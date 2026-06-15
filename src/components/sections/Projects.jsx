@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { projects } from '../../data/projects'
 
 const fadeUp = {
@@ -166,7 +166,7 @@ export default function Projects({ onOpenDetail }) {
     setPage([i, newDirection])
   }
 
-  // ── Progress bar animation ──────────────────────────────────────────
+  // ── Progress bar animation & autoplay trigger ───────────────────────
   const startProgress = useCallback(() => {
     // Cancel any existing animation
     if (progressRafRef.current) cancelAnimationFrame(progressRafRef.current)
@@ -185,35 +185,27 @@ export default function Projects({ onOpenDetail }) {
       const p = Math.min(elapsed / AUTOPLAY_DELAY, 1)
       progressRef.current = p
       setProgress(p)
+      
       if (p < 1) {
         progressRafRef.current = requestAnimationFrame(tick)
+      } else {
+        // Time's up! Transition to the next project
+        setPage(([currPage]) => {
+          const next = (currPage + 1) % projects.length
+          return [next, 1]
+        })
       }
     }
     progressRafRef.current = requestAnimationFrame(tick)
   }, [])
 
-  // ── Auto-play timer ─────────────────────────────────────────────────
-  const scheduleNext = useCallback(() => {
-    if (timerRef.current) clearTimeout(timerRef.current)
-    timerRef.current = setTimeout(() => {
-      if (!isPausedRef.current) {
-        setPage(([p]) => {
-          const next = (p + 1) % projects.length
-          return [next, 1]
-        })
-      }
-    }, AUTOPLAY_DELAY)
-  }, [])
-
   // Reset & restart everything when the active slide changes
   useEffect(() => {
     startProgress()
-    scheduleNext()
     return () => {
-      if (timerRef.current) clearTimeout(timerRef.current)
       if (progressRafRef.current) cancelAnimationFrame(progressRafRef.current)
     }
-  }, [activeIdx, startProgress, scheduleNext])
+  }, [activeIdx, startProgress])
 
   const handleMouseEnter = () => { isPausedRef.current = true }
   const handleMouseLeave = () => { isPausedRef.current = false }
@@ -224,17 +216,17 @@ export default function Projects({ onOpenDetail }) {
   return (
     <section
       id="projects"
-      className="min-h-screen w-full flex flex-col justify-center py-10 px-4 md:px-8 max-w-7xl mx-auto overflow-hidden relative"
+      className="min-h-screen w-full flex flex-col justify-center py-10 overflow-hidden relative"
     >
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="flex flex-col gap-6 md:gap-10"
+        className="flex flex-col gap-6 md:gap-10 w-full"
       >
         {/* Section Header */}
-        <div>
+        <div className="max-w-7xl mx-auto w-full px-4 md:px-8">
           <motion.div
             variants={fadeUp}
             className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-blue)] border border-black/5 rotate-[1deg] mb-2"
@@ -247,13 +239,13 @@ export default function Projects({ onOpenDetail }) {
             className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-[var(--text-dark)] m-0"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            The Polaroid Gallery
+            The Project Blueprints
           </motion.h2>
         </div>
 
         {/* Unified Board Container */}
         <div
-          className="relative w-full z-10 flex items-center justify-center min-h-[500px]"
+          className="relative w-full z-10 flex items-center justify-center min-h-[600px] md:min-h-[550px] overflow-visible"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -262,140 +254,182 @@ export default function Projects({ onOpenDetail }) {
           <div className="absolute top-[3%] left-[10%] w-24 h-5 bg-[var(--accent-blue)]/60 rotate-[-3deg] rounded-xs shadow-3xs z-25 pointer-events-none hidden md:block" />
           <div className="absolute bottom-[3%] right-[10%] w-20 h-5 bg-[var(--accent-lavender)]/60 rotate-[4deg] rounded-xs shadow-3xs z-25 pointer-events-none hidden md:block" />
 
-          <AnimatePresence initial={false} custom={direction} mode="wait">
-            {/* Opsi 1: Unified Large Landscape Jurnal/Scrapbook Sheet */}
-            <motion.div
-              key={activeIdx}
-              custom={direction}
-              variants={containerVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              className="w-full min-h-[480px] bg-[#fefcf7] border border-black/10 shadow-md rounded-[6px] p-6 md:p-10 relative flex flex-col justify-between overflow-hidden z-10"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgba(160, 160, 190, 0.05) 1.5px, transparent 1.5px),
-                  linear-gradient(90deg, rgba(160, 160, 190, 0.05) 1.5px, transparent 1.5px)
-                `,
-                backgroundSize: '20px 20px',
-              }}
-            >
-              
-              {/* Top Row: Split Layout (Photo Left, Text Specs Right) */}
-              <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-between w-full flex-grow">
-                
-                {/* Left Column: Large Polaroid Photo Card */}
-                <div className="w-full md:w-[45%] flex items-center justify-center flex-shrink-0 relative">
-                  <div className="w-full max-w-[440px] p-4 pb-12 bg-white border border-black/10 shadow-sm rounded-xs rotate-[-2deg] relative hover:rotate-0 hover:scale-102 active:scale-98 transition-all">
-                    
-                    {/* Polaroid Image */}
-                    <div className="relative aspect-video w-full bg-[var(--bg-secondary)] overflow-hidden rounded-[2px] border border-black/5 select-none">
-                      <img
-                        src={activeProject.thumbnail}
-                        alt={activeProject.title}
-                        className="w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-300 pointer-events-none"
-                        loading="lazy"
-                      />
-                    </div>
+          {projects.map((project, idx) => {
+            // Calculate relative distance with loop wrapping
+            let diff = idx - activeIdx
+            if (diff > projects.length / 2) {
+              diff -= projects.length
+            } else if (diff < -projects.length / 2) {
+              diff += projects.length
+            }
 
-                    {/* Handwritten Label */}
-                    <div className="mt-4 text-center font-handwrite text-[1rem] text-[var(--text-handwrite)] select-none">
-                      {activeProject.title.toLowerCase().replace(/\s+/g, '_')}.png
-                    </div>
+            const isActive = diff === 0
+            const isNext = diff === 1
+            const isPrev = diff === -1
+            const isFar = !isActive && !isNext && !isPrev
 
-                    {/* Washi Tape pinning the photo to the sheet */}
-                    <div 
-                      className={`absolute -top-3.5 left-[calc(50%-45px)] w-[90px] h-[18px] ${washiColor} rotate-[-1deg] rounded-[2px] z-10 shadow-3xs opacity-85 transition-colors duration-500`}
-                    />
+            const cardWashiColor = washiColors[idx % washiColors.length]
+            const cardSticker = activeSticker(idx)
+            const cardTechString = project.tech.join(' / ').toUpperCase()
 
-                    {/* Corner sticker */}
-                    <div className="absolute -top-2.5 -right-2.5 w-8 h-8 bg-white rounded-full flex items-center justify-center text-base select-none shadow-xs rotate-[12deg] border border-black/5 z-20">
-                      {activeSticker(activeIdx)}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Column: Project Specifications (Bold minimalist style inspired by image.png) */}
-                <div className="w-full md:w-[55%] flex flex-col justify-between self-stretch gap-6">
-                  <div className="flex-grow flex flex-col justify-between gap-6">
-                    <div className="flex flex-col gap-3">
+            return (
+              <motion.div
+                key={project.id}
+                style={{
+                  backgroundImage: `
+                    linear-gradient(rgba(160, 160, 190, 0.05) 1.5px, transparent 1.5px),
+                    linear-gradient(90deg, rgba(160, 160, 190, 0.05) 1.5px, transparent 1.5px)
+                  `,
+                  backgroundSize: '20px 20px',
+                }}
+                animate={{
+                  x: isActive ? "-50%" : isNext ? "38%" : isPrev ? "-138%" : diff > 0 ? "200%" : "-300%",
+                  scale: isActive ? 1 : 0.9,
+                  rotate: isActive ? 0.5 : isNext ? 3 : isPrev ? -2 : 0,
+                  opacity: isActive ? 1 : isFar ? 0 : 0.35,
+                  zIndex: isActive ? 20 : isFar ? 0 : 10,
+                }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 260,
+                  damping: 24
+                }}
+                whileHover={!isActive ? { scale: 0.93, opacity: 0.55 } : undefined}
+                className={`absolute left-1/2 w-[90%] md:w-[85%] lg:w-[80%] max-w-[1100px] min-h-[540px] md:min-h-[480px] bg-[#fefcf7] border border-black/10 shadow-md rounded-[6px] p-6 md:p-10 flex flex-col justify-between overflow-hidden ${
+                  isActive ? '' : 'cursor-pointer select-none'
+                }`}
+                onClick={() => {
+                  if (!isActive) {
+                    handleDotClick(idx)
+                  }
+                }}
+              >
+                {/* Top Row: Split Layout (Photo Left, Text Specs Right) */}
+                <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-between w-full flex-grow">
+                  
+                  {/* Left Column: Large Polaroid Photo Card */}
+                  <div className="w-full md:w-[45%] flex items-center justify-center flex-shrink-0 relative">
+                    <div className="w-full max-w-[440px] p-4 pb-12 bg-white border border-black/10 shadow-sm rounded-xs rotate-[-2deg] relative hover:rotate-0 hover:scale-102 active:scale-98 transition-all">
                       
-                      {/* Status & Category/Subheader */}
-                      <div className="flex items-center gap-2">
-                        <span className="inline-block px-2.5 py-0.5 rounded-sm text-[9px] font-semibold tracking-wider uppercase border border-black/10 bg-white text-[var(--text-dark)]">
-                          {activeProject.status}
-                        </span>
+                      {/* Polaroid Image */}
+                      <div className="relative aspect-video w-full bg-[var(--bg-secondary)] overflow-hidden rounded-[2px] border border-black/5 select-none">
+                        <img
+                          src={project.thumbnail}
+                          alt={project.title}
+                          className="w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-300 pointer-events-none"
+                          loading="lazy"
+                        />
                       </div>
 
-                      {/* Giant Bold Title (Uppercase & Heavy) */}
-                      <h3 
-                        className="font-display font-semibold text-2xl md:text-3xl lg:text-4xl text-[var(--text-dark)] uppercase leading-[1.1] tracking-tight m-0"
-                        style={{ fontFamily: 'var(--font-display)' }}
-                      >
-                        {activeProject.title}
-                      </h3>
+                      {/* Handwritten Label */}
+                      <div className="mt-4 text-center font-handwrite text-[1rem] text-[var(--text-handwrite)] select-none">
+                        {project.title.toLowerCase().replace(/\s+/g, '_')}.png
+                      </div>
 
-                      {/* Tech Stack - Slashed Clean Text (LARAVEL / FIGMA / MYSQL) */}
+                      {/* Washi Tape pinning the photo to the sheet */}
                       <div 
-                        className="font-body text-[10px] md:text-xs font-semibold tracking-wider text-[var(--text-muted)] uppercase mt-0.5"
-                        style={{ fontFamily: 'var(--font-body)' }}
-                      >
-                        {techString}
+                        className={`absolute -top-3.5 left-[calc(50%-45px)] w-[90px] h-[18px] ${cardWashiColor} rotate-[-1deg] rounded-[2px] z-10 shadow-3xs opacity-85 transition-colors duration-500`}
+                      />
+
+                      {/* Corner sticker */}
+                      <div className="absolute -top-2.5 -right-2.5 w-8 h-8 bg-white rounded-full flex items-center justify-center text-base select-none shadow-xs rotate-[12deg] border border-black/5 z-20">
+                        {cardSticker}
                       </div>
-
-                      {/* Description */}
-                      <p 
-                        className="text-xs md:text-sm text-[var(--text-dark)]/85 leading-relaxed font-body mt-2 max-w-xl"
-                        style={{ fontFamily: 'var(--font-body)' }}
-                      >
-                        {activeProject.desc}
-                      </p>
-                    </div>
-
-                    {/* Action Buttons (Clean Thin Outline Style) */}
-                    <div className="mt-4 pt-4 border-t border-black/5 flex flex-col gap-2 max-w-md">
-                      <button
-                        onClick={() => onOpenDetail?.(activeProject.id)}
-                        className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-sm border border-[var(--text-dark)] text-[var(--text-dark)] text-xs font-semibold hover:bg-black/5 active:scale-[0.98] transition-all cursor-pointer min-h-[44px]"
-                      >
-                        <ReadmeIcon className="shrink-0" />
-                        See Detail (README.md)
-                      </button>
-                      
-                      {(activeProject.github || activeProject.live) && (
-                        <div className="flex items-center gap-2 w-full">
-                          {activeProject.github && (
-                            <a
-                              href={activeProject.github}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-sm border border-black/15 text-[var(--text-dark)]/80 text-xs font-semibold hover:border-[var(--text-dark)] hover:text-[var(--text-dark)] hover:bg-black/5 transition-all min-h-[44px] no-underline"
-                            >
-                              <GitHubIcon className="shrink-0" />
-                              GitHub
-                            </a>
-                          )}
-                          {activeProject.live && (
-                            <a
-                              href={activeProject.live}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-sm border border-black/15 text-[var(--text-dark)]/80 text-xs font-semibold hover:border-[var(--text-dark)] hover:text-[var(--text-dark)] hover:bg-black/5 transition-all min-h-[44px] no-underline"
-                            >
-                              <ExternalIcon className="shrink-0" />
-                              Live Demo
-                            </a>
-                          )}
-                        </div>
-                      )}
                     </div>
                   </div>
+
+                  {/* Right Column: Project Specifications (Bold minimalist style inspired by image.png) */}
+                  <div className="w-full md:w-[55%] flex flex-col justify-between self-stretch gap-6">
+                    <div className="flex-grow flex flex-col justify-between gap-6">
+                      <div className="flex flex-col gap-3">
+                        
+                        {/* Status & Category/Subheader */}
+                        <div className="flex items-center gap-2">
+                          <span className="inline-block px-2.5 py-0.5 rounded-sm text-[9px] font-semibold tracking-wider uppercase border border-black/10 bg-white text-[var(--text-dark)]">
+                            {project.status}
+                          </span>
+                        </div>
+
+                        {/* Giant Bold Title (Uppercase & Heavy) */}
+                        <h3 
+                          className="font-display font-semibold text-2xl md:text-3xl lg:text-4xl text-[var(--text-dark)] uppercase leading-[1.1] tracking-tight m-0"
+                          style={{ fontFamily: 'var(--font-display)' }}
+                        >
+                          {project.title}
+                        </h3>
+
+                        {/* Tech Stack - Slashed Clean Text (LARAVEL / FIGMA / MYSQL) */}
+                        <div 
+                          className="font-body text-[10px] md:text-xs font-semibold tracking-wider text-[var(--text-muted)] uppercase mt-0.5"
+                          style={{ fontFamily: 'var(--font-body)' }}
+                        >
+                          {cardTechString}
+                        </div>
+
+                        {/* Description */}
+                        <p 
+                          className="text-xs md:text-sm text-[var(--text-dark)]/85 leading-relaxed font-body mt-2 max-w-xl"
+                          style={{ fontFamily: 'var(--font-body)' }}
+                        >
+                          {project.desc}
+                        </p>
+                      </div>
+
+                      {/* Action Buttons (Clean Thin Outline Style) */}
+                      <div className="mt-4 pt-4 border-t border-black/5 flex flex-col gap-2 max-w-md">
+                        <button
+                          onClick={(e) => {
+                            if (!isActive) return
+                            e.stopPropagation()
+                            onOpenDetail?.(project.id)
+                          }}
+                          disabled={!isActive}
+                          className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-sm border border-[var(--text-dark)] text-[var(--text-dark)] text-xs font-semibold hover:bg-black/5 active:scale-[0.98] transition-all cursor-pointer min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <ReadmeIcon className="shrink-0" />
+                          See Detail (README.md)
+                        </button>
+                        
+                        {(project.github || project.live) && (
+                          <div className="flex items-center gap-2 w-full">
+                            {project.github && (
+                              <a
+                                href={project.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => { if (!isActive) e.preventDefault() }}
+                                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-sm border border-black/15 text-[var(--text-dark)]/80 text-xs font-semibold hover:border-[var(--text-dark)] hover:text-[var(--text-dark)] hover:bg-black/5 transition-all min-h-[44px] no-underline ${
+                                  isActive ? '' : 'pointer-events-none opacity-50'
+                                }`}
+                              >
+                                <GitHubIcon className="shrink-0" />
+                                GitHub
+                              </a>
+                            )}
+                            {project.live && (
+                              <a
+                                href={project.live}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => { if (!isActive) e.preventDefault() }}
+                                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-sm border border-black/15 text-[var(--text-dark)]/80 text-xs font-semibold hover:border-[var(--text-dark)] hover:text-[var(--text-dark)] hover:bg-black/5 transition-all min-h-[44px] no-underline ${
+                                  isActive ? '' : 'pointer-events-none opacity-50'
+                                }`}
+                              >
+                                <ExternalIcon className="shrink-0" />
+                                Live Demo
+                              </a>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-
-              </div>
-
-            </motion.div>
-          </AnimatePresence>
+              </motion.div>
+            )
+          })}
 
           {/* Progress bar — thin strip at the bottom of the card area */}
           <div className="absolute bottom-0 left-0 w-full h-[3px] bg-black/5 rounded-full overflow-hidden z-30 pointer-events-none">

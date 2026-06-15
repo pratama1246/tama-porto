@@ -159,6 +159,7 @@ export default function About() {
                 <li>📌 D3 Informatics @ PNC</li>
                 <li>🎨 Figma & UI Enthusiast</li>
                 <li>🛠️ PHP & Laravel Basics</li>
+                <li>🌐 Networking foundations</li>
                 <li>🚀 Learning React & GSAP</li>
               </ul>
             </motion.div>

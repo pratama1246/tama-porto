@@ -7,7 +7,7 @@ export const projects = [
     status: "In Progress",
     github: "https://github.com/pratama1246/PickupOrder-App", // Fallback to Tama's GitHub since links are blank in spec
     live: "",
-    thumbnail: "/assets/projects/pickup-order.png"
+    thumbnail: "/assets/projects/pickup-order.webp"
   },
   {
     id: 2,

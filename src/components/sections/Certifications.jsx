@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import ScrollStack, { ScrollStackItem } from '../reactbits/ScrollStack'
 import { certifications } from '../../data/certifications'
 
@@ -41,15 +43,17 @@ function Stamp({ id }) {
   )
 }
 
-// Individual Certificate Card Component integrated into ScrollStackItem
-function CertificateCard({ cert }) {
+// Individual Certificate Card Component
+function CertificateCard({ cert, isArchive = false }) {
   const isPaperClip = cert.id % 2 === 0
   const tapeStyle = getTapeStyle(cert.id)
+  
+  const randomRotation = isArchive 
+    ? (cert.id % 2 === 0 ? 'rotate-[1.5deg]' : 'rotate-[-1.5deg]')
+    : ''
 
-  return (
-    <ScrollStackItem 
-      itemClassName="flex flex-col justify-between min-h-[390px] md:min-h-[360px] w-full"
-    >
+  const CardContent = () => (
+    <>
       {/* Decorative Pinned Element: alternating paperclip or washi tape */}
       {isPaperClip ? (
         /* Paper Clip */
@@ -87,7 +91,9 @@ function CertificateCard({ cert }) {
       {/* Card Body (Title & Credential ID) */}
       <div className="flex-grow flex flex-col gap-2.5">
         <h3 
-          className="font-display font-semibold text-base md:text-lg tracking-tight text-[var(--text-dark)] leading-tight m-0"
+          className={`font-display font-semibold tracking-tight text-[var(--text-dark)] leading-tight m-0 ${
+            isArchive ? 'text-sm md:text-base' : 'text-base md:text-lg'
+          }`}
           style={{ fontFamily: 'var(--font-display)' }}
         >
           {cert.title}
@@ -113,7 +119,9 @@ function CertificateCard({ cert }) {
       </div>
 
       {/* Card Footer (Verify Link and Stamp) */}
-      <div className="mt-5 pt-3 border-t border-black/5 flex justify-between items-end relative min-h-[50px]">
+      <div className={`mt-5 pt-3 border-t border-black/5 flex justify-between items-end relative min-h-[50px] ${
+        isArchive ? 'z-10' : ''
+      }`}>
         {cert.link ? (
           <a
             href={cert.link}
@@ -141,11 +149,36 @@ function CertificateCard({ cert }) {
         {/* Wax Seal / Stamp */}
         <Stamp id={cert.id} />
       </div>
+    </>
+  )
+
+  if (isArchive) {
+    return (
+      <div 
+        className={`relative flex flex-col justify-between min-h-[280px] w-full p-6 bg-white border border-black/10 rounded-sm shadow-xs hover:shadow-sm hover:-translate-y-1 transition-all duration-200 ${randomRotation}`}
+      >
+        <CardContent />
+      </div>
+    )
+  }
+
+  return (
+    <ScrollStackItem 
+      itemClassName="flex flex-col justify-between min-h-[390px] md:min-h-[360px] w-full"
+    >
+      <CardContent />
     </ScrollStackItem>
   )
 }
 
 export default function Certifications() {
+  const [showArchive, setShowArchive] = useState(false)
+
+  // Core technical certifications for ScrollStack
+  const coreCerts = certifications.filter(cert => [4, 7, 8, 6, 2, 3].includes(cert.id))
+  // Other general / soft skill certs for Collapsible Grid
+  const archiveCerts = certifications.filter(cert => ![4, 7, 8, 6, 2, 3].includes(cert.id))
+
   return (
     <section
       id="certifications"
@@ -168,7 +201,7 @@ export default function Certifications() {
           </h2>
         </div>
 
-        {/* ScrollStack Wrapper for stacking cards */}
+        {/* ScrollStack Wrapper for core tech certifications */}
         <ScrollStack 
           useWindowScroll={true}
           itemDistance={40} 
@@ -180,10 +213,47 @@ export default function Certifications() {
           rotationAmount={1.5}
           blurAmount={0.8}
         >
-          {certifications.map((cert) => (
+          {coreCerts.map((cert) => (
             <CertificateCard key={cert.id} cert={cert} />
           ))}
         </ScrollStack>
+
+        {/* Toggle Archive Button */}
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={() => setShowArchive(!showArchive)}
+            className="px-6 py-2.5 rounded-sm border border-[var(--text-dark)] bg-white text-xs font-semibold text-[var(--text-dark)] hover:bg-black/5 hover:-translate-y-0.5 active:scale-95 transition-all cursor-pointer shadow-3xs rotate-[-1deg] min-h-[44px]"
+            style={{ fontFamily: 'var(--font-body)' }}
+          >
+            {showArchive ? 'Collapse Archive Certificates' : 'View Archive Certificates'}
+          </button>
+        </div>
+
+        {/* Collapsible Archive Grid */}
+        <AnimatePresence>
+          {showArchive && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className="overflow-hidden"
+            >
+              <div className="border-t border-dashed border-[var(--text-muted)]/30 pt-10 mt-6">
+                <div className="text-center mb-8">
+                  <span className="font-handwrite text-sm text-[var(--text-handwrite)]/80 italic">
+                    * Pinned general & micro-skill achievements *
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center items-start">
+                  {archiveCerts.map((cert) => (
+                    <CertificateCard key={cert.id} cert={cert} isArchive={true} />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   )

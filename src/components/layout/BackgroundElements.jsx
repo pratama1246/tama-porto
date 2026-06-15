@@ -107,14 +107,25 @@ function ButterflySticker({ className, color = 'var(--accent-blue)', size = 48 }
 }
 
 export default function BackgroundElements() {
+  const springTransition = (delay = 0) => ({
+    type: 'spring',
+    stiffness: 80,
+    damping: 14,
+    mass: 1,
+    delay
+  })
+
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-20 w-full select-none" aria-hidden="true">
-      {/* --- HERO SECTION DECORATIONS --- */}
+      {/* --- HERO SECTION DECORATIONS (Animate on load) --- */}
       
       {/* 1. Heart Sticker (Hero top-left margin) */}
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: -200, y: -200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.5)}
         className="absolute top-[140px] left-[4%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.15, rotate: '-10deg' }}
       >
@@ -125,6 +136,9 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: 200, y: -200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.55)}
         className="absolute top-[180px] right-[4%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.15 }}
       >
@@ -135,6 +149,9 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: -200, y: 200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.6)}
         className="absolute top-[480px] left-[5%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.1, rotate: '15deg' }}
       >
@@ -145,6 +162,9 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: 200, y: 200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.65)}
         className="absolute top-[680px] right-[5%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.15 }}
       >
@@ -155,13 +175,16 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
-        className="absolute top-[520px] left-[26%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-30"
+        initial={{ x: -250, y: 250, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.7)}
+        className="absolute top-[600px] left-[52%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-30"
         whileHover={{ scale: 1.2, rotate: '15deg' }}
       >
         <img
           src="/assets/stickers/cursor.png"
           alt="Pixel Cursor Sticker"
-          className="w-[50px] h-[50px] select-none pointer-events-none drop-shadow-[1px_2px_2px_rgba(0,0,0,0.15)]"
+          className="w-[65px] h-[65px] select-none pointer-events-none drop-shadow-[1px_2px_2px_rgba(0,0,0,0.15)]"
         />
       </motion.div>
 
@@ -169,7 +192,10 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
-        className="absolute top-[820px] right-[6%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        initial={{ x: 250, y: 250, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.75)}
+        className="absolute top-[820px] right-[3%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.1, rotate: '-10deg' }}
       >
         <img
@@ -179,12 +205,15 @@ export default function BackgroundElements() {
         />
       </motion.div>
 
-      {/* --- ABOUT SECTION DECORATIONS --- */}
+      {/* --- ABOUT SECTION DECORATIONS (Animate when scrolled into view) --- */}
       
       {/* 5. Cassette Tape (Between Hero and About) */}
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: -200, y: 100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.8)}
         className="absolute top-[920px] left-[3%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.08, rotate: '-5deg' }}
       >
@@ -195,6 +224,9 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: 200, y: -100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.85)}
         className="absolute top-[1150px] right-[4%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.15 }}
       >
@@ -205,6 +237,9 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: -200, y: 100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.9)}
         className="absolute top-[1380px] left-[4%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.15 }}
       >
@@ -217,6 +252,9 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: -200, y: -100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.95)}
         className="absolute top-[1650px] left-[5%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.15 }}
       >
@@ -227,6 +265,9 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: 200, y: 100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.0)}
         className="absolute top-[1920px] right-[3%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.08, rotate: '12deg' }}
       >
@@ -237,6 +278,9 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: -200, y: 200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.05)}
         className="absolute top-[2150px] left-[3%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.15, rotate: '-8deg' }}
       >
@@ -249,6 +293,9 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: 200, y: -100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.1)}
         className="absolute top-[2480px] right-[4%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.15 }}
       >
@@ -259,19 +306,147 @@ export default function BackgroundElements() {
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: -200, y: 50, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 0.7 }}
+        transition={springTransition(1.15)}
         className="absolute top-[2820px] left-[2%] w-[80px] h-[18px] bg-[var(--accent-blue)] border border-black/5 rotate-[-5deg] rounded-sm hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         style={{ mixBlendMode: 'multiply' }}
         whileHover={{ scale: 1.1 }}
       />
 
-      {/* 13. Pink Sparkle Star (Contact right margin) */}
+      {/* 13. Pink Sparkle Star (Skills/Certifications transition right margin) */}
       <motion.div
         drag
         dragMomentum={false}
+        initial={{ x: 200, y: 200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.2)}
         className="absolute top-[2980px] right-[5%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
         whileHover={{ scale: 1.15 }}
       >
         <SparkleStar color="var(--accent-pink)" size={36} className="shadow-xs rotate-[20deg]" />
+      </motion.div>
+
+      {/* --- CERTIFICATIONS SECTION DECORATIONS --- */}
+
+      {/* 14. Smiley Sticker (Lavender, Certifications left margin) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, y: 100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.25)}
+        className="absolute top-[3350px] left-[3%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        whileHover={{ scale: 1.1, rotate: '15deg' }}
+      >
+        <SmileySticker color="var(--accent-lavender)" size={46} className="shadow-xs rotate-[15deg]" />
+      </motion.div>
+
+      {/* 15. Peach Sparkle Star (Certifications right margin) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: 200, y: -100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.3)}
+        className="absolute top-[3650px] right-[4%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        whileHover={{ scale: 1.15 }}
+      >
+        <SparkleStar color="var(--accent-peach)" size={35} className="shadow-xs rotate-[-10deg]" />
+      </motion.div>
+
+      {/* 16. Flower Sticker (Mint, Certifications left margin) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, y: 100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.35)}
+        className="absolute top-[3950px] left-[4%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        whileHover={{ scale: 1.08, rotate: '12deg' }}
+      >
+        <FlowerSticker color="var(--accent-mint)" size={50} className="shadow-xs rotate-[8deg]" />
+      </motion.div>
+
+      {/* 17. Butterfly Sticker (Pink, Certifications right margin) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: 200, y: 200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.4)}
+        className="absolute top-[4250px] right-[5%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        whileHover={{ scale: 1.15, rotate: '-8deg' }}
+      >
+        <ButterflySticker color="var(--accent-pink)" size={45} className="shadow-xs rotate-[-12deg]" />
+      </motion.div>
+
+      {/* --- HOBBIES SECTION DECORATIONS --- */}
+
+      {/* 18. Heart Sticker (Yellow, Hobbies left margin) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, y: -200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.45)}
+        className="absolute top-[4600px] left-[3%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        whileHover={{ scale: 1.15, rotate: '-10deg' }}
+      >
+        <HeartSticker color="var(--accent-yellow)" size={40} className="shadow-xs rotate-[10deg]" />
+      </motion.div>
+
+      {/* 19. Cassette Sticker (Mint, Hobbies left margin) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, y: 100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.5)}
+        className="absolute top-[5300px] left-[4%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        whileHover={{ scale: 1.08, rotate: '-5deg' }}
+      >
+        <CassetteSticker color="var(--accent-mint)" className="shadow-xs rotate-[-8deg]" />
+      </motion.div>
+
+      {/* 20. Yellow Washi Tape Strip (Hobbies right margin) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: 200, y: 50, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 0.7 }}
+        transition={springTransition(1.55)}
+        className="absolute top-[5600px] right-[3%] w-[80px] h-[18px] bg-[var(--accent-yellow)] border border-black/5 rotate-[4deg] rounded-sm hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        style={{ mixBlendMode: 'multiply' }}
+        whileHover={{ scale: 1.1 }}
+      />
+
+      {/* --- CONTACT SECTION DECORATIONS --- */}
+
+      {/* 21. Lavender Sparkle Star (Contact left margin) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, y: 200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.6)}
+        className="absolute top-[5850px] left-[5%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        whileHover={{ scale: 1.15 }}
+      >
+        <SparkleStar color="var(--accent-lavender)" size={38} className="shadow-xs rotate-[15deg]" />
+      </motion.div>
+
+      {/* 22. Smiley Sticker (Peach, Contact right margin) */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: 200, y: 200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(1.65)}
+        className="absolute top-[6100px] right-[5%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        whileHover={{ scale: 1.1, rotate: '15deg' }}
+      >
+        <SmileySticker color="var(--accent-peach)" size={46} className="shadow-xs rotate-[-15deg]" />
       </motion.div>
     </div>
   )

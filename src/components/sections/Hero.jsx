@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import SplitText from '../reactbits/SplitText'
 import TextType from '../reactbits/TextType'
@@ -27,7 +27,7 @@ const stickyNoteVariants = {
     y: 0,
     rotate: -4,
     opacity: 1,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.75 }
   }
 }
 
@@ -38,58 +38,63 @@ const polaroidVariants = {
     y: 0,
     rotate: 6,
     opacity: 1,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.45 }
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.85 }
   }
 }
 
 const reactCssBadgeVariants = {
-  hidden: { y: -80, opacity: 0, rotate: -15 },
+  hidden: { x: 150, y: -150, opacity: 0, rotate: -15 },
   visible: {
+    x: 0,
     y: 0,
     opacity: 1,
     rotate: -4,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 }
+    transition: { type: 'spring', stiffness: 80, damping: 14, delay: 0.65 }
   }
 }
 
 const figmaBadgeVariants = {
-  hidden: { x: -100, y: 100, opacity: 0, rotate: 20 },
+  hidden: { x: -150, y: 150, opacity: 0, rotate: 20 },
   visible: {
     x: 0,
     y: 0,
     opacity: 1,
     rotate: 8,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.6 }
+    transition: { type: 'spring', stiffness: 80, damping: 14, delay: 0.7 }
   }
 }
 
 const pncBadgeVariants = {
-  hidden: { x: 100, y: -100, opacity: 0, rotate: -10 },
+  hidden: { x: 200, y: -150, opacity: 0, rotate: -10 },
   visible: {
     x: 0,
     y: 0,
     opacity: 1,
     rotate: 6,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.7 }
+    transition: { type: 'spring', stiffness: 80, damping: 14, delay: 0.75 }
   }
 }
 
 const laravelBadgeVariants = {
-  hidden: { x: 100, y: 100, opacity: 0, rotate: -20 },
+  hidden: { x: 200, y: 200, opacity: 0, rotate: -20 },
   visible: {
     x: 0,
     y: 0,
     opacity: 1,
     rotate: -8,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.8 }
+    transition: { type: 'spring', stiffness: 80, damping: 14, delay: 0.8 }
   }
 }
 
 const descriptionSegments = [
-  { text: "D3 Informatics Engineering student & Frontend-leaning developer. Inspired by ", type: "normal" },
+  { text: "D3 Informatics Engineering student, Frontend Developer & Network Administrator. Inspired by ", type: "normal" },
   { text: "stories", type: "underline" },
   { text: ", ", type: "normal" },
-  { text: "music and technology.", type: "highlight" }
+  { text: "music", type: "highlight" },
+  { text: ", ", type: "normal" },
+  { text: "aesthetics", type: "highlight" },
+  { text: ", and ", type: "normal" },
+  { text: "technology.", type: "highlight" }
 ];
 
 export default function Hero() {
@@ -151,7 +156,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Subtitle / Bio Teaser with custom scrapbook highlights & underlines */}
-          <motion.div variants={fadeUp} className="mt-4 max-w-[600px] w-full min-h-[4.5rem]">
+          <motion.div variants={fadeUp} className="mt-4 max-w-[600px] w-full min-h-[11rem] min-[400px]:min-h-[9rem] sm:min-h-[7.5rem] md:min-h-[6.5rem] lg:min-h-[6rem]">
             <TextType
               text={descriptionSegments}
               className="text-lg md:text-xl text-[var(--text-muted)] leading-relaxed font-body"

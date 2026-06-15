@@ -12,7 +12,11 @@ const BOOT_STEPS = [
 
 export default function Loader({ onComplete }) {
   const [progress, setProgress] = useState(0);
-  const [stepIndex, setStepIndex] = useState(0);
+  const stepSize = BOOT_STEPS.length ? 100 / BOOT_STEPS.length : 1;
+  const stepIndex = Math.min(
+    Math.floor(progress / stepSize),
+    BOOT_STEPS.length - 1
+  );
 
   useEffect(() => {
     // Increment progress simulating boot sequence
@@ -30,14 +34,6 @@ export default function Loader({ onComplete }) {
   }, []);
 
   useEffect(() => {
-    // Maps progress milestones to boot text changes
-    const stepSize = 100 / BOOT_STEPS.length;
-    const currentStep = Math.min(
-      Math.floor(progress / stepSize),
-      BOOT_STEPS.length - 1
-    );
-    setStepIndex(currentStep);
-
     if (progress === 100) {
       // Small delay after reaching 100% before transition
       const timeout = setTimeout(() => {

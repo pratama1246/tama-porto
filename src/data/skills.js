@@ -13,20 +13,26 @@ export const skillCategories = [
   },
   {
     id: 3,
-    title: "design & tools",
-    color: "var(--accent-mint)",
-    skills: ["Figma Wireframes", "UI/UX Prototyping", "VS Code", "Git / GitHub"]
+    title: "networking & systems",
+    color: "var(--accent-blue)",
+    skills: ["TCP/IP & Subnetting", "MikroTik RouterOS", "Cisco Packet Tracer", "Linux Administration"]
   },
   {
     id: 4,
+    title: "design & tools",
+    color: "var(--accent-peach)",
+    skills: ["Figma Wireframes", "UI/UX Prototyping", "VS Code", "Git / GitHub"]
+  },
+  {
+    id: 5,
     title: "currently learning",
     color: "var(--accent-yellow)",
     skills: ["Framer Motion", "GSAP Animations", "React Hooks", "Responsive Dev"]
   },
   {
-    id: 5,
+    id: 6,
     title: "soft skills",
-    color: "var(--accent-blue)",
+    color: "var(--accent-mint)",
     skills: ["Creative Problem Solving", "Active Communication", "Team Collaboration", "Attention to Detail"]
   }
 ]

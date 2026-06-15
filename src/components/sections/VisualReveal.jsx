@@ -78,7 +78,7 @@ export default function VisualReveal() {
             containerClassName="mx-auto"
             textClassName="text-center font-display font-bold text-[var(--text-dark)] leading-[1.4] tracking-tight text-[1.5rem] sm:text-[2rem] md:text-[2.6rem]"
           >
-            "The things I enjoy most—stories, music, and technology—have one thing in common: they leave a lasting impression. That's the kind of experience I hope to create in everything I build."
+            "The things that inspire me most—stories that stay with us, music that sparks emotion, aesthetics that express personality, and technology that connects people—all share one thing in common: they leave a lasting impression. That's the kind of experience I hope to create in everything I build."
           </ScrollReveal>
         </div>
 

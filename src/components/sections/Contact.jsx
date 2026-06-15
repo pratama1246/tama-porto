@@ -17,121 +17,6 @@ const staggerContainer = {
   }
 }
 
-// Custom SVG Icons
-function MailIcon({ className }) {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-      <polyline points="22,6 12,13 2,6" />
-    </svg>
-  )
-}
-
-function GitHubIcon({ className }) {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-    </svg>
-  )
-}
-
-function WebIcon({ className }) {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <circle cx="12" cy="12" r="10" />
-      <line x1="2" y1="12" x2="22" y2="12" />
-      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-    </svg>
-  )
-}
-
-function InstagramIcon({ className }) {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-    </svg>
-  )
-}
-
-function PinterestIcon({ className }) {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M8 22a9 9 0 0 1-1.9-9.1c.3-1.8 1.3-4 2.5-5.9C10 4.6 11.8 3 13.8 3c2.9 0 5.2 2.3 5.2 5.2 0 3.7-2 6.8-4.8 6.8-1 0-2-.5-2.3-1.1-.8 3.1-1.3 5.2-1.3 5.2a10 10 0 0 1-2.6 3z" />
-    </svg>
-  )
-}
-
-function LinkedInIcon({ className }) {
-  return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect x="2" y="9" width="4" height="12" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  )
-}
 
 export default function Contact() {
   return (
@@ -173,8 +58,27 @@ export default function Contact() {
           {/* Invitation Letter */}
           <motion.div
             variants={fadeUp}
-            className="bg-[#fefcf7] p-6 md:p-8 rounded-sm shadow-sm border border-black/5 max-w-[600px] w-full text-left rotate-[0.5deg]"
+            className="bg-[#fefcf7] p-6 pr-24 sm:pr-28 md:p-8 md:pr-32 rounded-sm shadow-sm border border-black/5 max-w-[600px] w-full text-left rotate-[0.5deg] relative overflow-visible"
           >
+            {/* Y2K Postage Stamp */}
+            <div className="absolute top-4 right-4 md:top-6 md:right-6 w-14 h-18 md:w-16 md:h-20 bg-[var(--accent-pink)] border-2 border-dashed border-[var(--text-dark)]/20 rounded-xs flex flex-col items-center justify-between p-1.5 rotate-[6deg] shadow-3xs select-none z-10">
+              <div className="text-[7px] font-bold text-[var(--text-dark)]/60 tracking-wider">INDONESIA</div>
+              <div className="text-lg md:text-xl">☕</div>
+              <div className="text-[8px] font-mono font-bold text-[var(--text-dark)]">2026</div>
+            </div>
+
+            {/* Circular Postmark Cancellation Cap (Overlapping the stamp) */}
+            <div className="absolute -top-2 -right-4 md:-top-4 md:-right-6 w-24 h-24 md:w-28 md:h-28 border border-dashed border-red-600/35 rounded-full flex flex-col items-center justify-center rotate-[-12deg] pointer-events-none font-mono text-[7px] md:text-[8px] text-red-600/40 select-none z-20">
+              <span className="font-bold tracking-widest">CILACAP</span>
+              <span className="my-0.5 font-bold">15 JUN 2026</span>
+              <span className="font-bold tracking-wide">POSTED</span>
+              
+              {/* Wavy lines spanning across */}
+              <svg className="absolute -left-12 top-6 w-20 h-12 text-red-600/30" viewBox="0 0 100 50">
+                <path d="M0,10 Q25,0 50,10 T100,10 M0,25 Q25,15 50,25 T100,25 M0,40 Q25,30 50,40 T100,40" fill="none" stroke="currentColor" strokeWidth="1.2" />
+              </svg>
+            </div>
+
             <p
               className="text-base text-[var(--text-handwrite)] leading-relaxed m-0"
               style={{ fontFamily: 'var(--font-handwrite)' }}
@@ -184,117 +88,85 @@ export default function Contact() {
               My inbox is always open!
             </p>
             <div
-              className="text-right mt-6 text-sm text-[var(--text-handwrite)]"
+              className="text-right mt-4 text-sm text-[var(--text-handwrite)]"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
               — Tama
             </div>
+            <div
+              className="mt-4 text-[13px] text-[var(--text-handwrite)]/90 border-t border-[var(--text-dark)]/5 pt-2"
+              style={{ fontFamily: 'var(--font-handwrite)' }}
+            >
+              P.S. Let's grab a cup of coffee if you are around Cilacap! ☕
+            </div>
           </motion.div>
 
-          {/* Stamp / Seal style links */}
+          {/* Clean Text-Only Social Links */}
           <motion.div
             variants={fadeUp}
-            className="flex flex-wrap justify-center gap-8 md:gap-12 mt-4 max-w-full"
+            className="flex flex-col w-full mt-4 border-t border-[var(--text-dark)]/15 text-left"
           >
-            {/* Stamp 1: GitHub (Dashed Red Border) */}
+            {/* Link 1: GitHub */}
             <motion.a
               href="https://github.com/pratama1246"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, rotate: '5deg' }}
-              className="flex flex-col items-center justify-center w-[120px] h-[120px] rounded-full border-2 border-dashed border-red-500/60 p-3 rotate-[-4deg] bg-[#fdf6e3]/40 cursor-pointer no-underline select-none shadow-xs text-red-700/80"
+              whileHover={{ x: 12 }}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
+              style={{ fontFamily: 'var(--font-body)' }}
             >
-              <GitHubIcon className="mb-1.5" />
-              <span className="text-[10px] font-bold tracking-wider uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                GitHub
-              </span>
-              <span className="text-[8px] uppercase tracking-tighter opacity-85 mt-0.5" style={{ fontFamily: 'var(--font-handwrite)' }}>
-                @pratama1246
-              </span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider">GITHUB</span>
+              <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">@PRATAMA1246</span>
             </motion.a>
 
-            {/* Stamp 2: Email (Oval Wax Seal) */}
+            {/* Link 2: Email */}
             <motion.a
               href="mailto:pratamaputra6854@gmail.com"
-              whileHover={{ scale: 1.1, rotate: '-5deg' }}
-              className="flex flex-col items-center justify-center w-[150px] h-[110px] rounded-[50%] border-2 border-double border-blue-500/60 p-3 rotate-[3deg] bg-[#fdf6e3]/40 cursor-pointer no-underline select-none shadow-xs text-blue-700/80"
+              whileHover={{ x: 12 }}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
+              style={{ fontFamily: 'var(--font-body)' }}
             >
-              <MailIcon className="mb-1.5" />
-              <span className="text-[10px] font-bold tracking-wider uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                Official Mail
-              </span>
-              <span className="text-[8px] tracking-tighter opacity-85 mt-0.5 truncate max-w-full" style={{ fontFamily: 'var(--font-handwrite)' }}>
-                pratamaputra6854@gmail.com
-              </span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider">OFFICIAL MAIL</span>
+              <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">PRATAMAPUTRA6854@GMAIL.COM</span>
             </motion.a>
 
-            {/* Stamp 3: Web Domain (Hexagonal/Decagon Wax Seal style) */}
-            <motion.a
-              href="https://mytamakikii.web.id"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, rotate: '4deg' }}
-              className="flex flex-col items-center justify-center w-[120px] h-[120px] rounded-lg border-2 border-dotted border-purple-500/60 p-3 rotate-[-3deg] bg-[#fdf6e3]/40 cursor-pointer no-underline select-none shadow-xs text-purple-700/80"
-              style={{ borderRadius: '24%' }}
-            >
-              <WebIcon className="mb-1.5" />
-              <span className="text-[10px] font-bold tracking-wider uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                Tama.gallery
-              </span>
-              <span className="text-[8px] tracking-tighter opacity-85 mt-0.5" style={{ fontFamily: 'var(--font-handwrite)' }}>
-                Verified Web
-              </span>
-            </motion.a>
-
-            {/* Stamp 4: LinkedIn (Rectangular Wax Seal style) */}
+            {/* Link 4: LinkedIn */}
             <motion.a
               href="https://www.linkedin.com/in/perfectpratama/"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, rotate: '3deg' }}
-              className="flex flex-col items-center justify-center w-[140px] h-[110px] rounded-md border-2 border-double border-sky-500/60 p-3 rotate-[2deg] bg-[#fdf6e3]/40 cursor-pointer no-underline select-none shadow-xs text-sky-700/80"
+              whileHover={{ x: 12 }}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
+              style={{ fontFamily: 'var(--font-body)' }}
             >
-              <LinkedInIcon className="mb-1.5" />
-              <span className="text-[10px] font-bold tracking-wider uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                LinkedIn
-              </span>
-              <span className="text-[8px] tracking-tighter opacity-85 mt-0.5" style={{ fontFamily: 'var(--font-handwrite)' }}>
-                perfectpratama
-              </span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider">LINKEDIN</span>
+              <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">PERFECTPRATAMA</span>
             </motion.a>
 
-            {/* Stamp 5: Instagram (Postage Stamp scalloped style) */}
+            {/* Link 5: Instagram */}
             <motion.a
               href="https://instagram.com/perfectamafine"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, rotate: '-4deg' }}
-              className="flex flex-col items-center justify-center w-[120px] h-[120px] rounded-xl border-2 border-dashed border-pink-500/60 p-3 rotate-[-5deg] bg-[#fdf6e3]/40 cursor-pointer no-underline select-none shadow-xs text-pink-700/80"
+              whileHover={{ x: 12 }}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
+              style={{ fontFamily: 'var(--font-body)' }}
             >
-              <InstagramIcon className="mb-1.5" />
-              <span className="text-[10px] font-bold tracking-wider uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                Instagram
-              </span>
-              <span className="text-[8px] tracking-tighter opacity-85 mt-0.5" style={{ fontFamily: 'var(--font-handwrite)' }}>
-                @perfectamafine
-              </span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider">INSTAGRAM</span>
+              <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">@PERFECTAMAFINE</span>
             </motion.a>
 
-            {/* Stamp 6: Pinterest (Round Wax Seal style) */}
+            {/* Link 6: Pinterest */}
             <motion.a
               href="https://id.pinterest.com/ppraaatammma___/"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, rotate: '5deg' }}
-              className="flex flex-col items-center justify-center w-[110px] h-[110px] rounded-full border-2 border-dotted border-rose-500/60 p-3 rotate-[4deg] bg-[#fdf6e3]/40 cursor-pointer no-underline select-none shadow-xs text-rose-700/80"
+              whileHover={{ x: 12 }}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
+              style={{ fontFamily: 'var(--font-body)' }}
             >
-              <PinterestIcon className="mb-1.5" />
-              <span className="text-[10px] font-bold tracking-wider uppercase" style={{ fontFamily: 'var(--font-body)' }}>
-                Pinterest
-              </span>
-              <span className="text-[8px] tracking-tighter opacity-85 mt-0.5" style={{ fontFamily: 'var(--font-handwrite)' }}>
-                @ppraaatammma___
-              </span>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider">PINTEREST</span>
+              <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">@PPRAAATAMMMA___</span>
             </motion.a>
           </motion.div>
         </motion.div>
@@ -306,17 +178,20 @@ export default function Contact() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="w-full select-none mt-12 overflow-hidden bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 py-5 md:py-6"
+        className="w-full select-none mt-12 overflow-hidden bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 pt-5 pb-4 md:pt-6 md:pb-5 flex flex-col gap-2 md:gap-3 items-center text-center"
       >
         <ScrollVelocity
           texts={[
-            `© ${new Date().getFullYear()} Pratama Putra Purwanto • Politeknik Negeri Cilacap — D3 Teknik Informatika •`
+            `© ${new Date().getFullYear()} Pratama Putra Purwanto • Politeknik Negeri Cilacap — D3 Informatics Engineering • All rights reserved •`
           ]}
           velocity={-35}
           numCopies={3}
           scrollerClassName="text-xl md:text-3xl font-display font-bold uppercase tracking-wider text-[var(--text-dark)]/90 flex items-center w-full"
           className="px-8"
         />
+        <div className="text-[10px] md:text-xs opacity-75 font-mono font-semibold tracking-wider text-[var(--text-dark)] px-4 uppercase">
+          Some assets and components may be subject to copyright • This website is a non-profit personal portfolio. If you own any featured asset and object to its use, please contact me for immediate removal.
+        </div>
       </motion.div>
     </section>
   )

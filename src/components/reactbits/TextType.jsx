@@ -207,7 +207,7 @@ const TextType = ({
         return (
           <span 
             key={idx} 
-            className="relative inline-block px-2 py-0.5 mx-0.5 bg-[var(--accent-yellow)]/65 border border-black/5 rounded-[4px] rotate-[-1.5deg] text-[var(--text-dark)] font-semibold shadow-xs"
+            className="relative inline-block px-1.5 py-0 mx-0.5 bg-[var(--accent-yellow)]/70 rounded-[2px] rotate-[-1deg] text-[var(--text-dark)] font-semibold"
           >
             {visibleText}
           </span>

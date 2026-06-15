@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, forwardRef, isValidElement, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Children, cloneElement, forwardRef, isValidElement, useEffect, useMemo, useRef } from 'react';
 import gsap from 'gsap';
 
 export const Card = forwardRef(({ customClass, ...rest }, ref) => (
@@ -76,9 +76,6 @@ const CardSwap = ({
   const intervalRef = useRef();
   const container = useRef(null);
   const swapRef = useRef();
-
-  const [activeIndex, setActiveIndex] = useState(0);
-
   useEffect(() => {
     const total = refs.length;
     refs.forEach((r, i) => {
@@ -102,7 +99,6 @@ const CardSwap = ({
 
       // Update index before animating to keep state in sync
       const newFront = rest[0];
-      setActiveIndex(newFront);
       if (onIndexChange) {
         onIndexChange(newFront);
       }
@@ -191,7 +187,7 @@ const CardSwap = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardDistance, verticalDistance, delay, pauseOnHover, skewAmount, easing]);
 
-  const handleCardClick = (i, e) => {
+  const handleCardClick = (i) => {
     // If user clicked the top card, trigger manual swap
     if (order.current[0] === i) {
       if (swapRef.current) {
@@ -205,6 +201,7 @@ const CardSwap = ({
     onCardClick?.(i);
   };
 
+  // eslint-disable-next-line react-hooks/refs
   const rendered = childArr.map((child, i) =>
     isValidElement(child)
       ? cloneElement(child, {
@@ -213,7 +210,7 @@ const CardSwap = ({
           style: { width, height, ...(child.props.style ?? {}) },
           onClick: e => {
             child.props.onClick?.(e);
-            handleCardClick(i, e);
+            handleCardClick(i);
           }
         })
       : child

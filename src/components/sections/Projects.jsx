@@ -59,7 +59,30 @@ function GitHubIcon({ className }) {
   )
 }
 
-export default function Projects() {
+// Custom SVG Readme Icon
+function ReadmeIcon({ className }) {
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+      <line x1="16" y1="17" x2="8" y2="17" />
+      <polyline points="10 9 9 9 8 9" />
+    </svg>
+  )
+}
+
+export default function Projects({ onOpenDetail }) {
   const [activeIdx, setActiveIdx] = useState(0)
   const activeProject = projects[activeIdx] || projects[0]
 
@@ -164,29 +187,41 @@ export default function Projects() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Action Buttons (GitHub / Live) */}
-              <div className="mt-6 pt-4 border-t border-black/5 flex items-center gap-3">
-                {activeProject.github && (
-                  <a
-                    href={activeProject.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-sm border border-[var(--text-dark)] text-xs font-semibold hover:bg-black/5 transition-colors duration-200 min-h-[44px] no-underline text-[var(--text-dark)]"
-                  >
-                    <GitHubIcon className="shrink-0" />
-                    GitHub
-                  </a>
-                )}
-                {activeProject.live && (
-                  <a
-                    href={activeProject.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-sm bg-[var(--text-dark)] text-white text-xs font-semibold hover:bg-[var(--text-dark)]/90 transition-colors duration-200 min-h-[44px] no-underline"
-                  >
-                    <ExternalIcon className="shrink-0" />
-                    Live Demo
-                  </a>
+              {/* Action Buttons (GitHub / Live / See Detail) */}
+              <div className="mt-6 pt-4 border-t border-black/5 flex flex-col gap-2">
+                <button
+                  onClick={() => onOpenDetail?.(activeProject.id)}
+                  className="w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-sm bg-[var(--text-dark)] text-white text-xs font-semibold hover:bg-[var(--text-dark)]/90 active:scale-[0.98] transition-all cursor-pointer shadow-3xs min-h-[44px]"
+                >
+                  <ReadmeIcon className="shrink-0" />
+                  See Detail (README.md)
+                </button>
+                
+                {(activeProject.github || activeProject.live) && (
+                  <div className="flex items-center gap-3 w-full">
+                    {activeProject.github && (
+                      <a
+                        href={activeProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-sm border border-[var(--text-dark)] text-xs font-semibold hover:bg-black/5 transition-colors duration-200 min-h-[44px] no-underline text-[var(--text-dark)]"
+                      >
+                        <GitHubIcon className="shrink-0" />
+                        GitHub
+                      </a>
+                    )}
+                    {activeProject.live && (
+                      <a
+                        href={activeProject.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-sm border border-[var(--text-dark)] text-xs font-semibold hover:bg-black/5 transition-colors duration-200 min-h-[44px] no-underline text-[var(--text-dark)]"
+                      >
+                        <ExternalIcon className="shrink-0" />
+                        Live Demo
+                      </a>
+                    )}
+                  </div>
                 )}
               </div>
             </div>

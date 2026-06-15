@@ -4,14 +4,14 @@ export const skillCategories = [
     title: "Frontend Core",
     color: "var(--accent-pink)",
     description: "Creating responsive, interactive web interfaces",
-    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Next.js", "Vite.js", "Alpine.js", "Tailwind CSS", "DaisyUI", "Flowbite", "Shadcn UI", "Framer Motion"]
+    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Next.js", "Vite.js", "Alpine.js", "Tailwind CSS", "Framer Motion"]
   },
   {
     id: 2,
     title: "Backend Services",
     color: "var(--accent-lavender)",
     description: "Server administration, database design, & APIs",
-    skills: ["PHP", "Laravel", "CodeIgniter", "Node.js", "MySQL", "Postman", "Mailtrap", "Resend"]
+    skills: ["PHP", "Laravel", "CodeIgniter", "Node.js", "MySQL"]
   },
   {
     id: 3,
@@ -25,14 +25,14 @@ export const skillCategories = [
     title: "Networking & OS",
     color: "var(--accent-blue)",
     description: "Routing, firewall configuration, & systems",
-    skills: ["MikroTik", "Cisco", "Windows", "Ubuntu", "Cloudflare", "ngrok"]
+    skills: ["MikroTik", "Cisco", "Windows", "Ubuntu"]
   },
   {
     id: 5,
-    title: "Design & Workspace",
+    title: "Workspace & Tools",
     color: "var(--accent-peach)",
-    description: "Prototyping, visual aesthetics, & dev tools",
-    skills: ["Figma", "Canva", "VS Code", "Git", "GitHub", "Notion"]
+    description: "Prototyping, version control, API testing, & dev utilities",
+    skills: ["Figma", "Canva", "VS Code", "Git", "GitHub", "Notion", "Postman", "ngrok"]
   },
   {
     id: 6,

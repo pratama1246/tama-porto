@@ -80,7 +80,9 @@ const localLogos = {
   "ngrok": "/assets/tech-stack/ngrok-n-dark.svg",
   "Vite.js": "/assets/tech-stack/Vite.js.png",
   "Windows": "/assets/tech-stack/Windows 11.png",
-  "Alpine.js": "/assets/tech-stack/Alpine.js.png"
+  "Alpine.js": "/assets/tech-stack/Alpine.js.png",
+  "Mailtrap": "/assets/tech-stack/mailtrap.jpeg",
+  "Resend": "/assets/tech-stack/resend-icon-black.svg"
 }
 
 export default function Skills() {

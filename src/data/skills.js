@@ -11,7 +11,7 @@ export const skillCategories = [
     title: "Backend Services",
     color: "var(--accent-lavender)",
     description: "Server administration, database design, & APIs",
-    skills: ["PHP", "Laravel", "CodeIgniter", "Node.js", "MySQL", "Postman"]
+    skills: ["PHP", "Laravel", "CodeIgniter", "Node.js", "MySQL", "Postman", "Mailtrap", "Resend"]
   },
   {
     id: 3,

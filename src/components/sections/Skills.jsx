@@ -79,7 +79,8 @@ const localLogos = {
   "Canva": "/assets/tech-stack/Canva-logo.png",
   "ngrok": "/assets/tech-stack/ngrok-n-dark.svg",
   "Vite.js": "/assets/tech-stack/Vite.js.png",
-  "Windows": "/assets/tech-stack/Windows 11.png"
+  "Windows": "/assets/tech-stack/Windows 11.png",
+  "Alpine.js": "/assets/tech-stack/Alpine.js.png"
 }
 
 export default function Skills() {

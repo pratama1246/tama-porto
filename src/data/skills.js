@@ -4,7 +4,7 @@ export const skillCategories = [
     title: "Frontend Core",
     color: "var(--accent-pink)",
     description: "Creating responsive, interactive web interfaces",
-    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Next.js", "Vite.js", "Tailwind CSS", "Framer Motion"]
+    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Next.js", "Vite.js", "Alpine.js", "Tailwind CSS", "Framer Motion"]
   },
   {
     id: 2,

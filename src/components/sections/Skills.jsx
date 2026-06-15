@@ -1,53 +1,95 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { skillCategories } from '../../data/skills'
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' }
+    transition: { duration: 0.4, ease: 'easeOut' }
   }
 }
 
 const staggerContainer = {
   hidden: {},
   visible: {
-    transition: { staggerChildren: 0.08 }
+    transition: { staggerChildren: 0.05 }
   }
 }
 
-// Deterministic rotations for sticky notes
-const getRotationStyle = (id) => {
-  const angles = [-3, 2, -2, 4, -1]
-  const idx = (id - 1) % angles.length
-  return { transform: `rotate(${angles[idx]}deg)` }
-}
-
-// Deterministic washi tape rotations and colors
-const getTapeStyle = (id) => {
-  const tapeColors = [
-    "var(--accent-mint)",
-    "var(--accent-pink)",
-    "var(--accent-blue)",
-    "var(--accent-peach)",
-    "var(--accent-lavender)"
+// Helper to determine icon color based on category ID
+const getFolderColorClass = (id) => {
+  const colors = [
+    "fill-pink-300 stroke-pink-400",
+    "fill-purple-300 stroke-purple-400",
+    "fill-blue-300 stroke-blue-400",
+    "fill-orange-300 stroke-orange-400",
+    "fill-emerald-300 stroke-emerald-400",
+    "fill-amber-300 stroke-amber-400"
   ]
-  const angles = [1, -2, 2, -1, 3]
-  const colorIdx = id % tapeColors.length
-  const angleIdx = (id - 1) % angles.length
-  
-  return {
-    backgroundColor: tapeColors[colorIdx],
-    transform: `rotate(${angles[angleIdx]}deg)`
-  }
+  return colors[(id - 1) % colors.length]
+}
+
+// Helper to determine file extension based on category ID
+const getFileExtension = (id) => {
+  const extensions = ["exe", "dll", "cfg", "lnk", "sys", "bat"]
+  return extensions[(id - 1) % extensions.length]
+}
+
+// Retro Folder Icon (SVG)
+function FolderIcon({ className = "w-10 h-10", colorClass = "fill-yellow-400" }) {
+  return (
+    <svg viewBox="0 0 32 32" className={`${className} ${colorClass} stroke-[var(--text-dark)]`} strokeWidth="1.5">
+      <path d="M2 6h8l3 3h17v21H2V6z" />
+      <path d="M2 11h28" fill="none" />
+    </svg>
+  )
+}
+
+const localLogos = {
+  "HTML5": "/assets/tech-stack/HTML5.png",
+  "CSS3": "/assets/tech-stack/CSS3.png",
+  "JavaScript": "/assets/tech-stack/JavaScript.png",
+  "TypeScript": "/assets/tech-stack/TypeScript.png",
+  "React": "/assets/tech-stack/React.png",
+  "Next.js": "/assets/tech-stack/Next.js.png",
+  "Tailwind CSS": "/assets/tech-stack/Tailwind CSS.png",
+  "PHP": "/assets/tech-stack/PHP.png",
+  "Laravel": "/assets/tech-stack/Laravel.png",
+  "Node.js": "/assets/tech-stack/Node.js.png",
+  "Dart": "/assets/tech-stack/Dart.png",
+  "Flutter": "/assets/tech-stack/Flutter.png",
+  "Ubuntu": "/assets/tech-stack/Ubuntu.png",
+  "MikroTik": "/assets/tech-stack/Mikrotik.png",
+  "Cisco": "/assets/tech-stack/Cisco.png",
+  "Cloudflare": "/assets/tech-stack/Cloudflare.png",
+  "Claude": "/assets/tech-stack/claude.svg",
+  "Gemini": "/assets/tech-stack/Gemini.svg",
+  "ChatGPT": "/assets/tech-stack/ChatGPT.svg",
+  "Framer Motion": "/assets/tech-stack/Framer Icon Black.svg",
+  "CodeIgniter": "/assets/tech-stack/CodeIgniter.png",
+  "Figma": "/assets/tech-stack/Figma.png",
+  "Git": "/assets/tech-stack/Git.png",
+  "GitHub": "/assets/tech-stack/GitHub.png",
+  "VS Code": "/assets/tech-stack/Visual Studio Code (VS Code).png",
+  "MySQL": "/assets/tech-stack/MySQL.png",
+  "Postman": "/assets/tech-stack/Postman.png",
+  "Notion": "/assets/tech-stack/Notion-logo.svg",
+  "Canva": "/assets/tech-stack/Canva-logo.png",
+  "ngrok": "/assets/tech-stack/ngrok-n-dark.svg",
+  "Vite.js": "/assets/tech-stack/Vite.js.png",
+  "Windows": "/assets/tech-stack/Windows 11.png"
 }
 
 export default function Skills() {
+  // All categories are collapsed by default
+  const [activeId, setActiveId] = useState(null)
+
   return (
     <section
       id="skills"
-      className="py-10 px-4 md:py-24 md:px-8 max-w-7xl mx-auto"
+      className="py-16 px-4 md:py-24 md:px-8 max-w-6xl mx-auto"
     >
       <motion.div
         variants={staggerContainer}
@@ -60,67 +102,112 @@ export default function Skills() {
         <div>
           <motion.div
             variants={fadeUp}
-            className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-mint)] border border-black/5 rotate-[-1deg] mb-2"
+            className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-mint)] border border-black/5 rotate-[-1deg] mb-2 select-none"
             style={{ fontFamily: 'var(--font-body)' }}
           >
             My Toolbox
           </motion.div>
           <motion.h2
             variants={fadeUp}
-            className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-[var(--text-dark)] m-0"
+            className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-[var(--text-dark)] m-0 select-none"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            The Sticky Note Wall
+            Skills Explorer
           </motion.h2>
+          <p className="text-xs md:text-sm text-[var(--text-muted)] mt-1 select-none">
+            Hover over folders below to expand each technical category directory.
+          </p>
         </div>
 
-        {/* Sticky Notes container */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-8 justify-items-center items-start pt-6">
+        {/* Collapsible Categories Accordion Stack */}
+        <div 
+          className="flex flex-col gap-4"
+          onMouseLeave={() => setActiveId(null)}
+        >
           {skillCategories.map((cat) => {
-            const rotStyle = getRotationStyle(cat.id)
-            const tapeStyle = getTapeStyle(cat.id)
+            const folderColor = getFolderColorClass(cat.id)
+            const ext = getFileExtension(cat.id)
+            const isOpen = activeId === cat.id
 
             return (
               <motion.div
                 key={cat.id}
                 variants={fadeUp}
-                style={{ ...rotStyle, backgroundColor: cat.color }}
-                whileHover={{
-                  y: -6,
-                  rotate: 0,
-                  scale: 1.04,
-                  boxShadow: 'var(--shadow-sm)',
-                  transition: { duration: 0.2, ease: 'easeOut' }
-                }}
-                className="relative w-full max-w-[200px] aspect-square p-5 pt-7 rounded-sm shadow-xs border border-black/5 flex flex-col justify-start"
+                onMouseEnter={() => setActiveId(cat.id)}
+                className="bg-[#fefcf7] rounded-md border border-black/5 shadow-xs overflow-hidden"
               >
-                {/* Washi Tape Strip at the top center */}
+                {/* Accordion Header (Hover to Trigger) */}
                 <div
-                  style={tapeStyle}
-                  className="absolute -top-3 left-[calc(50%-35px)] w-[70px] h-[16px] opacity-80 border border-black/5 rounded-xs"
-                  aria-hidden="true"
-                />
-
-                {/* Category Title (Print Font) */}
-                <h3
-                  className="text-[11px] font-bold text-[var(--text-handwrite)] tracking-wider uppercase border-b border-[var(--text-handwrite)]/10 pb-1.5 mb-3 select-none"
-                  style={{ fontFamily: 'var(--font-body)' }}
+                  className="px-5 py-3.5 bg-zinc-50 border-b border-black/5 flex justify-between items-center select-none transition-colors cursor-pointer hover:bg-zinc-100/80"
                 >
-                  {cat.title}
-                </h3>
+                  <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 flex-1 min-w-0 mr-4">
+                    <span 
+                      className="text-base md:text-2xl font-semibold text-neutral-800 uppercase tracking-widest font-mono flex items-center gap-2.5 shrink-0"
+                    >
+                      <span className="text-xl md:text-2xl leading-none">{isOpen ? "📂" : "📁"}</span>
+                      <span>{cat.title}</span>
+                    </span>
+                    {cat.description && (
+                      <span className="text-[10px] md:text-sm text-neutral-400 font-mono md:border-l md:border-neutral-300 md:pl-4 truncate ml-8 md:ml-0">
+                        {cat.description}
+                      </span>
+                    )}
+                  </div>
+                  
+                  {/* Windows 98 Tree View Expand Indicator [+] or [-] */}
+                  <div className="w-6 h-6 md:w-8 md:h-8 bg-white border border-neutral-400 flex items-center justify-center rounded-[1px] shadow-xs font-mono text-[11px] md:text-lg font-semibold text-neutral-700">
+                    {isOpen ? "-" : "+"}
+                  </div>
+                </div>
 
-                {/* Skills List (Handwritten Font) */}
-                <ul
-                  className="list-none p-0 m-0 flex flex-col gap-2 text-xs md:text-[0.875rem] text-[var(--text-handwrite)] leading-tight"
-                  style={{ fontFamily: 'var(--font-handwrite)' }}
+                {/* Collapsible Content Wrapper (Framer Motion height transition) */}
+                <motion.div
+                  initial={false}
+                  animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="overflow-hidden"
                 >
-                  {cat.skills.map((skill, index) => (
-                    <li key={`${skill}-${index}`} className="flex items-center gap-1">
-                      <span>•</span>
-                      <span>{skill}</span>
-                    </li>
-                  ))}
-                </ul>
+                  <div className="p-6 border-t border-black/[0.02]">
+                    {/* Skills Folder Grid */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 justify-items-center">
+                      {cat.skills.map((skill) => {
+                        const localLogo = localLogos[skill]
+                        return (
+                          <motion.div
+                            key={skill}
+                            whileHover={{ scale: 1.05 }}
+                            className="w-24 flex flex-col items-center gap-2 cursor-pointer group text-center select-none"
+                          >
+                            {/* Icon container */}
+                            <div className="relative transform transition-transform group-hover:scale-105 flex items-center justify-center w-14 h-14">
+                              {localLogo ? (
+                                <div className="relative w-11 h-11 flex items-center justify-center">
+                                  <img src={localLogo} alt={`${skill} logo`} className="w-11 h-11 object-contain" />
+                                  {/* Classic Windows 98 Shortcut Arrow overlay */}
+                                  <div className="absolute -bottom-1 -left-1 w-3.5 h-3.5 bg-white border border-neutral-400 flex items-center justify-center rounded-[1px] shadow-xs select-none pointer-events-none">
+                                    <span className="text-[8px] text-blue-800 leading-none font-semibold">↗</span>
+                                  </div>
+                                </div>
+                              ) : (
+                                <>
+                                  <FolderIcon colorClass={folderColor} className="w-14 h-14 drop-shadow-xs" />
+                                  <span className="absolute -bottom-0.5 -right-1 bg-zinc-800 text-[7px] text-[#00ffcc] font-mono px-1 rounded-xs border border-zinc-700 font-semibold select-none uppercase">
+                                    {ext}
+                                  </span>
+                                </>
+                              )}
+                            </div>
+                            
+                            {/* File Label (Classic Windows 98 highlight style on hover) */}
+                            <span className="text-[11px] font-mono text-neutral-800 px-1 py-0.5 leading-tight rounded-xs group-hover:bg-[#000080] group-hover:text-white select-none transition-colors break-words max-w-[88px]">
+                              {skill}
+                            </span>
+                          </motion.div>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
             )
           })}

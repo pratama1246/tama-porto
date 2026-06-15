@@ -36,37 +36,6 @@ function FlowerSticker({ className, color = 'var(--accent-lavender)', size = 50 
   )
 }
 
-// Retro Cassette Tape Component
-function CassetteSticker({ className, color = 'var(--accent-peach)', width = 120, height = 75 }) {
-  return (
-    <svg
-      width={width}
-      height={height}
-      viewBox="0 0 120 75"
-      fill="none"
-      className={className}
-    >
-      <rect x="2" y="2" width="116" height="71" rx="6" fill={color} stroke="var(--text-dark)" strokeWidth="3.5" />
-      <rect x="15" y="12" width="90" height="40" rx="3" fill="white" stroke="var(--text-dark)" strokeWidth="2.5" />
-      <circle cx="42" cy="32" r="10" fill="var(--bg-primary)" stroke="var(--text-dark)" strokeWidth="2.5" />
-      <circle cx="42" cy="32" r="4" fill="var(--text-dark)" />
-      <line x1="42" y1="19" x2="42" y2="22" stroke="var(--text-dark)" strokeWidth="2" />
-      <line x1="42" y1="42" x2="42" y2="45" stroke="var(--text-dark)" strokeWidth="2" />
-      <circle cx="78" cy="32" r="10" fill="var(--bg-primary)" stroke="var(--text-dark)" strokeWidth="2.5" />
-      <circle cx="78" cy="32" r="4" fill="var(--text-dark)" />
-      <line x1="78" y1="19" x2="78" y2="22" stroke="var(--text-dark)" strokeWidth="2" />
-      <line x1="78" y1="42" x2="78" y2="45" stroke="var(--text-dark)" strokeWidth="2" />
-      <line x1="22" y1="19" x2="100" y2="19" stroke="var(--accent-pink)" strokeWidth="2.5" />
-      <line x1="22" y1="24" x2="100" y2="24" stroke="var(--accent-blue)" strokeWidth="2.5" />
-      <polygon points="35,62 85,62 80,72 40,72" fill="white" stroke="var(--text-dark)" strokeWidth="2.5" />
-      <circle cx="8" cy="8" r="1.5" fill="var(--text-dark)" />
-      <circle cx="112" cy="8" r="1.5" fill="var(--text-dark)" />
-      <circle cx="8" cy="67" r="1.5" fill="var(--text-dark)" />
-      <circle cx="112" cy="67" r="1.5" fill="var(--text-dark)" />
-    </svg>
-  )
-}
-
 // Doodle Y2K Smiley Sticker Component
 function SmileySticker({ className, color = 'var(--accent-yellow)', size = 45 }) {
   return (
@@ -117,337 +86,382 @@ export default function BackgroundElements() {
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden z-20 w-full select-none" aria-hidden="true">
-      {/* --- HERO SECTION DECORATIONS (Animate on load) --- */}
       
-      {/* 1. Heart Sticker (Hero top-left margin) */}
+      {/* ─── HERO SECTION ─── */}
+      {/* PNG 1: Y2K Element 1 */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={springTransition(0.4)}
+        className="absolute top-[140px] left-[3%] w-[85px] sm:w-[110px] rotate-[-8deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.12, rotate: '-12deg' }}
+      >
+        <img src="/assets/stickers/1.png" alt="Y2K Element 1" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </motion.div>
+
+      {/* SVG 1: Pink Heart */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: -200, y: -200, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.5)}
-        className="absolute top-[140px] left-[4%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.45)}
+        className="absolute top-[180px] left-[12%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
         whileHover={{ scale: 1.15, rotate: '-10deg' }}
       >
-        <HeartSticker color="var(--accent-pink)" size={42} className="shadow-xs rotate-[-8deg]" />
+        <HeartSticker color="var(--accent-pink)" size={42} className="sticker-effect rotate-[-8deg]" />
       </motion.div>
 
-      {/* 2. Sparkle Star (Hero top-right margin) */}
+      {/* PNG 2: Vinyl */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: 200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={springTransition(0.45)}
+        className="absolute top-[200px] right-[3%] w-[100px] sm:w-[125px] rotate-[12deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.1, rotate: '25deg' }}
+      >
+        <img src="/assets/stickers/vinly.png" alt="Vinyl Record Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </motion.div>
+
+      {/* SVG 2: Pink Sparkle Star */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: 200, y: -200, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.55)}
-        className="absolute top-[180px] right-[4%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.5)}
+        className="absolute top-[260px] right-[12%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
         whileHover={{ scale: 1.15 }}
       >
-        <SparkleStar color="var(--accent-pink)" size={42} className="shadow-xs" />
+        <SparkleStar color="var(--accent-pink)" size={42} className="sticker-effect" />
       </motion.div>
 
-      {/* 3. Smiley Face Sticker (Hero bottom-left margin) */}
+      {/* SVG 3: Yellow Smiley */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: -200, y: 200, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.6)}
-        className="absolute top-[480px] left-[5%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.55)}
+        className="absolute top-[480px] left-[4%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
         whileHover={{ scale: 1.1, rotate: '15deg' }}
       >
-        <SmileySticker color="var(--accent-yellow)" size={46} className="shadow-xs rotate-[12deg]" />
+        <SmileySticker color="var(--accent-yellow)" size={46} className="sticker-effect rotate-[12deg]" />
       </motion.div>
 
-      {/* 4. Lavender Sparkle Star (Hero bottom-right margin) */}
+      {/* PNG 3: MikroTik */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, y: 100, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.5)}
+        className="absolute top-[580px] left-[12%] w-[100px] sm:w-[130px] rotate-[6deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.12, rotate: '-3deg' }}
+      >
+        <img src="/assets/stickers/mikrotik.png" alt="MikroTik Router Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </motion.div>
+
+      {/* PNG 4: Pixel Cursor */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: 200, y: 150, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.55)}
+        className="absolute top-[680px] right-[14%] w-[55px] sm:w-[70px] rotate-[-15deg] z-30 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.15, rotate: '5deg' }}
+      >
+        <img src="/assets/stickers/cursor.png" alt="Pixel Cursor Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </motion.div>
+
+      {/* SVG 4: Lavender Sparkle Star */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: 200, y: 200, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.65)}
-        className="absolute top-[680px] right-[5%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.6)}
+        className="absolute top-[750px] right-[3%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
         whileHover={{ scale: 1.15 }}
       >
-        <SparkleStar color="var(--accent-lavender)" size={35} className="shadow-xs rotate-[-15deg]" />
+        <SparkleStar color="var(--accent-lavender)" size={35} className="sticker-effect rotate-[-15deg]" />
       </motion.div>
 
-      {/* Y2K PNG Sticker 1: Draggable Pixel Cursor (near Hero CTA) */}
+
+      {/* ─── ABOUT SECTION ─── */}
+      {/* PNG 5: Y2K Element 2 */}
       <motion.div
         drag
         dragMomentum={false}
-        initial={{ x: -250, y: 250, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.7)}
-        className="absolute top-[600px] left-[52%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-30"
-        whileHover={{ scale: 1.2, rotate: '15deg' }}
+        initial={{ x: 200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={springTransition(0.6)}
+        className="absolute top-[1100px] right-[3%] w-[90px] sm:w-[115px] rotate-[10deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.12, rotate: '18deg' }}
       >
-        <img
-          src="/assets/stickers/cursor.png"
-          alt="Pixel Cursor Sticker"
-          className="w-[65px] h-[65px] select-none pointer-events-none drop-shadow-[1px_2px_2px_rgba(0,0,0,0.15)]"
-        />
+        <img src="/assets/stickers/2.png" alt="Y2K Element 2" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
-      {/* Y2K PNG Sticker 2: Draggable Pixel Folder (Between Hero and About, right side) */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 250, y: 250, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.75)}
-        className="absolute top-[820px] right-[3%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
-        whileHover={{ scale: 1.1, rotate: '-10deg' }}
-      >
-        <img
-          src="/assets/stickers/folder.png"
-          alt="Pixel Folder Sticker"
-          className="w-[100px] h-[100px] select-none pointer-events-none drop-shadow-[2px_3px_3px_rgba(0,0,0,0.12)] rotate-[8deg]"
-        />
-      </motion.div>
-
-      {/* --- ABOUT SECTION DECORATIONS (Animate when scrolled into view) --- */}
-      
-      {/* 5. Cassette Tape (Between Hero and About) */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: 100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.8)}
-        className="absolute top-[920px] left-[3%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
-        whileHover={{ scale: 1.08, rotate: '-5deg' }}
-      >
-        <CassetteSticker color="var(--accent-peach)" className="shadow-xs rotate-[-12deg]" />
-      </motion.div>
-
-      {/* 6. Peach Sparkle Star (About right margin) */}
+      {/* SVG 5: Peach Sparkle Star */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: 200, y: -100, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.85)}
-        className="absolute top-[1150px] right-[4%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.65)}
+        className="absolute top-[1180px] right-[12%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
         whileHover={{ scale: 1.15 }}
       >
-        <SparkleStar color="var(--accent-peach)" size={38} className="shadow-xs rotate-[10deg]" />
+        <SparkleStar color="var(--accent-peach)" size={38} className="sticker-effect rotate-[10deg]" />
       </motion.div>
 
-      {/* 7. Mint Sparkle Star (About left margin) */}
+      {/* PNG 6: Pixel Folder */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={springTransition(0.65)}
+        className="absolute top-[1450px] left-[3%] w-[85px] sm:w-[110px] rotate-[-5deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.1, rotate: '5deg' }}
+      >
+        <img src="/assets/stickers/folder.png" alt="Pixel Folder Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </motion.div>
+
+      {/* SVG 6: Mint Sparkle Star */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: -200, y: 100, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.9)}
-        className="absolute top-[1380px] left-[4%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.7)}
+        className="absolute top-[1550px] left-[12%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
         whileHover={{ scale: 1.15 }}
       >
-        <SparkleStar color="var(--accent-mint)" size={35} className="shadow-xs rotate-[15deg]" />
+        <SparkleStar color="var(--accent-mint)" size={35} className="sticker-effect rotate-[15deg]" />
       </motion.div>
 
-      {/* --- PROJECTS SECTION DECORATIONS --- */}
-      
-      {/* 8. Mint Sparkle Star (Projects top-left margin) */}
+      {/* SVG 7: Blue Butterfly */}
       <motion.div
         drag
         dragMomentum={false}
-        initial={{ x: -200, y: -100, opacity: 0 }}
+        initial={{ x: -200, y: 150, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.95)}
-        className="absolute top-[1650px] left-[5%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
-        whileHover={{ scale: 1.15 }}
+        transition={springTransition(0.75)}
+        className="absolute top-[1950px] left-[4%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
+        whileHover={{ scale: 1.15, rotate: '-8deg' }}
       >
-        <SparkleStar color="var(--accent-mint)" size={35} className="shadow-xs" />
+        <ButterflySticker color="var(--accent-blue)" size={48} className="sticker-effect rotate-[-10deg]" />
       </motion.div>
 
-      {/* 9. Flower Sticker (Projects right margin) */}
+
+      {/* ─── PROJECTS SECTION ─── */}
+      {/* PNG 7: Earphone */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={springTransition(0.7)}
+        className="absolute top-[2300px] left-[3%] w-[95px] sm:w-[120px] rotate-[-10deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.12, rotate: '-2deg' }}
+      >
+        <img src="/assets/stickers/earphone.png" alt="Earphone Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </motion.div>
+
+      {/* SVG 8: Lavender Flower */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: 200, y: 100, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.0)}
-        className="absolute top-[1920px] right-[3%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.8)}
+        className="absolute top-[2550px] right-[3%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
         whileHover={{ scale: 1.08, rotate: '12deg' }}
       >
-        <FlowerSticker color="var(--accent-lavender)" size={55} className="shadow-xs rotate-[8deg]" />
+        <FlowerSticker color="var(--accent-lavender)" size={55} className="sticker-effect rotate-[8deg]" />
       </motion.div>
 
-      {/* 10. Butterfly Sticker (Projects bottom-left margin) */}
+      {/* SVG 9: Mint Sparkle Star */}
       <motion.div
         drag
         dragMomentum={false}
-        initial={{ x: -200, y: 200, opacity: 0 }}
+        initial={{ x: -200, y: -100, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.05)}
-        className="absolute top-[2150px] left-[3%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
-        whileHover={{ scale: 1.15, rotate: '-8deg' }}
+        transition={springTransition(0.85)}
+        className="absolute top-[2850px] left-[6%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
+        whileHover={{ scale: 1.15 }}
       >
-        <ButterflySticker color="var(--accent-blue)" size={48} className="shadow-xs rotate-[-10deg]" />
+        <SparkleStar color="var(--accent-mint)" size={35} className="sticker-effect" />
       </motion.div>
 
-      {/* --- SKILLS & CONTACT SECTION DECORATIONS --- */}
-      
-      {/* 11. Yellow Sparkle Star (Skills right margin) */}
+
+      {/* ─── SKILLS & CERTIFICATIONS ─── */}
+      {/* SVG 10: Yellow Sparkle Star */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: 200, y: -100, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.1)}
-        className="absolute top-[2480px] right-[4%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.8)}
+        className="absolute top-[3150px] right-[5%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
         whileHover={{ scale: 1.15 }}
       >
-        <SparkleStar color="var(--accent-yellow)" size={38} className="shadow-xs" />
+        <SparkleStar color="var(--accent-yellow)" size={38} className="sticker-effect" />
       </motion.div>
 
-      {/* 12. Washi Tape Strip (Skills left margin) */}
+      {/* PNG 8: CD Sticker */}
       <motion.div
         drag
         dragMomentum={false}
-        initial={{ x: -200, y: 50, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 0.7 }}
-        transition={springTransition(1.15)}
-        className="absolute top-[2820px] left-[2%] w-[80px] h-[18px] bg-[var(--accent-blue)] border border-black/5 rotate-[-5deg] rounded-sm hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
-        style={{ mixBlendMode: 'multiply' }}
-        whileHover={{ scale: 1.1 }}
-      />
-
-      {/* 13. Pink Sparkle Star (Skills/Certifications transition right margin) */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, y: 200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.2)}
-        className="absolute top-[2980px] right-[5%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
-        whileHover={{ scale: 1.15 }}
+        initial={{ x: 200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={springTransition(0.75)}
+        className="absolute top-[3450px] right-[3%] w-[100px] sm:w-[130px] rotate-[8deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.15, rotate: '-12deg' }}
       >
-        <SparkleStar color="var(--accent-pink)" size={36} className="shadow-xs rotate-[20deg]" />
+        <img src="/assets/stickers/cd.png" alt="Compact Disc Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
-      {/* --- CERTIFICATIONS SECTION DECORATIONS --- */}
-
-      {/* 14. Smiley Sticker (Lavender, Certifications left margin) */}
+      {/* SVG 11: Lavender Smiley */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: -200, y: 100, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.25)}
-        className="absolute top-[3350px] left-[3%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.85)}
+        className="absolute top-[3750px] left-[3%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
         whileHover={{ scale: 1.1, rotate: '15deg' }}
       >
-        <SmileySticker color="var(--accent-lavender)" size={46} className="shadow-xs rotate-[15deg]" />
+        <SmileySticker color="var(--accent-lavender)" size={46} className="sticker-effect rotate-[15deg]" />
       </motion.div>
 
-      {/* 15. Peach Sparkle Star (Certifications right margin) */}
+      {/* SVG 12: Peach Sparkle Star */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: 200, y: -100, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.3)}
-        className="absolute top-[3650px] right-[4%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.9)}
+        className="absolute top-[4150px] right-[4%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
         whileHover={{ scale: 1.15 }}
       >
-        <SparkleStar color="var(--accent-peach)" size={35} className="shadow-xs rotate-[-10deg]" />
+        <SparkleStar color="var(--accent-peach)" size={35} className="sticker-effect rotate-[-10deg]" />
       </motion.div>
 
-      {/* 16. Flower Sticker (Mint, Certifications left margin) */}
+
+      {/* ─── HOBBIES SECTION ─── */}
+      {/* SVG 13: Mint Flower */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: -200, y: 100, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.35)}
-        className="absolute top-[3950px] left-[4%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.85)}
+        className="absolute top-[4500px] left-[4%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
         whileHover={{ scale: 1.08, rotate: '12deg' }}
       >
-        <FlowerSticker color="var(--accent-mint)" size={50} className="shadow-xs rotate-[8deg]" />
+        <FlowerSticker color="var(--accent-mint)" size={50} className="sticker-effect rotate-[8deg]" />
       </motion.div>
 
-      {/* 17. Butterfly Sticker (Pink, Certifications right margin) */}
+      {/* PNG 9: Cassette Tape */}
       <motion.div
         drag
         dragMomentum={false}
-        initial={{ x: 200, y: 200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.4)}
-        className="absolute top-[4250px] right-[5%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
-        whileHover={{ scale: 1.15, rotate: '-8deg' }}
+        initial={{ x: -200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={springTransition(0.8)}
+        className="absolute top-[4800px] left-[3%] w-[120px] sm:w-[145px] rotate-[-12deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.1, rotate: '-2deg' }}
       >
-        <ButterflySticker color="var(--accent-pink)" size={45} className="shadow-xs rotate-[-12deg]" />
+        <img src="/assets/stickers/Cassette_tape.png" alt="Cassette Tape Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
-      {/* --- HOBBIES SECTION DECORATIONS --- */}
-
-      {/* 18. Heart Sticker (Yellow, Hobbies left margin) */}
+      {/* SVG 14: Yellow Heart */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: -200, y: -200, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.45)}
-        className="absolute top-[4600px] left-[3%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.9)}
+        className="absolute top-[4980px] left-[10%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
         whileHover={{ scale: 1.15, rotate: '-10deg' }}
       >
-        <HeartSticker color="var(--accent-yellow)" size={40} className="shadow-xs rotate-[10deg]" />
+        <HeartSticker color="var(--accent-yellow)" size={40} className="sticker-effect rotate-[10deg]" />
       </motion.div>
 
-      {/* 19. Cassette Sticker (Mint, Hobbies left margin) */}
+      {/* PNG 10: Bowie Card */}
       <motion.div
         drag
         dragMomentum={false}
-        initial={{ x: -200, y: 100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.5)}
-        className="absolute top-[5300px] left-[4%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
-        whileHover={{ scale: 1.08, rotate: '-5deg' }}
+        initial={{ x: 200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={springTransition(0.85)}
+        className="absolute top-[5150px] right-[4%] w-[100px] sm:w-[125px] rotate-[14deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.12, rotate: '4deg' }}
       >
-        <CassetteSticker color="var(--accent-mint)" className="shadow-xs rotate-[-8deg]" />
+        <img src="/assets/stickers/bowie.png" alt="Bowie Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
-      {/* 20. Yellow Washi Tape Strip (Hobbies right margin) */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, y: 50, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 0.7 }}
-        transition={springTransition(1.55)}
-        className="absolute top-[5600px] right-[3%] w-[80px] h-[18px] bg-[var(--accent-yellow)] border border-black/5 rotate-[4deg] rounded-sm hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
-        style={{ mixBlendMode: 'multiply' }}
-        whileHover={{ scale: 1.1 }}
-      />
-
-      {/* --- CONTACT SECTION DECORATIONS --- */}
-
-      {/* 21. Lavender Sparkle Star (Contact left margin) */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: 200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.6)}
-        className="absolute top-[5850px] left-[5%] hidden lg:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
-        whileHover={{ scale: 1.15 }}
-      >
-        <SparkleStar color="var(--accent-lavender)" size={38} className="shadow-xs rotate-[15deg]" />
-      </motion.div>
-
-      {/* 22. Smiley Sticker (Peach, Contact right margin) */}
+      {/* SVG 15: Pink Butterfly */}
       <motion.div
         drag
         dragMomentum={false}
         initial={{ x: 200, y: 200, opacity: 0 }}
         animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(1.65)}
-        className="absolute top-[6100px] right-[5%] hidden xl:block pointer-events-auto cursor-grab active:cursor-grabbing z-20"
+        transition={springTransition(0.95)}
+        className="absolute top-[5350px] right-[9%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
+        whileHover={{ scale: 1.15, rotate: '-8deg' }}
+      >
+        <ButterflySticker color="var(--accent-pink)" size={45} className="sticker-effect rotate-[-12deg]" />
+      </motion.div>
+
+
+      {/* ─── CONTACT SECTION ─── */}
+      {/* SVG 16: Lavender Sparkle Star */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, y: 200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.9)}
+        className="absolute top-[5750px] left-[5%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
+        whileHover={{ scale: 1.15 }}
+      >
+        <SparkleStar color="var(--accent-lavender)" size={38} className="sticker-effect rotate-[15deg]" />
+      </motion.div>
+
+      {/* PNG 11: Retro Phone */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: 200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={springTransition(0.9)}
+        className="absolute top-[5920px] right-[3%] w-[85px] sm:w-[110px] rotate-[8deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
+        whileHover={{ scale: 1.15, rotate: '18deg' }}
+      >
+        <img src="/assets/stickers/phone.png" alt="Retro Telephone Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </motion.div>
+
+      {/* SVG 17: Peach Smiley */}
+      <motion.div
+        drag
+        dragMomentum={false}
+        initial={{ x: -200, y: 200, opacity: 0 }}
+        animate={{ x: 0, y: 0, opacity: 1 }}
+        transition={springTransition(0.95)}
+        className="absolute top-[6000px] left-[4%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
         whileHover={{ scale: 1.1, rotate: '15deg' }}
       >
-        <SmileySticker color="var(--accent-peach)" size={46} className="shadow-xs rotate-[-15deg]" />
+        <SmileySticker color="var(--accent-peach)" size={46} className="sticker-effect rotate-[-15deg]" />
       </motion.div>
+
     </div>
   )
 }

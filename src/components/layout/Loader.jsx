@@ -83,10 +83,10 @@ export default function Loader({ onComplete }) {
         <div className="bg-accent-lavender border-b-2 border-text-dark px-3 py-1.5 flex items-center justify-between font-display font-medium text-text-dark text-sm md:text-base select-none">
           <span>TAMA_BOOT_SYSTEM.EXE</span>
           <div className="flex gap-1">
-            <button className="w-5 h-5 border border-text-dark bg-white rounded-sm text-xs font-bold leading-none flex items-center justify-center hover:bg-accent-pink active:translate-y-0.5">
+            <button className="w-5 h-5 border border-text-dark bg-white rounded-sm text-xs font-semibold leading-none flex items-center justify-center hover:bg-accent-pink active:translate-y-0.5">
               _
             </button>
-            <button className="w-5 h-5 border border-text-dark bg-white rounded-sm text-xs font-bold leading-none flex items-center justify-center hover:bg-accent-pink active:translate-y-0.5">
+            <button className="w-5 h-5 border border-text-dark bg-white rounded-sm text-xs font-semibold leading-none flex items-center justify-center hover:bg-accent-pink active:translate-y-0.5">
               X
             </button>
           </div>

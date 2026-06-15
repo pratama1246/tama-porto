@@ -44,8 +44,6 @@ export default function Journey() {
     { id: 'organization', label: 'Organization', color: 'bg-[var(--accent-yellow)]', text: 'text-[var(--text-dark)]' }
   ]
 
-  const activeColor = tabs.find(t => t.id === activeTab)?.color || 'bg-white'
-
   return (
     <section
       id="journey"
@@ -94,7 +92,7 @@ export default function Journey() {
                     min-h-[44px] flex items-center justify-center select-none
                     ${tab.color} ${tab.text}
                     ${isActive 
-                      ? 'shadow-xs scale-100 z-10 font-bold border-b-transparent md:border-b-black/10 md:border-l-transparent md:translate-x-1.5' 
+                      ? 'shadow-xs scale-100 z-10 font-semibold border-b-transparent md:border-b-black/10 md:border-l-transparent md:translate-x-1.5' 
                       : 'opacity-70 scale-95 hover:opacity-90'
                     }
                     rounded-t-sm md:rounded-t-none md:rounded-r-sm md:first:rounded-t-sm md:last:rounded-b-sm

@@ -36,9 +36,9 @@ function Stamp({ id }) {
     <div 
       className={`absolute bottom-3 right-3 w-16 h-16 rounded-full border-2 border-dashed flex flex-col items-center justify-center ${config.color} ${config.rotation} select-none opacity-75 pointer-events-none`}
     >
-      <span className="text-[7px] uppercase tracking-widest font-bold font-body leading-none">Official</span>
-      <span className="text-[9px] uppercase tracking-tighter font-extrabold font-display my-0.5 leading-none">{config.text}</span>
-      <span className="text-[6px] uppercase tracking-wider font-bold font-body leading-none">PNC Dept</span>
+      <span className="text-[7px] uppercase tracking-widest font-semibold font-body leading-none">Official</span>
+      <span className="text-[9px] uppercase tracking-tighter font-semibold font-display my-0.5 leading-none">{config.text}</span>
+      <span className="text-[6px] uppercase tracking-wider font-semibold font-body leading-none">PNC Dept</span>
     </div>
   )
 }
@@ -52,7 +52,7 @@ function CertificateCard({ cert, isArchive = false }) {
     ? (cert.id % 2 === 0 ? 'rotate-[1.5deg]' : 'rotate-[-1.5deg]')
     : ''
 
-  const CardContent = () => (
+  const renderCardContent = () => (
     <>
       {/* Decorative Pinned Element: alternating paperclip or washi tape */}
       {isPaperClip ? (
@@ -75,13 +75,13 @@ function CertificateCard({ cert, isArchive = false }) {
       {/* Card Header (Issuer & Date) */}
       <div className="flex justify-between items-start mb-3">
         <span 
-          className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider max-w-[70%]"
+          className="text-[10px] font-semibold text-[var(--text-muted)] uppercase tracking-wider max-w-[70%]"
           style={{ fontFamily: 'var(--font-body)' }}
         >
           {cert.issuer}
         </span>
         <span 
-          className="text-xs text-[var(--text-handwrite)] rotate-[2deg] select-none font-bold"
+          className="text-xs text-[var(--text-handwrite)] rotate-[2deg] select-none"
           style={{ fontFamily: 'var(--font-handwrite)' }}
         >
           {cert.date}
@@ -157,7 +157,7 @@ function CertificateCard({ cert, isArchive = false }) {
       <div 
         className={`relative flex flex-col justify-between min-h-[280px] w-full p-6 bg-white border border-black/10 rounded-sm shadow-xs hover:shadow-sm hover:-translate-y-1 transition-all duration-200 ${randomRotation}`}
       >
-        <CardContent />
+        {renderCardContent()}
       </div>
     )
   }
@@ -166,7 +166,7 @@ function CertificateCard({ cert, isArchive = false }) {
     <ScrollStackItem 
       itemClassName="flex flex-col justify-between min-h-[390px] md:min-h-[360px] w-full"
     >
-      <CardContent />
+      {renderCardContent()}
     </ScrollStackItem>
   )
 }
@@ -174,10 +174,10 @@ function CertificateCard({ cert, isArchive = false }) {
 export default function Certifications() {
   const [showArchive, setShowArchive] = useState(false)
 
-  // Core technical certifications for ScrollStack
-  const coreCerts = certifications.filter(cert => [4, 7, 8, 6, 2, 3].includes(cert.id))
-  // Other general / soft skill certs for Collapsible Grid
-  const archiveCerts = certifications.filter(cert => ![4, 7, 8, 6, 2, 3].includes(cert.id))
+  // Active certifications shown in ScrollStack
+  const coreCerts = certifications.filter(cert => !cert.archived)
+  // Archived certifications shown in collapsible grid
+  const archiveCerts = certifications.filter(cert => cert.archived)
 
   return (
     <section
@@ -242,10 +242,10 @@ export default function Certifications() {
               <div className="border-t border-dashed border-[var(--text-muted)]/30 pt-10 mt-6">
                 <div className="text-center mb-8">
                   <span className="font-handwrite text-sm text-[var(--text-handwrite)]/80 italic">
-                    * Pinned general & micro-skill achievements *
+                    * {archiveCerts.length} archived — general &amp; micro-skill achievements *
                   </span>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center items-start">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center items-start [&>*:last-child:nth-child(3n+1)]:md:col-start-2">
                   {archiveCerts.map((cert) => (
                     <CertificateCard key={cert.id} cert={cert} isArchive={true} />
                   ))}

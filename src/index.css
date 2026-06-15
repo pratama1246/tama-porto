@@ -184,7 +184,8 @@ body {
     drop-shadow(4.5px 4.5px 0px #ffffff) 
     drop-shadow(-4.5px -4.5px 0px #ffffff) 
     drop-shadow(4.5px -4.5px 0px #ffffff) 
-    drop-shadow(-4.5px 4.5px 0px #ffffff);
+    drop-shadow(-4.5px 4.5px 0px #ffffff)
+    drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.15));
 }
 
 

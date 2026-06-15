@@ -11,7 +11,6 @@ import Certifications from './components/sections/Certifications'
 import Hobbies from './components/sections/Hobbies'
 import Contact from './components/sections/Contact'
 import BackgroundElements from './components/layout/BackgroundElements'
-import CircularText from './components/reactbits/CircularText'
 import Loader from './components/layout/Loader'
 import { projects } from './data/projects'
 import ProjectDetail from './components/sections/ProjectDetail'
@@ -57,14 +56,7 @@ function App() {
             />
           ) : (
             <>
-              {/* Rotating Circular Text Seal (Desktop only, fixed in bottom left) */}
-              <CircularText
-                text="TAMA*GALLERY*ESTD*2026*"
-                spinDuration={24}
-                onHover="speedUp"
-                className="hidden md:block fixed bottom-16 left-16 z-[99]"
-                radius={35}
-              />
+
 
               {/* GSAP-Powered Mobile-Responsive Navbar */}
               <Navbar />

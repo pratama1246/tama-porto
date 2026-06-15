@@ -42,49 +42,7 @@ const polaroidVariants = {
   }
 }
 
-const reactCssBadgeVariants = {
-  hidden: { x: 150, y: -150, opacity: 0, rotate: -15 },
-  visible: {
-    x: 0,
-    y: 0,
-    opacity: 1,
-    rotate: -4,
-    transition: { type: 'spring', stiffness: 80, damping: 14, delay: 0.65 }
-  }
-}
-
-const figmaBadgeVariants = {
-  hidden: { x: -150, y: 150, opacity: 0, rotate: 20 },
-  visible: {
-    x: 0,
-    y: 0,
-    opacity: 1,
-    rotate: 8,
-    transition: { type: 'spring', stiffness: 80, damping: 14, delay: 0.7 }
-  }
-}
-
-const pncBadgeVariants = {
-  hidden: { x: 200, y: -150, opacity: 0, rotate: -10 },
-  visible: {
-    x: 0,
-    y: 0,
-    opacity: 1,
-    rotate: 6,
-    transition: { type: 'spring', stiffness: 80, damping: 14, delay: 0.75 }
-  }
-}
-
-const laravelBadgeVariants = {
-  hidden: { x: 200, y: 200, opacity: 0, rotate: -20 },
-  visible: {
-    x: 0,
-    y: 0,
-    opacity: 1,
-    rotate: -8,
-    transition: { type: 'spring', stiffness: 80, damping: 14, delay: 0.8 }
-  }
-}
+// (Removed skill badge variants)
 
 const descriptionSegments = [
   { text: "D3 Informatics Engineering student, Frontend Developer & Network Administrator. Inspired by ", type: "normal" },
@@ -222,6 +180,22 @@ export default function Hero() {
         {/* Right column: Interactive Polaroid Stack (Without redundant avatar photo) */}
         <div className="lg:col-span-5 flex justify-center items-center relative min-h-[380px] sm:min-h-[460px] w-full mt-10 lg:mt-0 select-none">
           
+          {/* Cute handwritten drag tip */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 0.75, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.5 }}
+            className="absolute -top-2 left-[12%] pointer-events-none select-none text-[var(--text-muted)] hidden sm:flex items-center gap-1"
+            style={{ transform: 'rotate(-4deg)' }}
+          >
+            <span
+              className="text-[0.9rem] text-[var(--text-handwrite)]"
+              style={{ fontFamily: 'var(--font-handwrite)' }}
+            >
+              💡 Tips: try dragging the cards!
+            </span>
+          </motion.div>
+
           {/* Card 1: Sticky Note (Mood/State) - Index 0 */}
           <motion.div
             ref={card1Ref}
@@ -238,7 +212,7 @@ export default function Hero() {
             className="absolute left-[5%] sm:left-[10%] top-[10%] bg-[var(--accent-yellow)] p-4 w-[170px] sm:w-[190px] aspect-square rounded-sm shadow-xs border border-black/5 cursor-grab active:cursor-grabbing"
           >
             <h3 
-              className="text-[10px] font-bold text-[var(--text-handwrite)] tracking-wider uppercase border-b border-[var(--text-handwrite)]/10 pb-1 mb-2.5"
+              className="text-[10px] font-semibold text-[var(--text-handwrite)] tracking-wider uppercase border-b border-[var(--text-handwrite)]/10 pb-1 mb-2.5"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               ⚡ CURRENT STATE
@@ -307,59 +281,6 @@ export default function Hero() {
         </div>
       </motion.div>
 
-      {/* Floating/Scattered tags positioned dynamically around the main container */}
-      
-      {/* React & CSS Badge */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        variants={reactCssBadgeVariants}
-        whileHover={{ scale: 1.1, rotate: '5deg' }}
-        whileTap={{ scale: 0.95 }}
-        className="absolute top-[10%] left-[12%] px-3 py-1.5 rounded-sm bg-[var(--accent-blue)] border border-black/5 shadow-xs text-xs font-semibold cursor-grab select-none rotate-[-4deg] hidden xl:flex items-center gap-1.5 z-20"
-        style={{ fontFamily: 'var(--font-body)', color: 'var(--text-dark)' }}
-      >
-        <span>🌸</span> React & CSS
-      </motion.div>
-
-      {/* UI/UX Figma Badge */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        variants={figmaBadgeVariants}
-        whileHover={{ scale: 1.1, rotate: '-6deg' }}
-        whileTap={{ scale: 0.95 }}
-        className="absolute bottom-[8%] left-[32%] px-3 py-1.5 rounded-sm bg-[var(--accent-yellow)] border border-black/5 shadow-xs text-xs font-semibold cursor-grab select-none rotate-[8deg] hidden md:flex items-center gap-1.5 z-20"
-        style={{ fontFamily: 'var(--font-body)', color: 'var(--text-dark)' }}
-      >
-        <span>⭐</span> UI/UX Figma
-      </motion.div>
-
-      {/* PNC Coder Badge */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        variants={pncBadgeVariants}
-        whileHover={{ scale: 1.1, rotate: '8deg' }}
-        whileTap={{ scale: 0.95 }}
-        className="absolute bottom-[34%] right-[12%] px-3 py-1.5 rounded-sm bg-[var(--accent-mint)] border border-black/5 shadow-xs text-xs font-semibold cursor-grab select-none rotate-[6deg] hidden lg:flex items-center gap-1.5 z-20"
-        style={{ fontFamily: 'var(--font-body)', color: 'var(--text-dark)' }}
-      >
-        <span>💻</span> PNC Coder
-      </motion.div>
-
-      {/* Laravel Fan Badge */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        variants={laravelBadgeVariants}
-        whileHover={{ scale: 1.1, rotate: '-4deg' }}
-        whileTap={{ scale: 0.95 }}
-        className="absolute bottom-[10%] right-[3%] px-3 py-1.5 rounded-sm bg-[var(--accent-pink)] border border-black/5 shadow-xs text-xs font-semibold cursor-grab select-none rotate-[-8deg] hidden lg:flex items-center gap-1.5 z-20"
-        style={{ fontFamily: 'var(--font-body)', color: 'var(--text-dark)' }}
-      >
-        <span>⚡</span> Laravel Fan
-      </motion.div>
     </section>
   )
 }

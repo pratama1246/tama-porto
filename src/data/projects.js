@@ -12,10 +12,10 @@ export const projects = [
   {
     id: 2,
     title: "Ticketly",
-    desc: "Ticketing platform with email authentication system.",
-    tech: ["Laravel", "Filament", "MySQL"],
-    status: "In Progress",
-    github: "https://github.com/pratama1246/Ticketly-Project",
+    desc: "Web-based event ticketing platform enabling user bookings and admin quota management.",
+    tech: ["CodeIgniter 4", "MySQL", "PHP", "Tailwind CSS v4", "Flowbite"],
+    status: "Completed",
+    github: "https://github.com/pratama1246/ticketly-project.git",
     live: "",
     thumbnail: "/assets/projects/ticketly.png"
   },
@@ -28,15 +28,5 @@ export const projects = [
     github: "https://github.com/pratama1246/SistemPenggajianKaryawan",
     live: "",
     thumbnail: "/assets/projects/penggajian.png"
-  },
-  {
-    id: 4,
-    title: "EcoStock AI",
-    desc: "AI-powered production prediction platform for food-based SMEs (UMKM).",
-    tech: ["Next.js", "ASP.NET Core", "FastAPI", "PostgreSQL"],
-    status: "In Progress",
-    github: "https://github.com/pratama1246",
-    live: "",
-    thumbnail: "/assets/projects/ecostock.png"
   }
 ]

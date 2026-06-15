@@ -62,16 +62,16 @@ export default function Contact() {
           >
             {/* Y2K Postage Stamp */}
             <div className="absolute top-4 right-4 md:top-6 md:right-6 w-14 h-18 md:w-16 md:h-20 bg-[var(--accent-pink)] border-2 border-dashed border-[var(--text-dark)]/20 rounded-xs flex flex-col items-center justify-between p-1.5 rotate-[6deg] shadow-3xs select-none z-10">
-              <div className="text-[7px] font-bold text-[var(--text-dark)]/60 tracking-wider">INDONESIA</div>
+              <div className="text-[7px] font-semibold text-[var(--text-dark)]/60 tracking-wider">INDONESIA</div>
               <div className="text-lg md:text-xl">☕</div>
-              <div className="text-[8px] font-mono font-bold text-[var(--text-dark)]">2026</div>
+              <div className="text-[8px] font-mono font-semibold text-[var(--text-dark)]">2026</div>
             </div>
 
             {/* Circular Postmark Cancellation Cap (Overlapping the stamp) */}
             <div className="absolute -top-2 -right-4 md:-top-4 md:-right-6 w-24 h-24 md:w-28 md:h-28 border border-dashed border-red-600/35 rounded-full flex flex-col items-center justify-center rotate-[-12deg] pointer-events-none font-mono text-[7px] md:text-[8px] text-red-600/40 select-none z-20">
-              <span className="font-bold tracking-widest">CILACAP</span>
-              <span className="my-0.5 font-bold">15 JUN 2026</span>
-              <span className="font-bold tracking-wide">POSTED</span>
+              <span className="font-semibold tracking-widest">CILACAP</span>
+              <span className="my-0.5 font-semibold">15 JUN 2026</span>
+              <span className="font-semibold tracking-wide">POSTED</span>
               
               {/* Wavy lines spanning across */}
               <svg className="absolute -left-12 top-6 w-20 h-12 text-red-600/30" viewBox="0 0 100 50">
@@ -115,7 +115,7 @@ export default function Contact() {
               className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider">GITHUB</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">GITHUB</span>
               <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">@PRATAMA1246</span>
             </motion.a>
 
@@ -126,7 +126,7 @@ export default function Contact() {
               className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider">OFFICIAL MAIL</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">OFFICIAL MAIL</span>
               <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">PRATAMAPUTRA6854@GMAIL.COM</span>
             </motion.a>
 
@@ -139,7 +139,7 @@ export default function Contact() {
               className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider">LINKEDIN</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">LINKEDIN</span>
               <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">PERFECTPRATAMA</span>
             </motion.a>
 
@@ -152,7 +152,7 @@ export default function Contact() {
               className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider">INSTAGRAM</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">INSTAGRAM</span>
               <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">@PERFECTAMAFINE</span>
             </motion.a>
 
@@ -165,7 +165,7 @@ export default function Contact() {
               className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
               style={{ fontFamily: 'var(--font-body)' }}
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-wider">PINTEREST</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">PINTEREST</span>
               <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">@PPRAAATAMMMA___</span>
             </motion.a>
           </motion.div>
@@ -186,7 +186,7 @@ export default function Contact() {
           ]}
           velocity={-35}
           numCopies={3}
-          scrollerClassName="text-xl md:text-3xl font-display font-bold uppercase tracking-wider text-[var(--text-dark)]/90 flex items-center w-full"
+          scrollerClassName="text-xl md:text-3xl font-display font-semibold uppercase tracking-wider text-[var(--text-dark)]/90 flex items-center w-full"
           className="px-8"
         />
         <div className="text-[10px] md:text-xs opacity-75 font-mono font-semibold tracking-wider text-[var(--text-dark)] px-4 uppercase">

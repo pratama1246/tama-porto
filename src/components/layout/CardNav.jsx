@@ -65,7 +65,7 @@ const CardNav = ({
         // Trigger reflow to read correct scrollHeight
         contentEl.offsetHeight;
 
-        const topBar = 56; // height of mobile top bar (h-14 = 56px)
+        const topBar = 48; // height of mobile top bar (h-12 = 48px)
         const padding = 16;
         const contentHeight = contentEl.scrollHeight;
 
@@ -91,7 +91,7 @@ const CardNav = ({
       return null;
     }
 
-    gsap.set(navEl, { height: 56, overflow: 'hidden' });
+    gsap.set(navEl, { height: 48, overflow: 'hidden' });
     gsap.set(cardsRef.current, { y: 50, opacity: 0 });
 
     const tl = gsap.timeline({ paused: true });
@@ -123,7 +123,7 @@ const CardNav = ({
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
 
       if (!isMobile) {
-        // On desktop, clear GSAP heights completely so h-16 (64px) CSS takes over
+        // On desktop, clear GSAP heights completely so h-14 (56px) CSS takes over
         gsap.set(navRef.current, { clearProps: 'height,overflow' });
         setIsExpanded(false);
         setIsHamburgerOpen(false);
@@ -187,16 +187,16 @@ const CardNav = ({
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className={`card-nav-container fixed left-4 right-4 md:left-auto md:right-8 w-auto md:w-[92%] max-w-[820px] z-[99] top-[1.2em] md:top-[2em] ${className}`}
+      className={`card-nav-container fixed left-4 right-4 md:left-auto md:right-8 w-auto md:w-[90%] max-w-[720px] z-[99] top-[1em] md:top-[1.2em] ${className}`}
     >
       <nav
         ref={navRef}
-        className={`card-nav ${isExpanded ? 'open' : ''} block h-14 md:h-16 p-0 rounded-xl shadow-[var(--shadow-sm)] border border-[rgba(160,160,190,0.2)] relative overflow-hidden`}
+        className={`card-nav ${isExpanded ? 'open' : ''} block h-12 md:h-14 p-0 rounded-xl shadow-[var(--shadow-sm)] border border-[rgba(160,160,190,0.2)] relative overflow-hidden`}
         style={{ backgroundColor: baseColor }}
       >
         <div 
-          className="card-nav-top absolute inset-x-0 top-0 h-14 md:h-16 flex items-center justify-between z-[2]"
-          style={{ paddingLeft: '24px', paddingRight: '24px' }}
+          className="card-nav-top absolute inset-x-0 top-0 h-12 md:h-14 flex items-center justify-between z-[2]"
+          style={{ paddingLeft: '16px', paddingRight: '16px' }}
         >
           {/* Hamburger Menu Icon (Mobile Only) */}
           <div
@@ -238,10 +238,10 @@ const CardNav = ({
           </div>
 
           {/* Desktop Links (Hidden on Mobile, Styled as cute index tabs/tapes) */}
-          <div className="hidden md:flex items-center gap-3.5 order-2 ml-auto">
+          <div className="hidden md:flex items-center gap-2 order-2 ml-auto">
             <a
               href="#hero"
-              className="px-3 py-1.5 rounded-sm text-xs font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: '#b8d8e8', // --accent-blue
                 color: '#2d2d2d',
@@ -253,7 +253,7 @@ const CardNav = ({
             </a>
             <a
               href="#about"
-              className="px-3 py-1.5 rounded-sm text-xs font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: '#c8b8e8', // --accent-lavender
                 color: '#2d2d2d',
@@ -265,7 +265,7 @@ const CardNav = ({
             </a>
             <a
               href="#projects"
-              className="px-3 py-1.5 rounded-sm text-xs font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: '#ffb3c6', // --accent-pink
                 color: '#2d2d2d',
@@ -277,7 +277,7 @@ const CardNav = ({
             </a>
             <a
               href="#skills"
-              className="px-3 py-1.5 rounded-sm text-xs font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: '#b8e8d0', // --accent-mint
                 color: '#2d2d2d',
@@ -289,7 +289,7 @@ const CardNav = ({
             </a>
             <a
               href="#certifications"
-              className="px-3 py-1.5 rounded-sm text-xs font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: '#ffeaa7', // --accent-yellow
                 color: '#2d2d2d',
@@ -301,7 +301,7 @@ const CardNav = ({
             </a>
             <a
               href="#contact"
-              className="px-3 py-1.5 rounded-sm text-xs font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
                 backgroundColor: '#ffd4b8', // --accent-peach
                 color: '#2d2d2d',
@@ -316,7 +316,7 @@ const CardNav = ({
 
         {/* Expanded Content Grid (Mobile Drawer only) */}
         <div
-          className={`card-nav-content absolute left-0 right-0 top-[56px] bottom-0 p-4 flex flex-col items-stretch gap-4 justify-start z-[1] ${
+          className={`card-nav-content absolute left-0 right-0 top-[48px] bottom-0 p-4 flex flex-col items-stretch gap-4 justify-start z-[1] ${
             isExpanded ? 'visible pointer-events-auto' : 'invisible pointer-events-none'
           } md:hidden`}
           aria-hidden={!isExpanded}

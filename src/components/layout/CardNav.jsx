@@ -6,6 +6,7 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { motion } from 'framer-motion';
+import GlassSurface from '../reactbits/GlassSurface';
 
 // Custom SVG arrow icon to replace react-icons/go
 function ArrowUpRight({ className, ...props }) {
@@ -35,7 +36,6 @@ const CardNav = ({
   items,
   className = '',
   ease = 'power3.out',
-  baseColor = '#fdf6e3', // Matches --bg-primary (grid paper) from DESIGN.md
   menuColor = '#2d2d2d'
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
@@ -191,9 +191,27 @@ const CardNav = ({
     >
       <nav
         ref={navRef}
-        className={`card-nav ${isExpanded ? 'open' : ''} block h-12 md:h-14 p-0 rounded-xl shadow-[var(--shadow-sm)] border border-[rgba(160,160,190,0.2)] relative overflow-hidden`}
-        style={{ backgroundColor: baseColor }}
+        className={`card-nav ${isExpanded ? 'open' : ''} block h-12 md:h-14 p-0 rounded-xl shadow-[var(--shadow-sm)] border border-text-dark/20 relative overflow-hidden`}
+        style={{ backgroundColor: 'transparent' }}
       >
+        {/* GlassSurface as Background */}
+        <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
+          <GlassSurface
+            width="100%"
+            height="100%"
+            borderRadius={12}
+            borderWidth={0.03}
+            brightness={85}
+            opacity={0.8}
+            blur={12}
+            backgroundOpacity={0.45}
+            saturation={1.6}
+            distortionScale={-80}
+            forceLight={true}
+            className="w-full h-full border-none shadow-none pointer-events-none"
+          />
+        </div>
+
         <div 
           className="card-nav-top absolute inset-x-0 top-0 h-12 md:h-14 flex items-center justify-between z-[2]"
           style={{ paddingLeft: '16px', paddingRight: '16px' }}

@@ -18,37 +18,7 @@ const staggerContainer = {
   }
 }
 
-// Parallax slide variants for the ENTIRE unified scrapbook container sheet
-const containerVariants = {
-  enter: (direction) => ({
-    x: direction > 0 ? 300 : direction < 0 ? -300 : 0,
-    opacity: 0,
-    rotate: direction > 0 ? 2 : direction < 0 ? -2 : 0,
-    scale: 0.97
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-    rotate: 0.5,
-    scale: 1,
-    transition: {
-      x: { type: 'spring', stiffness: 260, damping: 22 },
-      opacity: { duration: 0.25 },
-      rotate: { type: 'spring', stiffness: 200, damping: 20 },
-      scale: { type: 'spring', stiffness: 200, damping: 20 }
-    }
-  },
-  exit: (direction) => ({
-    x: direction < 0 ? 300 : direction > 0 ? -300 : 0,
-    opacity: 0,
-    rotate: direction < 0 ? 2 : direction > 0 ? -2 : 0,
-    scale: 0.97,
-    transition: {
-      x: { duration: 0.25, ease: 'easeIn' },
-      opacity: { duration: 0.18 }
-    }
-  })
-}
+
 
 // Custom SVG External Link Icon
 function ExternalIcon({ className }) {
@@ -117,15 +87,13 @@ function ReadmeIcon({ className }) {
 const AUTOPLAY_DELAY = 4000
 
 export default function Projects({ onOpenDetail }) {
-  // Store page index and pagination direction [page, direction]
-  const [[page, direction], setPage] = useState([0, 0])
+  // Store page index
+  const [page, setPage] = useState(0)
   
   const activeIdx = page
-  const activeProject = projects[activeIdx] || projects[0]
 
   // Auto-play state
   const isPausedRef = useRef(false)
-  const timerRef = useRef(null)
   // Progress: 0 → 1 over AUTOPLAY_DELAY ms
   const [progress, setProgress] = useState(0)
   const progressRef = useRef(0)
@@ -138,7 +106,6 @@ export default function Projects({ onOpenDetail }) {
     'bg-[var(--accent-blue)]/70',
     'bg-[var(--accent-peach)]/70'
   ]
-  const washiColor = washiColors[activeIdx % washiColors.length]
 
   // Decorative stickers on active project polaroid corner
   const activeSticker = (idx) => {
@@ -153,17 +120,15 @@ export default function Projects({ onOpenDetail }) {
 
   // Navigation handlers
   const paginate = useCallback((newDirection) => {
-    const nextIdx = (page + newDirection + projects.length) % projects.length
-    setPage([nextIdx, newDirection])
-  }, [page])
+    setPage((curr) => (curr + newDirection + projects.length) % projects.length)
+  }, [])
 
   const nextProject = useCallback(() => paginate(1), [paginate])
   const prevProject = useCallback(() => paginate(-1), [paginate])
 
   const handleDotClick = (i) => {
     if (i === activeIdx) return
-    const newDirection = i > activeIdx ? 1 : -1
-    setPage([i, newDirection])
+    setPage(i)
   }
 
   // ── Progress bar animation & autoplay trigger ───────────────────────
@@ -171,7 +136,6 @@ export default function Projects({ onOpenDetail }) {
     // Cancel any existing animation
     if (progressRafRef.current) cancelAnimationFrame(progressRafRef.current)
     progressRef.current = 0
-    setProgress(0)
     startTimeRef.current = performance.now()
 
     const tick = (now) => {
@@ -190,10 +154,7 @@ export default function Projects({ onOpenDetail }) {
         progressRafRef.current = requestAnimationFrame(tick)
       } else {
         // Time's up! Transition to the next project
-        setPage(([currPage]) => {
-          const next = (currPage + 1) % projects.length
-          return [next, 1]
-        })
+        setPage((currPage) => (currPage + 1) % projects.length)
       }
     }
     progressRafRef.current = requestAnimationFrame(tick)
@@ -210,8 +171,7 @@ export default function Projects({ onOpenDetail }) {
   const handleMouseEnter = () => { isPausedRef.current = true }
   const handleMouseLeave = () => { isPausedRef.current = false }
 
-  // Join tech tags into an uppercase slashed string (LARAVEL / FIGMA / MYSQL)
-  const techString = activeProject.tech.join(' / ').toUpperCase()
+
 
   return (
     <section
@@ -245,7 +205,7 @@ export default function Projects({ onOpenDetail }) {
 
         {/* Unified Board Container */}
         <div
-          className="relative w-full z-10 flex items-center justify-center min-h-[600px] md:min-h-[550px] overflow-visible"
+          className="relative w-full z-10 flex items-center justify-center min-h-[600px] md:min-h-[500px] overflow-visible mt-8 md:mt-0"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -295,8 +255,10 @@ export default function Projects({ onOpenDetail }) {
                   damping: 24
                 }}
                 whileHover={!isActive ? { scale: 0.93, opacity: 0.55 } : undefined}
-                className={`absolute left-1/2 w-[90%] md:w-[85%] lg:w-[80%] max-w-[1100px] min-h-[540px] md:min-h-[480px] bg-[#fefcf7] border border-black/10 shadow-md rounded-[6px] p-6 md:p-10 flex flex-col justify-between overflow-hidden ${
-                  isActive ? '' : 'cursor-pointer select-none'
+                className={`absolute left-1/2 w-[90%] md:w-[85%] lg:w-[80%] max-w-[1100px] bg-[#fefcf7] border border-black/10 shadow-md rounded-[6px] p-6 md:p-10 flex flex-col justify-between overflow-hidden ${
+                  isActive 
+                    ? 'min-h-[540px] md:min-h-[480px] h-auto' 
+                    : 'h-[280px] md:h-auto min-h-[280px] md:min-h-[480px] overflow-hidden cursor-pointer select-none'
                 }`}
                 onClick={() => {
                   if (!isActive) {
@@ -339,7 +301,9 @@ export default function Projects({ onOpenDetail }) {
                   </div>
 
                   {/* Right Column: Project Specifications (Bold minimalist style inspired by image.png) */}
-                  <div className="w-full md:w-[55%] flex flex-col justify-between self-stretch gap-6">
+                  <div className={`w-full md:w-[55%] flex-col justify-between self-stretch gap-6 ${
+                    isActive ? 'flex' : 'hidden md:flex'
+                  }`}>
                     <div className="flex-grow flex flex-col justify-between gap-6">
                       <div className="flex flex-col gap-3">
                         
@@ -431,18 +395,19 @@ export default function Projects({ onOpenDetail }) {
             )
           })}
 
-          {/* Progress bar — thin strip at the bottom of the card area */}
-          <div className="absolute bottom-0 left-0 w-full h-[3px] bg-black/5 rounded-full overflow-hidden z-30 pointer-events-none">
-            <div
-              className="h-full bg-[var(--text-dark)]/25 rounded-full transition-none"
-              style={{ width: `${progress * 100}%` }}
-            />
-          </div>
+        </div>
+
+        {/* Progress bar — thin strip above navigation */}
+        <div className="w-full max-w-[200px] mx-auto h-[3px] bg-black/5 rounded-full overflow-hidden mt-3 md:mt-1 mb-1 pointer-events-none">
+          <div
+            className="h-full bg-[var(--text-dark)]/25 rounded-full transition-none"
+            style={{ width: `${progress * 100}%` }}
+          />
         </div>
 
         {/* Combined Navigation Bar (Outside Card) */}
         <div 
-          className="w-full flex items-center justify-center gap-4 mt-2 text-[var(--text-handwrite)] font-handwrite select-none text-sm relative z-30"
+          className="w-full flex items-center justify-center gap-4 mt-2 md:mt-1 text-[var(--text-handwrite)] font-handwrite select-none text-sm relative z-30"
           style={{ fontFamily: 'var(--font-handwrite)' }}
         >
           <button 
@@ -482,6 +447,8 @@ export default function Projects({ onOpenDetail }) {
         <p className="text-center font-handwrite text-xs text-[var(--text-handwrite)]/80 select-none">
           * Auto-flipping every 4s — hover to pause, click arrows or dots to navigate! *
         </p>
+
+
       </motion.div>
     </section>
   )

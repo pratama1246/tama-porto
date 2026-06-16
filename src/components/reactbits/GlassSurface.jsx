@@ -150,6 +150,12 @@ const GlassSurface = ({
       return false;
     }
 
+    // Detect mobile devices (phones & tablets) to prevent performance issues with complex SVG filters
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile) {
+      return false;
+    }
+
     const isWebkit = /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
     const isFirefox = /Firefox/.test(navigator.userAgent);
 

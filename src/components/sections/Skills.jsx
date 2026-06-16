@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { skillCategories } from '../../data/skills'
 
@@ -91,6 +91,16 @@ const localLogos = {
 export default function Skills() {
   // All categories are collapsed by default
   const [activeId, setActiveId] = useState(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
     <section
@@ -121,14 +131,17 @@ export default function Skills() {
             Skills Explorer
           </motion.h2>
           <p className="text-xs md:text-sm text-[var(--text-muted)] mt-1 select-none">
-            Hover over folders below to expand each technical category directory.
+            {isMobile 
+              ? "Tap folders below to expand or collapse each technical category directory."
+              : "Hover over folders below to expand each technical category directory."
+            }
           </p>
         </div>
 
         {/* Collapsible Categories Accordion Stack */}
         <div 
           className="flex flex-col gap-4"
-          onMouseLeave={() => setActiveId(null)}
+          onMouseLeave={isMobile ? undefined : () => setActiveId(null)}
         >
           {skillCategories.map((cat) => {
             const folderColor = getFolderColorClass(cat.id)
@@ -139,12 +152,15 @@ export default function Skills() {
               <motion.div
                 key={cat.id}
                 variants={fadeUp}
-                onMouseEnter={() => setActiveId(cat.id)}
+                onMouseEnter={isMobile ? undefined : () => setActiveId(cat.id)}
                 className="bg-[#fefcf7] rounded-md border border-black/5 shadow-xs overflow-hidden"
               >
-                {/* Accordion Header (Hover to Trigger) */}
+                {/* Accordion Header (Hover on desktop / click to toggle on both) */}
                 <div
                   className="px-5 py-3.5 bg-zinc-50 border-b border-black/5 flex justify-between items-center select-none transition-colors cursor-pointer hover:bg-zinc-100/80"
+                  onClick={() => {
+                    setActiveId(prevId => prevId === cat.id ? null : cat.id)
+                  }}
                 >
                   <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 flex-1 min-w-0 mr-4">
                     <span 

@@ -20,30 +20,6 @@ const staggerContainer = {
   }
 }
 
-const stickyNoteVariants = {
-  hidden: { x: 200, y: 150, rotate: -25, opacity: 0 },
-  visible: {
-    x: 0,
-    y: 0,
-    rotate: -4,
-    opacity: 1,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.75 }
-  }
-}
-
-const polaroidVariants = {
-  hidden: { x: 250, y: -50, rotate: 25, opacity: 0 },
-  visible: {
-    x: 0,
-    y: 0,
-    rotate: 6,
-    opacity: 1,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.85 }
-  }
-}
-
-// (Removed skill badge variants)
-
 const descriptionSegments = [
   { text: "D3 Informatics Engineering student, Frontend Developer & Network Administrator. Inspired by ", type: "normal" },
   { text: "stories", type: "underline" },
@@ -70,6 +46,38 @@ export default function Hero() {
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  const stickyNoteVariants = {
+    hidden: { 
+      x: isMobile ? 0 : 200, 
+      y: isMobile ? 40 : 150, 
+      rotate: isMobile ? -8 : -25, 
+      opacity: 0 
+    },
+    visible: {
+      x: 0,
+      y: 0,
+      rotate: -4,
+      opacity: 1,
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.75 }
+    }
+  }
+
+  const polaroidVariants = {
+    hidden: { 
+      x: isMobile ? 0 : 250, 
+      y: isMobile ? 40 : -50, 
+      rotate: isMobile ? 8 : 25, 
+      opacity: 0 
+    },
+    visible: {
+      x: 0,
+      y: 0,
+      rotate: 6,
+      opacity: 1,
+      transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.85 }
+    }
+  }
 
   const bringCardToFront = (index) => {
     if (index === 0) {

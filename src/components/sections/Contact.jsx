@@ -182,7 +182,7 @@ export default function Contact() {
       >
         <ScrollVelocity
           texts={[
-            `© ${new Date().getFullYear()} Pratama Putra Purwanto • Politeknik Negeri Cilacap — D3 Informatics Engineering • All rights reserved •`
+            `© ${new Date().getFullYear()} Tama • All rights reserved •`
           ]}
           velocity={-35}
           numCopies={3}

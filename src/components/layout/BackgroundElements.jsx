@@ -85,7 +85,7 @@ export default function BackgroundElements() {
   })
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden z-20 w-full select-none" aria-hidden="true">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-20 w-full select-none hidden lg:block" aria-hidden="true">
       
       {/* ─── HERO SECTION ─── */}
       {/* PNG 1: Y2K Element 1 */}

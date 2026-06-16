@@ -17,7 +17,8 @@ export const education = [
     degree: "Vocational High School Graduate in Computer and Network Engineering",
     period: "2021 - 2024",
     details: [
-      "Studied LAN/WAN network infrastructure, server administration, PC assembly, and OS installation.",
+      "Studied LAN/WAN network infrastructure, server administration (ASJ), PC assembly, and OS installation.",
+      "First introduced to web servers by configuring Apache under the ASJ curriculum, developing a custom tourism site ('Explore Central Java') to validate local server connectivity.",
       "Graduated with a 'Highly Competent' distinction in the Computer and Network Engineering Vocational Competency Test (UKK) (Score: 90)."
     ]
   }

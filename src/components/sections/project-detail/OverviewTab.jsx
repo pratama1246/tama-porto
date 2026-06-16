@@ -35,6 +35,19 @@ export default function OverviewTab({ detail }) {
         </div>
       </div>
 
+      {/* Disclaimer / Copyright Alert */}
+      {detail?.disclaimer && (
+        <div className="bg-amber-50 border border-amber-500/20 rounded-sm p-4 relative shadow-3xs rotate-[-0.5deg] hover:rotate-0 transition-transform">
+          <div className="w-10 h-3.5 bg-amber-500/15 absolute -top-2 left-6 rotate-[1deg] rounded-sm pointer-events-none" />
+          <h4 className="font-display font-semibold text-xs md:text-sm text-amber-800 uppercase mb-2 flex items-center gap-1.5 select-none">
+            ⚠️ Disclaimer & Copyright Notice
+          </h4>
+          <p className="font-body text-[11px] md:text-xs text-amber-900/90 leading-relaxed m-0">
+            {detail.disclaimer}
+          </p>
+        </div>
+      )}
+
       {/* Key Features Block */}
       {detail?.keyFeatures && (
         <div className="bg-[#fefcf7] border border-black/10 rounded-sm p-5 shadow-2xs relative">

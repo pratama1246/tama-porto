@@ -107,6 +107,7 @@ export const projectDetails = {
   2: {
     tagline: "CodeIgniter 4 powered event ticketing platform with secure user booking and admin controls.",
     overview: "Ticketly is a web-based event ticketing platform built using the CodeIgniter 4 framework. Designed as a college project for the Pemrograman Web 2 course at Politeknik Negeri Cilacap, the platform allows guests to browse and secure digital ticket bookings for various events while giving administrators direct control over quotas, event parameters, and overall transaction logs.",
+    disclaimer: "All event logos, promoter names, and concert posters featured in the screenshots and demo data of this project belong to their respective copyright owners (official promoters/events). They are used purely for educational and demonstration purposes to simulate a real-world ticketing catalog.",
     problem: "Event registration and booking processes on campus are often disorganized, leading to issues with quota management, manual ticketing, and slow attendance checks.",
     solution: "A centralized web application utilizing CodeIgniter 4 MVC architecture to automate ticket bookings, manage ticket quotas in real-time, and provide an administrative control board for event verification.",
     keyFeatures: [
@@ -251,5 +252,137 @@ export const projectDetails = {
       { role: "HRD User", username: "hrd_demo", email: "hrd@payroll.co.id" },
       { role: "Admin System", username: "admin_payroll", email: "admin@payroll.co.id" }
     ],
+  },
+  4: {
+    tagline: "Web-based tournament manager demonstrating Stack (LIFO) and Queue (FIFO) data structures in PHP.",
+    overview: "Sistem Manajemen Turnamen E-Sport Berbasis Struktur Data is a web application that demonstrates the practical implementation of Stack and Queue data structures using native PHP and PHP Sessions. Built as a midterm project for the Data Structure Programming course at Politeknik Negeri Cilacap, this project models real-world tournament management scenarios like strategy undos (Stack) and match calling lists (Queue).",
+    problem: "Visualizing abstract computer science concepts like Stack (LIFO) and Queue (FIFO) can be difficult for students, and applying them in practical, interactive web simulations is key to understanding state management.",
+    solution: "An interactive session-based web portal simulating team strategy planning (Stack with Push, Pop/Undo, Print) and tournament schedule execution (Queue with Enqueue, Dequeue/Call, Display).",
+    keyFeatures: [
+      "Stack-based team strategy inputs with Undo (LIFO) behavior",
+      "Queue-based match scheduling with Call Team (FIFO) behavior",
+      "PHP Session-based state management that persists data across page refreshes",
+      "Flash notification system showing feedback messages after each queue/stack action"
+    ],
+    techStack: [
+      { category: "Backend Core", list: ["PHP 7.4+", "PHP Session State"] },
+      { category: "Frontend UI", list: ["HTML5", "CSS3 (Custom Style)"] }
+    ],
+    roles: [
+      {
+        roleName: "Tournament Admin / Organizer",
+        color: "var(--accent-blue)",
+        icon: "🎮",
+        features: [
+          "Manage team strategies (Push, Pop, Print strategies in Stack)",
+          "Queue registered teams for matches in FIFO queue order",
+          "Call teams for matches (Dequeue) from the schedule",
+          "Reset session data for stack and queue individually"
+        ]
+      }
+    ],
+    database: {
+      description: "This application does not connect to an external SQL database. Instead, it maintains state entirely in-memory on the server side using native PHP session arrays.",
+      tables: [
+        { name: "$_SESSION['stack']", fields: ["data[]: ['tim' => string, 'strategi' => string]"] },
+        { name: "$_SESSION['queue']", fields: ["data[]: string (team names)"] }
+      ],
+      specialFeatures: [
+        "In-memory PHP session array manipulation",
+        "Stack behavior using PHP array_pop",
+        "Queue behavior using PHP array_shift"
+      ]
+    },
+    payments: null,
+    setup: {
+      steps: [
+        { cmd: "git clone https://github.com/pratama1246/ALPRO_Stack-Queue.git", desc: "Clone the repository to your local directory" },
+        { cmd: "cd ALPRO_Stack-Queue", desc: "Change directory into the cloned folder" },
+        { cmd: "php -S localhost:8080", desc: "Run application using PHP's built-in web server" },
+        { cmd: "Open URL in Browser", desc: "Navigate to http://localhost:8080/ in your browser" }
+      ],
+      envVars: []
+    },
+    demoAccounts: [],
+    screenshots: []
+  },
+  5: {
+    tagline: "My very first legacy web project, showcasing a simple native wallpaper gallery.",
+    overview: "TheGreatesWallpaper.com is a simple static website created to showcase high-quality wallpapers. Developed using native HTML5, CSS3, and simple vanilla JavaScript during the early stages of my coding journey, this project serves as a nostalgic milestone showing how I first learned structure, styling, and navigation on the web.",
+    problem: "When first starting out with web development, understanding how to lay out articles, structure responsive grids, and implement hamburger navigation menus using native CSS and JavaScript can be challenging.",
+    solution: "A multi-page static site with a responsive navbar, dark/light styling, and a clean gallery card layout displaying curated nature and landscape wallpapers.",
+    keyFeatures: [
+      "Responsive hamburger navigation menu using vanilla JavaScript",
+      "Multi-page architecture (Beranda, Tentang Kami, Kegiatan, Kontak)",
+      "Curated fullscreen image gallery cards with hover interactions",
+      "Pure HTML5 markup and custom CSS layouts without frameworks"
+    ],
+    techStack: [
+      { category: "Web Core", list: ["HTML5", "CSS3", "JavaScript (Vanilla)"] }
+    ],
+    roles: [
+      {
+        roleName: "Guest Viewer",
+        color: "var(--accent-pink)",
+        icon: "🖼️",
+        features: [
+          "Browse aesthetic landscape wallpapers",
+          "Read about the organization's vision",
+          "Submit feedback via contact form"
+        ]
+      }
+    ],
+    database: null,
+    payments: null,
+    setup: {
+      steps: [
+        { cmd: "git clone https://github.com/pratama1246/pratama1246.github.io.git", desc: "Clone the repository to your local computer" },
+        { cmd: "cd pratama1246.github.io", desc: "Navigate to the project folder" },
+        { cmd: "Open index.html", desc: "Open the file directly in any modern browser to view the site" }
+      ],
+      envVars: []
+    },
+    demoAccounts: [],
+    screenshots: []
+  },
+  6: {
+    tagline: "My true first web project, built at SMKN 1 Binangun for Apache server validation.",
+    overview: "Explore Central Java is a static website created during my vocational high school years. Originally, this project was developed as a validation tool for the Administrasi Sistem Jaringan (ASJ) course. The goal was to verify that the Apache web server and local virtual host configurations on our Debian server were running correctly. The website lists popular tourism spots across Central Java with a neat vertical sidebar navigation.",
+    problem: "Validating server configurations during networking classes typically involves dull text or basic placeholders. We wanted to verify our Apache server configuration with a beautiful, fully functional multi-page site.",
+    solution: "A responsive static HTML/CSS/JS site featuring beautiful fullscreen landscape photography, smooth transitions, and a Boxicons-driven vertical navigation menu to showcase landmarks like Borobudur and Dieng.",
+    keyFeatures: [
+      "Modern vertical sidebar navigation menu utilizing Boxicons",
+      "Multi-page architecture with separate detail files for major tourist spots",
+      "Fullscreen hero sections with overlaid high-contrast typography",
+      "Pure, lightweight HTML5 and CSS3 without frontend dependencies"
+    ],
+    techStack: [
+      { category: "Web Core", list: ["HTML5", "CSS3", "JavaScript (Vanilla)"] },
+      { category: "Design Assets", list: ["Boxicons", "FontAwesome Icons"] }
+    ],
+    roles: [
+      {
+        roleName: "Guest Visitor",
+        color: "var(--accent-blue)",
+        icon: "🧭",
+        features: [
+          "Browse historical landmarks and mountains in Central Java",
+          "Collapse/expand the left vertical navigation bar",
+          "Read detailed history and facts about each destination"
+        ]
+      }
+    ],
+    database: null,
+    payments: null,
+    setup: {
+      steps: [
+        { cmd: "git clone https://github.com/pratama1246/explore-central-java.git", desc: "Clone the repository to your local computer" },
+        { cmd: "cd explore-central-java", desc: "Navigate to the project folder" },
+        { cmd: "Open index.html", desc: "Open the file directly in any modern browser to view the site" }
+      ],
+      envVars: []
+    },
+    demoAccounts: [],
+    screenshots: []
   }
 }

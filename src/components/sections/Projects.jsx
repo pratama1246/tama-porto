@@ -243,19 +243,30 @@ export default function Projects({ onOpenDetail }) {
                   backgroundSize: '20px 20px',
                 }}
                 animate={{
-                  x: isActive ? "-50%" : isNext ? "38%" : isPrev ? "-138%" : diff > 0 ? "200%" : "-300%",
+                  x: isActive ? 0 : isNext ? "88%" : isPrev ? "-88%" : diff > 0 ? "200%" : "-200%",
                   scale: isActive ? 1 : 0.9,
                   rotate: isActive ? 0.5 : isNext ? 3 : isPrev ? -2 : 0,
                   opacity: isActive ? 1 : isFar ? 0 : 0.35,
                   zIndex: isActive ? 20 : isFar ? 0 : 10,
                 }}
                 transition={{
-                  type: 'spring',
-                  stiffness: 260,
-                  damping: 24
+                  type: 'tween',
+                  ease: 'easeOut',
+                  duration: 0.28
+                }}
+                drag={isActive ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.15}
+                onDragEnd={(event, info) => {
+                  const swipeThreshold = 50
+                  if (info.offset.x < -swipeThreshold) {
+                    nextProject()
+                  } else if (info.offset.x > swipeThreshold) {
+                    prevProject()
+                  }
                 }}
                 whileHover={!isActive ? { scale: 0.93, opacity: 0.55 } : undefined}
-                className={`absolute left-1/2 w-[90%] md:w-[85%] lg:w-[80%] max-w-[1100px] bg-[#fefcf7] border border-black/10 shadow-md rounded-[6px] p-6 md:p-10 flex flex-col justify-between overflow-hidden ${
+                className={`absolute left-0 right-0 mx-auto w-[90%] md:w-[85%] lg:w-[80%] max-w-[1100px] bg-[#fefcf7] border border-black/10 shadow-md rounded-[6px] p-6 md:p-10 flex flex-col justify-between overflow-hidden touch-pan-y ${
                   isActive 
                     ? 'min-h-[540px] md:min-h-[480px] h-auto' 
                     : 'h-[280px] md:h-auto min-h-[280px] md:min-h-[480px] overflow-hidden cursor-pointer select-none'
@@ -332,7 +343,7 @@ export default function Projects({ onOpenDetail }) {
 
                         {/* Description */}
                         <p 
-                          className="text-xs md:text-sm text-[var(--text-dark)]/85 leading-relaxed font-body mt-2 max-w-xl"
+                          className="text-xs md:text-sm text-[var(--text-dark)]/85 leading-relaxed font-body mt-2 max-w-xl line-clamp-2 md:line-clamp-none"
                           style={{ fontFamily: 'var(--font-body)' }}
                         >
                           {project.desc}
@@ -397,13 +408,7 @@ export default function Projects({ onOpenDetail }) {
 
         </div>
 
-        {/* Progress bar — thin strip above navigation */}
-        <div className="w-full max-w-[200px] mx-auto h-[3px] bg-black/5 rounded-full overflow-hidden mt-3 md:mt-1 mb-1 pointer-events-none">
-          <div
-            className="h-full bg-[var(--text-dark)]/25 rounded-full transition-none"
-            style={{ width: `${progress * 100}%` }}
-          />
-        </div>
+
 
         {/* Combined Navigation Bar (Outside Card) */}
         <div 

@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import SplitText from '../reactbits/SplitText'
 import TextType from '../reactbits/TextType'
@@ -59,6 +59,17 @@ export default function Hero() {
   // Refs for direct DOM zIndex updates to avoid React re-renders during dragging
   const card1Ref = useRef(null)
   const card2Ref = useRef(null)
+
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const bringCardToFront = (index) => {
     if (index === 0) {
@@ -199,7 +210,7 @@ export default function Hero() {
           {/* Card 1: Sticky Note (Mood/State) - Index 0 */}
           <motion.div
             ref={card1Ref}
-            drag
+            drag={!isMobile}
             dragMomentum={false}
             onDragStart={() => bringCardToFront(0)}
             onTapStart={() => bringCardToFront(0)}
@@ -207,9 +218,11 @@ export default function Hero() {
               zIndex: 10,
             }}
             variants={stickyNoteVariants}
-            whileHover={{ scale: 1.05, rotate: '-2deg', boxShadow: 'var(--shadow-md)', transition: { duration: 0.15 } }}
-            whileDrag={{ scale: 1.05, zIndex: 100 }}
-            className="absolute left-[5%] sm:left-[10%] top-[10%] bg-[var(--accent-yellow)] p-4 w-[170px] sm:w-[190px] aspect-square rounded-sm shadow-xs border border-black/5 cursor-grab active:cursor-grabbing"
+            whileHover={isMobile ? {} : { scale: 1.05, rotate: '-2deg', boxShadow: 'var(--shadow-md)', transition: { duration: 0.15 } }}
+            whileDrag={{ scale: 1.03, zIndex: 100 }}
+            className={`absolute left-[5%] sm:left-[10%] top-[10%] bg-[var(--accent-yellow)] p-4 w-[170px] sm:w-[190px] aspect-square rounded-sm shadow-xs border border-black/5 will-change-transform ${
+              isMobile ? 'cursor-default' : 'cursor-grab active:cursor-grabbing touch-none'
+            }`}
           >
             <h3 
               className="text-[10px] font-semibold text-[var(--text-handwrite)] tracking-wider uppercase border-b border-[var(--text-handwrite)]/10 pb-1 mb-2.5"
@@ -231,7 +244,7 @@ export default function Hero() {
           {/* Card 2: Mini Polaroid (Workspace / Tech Drawing) - Index 1 */}
           <motion.div
             ref={card2Ref}
-            drag
+            drag={!isMobile}
             dragMomentum={false}
             onDragStart={() => bringCardToFront(1)}
             onTapStart={() => bringCardToFront(1)}
@@ -239,9 +252,11 @@ export default function Hero() {
               zIndex: 20,
             }}
             variants={polaroidVariants}
-            whileHover={{ scale: 1.05, rotate: '3deg', boxShadow: 'var(--shadow-md)', transition: { duration: 0.15 } }}
-            whileDrag={{ scale: 1.05, zIndex: 100 }}
-            className="absolute right-[5%] sm:right-[10%] top-[5%] bg-white p-3 pb-6 w-[180px] sm:w-[200px] rounded-sm shadow-sm border border-black/5 cursor-grab active:cursor-grabbing"
+            whileHover={isMobile ? {} : { scale: 1.05, rotate: '3deg', boxShadow: 'var(--shadow-md)', transition: { duration: 0.15 } }}
+            whileDrag={{ scale: 1.03, zIndex: 100 }}
+            className={`absolute right-[5%] sm:right-[10%] top-[5%] bg-white p-3 pb-6 w-[180px] sm:w-[200px] rounded-sm shadow-sm border border-black/5 will-change-transform ${
+              isMobile ? 'cursor-default' : 'cursor-grab active:cursor-grabbing touch-none'
+            }`}
           >
             {/* Torn Washi Tape on top corner */}
             <div

@@ -188,5 +188,10 @@ body {
     drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.15));
 }
 
-
+@media (max-width: 1023px) {
+  .sticker-effect {
+    /* Simplify filters on mobile to avoid heavy GPU recalculations during scroll */
+    filter: drop-shadow(3px 3px 0px #ffffff) drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.15)) !important;
+  }
+}
 

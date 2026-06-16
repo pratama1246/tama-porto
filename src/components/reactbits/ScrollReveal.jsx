@@ -83,9 +83,8 @@ const ScrollReveal = ({
     );
 
     // ScrollTrigger for blur
-    const isMobileDevice = window.innerWidth < 1024;
     let animBlur = null;
-    if (enableBlur && !isMobileDevice) {
+    if (enableBlur) {
       animBlur = gsap.fromTo(
         wordElements,
         { filter: `blur(${blurStrength}px)` },

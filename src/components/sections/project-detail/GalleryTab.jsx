@@ -33,7 +33,9 @@ export default function GalleryTab({ detail }) {
                 <img
                   src={shot.url}
                   alt={shot.caption}
-                  className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-102 pointer-events-none"
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="protected-image w-full h-auto object-cover transition-transform duration-500 group-hover:scale-102 pointer-events-none"
                   loading="lazy"
                 />
               </div>

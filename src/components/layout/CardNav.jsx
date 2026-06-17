@@ -240,7 +240,13 @@ const CardNav = ({
           {/* Logo Container */}
           <div className="logo-container flex items-center order-1">
             {logo ? (
-              <img src={logo} alt={logoAlt} className="logo h-[28px]" />
+              <img
+                src={logo}
+                alt={logoAlt}
+                draggable={false}
+                onContextMenu={(e) => e.preventDefault()}
+                className="protected-image logo h-[28px]"
+              />
             ) : (
               <a
                 href="#hero"

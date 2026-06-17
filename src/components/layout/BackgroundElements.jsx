@@ -75,6 +75,19 @@ function ButterflySticker({ className, color = 'var(--accent-blue)', size = 48 }
   )
 }
 
+// Wrapper to apply protection to all background sticker images
+function StickerImage({ src, alt, className }) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      draggable={false}
+      onContextMenu={(e) => e.preventDefault()}
+      className={`protected-image ${className}`}
+    />
+  )
+}
+
 export default function BackgroundElements() {
   const springTransition = (delay = 0) => ({
     type: 'spring',
@@ -98,7 +111,7 @@ export default function BackgroundElements() {
         className="absolute top-[140px] left-[3%] w-[85px] sm:w-[110px] rotate-[-8deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.12, rotate: '-12deg' }}
       >
-        <img src="/assets/stickers/1.png" alt="Y2K Element 1" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/1.png" alt="Y2K Element 1" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* SVG 1: Pink Heart */}
@@ -124,7 +137,7 @@ export default function BackgroundElements() {
         className="absolute top-[200px] right-[3%] w-[100px] sm:w-[125px] rotate-[12deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.1, rotate: '25deg' }}
       >
-        <img src="/assets/stickers/vinly.png" alt="Vinyl Record Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/vinly.png" alt="Vinyl Record Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* SVG 2: Pink Sparkle Star */}
@@ -163,7 +176,7 @@ export default function BackgroundElements() {
         className="absolute top-[580px] left-[12%] w-[100px] sm:w-[130px] rotate-[6deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.12, rotate: '-3deg' }}
       >
-        <img src="/assets/stickers/mikrotik.png" alt="MikroTik Router Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/mikrotik.png" alt="MikroTik Router Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* PNG 4: Pixel Cursor */}
@@ -176,7 +189,7 @@ export default function BackgroundElements() {
         className="absolute top-[680px] right-[14%] w-[55px] sm:w-[70px] rotate-[-15deg] z-30 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.15, rotate: '5deg' }}
       >
-        <img src="/assets/stickers/cursor.png" alt="Pixel Cursor Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/cursor.png" alt="Pixel Cursor Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* SVG 4: Lavender Sparkle Star */}
@@ -204,7 +217,7 @@ export default function BackgroundElements() {
         className="absolute top-[1100px] right-[3%] w-[90px] sm:w-[115px] rotate-[10deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.12, rotate: '18deg' }}
       >
-        <img src="/assets/stickers/2.png" alt="Y2K Element 2" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/2.png" alt="Y2K Element 2" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* SVG 5: Peach Sparkle Star */}
@@ -230,7 +243,7 @@ export default function BackgroundElements() {
         className="absolute top-[1450px] left-[3%] w-[85px] sm:w-[110px] rotate-[-5deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.1, rotate: '5deg' }}
       >
-        <img src="/assets/stickers/folder.png" alt="Pixel Folder Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/folder.png" alt="Pixel Folder Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* SVG 6: Mint Sparkle Star */}
@@ -271,7 +284,7 @@ export default function BackgroundElements() {
         className="absolute top-[2300px] left-[3%] w-[95px] sm:w-[120px] rotate-[-10deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.12, rotate: '-2deg' }}
       >
-        <img src="/assets/stickers/earphone.png" alt="Earphone Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/earphone.png" alt="Earphone Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* SVG 8: Lavender Flower */}
@@ -325,7 +338,7 @@ export default function BackgroundElements() {
         className="absolute top-[3450px] right-[3%] w-[100px] sm:w-[130px] rotate-[8deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.15, rotate: '-12deg' }}
       >
-        <img src="/assets/stickers/cd.png" alt="Compact Disc Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/cd.png" alt="Compact Disc Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* SVG 11: Lavender Smiley */}
@@ -379,7 +392,7 @@ export default function BackgroundElements() {
         className="absolute top-[4800px] left-[3%] w-[120px] sm:w-[145px] rotate-[-12deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.1, rotate: '-2deg' }}
       >
-        <img src="/assets/stickers/Cassette_tape.png" alt="Cassette Tape Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/Cassette_tape.png" alt="Cassette Tape Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* SVG 14: Yellow Heart */}
@@ -405,7 +418,7 @@ export default function BackgroundElements() {
         className="absolute top-[5150px] right-[4%] w-[100px] sm:w-[125px] rotate-[14deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.12, rotate: '4deg' }}
       >
-        <img src="/assets/stickers/bowie.png" alt="Bowie Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/bowie.png" alt="Bowie Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* SVG 15: Pink Butterfly */}
@@ -446,7 +459,7 @@ export default function BackgroundElements() {
         className="absolute top-[5920px] right-[3%] w-[85px] sm:w-[110px] rotate-[8deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
         whileHover={{ scale: 1.15, rotate: '18deg' }}
       >
-        <img src="/assets/stickers/phone.png" alt="Retro Telephone Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+        <StickerImage src="/assets/stickers/phone.png" alt="Retro Telephone Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
       </motion.div>
 
       {/* SVG 17: Peach Smiley */}

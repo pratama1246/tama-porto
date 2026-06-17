@@ -74,7 +74,9 @@ export default function About() {
               <img
                 src="/assets/photos/avatar.webp"
                 alt="Tama Purwanto"
-                className="w-full h-full object-cover grayscale-[10%]"
+                draggable={false}
+                onContextMenu={(e) => e.preventDefault()}
+                className="protected-image w-full h-full object-cover grayscale-[10%]"
                 loading="lazy"
               />
             </div>

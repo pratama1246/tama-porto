@@ -289,7 +289,9 @@ export default function Projects({ onOpenDetail }) {
                         <img
                           src={project.thumbnail}
                           alt={project.title}
-                          className="w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-300 pointer-events-none"
+                          draggable={false}
+                          onContextMenu={(e) => e.preventDefault()}
+                          className="protected-image w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-300 pointer-events-none"
                           loading="lazy"
                         />
                       </div>

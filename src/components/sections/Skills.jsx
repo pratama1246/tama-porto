@@ -204,7 +204,13 @@ export default function Skills() {
                             <div className="relative transform transition-transform group-hover:scale-105 flex items-center justify-center w-14 h-14">
                               {localLogo ? (
                                 <div className="relative w-11 h-11 flex items-center justify-center">
-                                  <img src={localLogo} alt={`${skill} logo`} className="w-11 h-11 object-contain" />
+                                  <img
+                                    src={localLogo}
+                                    alt={`${skill} logo`}
+                                    draggable={false}
+                                    onContextMenu={(e) => e.preventDefault()}
+                                    className="protected-image w-11 h-11 object-contain"
+                                  />
                                   {/* Classic Windows 98 Shortcut Arrow overlay */}
                                   <div className="absolute -bottom-1 -left-1 w-3.5 h-3.5 bg-white border border-neutral-400 flex items-center justify-center rounded-[1px] shadow-xs select-none pointer-events-none">
                                     <span className="text-[8px] text-blue-800 leading-none font-semibold">↗</span>

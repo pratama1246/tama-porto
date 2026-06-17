@@ -194,3 +194,9 @@ body {
     drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.15));
 }
 
+/* Lightweight Image Protection */
+.protected-image {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+

@@ -62,7 +62,13 @@ export default function EcoStockDetail({ project, onBack }) {
             <div className="w-full max-w-[420px] bg-white border border-black/10 rounded-sm p-4 pb-12 shadow-sm relative rotate-[-1.5deg] hover:rotate-0 transition-all select-none">
               <div className="absolute -top-3 left-1/3 w-24 h-4.5 bg-[var(--accent-mint)]/70 rotate-[1deg] rounded-sm pointer-events-none" />
               <div className="relative aspect-video w-full bg-[var(--bg-secondary)] overflow-hidden rounded-xs border border-black/5">
-                <img src={project.thumbnail} alt={project.title} className="w-full h-full object-cover" />
+                <img
+                  src={project.thumbnail}
+                  alt={project.title}
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="protected-image w-full h-full object-cover"
+                />
               </div>
               <div className="mt-4 text-center font-handwrite text-xs md:text-sm text-[var(--text-handwrite)]">
                 ecostock_dashboard.png

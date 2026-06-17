@@ -139,7 +139,9 @@ export default function VisualReveal() {
             ref={imageRef}
             src="/assets/stickers/profile-sticker.webp"
             alt="Tama Sticker"
-            className="w-[380px] max-w-[90vw] sm:w-[480px] md:w-[660px] max-h-[50vh] h-auto object-contain sticker-effect origin-bottom"
+            draggable={false}
+            onContextMenu={(e) => e.preventDefault()}
+            className="protected-image w-[380px] max-w-[90vw] sm:w-[480px] md:w-[660px] max-h-[50vh] h-auto object-contain sticker-effect origin-bottom"
           />
         </div>
 

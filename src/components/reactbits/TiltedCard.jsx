@@ -108,7 +108,9 @@ export default function TiltedCard({
         <motion.img
           src={imageSrc}
           alt={altText}
-          className={`object-cover will-change-transform [transform:translateZ(0)] ${
+          draggable={false}
+          onContextMenu={(e) => e.preventDefault()}
+          className={`protected-image object-cover will-change-transform [transform:translateZ(0)] ${
             isPolaroid 
               ? 'rounded-[2px] w-full h-full border border-black/5' 
               : 'absolute top-0 left-0 rounded-[4px]'

@@ -39,7 +39,7 @@ export const certifications = [
     issuer: "Cisco Networking Academy",
     date: "Jan 2025",
     credentialId: "ITE-2025-Cisco",
-    link: "https://www.netacad.com",
+    link: "https://www.credly.com/badges/fb246f7f-78a8-4be5-9abc-131c9524735d",
     color: "var(--accent-lavender)",
     skills: ["Ilmu Komputer", "Jaringan Komputer", "Hardware Diagnostics"],
     archived: false
@@ -74,7 +74,7 @@ export const certifications = [
     issuer: "Cisco Networking Academy",
     date: "Jul 2025",
     credentialId: "OSB-2025-Cisco",
-    link: "https://www.netacad.com",
+    link: "https://www.credly.com/badges/35947b9f-c968-4f19-924c-aae7b562c753",
     color: "var(--accent-mint)",
     skills: ["Ilmu Komputer", "Operating Systems", "Linux Basics"],
     archived: true

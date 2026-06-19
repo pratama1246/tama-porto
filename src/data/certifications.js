@@ -6,7 +6,7 @@ export const certifications = [
     issuer: "Digital Talent Scholarship",
     date: "Jun 2026",
     credentialId: "2299793850-3522",
-    link: "https://digitalent.kominfo.go.id",
+    link: "https://digitalent.komdigi.go.id",
     color: "var(--accent-lavender)",
     skills: ["Programming Principles", "Logic & Coding"],
     archived: false
@@ -28,7 +28,7 @@ export const certifications = [
     issuer: "Digital Talent Scholarship",
     date: "Jul 2025",
     credentialId: "193107541110-6",
-    link: "https://digitalent.kominfo.go.id",
+    link: "https://digitalent.komdigi.go.id",
     color: "var(--accent-mint)",
     skills: ["Pengembangan Web", "HTML & CSS", "JavaScript Basics"],
     archived: false
@@ -62,8 +62,8 @@ export const certifications = [
     title: "Introduction to Financial Literacy",
     issuer: "Dicoding Indonesia",
     date: "Jun 2026",
-    credentialId: "OLZ0Y81NNX65",
-    link: "https://www.dicoding.com/certificates/OLZ0Y81NNX65",
+    credentialId: "0LZ0Y81NNX65",
+    link: "https://www.dicoding.com/certificates/0LZ0Y81NNX65",
     color: "var(--accent-pink)",
     skills: ["Financial Literacy", "Basic Finance", "Planning"],
     archived: true
@@ -85,7 +85,7 @@ export const certifications = [
     issuer: "Digital Talent Scholarship",
     date: "Jul 2025",
     credentialId: "2299815850-6855",
-    link: "https://digitalent.kominfo.go.id",
+    link: "https://digitalent.komdigi.go.id",
     color: "var(--accent-yellow)",
     skills: ["Digital Mindset", "Adaptability", "Collaboration"],
     archived: true

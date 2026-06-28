@@ -1,16 +1,183 @@
-# React + Vite
+# 📸 Tama's Gallery Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Tama's Gallery Portfolio** is a personal portfolio website designed to feel like a physical **Polaroid gallery studio**—personal, artistic, and memorable. It features a **Y2K scrapbook aesthetic** with pastel tones and digital glitch accents.
 
-Currently, two official plugins are available:
+Built as a personal portfolio by **Tama (Pratama Putra Purwanto)**, an Informatics Engineering student at **Politeknik Negeri Cilacap**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> **Concept:** Walk into a personal art studio—walls covered in polaroid photos, sticky notes, washi tape, and scrapbook cutouts. Everything feels tactile, personal, and slightly chaotic in a beautiful way, layered with subtle Y2K digital glitch accents.
+> Designed first in Figma, built using React + Vite, and deployed on Vercel.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vite.dev)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Framer_Motion](https://img.shields.io/badge/Framer_Motion-v12-F00F3F?style=for-the-badge&logo=framer&logoColor=white)](https://framer.com/motion)
+[![GSAP](https://img.shields.io/badge/GSAP-v3-88CE02?style=for-the-badge&logo=greensock&logoColor=white)](https://greensock.com)
+[![Lenis](https://img.shields.io/badge/Lenis-v1-black?style=for-the-badge)](https://lenis.darkroom.engineering)
+[![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)](https://figma.com)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Table of Contents
+
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Requirements](#requirements)
+- [Local Setup](#local-setup)
+- [Run the App](#run-the-app)
+- [UI/UX Design](#uiux-design)
+- [Screenshots](#screenshots)
+- [License](#license)
+
+---
+
+## Key Features
+
+### 🖼️ Polaroid Gallery Experience
+- Custom polaroid photo cards for projects and personal bio.
+- Interactive hover effects that lift cards up, mimicking tactile physical interactions.
+
+### 🎨 Y2K Scrapbook Aesthetic
+- Pastel-toned sticky notes pinned at slight angles.
+- Decorative paperclips, washi tape, and paper textures.
+- Dynamic digital glitch text effects for a retro-cyber feel.
+- Wax verification seals and stamps for certifications.
+
+### 💫 Smooth Animations & Scrolling
+- Integrated **Lenis** smooth scrolling for a premium, non-jagged scrolling feel.
+- Complex micro-animations powered by **Framer Motion** and **GSAP** (`@gsap/react`).
+
+### 📱 Responsive & Semantic
+- Mobile-first approach, ensuring the scrapbook layout scales beautifully from 320px screens up.
+- Semantic HTML5 structure for accessibility and SEO optimization.
+
+---
+
+## Tech Stack
+
+**Frontend & Build Tools**
+
+- **Framework:** React `^19.2.6` (JavaScript / JSX)
+- **Build Tool:** Vite `^8.0.12`
+- **Styling:** Tailwind CSS `^4.3.1` (using `@tailwindcss/vite` compiler)
+- **Smooth Scroll:** Lenis `^1.3.23`
+- **Animations:** 
+  - Framer Motion `^12.40.0`
+  - GSAP `^3.15.0` & `@gsap/react` `^2.1.2`
+- **Components:** Custom primitives adapted from [ReactBits](https://reactbits.dev)
+
+---
+
+## Project Structure
+
+A breakdown of the project directories and assets:
+
+```
+tama-porto/
+├── public/
+│   └── assets/
+│       ├── stickers/        # Y2K sticker PNGs (transparent)
+│       ├── textures/        # Paper textures (grid, kraft)
+│       ├── washi/           # Washi tape PNGs
+│       └── photos/          # Tama's personal photos (polaroid content)
+├── src/
+│   ├── components/
+│   │   ├── layout/          # Layout components (Navbar, Loader, etc.)
+│   │   ├── reactbits/       # External ReactBits UI/animation components
+│   │   └── sections/        # Page sections (Hero, About, Projects, Skills, etc.)
+│   ├── data/
+│   │   └── projects.js      # Centralized project data array
+│   ├── App.jsx              # Main App orchestrator
+│   ├── main.jsx             # Entry point
+│   └── index.css            # Global CSS, typography, and custom tokens
+├── AGENTS.md                # Project context for AI assistants
+├── DESIGN.md                # Detailed design system specifications
+└── package.json             # NPM dependencies and scripts
+```
+
+---
+
+## Requirements
+
+- **Node.js** `v18.x` or higher
+- **npm** (comes with Node.js) or any equivalent package manager (`pnpm` / `yarn`)
+
+---
+
+## Local Setup
+
+```bash
+# 1) Clone repository
+git clone https://github.com/pratama1246/tama-porto.git
+cd tama-porto
+
+# 2) Install dependencies
+npm install
+```
+
+---
+
+## Run the App
+
+### Development
+
+Start the development server with Hot Module Replacement (HMR):
+
+```bash
+npm run dev
+```
+
+The app will run locally at `http://localhost:5173/` (or another port if 5173 is occupied).
+
+### Code Linting
+
+Ensure code style matches ESLint rules:
+
+```bash
+npm run lint
+```
+
+### Production Build
+
+Compile and optimize assets for deployment:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+---
+
+## 🎨 UI/UX Design
+
+The visual layout of this portfolio was designed first in **Figma** to draft the scrapbook spacing, tape positions, and sticker placement.
+
+The details of the color tokens, font sizes (`Space Grotesk`, `Plus Jakarta Sans`, `Architects Daughter`), and spacing principles are documented in [DESIGN.md](file:///home/pputra/Documents/Project-Web/tama-porto/DESIGN.md).
+
+---
+
+## 📸 Screenshots
+
+### Desktop Version
+*(Add desktop screenshot here)*
+
+### Mobile Version
+*(Add mobile screenshot here)*
+
+---
+
+## License
+
+This repository currently does not include a `LICENSE` file. All rights reserved by the author.
+
+---
+
+[![GitHub](https://img.shields.io/badge/GitHub-pratama1246-black?logo=github)](https://github.com/pratama1246)

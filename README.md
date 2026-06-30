@@ -2,8 +2,6 @@
 
 **Tama's Gallery Portfolio** is a personal portfolio website designed to feel like a physical **Polaroid gallery studio**—personal, artistic, and memorable. It features a **Y2K scrapbook aesthetic** with pastel tones.
 
-Built as a personal portfolio by **Tama (Pratama Putra Purwanto)**, an Informatics Engineering student at **Politeknik Negeri Cilacap**.
-
 > **Concept:** Walk into a personal art studio—walls covered in polaroid photos, sticky notes, washi tape, and scrapbook cutouts. Everything feels tactile, personal, and slightly chaotic in a beautiful way.
 > Built using React + Vite, and deployed on Vercel.
 

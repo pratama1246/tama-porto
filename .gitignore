@@ -25,7 +25,6 @@ dist-ssr
 
 # AI / agent context files
 AGENTS.md
-DESIGN.md
 
 # env files
 .env

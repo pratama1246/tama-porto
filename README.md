@@ -1,11 +1,11 @@
 # 📸 Tama's Gallery Portfolio
 
-**Tama's Gallery Portfolio** is a personal portfolio website designed to feel like a physical **Polaroid gallery studio**—personal, artistic, and memorable. It features a **Y2K scrapbook aesthetic** with pastel tones and digital glitch accents.
+**Tama's Gallery Portfolio** is a personal portfolio website designed to feel like a physical **Polaroid gallery studio**—personal, artistic, and memorable. It features a **Y2K scrapbook aesthetic** with pastel tones.
 
 Built as a personal portfolio by **Tama (Pratama Putra Purwanto)**, an Informatics Engineering student at **Politeknik Negeri Cilacap**.
 
-> **Concept:** Walk into a personal art studio—walls covered in polaroid photos, sticky notes, washi tape, and scrapbook cutouts. Everything feels tactile, personal, and slightly chaotic in a beautiful way, layered with subtle Y2K digital glitch accents.
-> Designed first in Figma, built using React + Vite, and deployed on Vercel.
+> **Concept:** Walk into a personal art studio—walls covered in polaroid photos, sticky notes, washi tape, and scrapbook cutouts. Everything feels tactile, personal, and slightly chaotic in a beautiful way.
+> Built using React + Vite, and deployed on Vercel.
 
 ---
 
@@ -43,7 +43,6 @@ Built as a personal portfolio by **Tama (Pratama Putra Purwanto)**, an Informati
 ### 🎨 Y2K Scrapbook Aesthetic
 - Pastel-toned sticky notes pinned at slight angles.
 - Decorative paperclips, washi tape, and paper textures.
-- Dynamic digital glitch text effects for a retro-cyber feel.
 - Wax verification seals and stamps for certifications.
 
 ### 💫 Smooth Animations & Scrolling
@@ -85,9 +84,9 @@ tama-porto/
 │       └── photos/          # Tama's personal photos (polaroid content)
 ├── src/
 │   ├── components/
-│   │   ├── layout/          # Layout components (Navbar, Loader, etc.)
+│   │   ├── layout/          # Layout components (Navbar, CardNav, Loader, BackgroundElements, etc.)
 │   │   ├── reactbits/       # External ReactBits UI/animation components
-│   │   └── sections/        # Page sections (Hero, About, Projects, Skills, etc.)
+│   │   └── sections/        # Page sections (Hero, About, Projects, Skills, Journey, Hobbies, etc.)
 │   ├── data/
 │   │   └── projects.js      # Centralized project data array
 │   ├── App.jsx              # Main App orchestrator
@@ -158,9 +157,9 @@ npm run preview
 
 ## 🎨 UI/UX Design
 
-The visual layout of this portfolio was designed first in **Figma** to draft the scrapbook spacing, tape positions, and sticker placement.
+This project follows a **design-in-code** workflow. Instead of drafting in Figma first, the visual layout, scrapbook spacing, tape alignments, and interactive animations were built and polished directly in code.
 
-The details of the color tokens, font sizes (`Space Grotesk`, `Plus Jakarta Sans`, `Architects Daughter`), and spacing principles are documented in [DESIGN.md](file:///home/pputra/Documents/Project-Web/tama-porto/DESIGN.md).
+For a detailed look at the layout guidelines, visual metaphors, and design constraints, see the [DESIGN.md](DESIGN.md) document.
 
 ---
 
@@ -176,7 +175,7 @@ The details of the color tokens, font sizes (`Space Grotesk`, `Plus Jakarta Sans
 
 ## License
 
-This repository currently does not include a `LICENSE` file. All rights reserved by the author.
+This repository is unlicensed. All rights reserved by the author. You are welcome to inspect and learn from the code, but copying or redistributing the design and assets for personal use is not permitted.
 
 ---
 

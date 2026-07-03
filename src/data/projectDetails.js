@@ -271,6 +271,9 @@ export const projectDetails = {
       { role: "Kiosk Mode", username: "kiosk", password: "kiosk123" },
       { role: "Employee (Karyawan)", username: "karyawan", password: "karyawan123" }
     ],
+    screenshots: [
+      { url: "/assets/projects/penggajian.png", caption: "Form Login & Dynamic Dashboard Routing", type: "Desktop UI" }
+    ]
   },
   4: {
     tagline: "Web-based tournament manager demonstrating Stack (LIFO) and Queue (FIFO) data structures in PHP.",

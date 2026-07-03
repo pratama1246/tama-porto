@@ -60,15 +60,11 @@ export default function SetupTab({ detail }) {
           </p>
         </div>
 
-        {demoAccounts.length > 0 ? (
+         {demoAccounts.length > 0 ? (
           <div className="bg-[#fefcf7] border border-black/10 rounded-sm p-5 shadow-2xs relative flex flex-col gap-4">
             {/* Washi tape decoration */}
             <div className="absolute -top-3.5 right-6 w-16 h-4.5 bg-[var(--accent-pink)]/60 rotate-[-1deg] rounded-sm pointer-events-none select-none" />
             
-            <div className="font-body text-sm text-[var(--text-dark)] select-none">
-              Demo Password: <span className="font-mono font-bold bg-[var(--accent-yellow)] px-2 py-0.5 rounded-xs">pncpickup123</span>
-            </div>
-
             <div className="flex flex-col gap-4">
               {demoAccounts.map((acc, idx) => (
                 <div key={idx} className="flex flex-col gap-2.5 border-t border-black/5 pt-3.5 first:border-0 first:pt-0">
@@ -89,12 +85,22 @@ export default function SetupTab({ detail }) {
                         {acc.username}
                       </span>
                     </div>
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-mono select-none">email</span>
-                      <span className="font-mono text-xs md:text-sm text-[var(--text-dark)] bg-white border border-black/5 px-2 py-0.5 rounded-sm select-all overflow-hidden text-ellipsis whitespace-nowrap">
-                        {acc.email}
-                      </span>
-                    </div>
+                    {acc.email && (
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-mono select-none">email</span>
+                        <span className="font-mono text-xs md:text-sm text-[var(--text-dark)] bg-white border border-black/5 px-2 py-0.5 rounded-sm select-all overflow-hidden text-ellipsis whitespace-nowrap">
+                          {acc.email}
+                        </span>
+                      </div>
+                    )}
+                    {acc.password && (
+                      <div className="flex flex-col gap-0.5 col-span-2">
+                        <span className="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-mono select-none">password</span>
+                        <span className="font-mono text-xs md:text-sm text-[var(--text-dark)] bg-[var(--accent-yellow)]/20 border border-[var(--accent-yellow)]/40 px-2 py-0.5 rounded-sm select-all">
+                          {acc.password}
+                        </span>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}

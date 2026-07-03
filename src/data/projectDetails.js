@@ -182,39 +182,42 @@ export const projectDetails = {
     screenshots: []
   },
   3: {
-    tagline: "Desktop employee payroll system with robust multi-tier OOP architecture.",
-    overview: "Penggajian Karyawan is a C# WinForms enterprise application designed for internal company payroll computations. Using SQL Server and ADO.NET, the system enforces a strict Object-Orient Oriented architecture to calculate allowances, tax deductions, basic salaries, and issue clean slip documents for employees.",
-    problem: "Manual calculations for overtime allowances, leave compensation, and PPH 21 taxes trigger math discrepancies and delays.",
-    solution: "A desktop C# WinForms system with SQL Server stored procedures to automate net payroll computation and export PDF slips.",
+    tagline: "Desktop employee payroll and webcam QR attendance system with robust OOP architecture.",
+    overview: "Sistem Informasi Penggajian Karyawan (Employee Payroll Information System) is a desktop application based on Windows Forms (C# .NET Framework 4.8) designed to manage employee profiles, track daily attendance, configure custom salary components, calculate monthly payroll automatically, and print/view salary slips. Built as a practical assignment for the Object-Oriented Programming (OOP) Lab Course at Politeknik Negeri Cilacap, the application features database auto-initialization and seeding, dynamic salary configs, and a dedicated Kiosk Mode for contactless check-in/out via QR Code scanner using a live webcam feed.",
+    problem: "Manual monthly salary calculations (allowances, deductions, and grace-period late penalties based on raw logs) trigger math discrepancies and delays, while standard biometric attendance hardware is expensive to implement.",
+    solution: "A desktop C# WinForms application integrated with MySQL that automatically seeds its database on launch, computes dynamic salaries, and utilizes a standard computer webcam to scan employee QR badge cards for automated kiosk attendance tracking.",
     keyFeatures: [
-      "Automated salary calculations (allowances, BPJS, PPH 21 taxes)",
-      "Physical slip printing & bulk monthly report export in PDF",
-      "Integrated attendance logging (in/out/delay tracking)",
-      "Centralized database access using SQL Server Stored Procedures"
+      "Secure role-based dashboards (Admin, HRD, Employee, and Kiosk Mode)",
+      "Automated database schema creation & self-healing data seeder on startup",
+      "Dynamic salary components configuration (allowances & deductions by nominal or %)",
+      "Live webcam QR code scanner for contactless self-attendance checking (kiosk)",
+      "Automatic monthly salary calculation & GDI+ dynamic slip rendering and printing",
+      "Secure cryptography service for user passwords and login sessions"
     ],
     techStack: [
-      { category: "Application Layer", list: ["C#", ".NET Framework 4.8", "Windows Forms"] },
-      { category: "Data Layer", list: ["SQL Server", "ADO.NET Database Access", "Stored Procedures"] },
-      { category: "Reporting", list: ["Microsoft ReportViewer", "PDF Slip Exporter"] }
+      { category: "Application Layer", list: ["C#", ".NET Framework 4.8", "Windows Forms (WinForms)"] },
+      { category: "Data Layer", list: ["MySQL Server", "ADO.NET Provider (MySql.Data v9.7.0)", "Database Auto-Seeder"] },
+      { category: "Third-Party Libraries", list: ["AForge.Video (Webcam API)", "ZXing.Net (QR Code)", "BouncyCastle (Cryptography)"] }
     ],
     roles: [
-      {
-        roleName: "HRD / Payroll Officer",
-        color: "var(--accent-peach)",
-        icon: "👔",
-        features: [
-          "Recalculate monthly salary based on attendances & overtime",
-          "Process tax deductions (PPH 21) and social insurance",
-          "Disburse monthly payroll and generate bulk reports"
-        ]
-      },
       {
         roleName: "Administrator",
         color: "var(--accent-lavender)",
         icon: "⚙️",
         features: [
-          "System configuration, role provisioning, and audit logs tracking",
-          "Back up and restore SQL Server payroll database entries"
+          "User Management: CRUD operations for login accounts",
+          "Employee Management: CRUD operations for employee records (Permanent, Contract, Daily)",
+          "QR Identity Cards: Automatically generate and download badges as PNG"
+        ]
+      },
+      {
+        roleName: "HRD Staff",
+        color: "var(--accent-peach)",
+        icon: "👔",
+        features: [
+          "Configure salary components dynamically (allowances and deductions)",
+          "Configure shifts, normal hours, and late tolerance grace periods",
+          "Process monthly payroll calculations and review recaps/reports"
         ]
       },
       {
@@ -222,35 +225,51 @@ export const projectDetails = {
         color: "var(--accent-blue)",
         icon: "👤",
         features: [
-          "Secure personal portal to view monthly salary breakdown",
-          "Download official payroll slip documents in PDF format"
+          "Personal dashboard showing real-time stats and active payroll status",
+          "View individual daily attendance history logs",
+          "Print/export monthly salary slips rendered dynamically using GDI+"
+        ]
+      },
+      {
+        roleName: "Kiosk Mode",
+        color: "var(--accent-pink)",
+        icon: "🖥️",
+        features: [
+          "Contactless check-in/out self-attendance clocking console",
+          "Live webcam stream capturing using AForge.Video library",
+          "Instantly decode employee QR identity cards using ZXing.Net"
         ]
       }
     ],
     database: {
-      description: "Normalized payroll schema on Microsoft SQL Server with database triggers for balance updates.",
+      description: "Normalized MySQL schema containing tables for employee master profiles (base class with concrete models), attendance logs, login accounts, and salary components.",
       tables: [
-        { name: "Karyawan", fields: ["ID_Karyawan", "Nama", "Jabatan", "Departemen", "ID_User"] },
-        { name: "Gaji", fields: ["ID_Gaji", "ID_Karyawan", "Bulan_Tahun", "Gaji_Pokok", "Tunjangan", "Potongan", "Total_Bersih"] },
-        { name: "Absensi", fields: ["ID_Absen", "ID_Karyawan", "Tanggal", "Status_Kehadiran", "Jam_Masuk", "Jam_Keluar"] }
+        { name: "Karyawan", fields: ["kode_karyawan", "nama", "jabatan", "gaji_pokok", "jenis_karyawan"] },
+        { name: "DataAbsensi", fields: ["id_absensi", "kode_karyawan", "tanggal", "status", "jam_masuk", "jam_keluar"] },
+        { name: "KomponenGaji", fields: ["id_komponen", "nama_komponen", "jenis", "nilai", "tipe_nilai"] },
+        { name: "Gaji", fields: ["id_gaji", "kode_karyawan", "bulan_tahun", "gaji_pokok", "total_tunjangan", "total_potongan", "gaji_bersih"] }
       ],
-      specialFeatures: ["Stored procedures for atomic calculations", "Salary calculation database triggers"]
+      specialFeatures: ["Self-healing auto-seeder on startup", "Inheritance-based employee OOP hierarchy", "Dynamic custom salary components binding"]
     },
     payments: null,
     setup: {
       steps: [
-        { cmd: "Clone Repository", desc: "Clone files onto local machine" },
-        { cmd: "Attach SQL DB", desc: "Open SQL Server Management Studio (SSMS) and attach payroll database (.mdf)" },
-        { cmd: "Configure Connection", desc: "Update ConnectionString in App.config configuration file" },
-        { cmd: "Build Solution", desc: "Open in Visual Studio 2022 and compile/run the C# project" }
+        { cmd: "Clone Repository", desc: "Clone files: git clone https://github.com/pratama1246/SistemPenggajianKaryawan.git" },
+        { cmd: "Create Database", desc: "Open MySQL and execute: CREATE DATABASE penggajian;" },
+        { cmd: "Configure Connection", desc: "Adjust credentials in Koneksi.cs if different from default root / empty password" },
+        { cmd: "Compile & Run", desc: "Open in Visual Studio 2022 and compile (F5). Seeder creates tables and sample data automatically" }
       ],
       envVars: [
-        { name: "ConnectionString", val: "Server=.\\SQLEXPRESS;Database=PenggajianDb;Trusted_Connection=True;" }
+        { name: "Database Name", val: "penggajian" },
+        { name: "Default Host / Port", val: "localhost / 3306" },
+        { name: "MySQL User / Password", val: "root / (empty)" }
       ]
     },
     demoAccounts: [
-      { role: "HRD User", username: "hrd_demo", email: "hrd@payroll.co.id" },
-      { role: "Admin System", username: "admin_payroll", email: "admin@payroll.co.id" }
+      { role: "Administrator", username: "admin", password: "admin123" },
+      { role: "HRD Staff", username: "hrd", password: "hrd123" },
+      { role: "Kiosk Mode", username: "kiosk", password: "kiosk123" },
+      { role: "Employee (Karyawan)", username: "karyawan", password: "karyawan123" }
     ],
   },
   4: {

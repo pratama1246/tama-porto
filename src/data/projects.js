@@ -22,9 +22,9 @@ export const projects = [
   {
     id: 3,
     title: "Penggajian Karyawan",
-    desc: "Desktop payroll system with 3 roles (Admin/HRD/Employee), OOP architecture, ADO.NET.",
-    tech: ["C#", "WinForms", ".NET 4.8", "SQL Server"],
-    status: "Planning",
+    desc: "Desktop employee payroll system with 4 roles (Admin/HRD/Employee/Kiosk) featuring dynamic salary configurations and live webcam QR-code attendance scanner.",
+    tech: ["C#", "WinForms", ".NET 4.8", "MySQL", "AForge (Webcam)", "ZXing (QR)"],
+    status: "Completed",
     github: "https://github.com/pratama1246/SistemPenggajianKaryawan",
     live: "",
     thumbnail: "/assets/projects/penggajian.png"

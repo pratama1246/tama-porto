@@ -278,24 +278,27 @@ export default function Hero() {
             />
 
             {/* Browser Drawing/Mockup */}
-            <div className="w-full aspect-video bg-[var(--accent-lavender)] flex flex-col border border-black/5 rounded-xs p-1.5 overflow-hidden">
-              <div className="flex gap-1 border-b border-black/10 pb-1 mb-1.5">
+            <div className="w-full aspect-video bg-white flex flex-col border border-black/5 rounded-xs p-1.5 overflow-hidden relative">
+              {/* Overlay to intercept mouse/touch events so card dragging remains smooth */}
+              <div className="absolute inset-0 z-10 bg-transparent cursor-grab active:cursor-grabbing" />
+              
+              <div className="flex gap-1 border-b border-black/10 pb-1 mb-1 select-none">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-400"></span>
                 <span className="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
               </div>
-              <div className="flex-grow flex flex-col items-center justify-center text-[10px] text-[var(--text-dark)] font-mono leading-none select-none gap-1">
-                <span>&lt;canvas &gt;</span>
-                <span className="text-[8px] opacity-65">doodles_here</span>
-                <span>&lt;/canvas&gt;</span>
-              </div>
+              <iframe
+                src="https://giphy.com/embed/UWrvP9jVYegGdCXq6C"
+                className="w-full flex-grow border-0 rounded-xs pointer-events-none select-none scale-[1.3] origin-center translate-y-1"
+                title="Cute heart animation"
+              ></iframe>
             </div>
 
             <div
               className="text-center mt-3 text-[0.8rem] text-[var(--text-handwrite)]"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
-              canvas_view.png
+              heart_doodle.gif
             </div>
           </motion.div>
 

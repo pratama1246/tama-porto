@@ -2,8 +2,8 @@ export const projects = [
   {
     id: 1,
     title: "Sistem Pickup Order",
-    desc: "Campus canteen ordering system with multi-role access (civitas, admin, staff).",
-    tech: ["Laravel", "Figma", "MySQL", "PHP", "Tailwind CSS v4", "DaisyUI"],
+    desc: "Modern campus canteen pre-ordering and pickup system eliminating peak-hour queues with dynamic cart operations and online/manual payment integrations.",
+    tech: ["Laravel 13", "MySQL", "Tailwind CSS v4", "DaisyUI v5", "Alpine.js", "Midtrans"],
     status: "Completed",
     github: "https://github.com/pratama1246/PickupOrder-App", // Fallback to Tama's GitHub since links are blank in spec
     live: "",

@@ -1,20 +1,21 @@
 export const projectDetails = {
   1: {
-    tagline: "Laravel 13 powered campus canteen ordering system with role-based access control.",
-    overview: "PickupOrder-App is a Laravel 13 web application for canteen/food pickup ordering internal to Politeknik Negeri Cilacap. Designed to optimize ordering pipelines, it bridges students, canteen vendors, and administrators into a cohesive ecosystem with seamless payment flows integrated via Midtrans.",
+    tagline: "Laravel 13 powered campus canteen pre-ordering and pickup system with multi-role access control.",
+    overview: "PickupOrder-App is a modern and responsive Laravel 13 (PHP 8.3+) web application designed to streamline food pre-ordering and pickup operations at Politeknik Negeri Cilacap. By enabling students to order and pay ahead, the platform effectively eliminates queue bottlenecks in the campus canteens during peak hours. Payments are integrated via Midtrans, and the app supports automatic webhook callbacks.",
     problem: "Crowded canteen queues during class breaks waste student time, vendors struggle to project daily sales targets, and admins face hurdles managing campus user data manually.",
     solution: "A pre-order system integrated with Midtrans Snap for cashless payments, vendor dashboards with sales target trackers, and bulk user onboarding via CSV templates.",
     keyFeatures: [
       "Midtrans Snap Integration (Snap Popup & Webhook Notification)",
-      "Vendor Dashboard to track daily targets & sales reports",
+      "3 Checkout Payment Methods: Midtrans, QRIS Manual, and Pay Direct",
+      "Vendor Dashboard to track daily targets & sales reports using ApexCharts",
       "Scan QR & Order Code to speed up canteen pickup",
       "Bulk user import via CSV & download template",
-      "Force password change on first login for user safety"
+      "Force password change on first login & login throttling security controls"
     ],
     techStack: [
-      { category: "Backend Core", list: ["PHP 8.4+", "Laravel 13", "MySQL"] },
-      { category: "Frontend UI", list: ["Blade Templates", "Tailwind CSS v4", "Alpine.js", "Vite", "DaisyUI"] },
-      { category: "Integrations & Mail", list: ["Midtrans Snap API", "Resend (Email)", "Intervention Image"] }
+      { category: "Backend Core", list: ["PHP 8.3+", "Laravel 13", "MySQL"] },
+      { category: "Frontend UI", list: ["Blade Templates", "Tailwind CSS v4", "Alpine.js", "Vite", "DaisyUI v5", "ApexCharts"] },
+      { category: "Integrations & Mail", list: ["Midtrans PHP SDK", "Resend (Email)", "Intervention Image"] }
     ],
     roles: [
       {
@@ -23,11 +24,10 @@ export const projectDetails = {
         icon: "👩‍🎓",
         features: [
           "Browse campus canteens and active menus",
-          "Interactive shopping cart (add/update/remove items)",
-          "Secure checkout flow with Midtrans Snap",
-          "Order history tracking and reordering",
-          "Menu reviews and ratings for completed pickups",
-          "Real-time payment status polling in frontend"
+          "Interactive database-persistent shopping cart (add/update/remove items)",
+          "Secure checkout flow with Midtrans Snap, QRIS Manual, or Pay Direct",
+          "Order history tracking, cancel orders, review menus, and reorder",
+          "Real-time payment status polling in frontend JavaScript"
         ]
       },
       {
@@ -35,11 +35,10 @@ export const projectDetails = {
         color: "var(--accent-mint)",
         icon: "🏪",
         features: [
-          "Interactive Vendor Dashboard & Sales Reports",
-          "Update canteen profile & open/closed status toggle",
-          "Define daily sales target & progress tracking",
-          "Menu management (CRUD) with photo upload",
-          "Incoming order management with barcode/QR scanning",
+          "Interactive Vendor Dashboard & sales reports with ApexCharts",
+          "Update canteen profile, set daily target, and toggle open/closed status",
+          "Menu management (CRUD) with photo upload & category binding",
+          "Incoming order management with barcode/QR scanning or code entry",
           "Order status updates and cancellation management"
         ]
       },
@@ -64,16 +63,17 @@ export const projectDetails = {
         { name: "menus", fields: ["id", "canteen_id", "name", "slug", "price", "description", "category", "image_path", "is_available", "timestamps"] },
         { name: "orders", fields: ["id", "user_id", "canteen_id", "order_code", "status", "total_price", "payment_status", "midtrans_transaction_id", "timestamps"] },
         { name: "order_items", fields: ["id", "order_id", "menu_id", "quantity", "price_at_purchase", "notes"] },
-        { name: "reviews", fields: ["id", "order_item_id", "user_id", "rating", "comment", "timestamps"] }
+        { name: "reviews", fields: ["id", "order_item_id", "user_id", "rating", "comment", "timestamps"] },
+        { name: "cart_items", fields: ["id", "user_id", "menu_id", "quantity", "timestamps"] }
       ],
       specialFeatures: [
-        "Index optimization for fast menu lookups and order history scanning.",
+        "Database-persistent shopping carts via cart_items table.",
         "Soft-deletes and cascaded foreign key protection.",
-        "Daily target trackers stored on canteen records."
+        "Optimized indexes for fast menu category lookups and history retrieval."
       ]
     },
     payments: {
-      provider: "Midtrans Snap (3-DS Secure Payments)",
+      provider: "Midtrans Snap, Manual QRIS, and Direct Cash",
       endpoints: [
         { method: "POST", path: "/payment/notification", desc: "Webhook callback (CSRF excluded) where Midtrans sends transaction updates." },
         { method: "GET", path: "/api/order/{id}/payment-status", desc: "Polling endpoint called by student cart to auto-redirect on successful transaction." }
@@ -82,27 +82,33 @@ export const projectDetails = {
     setup: {
       steps: [
         { cmd: "composer install", desc: "Install backend PHP dependencies via Composer" },
-        { cmd: "cp .env.example .env", desc: "Duplicate environment configuration file" },
-        { cmd: "php artisan key:generate", desc: "Generate secure application encryption key" },
-        { cmd: "php artisan migrate --seed", desc: "Create database schema and seed demo accounts" },
+        { cmd: "cp .env.example .env && php artisan key:generate", desc: "Create environment file and generate secure encryption key" },
+        { cmd: "php artisan migrate --seed", desc: "Create MySQL schema, run migrations, and seed demo accounts" },
+        { cmd: "php artisan storage:link", desc: "Create storage symlink required for uploaded images" },
         { cmd: "npm install", desc: "Install frontend NPM packages" },
         { cmd: "npm run build", desc: "Build assets for production (or run dev server)" }
       ],
       envVars: [
-        { name: "DB_CONNECTION", val: "mysql" },
-        { name: "DB_DATABASE", val: "pickup_order_db" },
-        { name: "MIDTRANS_SERVER_KEY", val: "SB-Mid-server-xxxx" },
-        { name: "MIDTRANS_CLIENT_KEY", val: "SB-Mid-client-xxxx" },
-        { name: "MIDTRANS_IS_PRODUCTION", val: "false" }
+        { name: "ORDER_START_TIME / END_TIME", val: "07:30 / 15:30 (Enforces operational hours)" },
+        { name: "MIDTRANS_SERVER_KEY / CLIENT_KEY", val: "Obtained from Midtrans Sandbox/Production dashboard" },
+        { name: "RESEND_API_KEY", val: "Obtained from Resend dashboard for email notifications" },
+        { name: "QUEUE_CONNECTION", val: "database (Enables database-backed queue workers)" }
       ]
     },
     demoAccounts: [
-      { role: "Administrator", username: "admin", email: "admin@pnc.ac.id" },
-      { role: "Vendor (Harmoni)", username: "vendor_harmoni", email: "kantinharmoni@pnc.ac.id" },
-      { role: "Vendor (MI Academy)", username: "vendor_mi", email: "miacademy@pnc.ac.id" },
-      { role: "Student (Mahasiswa)", username: "demo_student", email: "demo.student@pnc.ac.id", note: "Forces change password on first login" }
+      { role: "Administrator", username: "admin", email: "admin@pnc.ac.id", password: "pncpickup123" },
+      { role: "Vendor (Harmoni)", username: "vendor_harmoni", email: "kantinharmoni@pnc.ac.id", password: "pncpickup123" },
+      { role: "Vendor (MI Academy)", username: "vendor_mi", email: "miacademy@pnc.ac.id", password: "pncpickup123" },
+      { role: "Student (Mahasiswa)", username: "demo_student", email: "demo.student@pnc.ac.id", password: "pncpickup123", note: "Forces change password on first login" }
     ],
-    screenshots: []
+    screenshots: [
+      { url: "https://github.com/user-attachments/assets/4f1f8180-c962-4472-ac7f-78ed208991f1", caption: "Main Page Dashboard (Desktop Version)", type: "Web App" },
+      { url: "https://github.com/user-attachments/assets/0186e14e-5eae-4453-8e4a-bc1c334d728b", caption: "Main Page Dashboard (Mobile responsive view)", type: "Mobile View" },
+      { url: "https://github.com/user-attachments/assets/04d379f8-bc73-411c-a7e1-c2a21e5985c2", caption: "Browse Canteens and Menus", type: "Web App" },
+      { url: "https://github.com/user-attachments/assets/48df6952-a5ce-4505-84d1-65ef45cf3c72", caption: "Menu Detail Page & Cart Operations", type: "Web App" },
+      { url: "https://github.com/user-attachments/assets/3a467efb-f938-4e31-ab98-1fa361633cf6", caption: "Vendor Dashboard with sales analytics", type: "Vendor Panel" },
+      { url: "https://github.com/user-attachments/assets/95b1b740-6cb6-4b66-8346-d8846c9defeb", caption: "Admin Dashboard with user quotas", type: "Admin Panel" }
+    ]
   },
   2: {
     tagline: "CodeIgniter 4 powered event ticketing platform with secure user booking and admin controls.",

@@ -226,7 +226,7 @@ export default function Hero() {
               zIndex: 10,
             }}
             variants={stickyNoteVariants}
-            whileHover={isMobile ? {} : { scale: 1.05, rotate: '-2deg', boxShadow: 'var(--shadow-md)', transition: { duration: 0.15 } }}
+            whileHover={isMobile ? {} : { scale: 1.05, rotate: -2, boxShadow: 'var(--shadow-md)', transition: { duration: 0.15 } }}
             whileDrag={{ scale: 1.03, zIndex: 100 }}
             className={`absolute left-[5%] sm:left-[10%] top-[10%] bg-[var(--accent-yellow)] p-4 w-[170px] sm:w-[190px] aspect-square rounded-sm shadow-xs border border-black/5 will-change-transform ${
               isMobile ? 'cursor-default' : 'cursor-grab active:cursor-grabbing touch-none'
@@ -248,7 +248,7 @@ export default function Hero() {
               <li>🚀 Crafting in React</li>
             </ul>
           </motion.div>
-
+ 
           {/* Card 2: Mini Polaroid (Workspace / Tech Drawing) - Index 1 */}
           <motion.div
             ref={card2Ref}
@@ -260,9 +260,9 @@ export default function Hero() {
               zIndex: 20,
             }}
             variants={polaroidVariants}
-            whileHover={isMobile ? {} : { scale: 1.05, rotate: '3deg', boxShadow: 'var(--shadow-md)', transition: { duration: 0.15 } }}
+            whileHover={isMobile ? {} : { scale: 1.05, rotate: 3, boxShadow: 'var(--shadow-md)', transition: { duration: 0.15 } }}
             whileDrag={{ scale: 1.03, zIndex: 100 }}
-            className={`absolute right-[5%] sm:right-[10%] top-[5%] bg-white p-3 pb-6 w-[180px] sm:w-[200px] rounded-sm shadow-sm border border-black/5 will-change-transform ${
+            className={`absolute right-[5%] sm:right-[10%] top-[5%] bg-white p-3 pb-6 w-[215px] sm:w-[235px] rounded-sm shadow-sm border border-black/5 will-change-transform ${
               isMobile ? 'cursor-default' : 'cursor-grab active:cursor-grabbing touch-none'
             }`}
           >
@@ -276,24 +276,23 @@ export default function Hero() {
                 transform: 'rotate(-4deg)'
               }}
             />
-
+ 
             {/* Browser Drawing/Mockup */}
             <div className="w-full aspect-square bg-white flex flex-col border border-black/5 rounded-xs p-1.5 overflow-hidden relative">
-              {/* Overlay to intercept mouse/touch events so card dragging remains smooth */}
-              <div className="absolute inset-0 z-10 bg-transparent cursor-grab active:cursor-grabbing" />
-              
-              <div className="flex gap-1 border-b border-black/10 pb-1 mb-1 select-none">
+              <div className="flex gap-1 border-b border-black/10 pb-1 mb-1 select-none pointer-events-none">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-400"></span>
                 <span className="w-1.5 h-1.5 rounded-full bg-yellow-400"></span>
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
               </div>
-              <iframe
-                src="https://giphy.com/embed/UWrvP9jVYegGdCXq6C"
-                className="w-full flex-grow border-0 rounded-xs pointer-events-none select-none"
-                title="Cute heart animation"
-              ></iframe>
+              <img
+                src="https://media.giphy.com/media/UWrvP9jVYegGdCXq6C/giphy.gif"
+                alt="Cute heart animation"
+                draggable={false}
+                onContextMenu={(e) => e.preventDefault()}
+                className="protected-image w-full flex-grow object-contain pointer-events-none select-none"
+              />
             </div>
-
+ 
             <div
               className="text-center mt-3 text-[0.8rem] text-[var(--text-handwrite)]"
               style={{ fontFamily: 'var(--font-handwrite)' }}

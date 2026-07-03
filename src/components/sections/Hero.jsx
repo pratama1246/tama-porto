@@ -298,7 +298,7 @@ export default function Hero() {
               className="text-center mt-3 text-[0.8rem] text-[var(--text-handwrite)]"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
-              heart_doodle.gif
+              🐢 juhoon (cortis).gif
             </div>
           </motion.div>
 

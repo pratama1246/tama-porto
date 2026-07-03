@@ -278,7 +278,7 @@ export default function Hero() {
             />
 
             {/* Browser Drawing/Mockup */}
-            <div className="w-full aspect-video bg-white flex flex-col border border-black/5 rounded-xs p-1.5 overflow-hidden relative">
+            <div className="w-full aspect-square bg-white flex flex-col border border-black/5 rounded-xs p-1.5 overflow-hidden relative">
               {/* Overlay to intercept mouse/touch events so card dragging remains smooth */}
               <div className="absolute inset-0 z-10 bg-transparent cursor-grab active:cursor-grabbing" />
               
@@ -289,7 +289,7 @@ export default function Hero() {
               </div>
               <iframe
                 src="https://giphy.com/embed/UWrvP9jVYegGdCXq6C"
-                className="w-full flex-grow border-0 rounded-xs pointer-events-none select-none scale-[1.3] origin-center translate-y-1"
+                className="w-full flex-grow border-0 rounded-xs pointer-events-none select-none"
                 title="Cute heart animation"
               ></iframe>
             </div>

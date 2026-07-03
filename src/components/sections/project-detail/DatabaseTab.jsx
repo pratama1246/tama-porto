@@ -2,10 +2,12 @@ export default function DatabaseTab({ detail }) {
   const database = detail?.database
   const payments = detail?.payments
 
+  const hasPayments = !!payments
+
   return (
     <div className="flex flex-col lg:flex-row gap-8 items-start w-full">
       {/* Database Schema Section */}
-      <div className="flex-grow w-full lg:max-w-[55%] flex flex-col gap-5">
+      <div className={`flex-grow w-full ${hasPayments ? 'lg:max-w-[55%]' : 'w-full'} flex flex-col gap-5`}>
         <div className="flex flex-col gap-2">
           <h3 className="font-display font-semibold text-base md:text-lg text-[var(--text-dark)] m-0">
             🗄️ Database Structure
@@ -16,7 +18,7 @@ export default function DatabaseTab({ detail }) {
         </div>
 
         {/* Database Tables Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        <div className={`grid grid-cols-1 ${hasPayments ? 'sm:grid-cols-2' : 'sm:grid-cols-3'} gap-3.5`}>
           {database?.tables.map((table, tIdx) => (
             <div key={tIdx} className="bg-white border border-black/10 rounded-sm p-4 shadow-3xs flex flex-col gap-2.5 rotate-[0.5deg] hover:rotate-0 transition-transform">
               <div className="font-mono text-sm font-semibold text-[var(--text-dark)] border-b border-black/5 pb-1 flex justify-between select-none">
@@ -35,18 +37,20 @@ export default function DatabaseTab({ detail }) {
         </div>
       </div>
 
-      {/* Midtrans Webhooks & Polling Section */}
-      <div className="w-full lg:w-[45%] flex flex-col gap-5">
-        <div className="flex flex-col gap-2">
-          <h3 className="font-display font-semibold text-base md:text-lg text-[var(--text-dark)] m-0">
-            💳 Midtrans Webhooks & APIs
-          </h3>
-          <p className="font-body text-sm text-[var(--text-muted)] leading-relaxed">
-            Transaction webhooks and frontend status polling configuration.
-          </p>
-        </div>
+      {/* Integration APIs & Webhooks Section */}
+      {hasPayments && (
+        <div className="w-full lg:w-[45%] flex flex-col gap-5">
+          <div className="flex flex-col gap-2">
+            <h3 className="font-display font-semibold text-base md:text-lg text-[var(--text-dark)] m-0">
+              {payments.provider.toLowerCase().includes('midtrans')
+                ? '💳 Midtrans Webhooks & APIs'
+                : '🌐 API Endpoints & Integrations'}
+            </h3>
+            <p className="font-body text-sm text-[var(--text-muted)] leading-relaxed">
+              API integration endpoints, route methods, and transaction webhooks configuration.
+            </p>
+          </div>
 
-        {payments ? (
           <div className="bg-[#fefcf7] border border-black/10 rounded-sm p-5 shadow-2xs relative flex flex-col gap-4">
             {/* Washi tape decoration */}
             <div className="absolute -top-3 left-1/3 w-20 h-4 bg-[var(--accent-blue)]/75 rotate-[-1deg] rounded-sm pointer-events-none select-none" />
@@ -75,12 +79,8 @@ export default function DatabaseTab({ detail }) {
               ))}
             </div>
           </div>
-        ) : (
-          <div className="bg-[#fefcf7] border border-black/10 rounded-sm p-8 shadow-2xs text-center font-handwrite text-[var(--text-muted)] select-none">
-            * No webhook payments integrated *
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

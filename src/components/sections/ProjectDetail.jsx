@@ -4,6 +4,7 @@ import PayrollDetail from './project-detail/PayrollDetail'
 import AlproStackQueueDetail from './project-detail/AlproStackQueueDetail'
 import GreatestWallpaperDetail from './project-detail/GreatestWallpaperDetail'
 import ExploreCentralJavaDetail from './project-detail/ExploreCentralJavaDetail'
+import TicketlyMobileDetail from './project-detail/TicketlyMobileDetail'
 
 export default function ProjectDetail({ project, onBack }) {
   if (!project) return null
@@ -22,6 +23,8 @@ export default function ProjectDetail({ project, onBack }) {
       return <GreatestWallpaperDetail project={project} onBack={onBack} />
     case 6:
       return <ExploreCentralJavaDetail project={project} onBack={onBack} />
+    case 7:
+      return <TicketlyMobileDetail project={project} onBack={onBack} />
     default:
       return (
         <div className="min-h-screen flex items-center justify-center font-handwrite text-lg">

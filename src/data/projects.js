@@ -12,8 +12,8 @@ export const projects = [
   {
     id: 2,
     title: "Ticketly",
-    desc: "Web-based event ticketing platform enabling user bookings and admin quota management.",
-    tech: ["CodeIgniter 4", "MySQL", "PHP", "Tailwind CSS v4", "Flowbite"],
+    desc: "Robust event ticketing platform powered by CodeIgniter 4 featuring web user portal, admin sales dashboard, and a custom JWT-protected RESTful API for Flutter mobile clients.",
+    tech: ["CodeIgniter 4", "MySQL", "Tailwind CSS v3", "Flowbite", "JWT APIs", "REST API docs"],
     status: "Completed",
     github: "https://github.com/pratama1246/ticketly-project.git",
     live: "",
@@ -58,5 +58,15 @@ export const projects = [
     github: "https://github.com/pratama1246/explore-central-java",
     live: "",
     thumbnail: "/assets/projects/explore-java.webp"
+  },
+  {
+    id: 7,
+    title: "Ticketly Mobile",
+    desc: "Cross-platform mobile application companion for Ticketly built with Flutter (Dart), featuring JWT API integrations, real-time cart calculations, and offline QR e-ticket caching.",
+    tech: ["Flutter", "Dart", "JWT REST APIs", "Shared Preferences", "Flutter SVG"],
+    status: "Completed",
+    github: "https://github.com/pratama1246/ticketly.git",
+    live: "",
+    thumbnail: "/assets/projects/ticketly.webp"
   }
 ]

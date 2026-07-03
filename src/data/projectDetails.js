@@ -111,79 +111,105 @@ export const projectDetails = {
     ]
   },
   2: {
-    tagline: "CodeIgniter 4 powered event ticketing platform with secure user booking and admin controls.",
-    overview: "Ticketly is a web-based event ticketing platform built using the CodeIgniter 4 framework. Designed as a college project for the Pemrograman Web 2 course at Politeknik Negeri Cilacap, the platform allows guests to browse and secure digital ticket bookings for various events while giving administrators direct control over quotas, event parameters, and overall transaction logs.",
-    disclaimer: "All event logos, promoter names, and concert posters featured in the screenshots and demo data of this project belong to their respective copyright owners (official promoters/events). They are used purely for educational and demonstration purposes to simulate a real-world ticketing catalog.",
+    tagline: "CodeIgniter 4 powered event ticketing platform with secure user booking and JWT RESTful APIs.",
+    overview: "Ticketly is a robust and modern event ticketing platform powered by CodeIgniter 4 (PHP 8.1+). It provides a comprehensive solution for managing events, selling tickets, and processing bookings. The system features a web-based user portal, an administrative dashboard, and a custom JWT-protected RESTful API for mobile Flutter client integrations.",
+    disclaimer: "All event logos, promoter names, and concert posters featured in this project belong to their respective copyright owners. They are used purely for educational and academic demonstration purposes to simulate a realistic ticketing catalog.",
     problem: "Event registration and booking processes on campus are often disorganized, leading to issues with quota management, manual ticketing, and slow attendance checks.",
-    solution: "A centralized web application utilizing CodeIgniter 4 MVC architecture to automate ticket bookings, manage ticket quotas in real-time, and provide an administrative control board for event verification.",
+    solution: "A centralized web application utilizing CodeIgniter 4 MVC architecture to automate ticket bookings, manage ticket quotas in real-time, provide an administrative control board, and expose JWT RESTful API endpoints for mobile companion apps.",
     keyFeatures: [
-      "User authentication system (Registration, Login, and Logout)",
-      "Interactive event catalog showcasing upcoming listings and descriptions",
-      "Ticket booking system with dynamic quantity selection and quota validation",
-      "Comprehensive Admin Dashboard monitoring transactions, sales, and capacities",
-      "Event management panel (CRUD operations) for organizers"
+      "Custom authentication for user & admin (Web Shield & custom JWT token for Mobile API)",
+      "Interactive event catalog showcasing upcoming concert listings and descriptions",
+      "Ticket booking system with dynamic category pricing and real-time quota validation",
+      "Comprehensive Admin Dashboard monitoring transactions, sales statistics, and seat quotas",
+      "Scalar-powered interactive REST API documentation (public/openapi.json)",
+      "Forgot password flows with email verification codes (OTP via SMTP)"
     ],
     techStack: [
-      { category: "Backend Framework", list: ["PHP 8.1+", "CodeIgniter 4", "MySQL"] },
-      { category: "Frontend UI", list: ["HTML5", "CSS3", "JavaScript", "Tailwind CSS v4", "Flowbite"] },
-      { category: "Workspace & Design", list: ["Figma Prototype", "Composer Manager", "Git"] }
+      { category: "Backend Core", list: ["PHP 8.1+", "CodeIgniter 4", "MySQL"] },
+      { category: "Security & Auth", list: ["CodeIgniter Shield (Web)", "firebase/php-jwt (Mobile API)", "OTP via SMTP"] },
+      { category: "Libraries & Frontend", list: ["Tailwind CSS v3", "Flowbite UI", "Dompdf (PDF Generator)", "Simple Qrcode (QR Generator)"] }
     ],
     roles: [
       {
-        roleName: "User (Student / Guest)",
+        roleName: "User (Web)",
         color: "var(--accent-pink)",
-        icon: "👥",
+        icon: "👩‍💻",
         features: [
-          "Browse through all available upcoming events",
-          "View specific event details, ticket price, and descriptions",
-          "Purchase tickets securely with customized quantity selections",
-          "Track personal booking history and current ticket status"
+          "Browse and search available concert and show events",
+          "Purchase tickets with custom seat/category quantity selections",
+          "Track personal order history details and transaction status",
+          "Manage personal profile details and edit accounts"
         ]
       },
       {
-        roleName: "Administrator (Event Organizer)",
+        roleName: "Administrator (Web Panel)",
         color: "var(--accent-mint)",
         icon: "🛠️",
         features: [
-          "Monitor live ticket sales, remaining quotas, and transaction histories",
-          "Manage event catalog (Create, Read, Update, Delete events)",
-          "Audit transaction records and update reservation states",
-          "Access overall platform analytics and registration stats"
+          "Monitor ticket sales statistics, transaction logs, and capacity thresholds",
+          "Manage events database (CRUD operations: create, edit, delete events)",
+          "Configure ticket tiers, prices, and event quotas in real-time",
+          "Audit incoming ticket transaction entries"
+        ]
+      },
+      {
+        roleName: "Mobile API Integration",
+        color: "var(--accent-blue)",
+        icon: "📱",
+        features: [
+          "User registration, JWT login, OTP requests, and password resets",
+          "Retrieve banner landing events and featured listings",
+          "Real-time mobile shopping cart calculation endpoint",
+          "Start checkout, upload payment proof/confirm, and cancel bookings via API"
         ]
       }
     ],
     database: {
-      description: "Database architecture built on MySQL. The full database structure and seeding data are provisioned directly via the ticketly.sql schema file.",
+      description: "Relational MySQL schema structured with clean relational integrity, performance indexes, and database foreign key cascades.",
       tables: [
         { name: "users", fields: ["id", "username", "email", "password", "role", "created_at", "updated_at"] },
         { name: "events", fields: ["id", "title", "description", "date", "time", "venue", "ticket_price", "ticket_quota", "image", "created_at"] },
-        { name: "bookings", fields: ["id", "user_id", "event_id", "quantity", "total_price", "booking_status", "created_at"] }
+        { name: "ticket_types", fields: ["id", "event_id", "name", "price", "quota", "created_at"] },
+        { name: "seats", fields: ["id", "event_id", "seat_number", "status"] },
+        { name: "orders", fields: ["id", "user_id", "event_id", "quantity", "total_price", "booking_status", "created_at"] },
+        { name: "order_items", fields: ["id", "order_id", "ticket_type_id", "quantity", "price_at_purchase"] },
+        { name: "payment_methods", fields: ["id", "name", "code", "is_active"] }
       ],
       specialFeatures: [
-        "Cascaded updates on event catalog deletions.",
-        "Real-time ticket quota subtraction constraints."
+        "Real-time ticket type quota subtractions on order creation.",
+        "Custom database tracking for seat maps per event venue.",
+        "Relational CASCADE rules on event catalog edits."
       ]
     },
-    payments: null,
+    payments: {
+      provider: "JWT Rest Checkout & Web Gateway Payments",
+      endpoints: [
+        { method: "POST", path: "/api/checkout/calculate", desc: "Calculates cart subtotals, admin fees, and totals in real-time." },
+        { method: "POST", path: "/api/checkout/start", desc: "Locks seat quotas and starts a pending transaction." },
+        { method: "POST", path: "/api/checkout/confirm", desc: "Confirm booking and upload proof of payment file." },
+        { method: "GET", path: "/api/docs", desc: "Scalar interactive endpoint to view and test Swagger/OpenAPI specifications." }
+      ]
+    },
     setup: {
       steps: [
-        { cmd: "git clone https://github.com/pratama1246/ticketly-project.git", desc: "Clone the project repository to your local directory" },
-        { cmd: "composer install", desc: "Install PHP libraries and CodeIgniter dependencies" },
+        { cmd: "composer install", desc: "Install dependencies via Composer" },
         { cmd: "cp env .env", desc: "Duplicate configuration environment file" },
-        { cmd: "Configure Base URL & DB", desc: "Open .env and edit app.baseURL and database.default details" },
-        { cmd: "mysql -u root -p ticketly < ticketly.sql", desc: "Import SQL schema structure and seed sample data" },
-        { cmd: "php spark serve", desc: "Launch CodeIgniter 4 built-in development server" }
+        { cmd: "Configure Env Configs", desc: "Adjust app.baseURL, JWT_SECRET_KEY, and SMTP email parameters in .env" },
+        { cmd: "php spark migrate", desc: "Create database schema using CodeIgniter migrations" },
+        { cmd: "php spark db:seed --all", desc: "Seed database with PaymentMethodSeeder, EventSeeder, AdminUserSeeder, and FakeUserSeeder" },
+        { cmd: "php spark serve", desc: "Launch development server at http://localhost:8080" }
       ],
       envVars: [
         { name: "app.baseURL", val: "http://localhost:8080/" },
         { name: "database.default.database", val: "ticketly" },
-        { name: "database.default.username", val: "root" },
-        { name: "database.default.DBDriver", val: "MySQLi" }
+        { name: "JWT_SECRET_KEY", val: "your_secret_key_here" },
+        { name: "email.SMTPHost / SMTPPort", val: "live.smtp.mailtrap.io / 2525" }
       ]
     },
     demoAccounts: [
-      { role: "Administrator", username: "admin_demo", email: "admin@ticketly.com", note: "Access dashboard" },
-      { role: "User / Guest", username: "guest_demo", email: "guest@ticketly.com", note: "Browse & book" }
+      { role: "Administrator", username: "admin", email: "admin@ticketly.com", password: "admin123" },
+      { role: "Mock User (Budi)", username: "budi_santoso", email: "budi@example.com", password: "password123" },
+      { role: "Mock User (Ani)", username: "ani_wijaya", email: "ani@example.com", password: "password123" }
     ],
     screenshots: []
   },
@@ -411,6 +437,86 @@ export const projectDetails = {
       envVars: []
     },
     demoAccounts: [],
+    screenshots: []
+  },
+  7: {
+    tagline: "Stateless cross-platform mobile client for ticket booking built with Flutter & JWT REST APIs.",
+    overview: "Ticketly Mobile is a cross-platform mobile application built using Flutter (Dart) that serves as the client interface for the Ticketly event ticketing system. It connects to the CodeIgniter 4 Backend RESTful API to deliver a seamless event discovery and ticket purchasing experience on mobile devices, supporting JWT-based stateless authentication, real-time shopping cart validation, and payment proof uploading.",
+    problem: "Booking event tickets on campus usually requires using web-based portals that are not mobile-responsive or optimized for on-the-go checks and scanning.",
+    solution: "A native-performing Flutter app that integrates with the backend API, utilizing local caching for sessions, interactive seat category quotas, and dynamically rendered e-tickets with barcode/QR verification.",
+    keyFeatures: [
+      "JWT-Based Stateless Auth & Session caching via shared_preferences",
+      "Dynamic Home Banner & Event categories discovery flow",
+      "Real-time ticket category quota checking & cart checkout calculations",
+      "Camera/Gallery payment proof uploading for vendor manual validation",
+      "E-Ticket dashboard showing active barcodes/QRs for check-in",
+      "Pull-to-refresh mechanism to reload concert poster updates dynamically"
+    ],
+    techStack: [
+      { category: "Mobile Framework", list: ["Flutter SDK v3.11+", "Dart 3.x"] },
+      { category: "State & Storage", list: ["shared_preferences (Local Cache)", "HTTP Client (REST API)", "Flutter SVG"] },
+      { category: "Typography & Theme", list: ["Poppins Font (Google Fonts)", "Figma UI/UX Prototypes"] }
+    ],
+    roles: [
+      {
+        roleName: "Mobile App User",
+        color: "var(--accent-pink)",
+        icon: "📱",
+        features: [
+          "Stateless registration, login, OTP recovery, and profiles",
+          "Browse events, filter by categories, and view seat capacities",
+          "Reserve ticket tiers and upload camera checkout payment proofs",
+          "Display e-tickets with barcode/QR check-in stamps"
+        ]
+      },
+      {
+        roleName: "API Integration Gateway",
+        color: "var(--accent-mint)",
+        icon: "🌐",
+        features: [
+          "Exposes routes to Android emulator loopback (10.0.2.2:8080)",
+          "Exposes iOS/Web local network interfaces (localhost:8080)",
+          "JWT authorization header security verification"
+        ]
+      }
+    ],
+    database: {
+      description: "Local device persistent storage utilizing key-value structures to maintain user sessions and offline state indicators.",
+      tables: [
+        { name: "shared_preferences", fields: ["jwt_token", "user_profile_cache", "is_first_open_state"] }
+      ],
+      specialFeatures: [
+        "Stateless token caching to avoid repeated credential inputs.",
+        "Automatic connection host resolver based on device platform."
+      ]
+    },
+    payments: {
+      provider: "JWT API Checkout Flow",
+      endpoints: [
+        { method: "POST", path: "/api/auth/login", desc: "Exchanges user credentials for a secure JWT Bearer authorization token." },
+        { method: "POST", path: "/api/checkout/start", desc: "Locks ticket seat quotas and registers order state on the backend." },
+        { method: "POST", path: "/api/checkout/confirm", desc: "Sends mobile file upload payload containing checkout payment receipts." },
+        { method: "GET", path: "/api/orders", desc: "Retrieves user ticket dashboard and order transaction logs." }
+      ]
+    },
+    setup: {
+      steps: [
+        { cmd: "flutter devices", desc: "Ensure your Android Emulator or iOS Simulator is active and connected" },
+        { cmd: "git clone https://github.com/pratama1246/ticketly.git", desc: "Clone the Flutter repository into your workspace" },
+        { cmd: "flutter pub get", desc: "Fetch and download all required packages in pubspec.yaml" },
+        { cmd: "Configure API URL", desc: "Double check lib/constants/api_constants.dart points to backend (10.0.2.2:8080 or localhost:8080)" },
+        { cmd: "flutter run", desc: "Launch the compiler and deploy the app to your active device/emulator" }
+      ],
+      envVars: [
+        { name: "baseUrl (Android Emulator)", val: "http://10.0.2.2:8080" },
+        { name: "baseUrl (iOS / Web)", val: "http://localhost:8080" },
+        { name: "Poppins Font", val: "Loaded dynamically via google_fonts package" }
+      ]
+    },
+    demoAccounts: [
+      { role: "Test Customer (Budi)", username: "budi_santoso", email: "budi@example.com", password: "password123" },
+      { role: "Test Customer (Ani)", username: "ani_wijaya", email: "ani@example.com", password: "password123" }
+    ],
     screenshots: []
   }
 }

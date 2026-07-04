@@ -442,6 +442,7 @@ export const projectDetails = {
   7: {
     tagline: "Stateless cross-platform mobile client for ticket booking built with Flutter & JWT REST APIs.",
     overview: "Ticketly Mobile is a cross-platform mobile application built using Flutter (Dart) that serves as the client interface for the Ticketly event ticketing system. It connects to the CodeIgniter 4 Backend RESTful API to deliver a seamless event discovery and ticket purchasing experience on mobile devices, supporting JWT-based stateless authentication, real-time shopping cart validation, and payment proof uploading.",
+    disclaimer: "All event logos, promoter names, and concert posters featured in this project belong to their respective copyright owners. They are used purely for educational and academic demonstration purposes to simulate a realistic ticketing catalog.",
     problem: "Booking event tickets on campus usually requires using web-based portals that are not mobile-responsive or optimized for on-the-go checks and scanning.",
     solution: "A native-performing Flutter app that integrates with the backend API, utilizing local caching for sessions, interactive seat category quotas, and dynamically rendered e-tickets with barcode/QR verification.",
     keyFeatures: [
@@ -517,6 +518,125 @@ export const projectDetails = {
       { role: "Test Customer (Budi)", username: "budi_santoso", email: "budi@example.com", password: "password123" },
       { role: "Test Customer (Ani)", username: "ani_wijaya", email: "ani@example.com", password: "password123" }
     ],
+    screenshots: []
+  },
+  8: {
+    tagline: "Vanilla PHP web application with flat-file database and NIK Linear Search algorithm.",
+    overview: "Employee Payroll Program is a simple Native PHP (Vanilla) web application using a Flat-File Database (.txt) designed to manage employee records and calculate monthly payroll details automatically. Built as a course evaluation mini-project for the Algorithm & Programming (ALPRO) course at Politeknik Negeri Cilacap, the application showcases custom salary logic, Linear Search-based employee lookups, and local text file data persistence.",
+    problem: "Evaluating and testing programming logic usually involves terminal/console interfaces that are hard to present, and managing small datasets without heavy database setups like MySQL can be cumbersome.",
+    solution: "A web-based interface built with native PHP and custom styling that stores data in local flat text files, handles NIK-based employee searches via a Linear Search algorithm, and calculates allowances/overtime dynamically.",
+    keyFeatures: [
+      "Admin Login & Session Protection at line 1 on all internal pages",
+      "Complete Employee CRUD operations (Create, Read, Update, Delete) stored locally",
+      "Linear Search search engine to locate employee records by NIK (16-digit ID)",
+      "Automatic monthly salary calculation (Basic, Overtime, Child/Meal Allowances)",
+      "Visual user interface styled in NCT-inspired Neo Pearl Champagne green theme",
+      "HTML5 numeric pattern validations and XSS prevention using htmlspecialchars()"
+    ],
+    techStack: [
+      { category: "Backend Core", list: ["PHP 8.0+ (Native)", "Flat-File Database (.txt)"] },
+      { category: "Frontend & Design", list: ["HTML5", "Vanilla CSS", "Google Fonts (Poppins)"] },
+      { category: "Algorithms & Logic", list: ["Linear Search", "Ascending Sorting by NIK", "Session State Management"] }
+    ],
+    roles: [
+      {
+        roleName: "Administrator",
+        color: "var(--accent-mint)",
+        icon: "⚙️",
+        features: [
+          "Access to Employee CRUD management views",
+          "Execute linear searches for employee NIK records",
+          "Manage administrator logins (Create accounts, update passwords)",
+          "Inspect calculated salary slip details table"
+        ]
+      }
+    ],
+    database: {
+      description: "Local text-based flat files using custom separators to represent columns and persist data locally without MySQL server dependency.",
+      tables: [
+        { name: "pengguna.txt (Users)", fields: ["username", "password"] },
+        { name: "pegawai.txt (Employees)", fields: ["nik", "name", "address", "grade", "number_of_children", "weekly_hours_worked", "monthly_working_days", "total_salary"] }
+      ],
+      specialFeatures: [
+        "Pipe-separated user credentials format (username|password).",
+        "Comma-separated employee records including computed salary values."
+      ]
+    },
+    payments: null,
+    setup: {
+      steps: [
+        { cmd: "git clone https://github.com/pratama1246/Payroll-System-PHP-Native-Alpro-Kelompok3.git", desc: "Clone the ALPRO project files to your local workstation" },
+        { cmd: "Check PHP version", desc: "Ensure you have PHP 8.0 or higher installed by running: php -v" },
+        { cmd: "php -S localhost:8000", desc: "Start the PHP built-in web server in the project root directory" },
+        { cmd: "Open Browser", desc: "Visit http://localhost:8000 in your browser and log in with default credentials" }
+      ],
+      envVars: [
+        { name: "Server URL", val: "http://localhost:8000" },
+        { name: "Flat-file paths", val: "data/pegawai.txt and data/pengguna.txt (Must be writable by server)" }
+      ]
+    },
+    demoAccounts: [
+      { role: "Administrator", username: "admin", password: "12345" },
+      { role: "Administrator (Nata)", username: "nata", password: "12345" }
+    ],
+    screenshots: []
+  },
+  9: {
+    tagline: "Native PHP web application with MySQL and Respect/Validation for Komdigi JWD certification.",
+    overview: "Scholarship Registration System is a web-based application built with native PHP and MySQL, developed as a certification project for the Junior Web Developer (JWD) program by Komdigi (Kementerian Komunikasi dan Digital RI). The system manages end-to-end scholarship application workflows, including student profile submission, document uploading, dynamic GPA fetches via AJAX, and server-side validation using the Respect/Validation library.",
+    problem: "Manual scholarship registrations on paper are disorganized and hard to track, while building secure input forms requires robust validation logic to verify files and grades.",
+    solution: "A web portal integrating a local MySQL database with native PHP processing, featuring client-side and composer-powered server-side form validations and async IPK fetching.",
+    keyFeatures: [
+      "Scholarship registration form with multi-field inputs (NIM, name, email, phone)",
+      "File upload support for PDF/DOCX academic documents (PHP $_FILES handling)",
+      "Dynamic student IPK (GPA) fetching using AJAX and backend script (get_ipk.php)",
+      "Server-side validation using Respect/Validation library via Composer",
+      "Applicants database management with applicant tables and SQL schema seeder",
+      "Modern landing page and registrations result display tables"
+    ],
+    techStack: [
+      { category: "Backend Core", list: ["PHP Native", "MySQL Database"] },
+      { category: "Libraries & Dependencies", list: ["Respect/Validation", "Symfony polyfill-mbstring"] },
+      { category: "Frontend UI", list: ["HTML5", "CSS3 Custom Styling", "AJAX (JavaScript Fetch)"] }
+    ],
+    roles: [
+      {
+        roleName: "Student Applicant",
+        color: "var(--accent-pink)",
+        icon: "🎓",
+        features: [
+          "Enter profile data and select scholarship type",
+          "See dynamically fetched GPA based on name/NIM",
+          "Upload PDF or DOCX format proof documents",
+          "View submission result status inside table lists"
+        ]
+      }
+    ],
+    database: {
+      description: "Relational database schema managed via db_beasiswa.sql file, featuring applicant tracking tables.",
+      tables: [
+        { name: "pendaftar (Applicants)", fields: ["id", "nama", "email", "nohp", "semester", "ipk", "beasiswa", "berkas", "status_ajuan"] }
+      ],
+      specialFeatures: [
+        "Status check tags (Pending verification / Approved / Cancelled).",
+        "Dynamic file path pointer storage."
+      ]
+    },
+    payments: null,
+    setup: {
+      steps: [
+        { cmd: "git clone https://github.com/pratama1246/JWD_project.git", desc: "Clone the JWD project repository to your workspace" },
+        { cmd: "composer install", desc: "Download project dependencies (Respect/Validation) using Composer" },
+        { cmd: "Import Database Schema", desc: "Create a MySQL database named 'beasiswa' and import db_beasiswa.sql" },
+        { cmd: "Configure Database Connection", desc: "Edit conn.php to adjust host, user, password, and database details" },
+        { cmd: "php -S localhost:8080", desc: "Launch local PHP web server and open http://localhost:8080 in browser" }
+      ],
+      envVars: [
+        { name: "DB_DATABASE", val: "beasiswa" },
+        { name: "DB_USER / PASSWORD", val: "root / (empty)" }
+      ]
+    },
+    demoAccounts: [],
     screenshots: []
   }
 }

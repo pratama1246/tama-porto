@@ -182,10 +182,10 @@ export default function Contact() {
       >
         <ScrollVelocity
           texts={[
-            `© ${new Date().getFullYear()} Pratama Putra • Informatics Engineering • All rights reserved •`
+            `© ${new Date().getFullYear()} Pratama Putra • Informatics Engineering • All rights reserved`
           ]}
           velocity={-35}
-          numCopies={3}
+          numCopies={8}
           scrollerClassName="text-xl md:text-3xl font-display font-semibold uppercase tracking-wider text-[var(--text-dark)]/90 flex items-center w-full"
           className="px-8"
         />

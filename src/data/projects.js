@@ -68,5 +68,25 @@ export const projects = [
     github: "https://github.com/pratama1246/ticketly.git",
     live: "",
     thumbnail: "/assets/projects/ticketly.webp"
+  },
+  {
+    id: 8,
+    title: "Employee Payroll (ALPRO)",
+    desc: "Simple native PHP web application using a flat-file database (.txt) to manage employee records, calculate salaries using custom ALPRO rules, and search records via Linear Search.",
+    tech: ["PHP Native", "Flat-File DB", "Vanilla CSS", "Algorithms (Linear Search)"],
+    status: "Completed",
+    github: "https://github.com/pratama1246/Payroll-System-PHP-Native-Alpro-Kelompok3",
+    live: "",
+    thumbnail: "/assets/projects/penggajian.png"
+  },
+  {
+    id: 9,
+    title: "Scholarship Registration (JWD)",
+    desc: "Web-based scholarship registration system built with native PHP and MySQL, developed as a certification project for the Junior Web Developer (JWD) program by Komdigi.",
+    tech: ["PHP Native", "MySQL", "Respect Validation", "AJAX", "Composer"],
+    status: "Completed",
+    github: "https://github.com/pratama1246/JWD_project",
+    live: "",
+    thumbnail: "/assets/projects/explore-java.webp"
   }
 ]

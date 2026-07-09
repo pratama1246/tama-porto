@@ -285,13 +285,17 @@ export default function Projects({ onOpenDetail }) {
                     <div className="w-full max-w-[440px] p-4 pb-12 bg-white border border-black/10 shadow-sm rounded-xs rotate-[-2deg] relative hover:rotate-0 hover:scale-102 active:scale-98 transition-all">
                       
                       {/* Polaroid Image */}
-                      <div className="relative aspect-video w-full bg-[var(--bg-secondary)] overflow-hidden rounded-[2px] border border-black/5 select-none">
+                      <div className={`relative aspect-video w-full overflow-hidden rounded-[2px] border border-black/5 select-none ${
+                        project.id === 7 ? 'bg-white' : 'bg-[var(--bg-secondary)]'
+                      }`}>
                         <img
                           src={project.thumbnail}
                           alt={project.title}
                           draggable={false}
                           onContextMenu={(e) => e.preventDefault()}
-                          className="protected-image w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-300 pointer-events-none"
+                          className={`protected-image w-full h-full grayscale-[15%] hover:grayscale-0 transition-all duration-300 pointer-events-none ${
+                            project.id === 7 ? 'object-contain p-1' : 'object-cover'
+                          }`}
                           loading="lazy"
                         />
                       </div>

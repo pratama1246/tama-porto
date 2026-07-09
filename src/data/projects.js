@@ -27,7 +27,7 @@ export const projects = [
     status: "Completed",
     github: "https://github.com/pratama1246/SistemPenggajianKaryawan",
     live: "",
-    thumbnail: "/assets/projects/penggajian.png"
+    thumbnail: "/assets/projects/payroll-csharp.webp"
   },
   {
     id: 4,
@@ -67,7 +67,7 @@ export const projects = [
     status: "Completed",
     github: "https://github.com/pratama1246/ticketly.git",
     live: "",
-    thumbnail: "/assets/projects/ticketly.webp"
+    thumbnail: "/assets/projects/ticketly-mobile.webp"
   },
   {
     id: 8,
@@ -77,7 +77,7 @@ export const projects = [
     status: "Completed",
     github: "https://github.com/pratama1246/Payroll-System-PHP-Native-Alpro-Kelompok3",
     live: "",
-    thumbnail: "/assets/projects/penggajian.png"
+    thumbnail: "/assets/projects/payroll-alpro.webp"
   },
   {
     id: 9,
@@ -87,6 +87,6 @@ export const projects = [
     status: "Completed",
     github: "https://github.com/pratama1246/JWD_project",
     live: "",
-    thumbnail: "/assets/projects/explore-java.webp"
+    thumbnail: "/assets/projects/beasiswa.webp"
   }
 ]

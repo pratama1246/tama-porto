@@ -304,7 +304,7 @@ export const projectDetails = {
       { role: "Employee (Karyawan)", username: "karyawan", password: "karyawan123" }
     ],
     screenshots: [
-      { url: "/assets/projects/penggajian.png", caption: "Form Login & Dynamic Dashboard Routing", type: "Desktop UI" }
+      { url: "/assets/projects/payroll-csharp.webp", caption: "Form Login & Dynamic Dashboard Routing", type: "Desktop UI" }
     ]
   },
   4: {
@@ -518,7 +518,9 @@ export const projectDetails = {
       { role: "Test Customer (Budi)", username: "budi_santoso", email: "budi@example.com", password: "password123" },
       { role: "Test Customer (Ani)", username: "ani_wijaya", email: "ani@example.com", password: "password123" }
     ],
-    screenshots: []
+    screenshots: [
+      { url: "/assets/projects/ticketly-mobile.webp", caption: "Ticketly Mobile App Discover Screen & Ticket Categories", type: "Mobile UI" }
+    ]
   },
   8: {
     tagline: "Vanilla PHP web application with flat-file database and NIK Linear Search algorithm.",
@@ -579,7 +581,9 @@ export const projectDetails = {
       { role: "Administrator", username: "admin", password: "12345" },
       { role: "Administrator (Nata)", username: "nata", password: "12345" }
     ],
-    screenshots: []
+    screenshots: [
+      { url: "/assets/projects/payroll-alpro.webp", caption: "Employee Payroll ALPRO Web Dashboard & Salary Computation", type: "Web UI" }
+    ]
   },
   9: {
     tagline: "Native PHP web application with MySQL and Respect/Validation for Komdigi JWD certification.",
@@ -637,6 +641,8 @@ export const projectDetails = {
       ]
     },
     demoAccounts: [],
-    screenshots: []
+    screenshots: [
+      { url: "/assets/projects/beasiswa.webp", caption: "Scholarship Registration Form & Dynamic GPA Verification", type: "Web UI" }
+    ]
   }
 }

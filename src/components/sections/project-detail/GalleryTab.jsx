@@ -29,13 +29,19 @@ export default function GalleryTab({ detail }) {
               className="break-inside-avoid bg-white border border-black/10 rounded-sm p-3 mb-4 relative group transition-all duration-300 hover:shadow-xs hover:border-black/20 hover:scale-[1.01] shadow-3xs"
             >
               {/* Image Container */}
-              <div className="w-full bg-[var(--bg-secondary)]/5 rounded-2xs overflow-hidden border border-black/5 relative select-none">
+              <div className={`w-full bg-[var(--bg-secondary)]/5 rounded-2xs overflow-hidden border border-black/5 relative select-none ${
+                shot.type === 'Mobile UI' ? 'py-4 flex justify-center bg-[#f7f5f0]' : ''
+              }`}>
                 <img
                   src={shot.url}
                   alt={shot.caption}
                   draggable={false}
                   onContextMenu={(e) => e.preventDefault()}
-                  className="protected-image w-full h-auto object-cover transition-transform duration-500 group-hover:scale-102 pointer-events-none"
+                  className={`protected-image transition-transform duration-500 group-hover:scale-102 pointer-events-none ${
+                    shot.type === 'Mobile UI'
+                      ? 'max-w-[65%] h-auto object-contain bg-white p-2 border border-black/10 shadow-3xs'
+                      : 'w-full h-auto object-cover'
+                  }`}
                   loading="lazy"
                 />
               </div>

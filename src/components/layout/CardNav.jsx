@@ -218,7 +218,7 @@ const CardNav = ({
         >
           {/* Hamburger Menu Icon (Mobile Only) */}
           <div
-            className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} group h-full md:hidden flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2`}
+            className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} group h-full min-w-[44px] min-h-[44px] p-2 md:hidden flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2`}
             onClick={toggleMenu}
             role="button"
             aria-label={isExpanded ? 'Close menu' : 'Open menu'}

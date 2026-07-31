@@ -87,6 +87,7 @@ const GlassSurface = ({
   };
 
   const updateDisplacementMap = () => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
     feImageRef.current?.setAttribute('href', generateDisplacementMap());
   };
 
@@ -125,6 +126,7 @@ const GlassSurface = ({
 
   useEffect(() => {
     if (!containerRef.current) return;
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
 
     const resizeObserver = new ResizeObserver(() => {
       setTimeout(updateDisplacementMap, 0);
@@ -147,6 +149,10 @@ const GlassSurface = ({
 
   const supportsSVGFilters = () => {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
+      return false;
+    }
+
+    if (window.innerWidth < 768) {
       return false;
     }
 

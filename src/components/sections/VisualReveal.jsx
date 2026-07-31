@@ -112,12 +112,12 @@ export default function VisualReveal() {
             >
               My Philosophy
             </span>
-            <h3 
+            <h2 
               className="font-display font-semibold text-3xl md:text-5xl text-[var(--text-dark)] m-0 tracking-tight"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Behind the Creative Flow
-            </h3>
+            </h2>
           </div>
 
           {/* ScrollReveal Text Overlay */}

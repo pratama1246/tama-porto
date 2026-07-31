@@ -208,6 +208,10 @@ export default function Projects({ onOpenDetail }) {
           className="relative w-full z-10 flex items-center justify-center min-h-[600px] md:min-h-[500px] overflow-visible mt-8 md:mt-0"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onTouchStart={() => { isPausedRef.current = true; }}
+          onTouchEnd={() => {
+            setTimeout(() => { isPausedRef.current = false; }, 4000);
+          }}
         >
           
           {/* FIXED Washi Tapes on top and bottom corners (remain completely static as the page slides underneath them) */}
@@ -250,20 +254,28 @@ export default function Projects({ onOpenDetail }) {
                   zIndex: isActive ? 20 : isFar ? 0 : 10,
                 }}
                 transition={{
-                  type: 'tween',
-                  ease: 'easeOut',
-                  duration: 0.28
+                  type: 'spring',
+                  stiffness: 300,
+                  damping: 30,
+                  mass: 0.8
                 }}
                 drag={isActive ? "x" : false}
                 dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={0.15}
+                dragElastic={0.2}
+                onDragStart={() => {
+                  isPausedRef.current = true;
+                }}
                 onDragEnd={(event, info) => {
-                  const swipeThreshold = 50
-                  if (info.offset.x < -swipeThreshold) {
+                  const swipeThreshold = 40
+                  const velocityThreshold = 250
+                  if (info.offset.x < -swipeThreshold || info.velocity.x < -velocityThreshold) {
                     nextProject()
-                  } else if (info.offset.x > swipeThreshold) {
+                  } else if (info.offset.x > swipeThreshold || info.velocity.x > velocityThreshold) {
                     prevProject()
                   }
+                  setTimeout(() => {
+                    isPausedRef.current = false;
+                  }, 4000)
                 }}
                 whileHover={!isActive ? { scale: 0.93, opacity: 0.55 } : undefined}
                 className={`absolute left-0 right-0 mx-auto w-[90%] md:w-[85%] lg:w-[80%] max-w-[1100px] bg-[#fefcf7] border border-black/10 shadow-md rounded-[6px] p-6 md:p-10 flex flex-col justify-between overflow-hidden touch-pan-y ${

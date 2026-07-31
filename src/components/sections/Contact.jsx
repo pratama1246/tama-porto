@@ -182,7 +182,7 @@ export default function Contact() {
       >
         <ScrollVelocity
           texts={[
-            `© ${new Date().getFullYear()} Pratama Putra • Informatics Engineering • All rights reserved`
+            `© ${new Date().getFullYear()} Pratama Putra Purwanto • Informatics Engineering • All rights reserved`
           ]}
           velocity={-35}
           numCopies={8}

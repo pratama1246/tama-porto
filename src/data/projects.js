@@ -1,6 +1,7 @@
 export const projects = [
   {
     id: 1,
+    slug: "pickup-order",
     title: "Sistem Pickup Order",
     desc: "Modern campus canteen pre-ordering and pickup system eliminating peak-hour queues with dynamic cart operations and online/manual payment integrations.",
     tech: ["Laravel 13", "MySQL", "Tailwind CSS v4", "DaisyUI v5", "Alpine.js", "Midtrans"],
@@ -11,6 +12,7 @@ export const projects = [
   },
   {
     id: 2,
+    slug: "ticketly",
     title: "Ticketly",
     desc: "Robust event ticketing platform powered by CodeIgniter 4 featuring web user portal, admin sales dashboard, and a custom JWT-protected RESTful API for Flutter mobile clients.",
     tech: ["CodeIgniter 4", "MySQL", "Tailwind CSS v3", "Flowbite", "JWT APIs", "REST API docs"],
@@ -21,6 +23,7 @@ export const projects = [
   },
   {
     id: 3,
+    slug: "payroll-csharp",
     title: "Penggajian Karyawan",
     desc: "Desktop employee payroll system with 4 roles (Admin/HRD/Employee/Kiosk) featuring dynamic salary configurations and live webcam QR-code attendance scanner.",
     tech: ["C#", "WinForms", ".NET 4.8", "MySQL", "AForge (Webcam)", "ZXing (QR)"],
@@ -31,6 +34,7 @@ export const projects = [
   },
   {
     id: 4,
+    slug: "alpro-stack-queue",
     title: "E-Sport Tournament Manager",
     desc: "Web-based tournament management platform demonstrating Stack (LIFO) and Queue (FIFO) data structures built with native PHP and PHP Sessions.",
     tech: ["PHP Native", "HTML", "CSS", "PHP Session"],
@@ -41,6 +45,7 @@ export const projects = [
   },
   {
     id: 5,
+    slug: "greatest-wallpaper",
     title: "TheGreatesWallpaper",
     desc: "A simple static wallpaper gallery website built using native HTML, CSS, and basic JavaScript. This was my very first web project, marking the start of my web engineering journey.",
     tech: ["HTML", "CSS", "JavaScript"],
@@ -51,6 +56,7 @@ export const projects = [
   },
   {
     id: 6,
+    slug: "explore-central-java",
     title: "Explore Central Java",
     desc: "A static tourism showcase website displaying landmarks in Central Java, originally built as an Apache server validation project during my vocational high school (SMK) years.",
     tech: ["HTML", "CSS", "JavaScript"],
@@ -61,6 +67,7 @@ export const projects = [
   },
   {
     id: 7,
+    slug: "ticketly-mobile",
     title: "Ticketly Mobile",
     desc: "Cross-platform mobile application companion for Ticketly built with Flutter (Dart), featuring JWT API integrations, real-time cart calculations, and offline QR e-ticket caching.",
     tech: ["Flutter", "Dart", "JWT REST APIs", "Shared Preferences", "Flutter SVG"],
@@ -71,6 +78,7 @@ export const projects = [
   },
   {
     id: 8,
+    slug: "payroll-alpro",
     title: "Employee Payroll (ALPRO)",
     desc: "Simple native PHP web application using a flat-file database (.txt) to manage employee records, calculate salaries using custom ALPRO rules, and search records via Linear Search.",
     tech: ["PHP Native", "Flat-File DB", "Vanilla CSS", "Algorithms (Linear Search)"],
@@ -81,6 +89,7 @@ export const projects = [
   },
   {
     id: 9,
+    slug: "jwd-beasiswa",
     title: "Scholarship Registration (JWD)",
     desc: "Web-based scholarship registration system built with native PHP and MySQL, developed as a certification project for the Junior Web Developer (JWD) program by Komdigi.",
     tech: ["PHP Native", "MySQL", "Respect Validation", "AJAX", "Composer"],

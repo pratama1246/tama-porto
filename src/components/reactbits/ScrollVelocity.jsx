@@ -6,7 +6,8 @@ import {
   useTransform,
   useMotionValue,
   useVelocity,
-  useAnimationFrame
+  useAnimationFrame,
+  useInView
 } from 'framer-motion';
 
 function useElementWidth(ref) {
@@ -54,6 +55,9 @@ export const ScrollVelocity = ({
     parallaxStyle,
     scrollerStyle
   }) {
+    const containerRef = useRef(null);
+    const isInView = useInView(containerRef, { margin: '200px' });
+
     const baseX = useMotionValue(0);
     const scrollOptions = scrollContainerRef ? { container: scrollContainerRef } : {};
     const { scrollY } = useScroll(scrollOptions);
@@ -85,6 +89,8 @@ export const ScrollVelocity = ({
 
     const directionFactor = useRef(1);
     useAnimationFrame((t, delta) => {
+      if (!isInView) return;
+
       let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
       if (velocityFactor.get() < 0) {
@@ -111,7 +117,7 @@ export const ScrollVelocity = ({
       : 'font-sans text-4xl font-bold tracking-[-0.02em] drop-shadow md:text-[5rem] md:leading-[5rem]';
 
     return (
-      <div className={`${parallaxClassName} relative overflow-hidden`} style={parallaxStyle}>
+      <div ref={containerRef} className={`${parallaxClassName} relative overflow-hidden`} style={parallaxStyle}>
         <motion.div
           className={`flex whitespace-nowrap text-center ${defaultScrollerClass}`}
           style={{ x, ...scrollerStyle }}

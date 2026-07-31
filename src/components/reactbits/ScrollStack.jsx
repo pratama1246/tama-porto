@@ -281,6 +281,7 @@ const ScrollStack = ({
     updateCardTransforms();
 
     return () => {
+      // Cancel the rAF loop (shared by both mobile plain-rAF and desktop Lenis paths)
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }

@@ -13,7 +13,16 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            return 'vendor'
+            if (id.includes('gsap')) {
+              return 'vendor-gsap'
+            }
+            if (id.includes('framer-motion')) {
+              return 'vendor-framer'
+            }
+            if (id.includes('react') || id.includes('scheduler') || id.includes('react-dom')) {
+              return 'vendor-react'
+            }
+            return 'vendor-libs'
           }
         }
       }

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 // Y2K 4-Pointed Sparkle Star Component
@@ -89,6 +90,18 @@ function StickerImage({ src, alt, className }) {
 }
 
 export default function BackgroundElements() {
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)')
+    setIsDesktop(mediaQuery.matches)
+    const handler = (e) => setIsDesktop(e.matches)
+    mediaQuery.addEventListener('change', handler)
+    return () => mediaQuery.removeEventListener('change', handler)
+  }, [])
+
+  if (!isDesktop) return null
+
   const springTransition = (delay = 0) => ({
     type: 'spring',
     stiffness: 80,

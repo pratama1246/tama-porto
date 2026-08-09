@@ -31,7 +31,7 @@ const descriptionSegments = [
   { text: "technology.", type: "highlight" }
 ];
 
-export default function Hero() {
+export default function Hero({ onOpenBirthday }) {
   // Refs for direct DOM zIndex updates to avoid React re-renders during dragging
   const card1Ref = useRef(null)
   const card2Ref = useRef(null)
@@ -105,14 +105,30 @@ export default function Hero() {
         {/* Left column: Text Content */}
         <div className="lg:col-span-7 flex flex-col items-start relative">
           
-          {/* Welcome Tag */}
-          <motion.div
-            variants={fadeUp}
-            className="px-3 py-1 rounded-sm text-[12px] font-semibold tracking-wider uppercase bg-[var(--accent-lavender)] text-[var(--text-dark)] border border-black/5 mb-6 rotate-[-1.5deg] select-none"
-            style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem' }}
-          >
-            Welcome to my studio
-          </motion.div>
+          {/* Welcome Tag & Subtle Birthday Release Clue */}
+          <div className="flex items-center gap-2 mb-6 flex-wrap">
+            <motion.div
+              variants={fadeUp}
+              className="px-3 py-1 rounded-sm text-[12px] font-semibold tracking-wider uppercase bg-[var(--accent-lavender)] text-[var(--text-dark)] border border-black/5 rotate-[-1.5deg] select-none"
+              style={{ fontFamily: 'var(--font-body)', fontSize: '0.75rem' }}
+            >
+              Welcome to my studio
+            </motion.div>
+
+            <motion.button
+              onClick={(e) => {
+                e.preventDefault()
+                if (onOpenBirthday) onOpenBirthday()
+              }}
+              variants={fadeUp}
+              whileHover={{ scale: 1.05, rotate: 2 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider bg-[var(--accent-peach)] text-[var(--text-dark)] border border-black/10 rotate-[2deg] select-none no-underline cursor-pointer hover:shadow-xs"
+              title="Click to discover something hidden!"
+            >
+              ⚡ v20.0 (15.08)
+            </motion.button>
+          </div>
 
           {/* Name Header */}
           <motion.div variants={fadeUp} className="relative select-none my-2 max-w-full">

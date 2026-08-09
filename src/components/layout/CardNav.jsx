@@ -36,7 +36,8 @@ const CardNav = ({
   items,
   className = '',
   ease = 'power3.out',
-  menuColor = '#2d2d2d'
+  menuColor = '#2d2d2d',
+  onLogoClick
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -252,7 +253,8 @@ const CardNav = ({
                 href="#hero"
                 className="logo font-semibold tracking-tight text-base select-none no-underline"
                 style={{ fontFamily: 'var(--font-display)', color: '#2d2d2d' }}
-                onClick={() => {
+                onClick={(e) => {
+                  if (onLogoClick) onLogoClick(e);
                   if (isExpanded) toggleMenu();
                 }}
               >

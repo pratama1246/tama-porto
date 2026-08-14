@@ -1,5 +1,5 @@
 // src/components/birthday/BirthdayPage.jsx
-// Full /20 route page view with Scattered 3:2 Polaroid Dump & Road to 21
+// Full /20 route page view with Confetti Cannon, Scattered 3:2 Polaroid Dump & Road to 21
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
@@ -7,6 +7,7 @@ import OpeningScreen from './OpeningScreen'
 import BirthdayTeaser from './BirthdayTeaser'
 import ScatteredGallery from './ScatteredGallery'
 import RoadTo21 from './RoadTo21'
+import ConfettiCannon from './ConfettiCannon'
 import ScrollVelocity from '../reactbits/ScrollVelocity'
 import { birthdayMeta } from '../../data/birthday'
 
@@ -19,6 +20,9 @@ export default function BirthdayPage({ onBackToPortfolio }) {
 
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-dark)] flex flex-col justify-start relative w-full pb-0">
+      {/* Confetti Explosion upon opening /20 */}
+      <ConfettiCannon triggerOnMount={true} />
+
       {/* Top Navbar Bar for /20 */}
       <header className="w-full max-w-6xl mx-auto px-4 py-6 flex items-center justify-between z-30">
         <button

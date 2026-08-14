@@ -1,5 +1,5 @@
 // src/components/birthday/ConfettiCannon.jsx
-// Ultra-slow floating celebratory confetti engine (Slow-motion flutter, especially on mobile)
+// Balanced celebratory confetti engine (Crisp launch, natural lively flutter)
 
 import { useEffect, useRef } from 'react'
 
@@ -30,9 +30,9 @@ export default function ConfettiCannon({ triggerOnMount = true }) {
 
     const shapes = ['rect', 'ribbon', 'circle', 'streamer']
     const newParticles = []
-    const burstCount = isMobile ? 100 : 150
-    const baseSpeed = isMobile ? 8 : 13
-    const speedVar = isMobile ? 5 : 10
+    const burstCount = isMobile ? 110 : 160
+    const baseSpeed = isMobile ? 11 : 16
+    const speedVar = isMobile ? 6 : 10
 
     // 1. Left Edge Cannon (Shoots high arc to center-right)
     for (let i = 0; i < Math.floor(burstCount * 0.45); i++) {
@@ -47,14 +47,14 @@ export default function ConfettiCannon({ triggerOnMount = true }) {
         color: colors[Math.floor(Math.random() * colors.length)],
         shape: shapes[Math.floor(Math.random() * shapes.length)],
         rotation: Math.random() * 360,
-        rotationSpeed: (Math.random() - 0.5) * 2.5,
+        rotationSpeed: (Math.random() - 0.5) * 4,
         wobble: Math.random() * 10,
-        wobbleSpeed: Math.random() * 0.06 + 0.02,
-        gravity: isMobile ? 0.035 : 0.045, // Ultra-slow floating descent
-        drag: isMobile ? 0.982 : 0.98, // Floaty air resistance
+        wobbleSpeed: Math.random() * 0.09 + 0.04,
+        gravity: isMobile ? 0.11 : 0.13, // Balanced natural gravity
+        drag: isMobile ? 0.965 : 0.968, // Natural air resistance
         opacity: 1,
         life: 0,
-        maxLife: isMobile ? 560 : 520 // ~9 to 10 seconds of slow float
+        maxLife: 320 // ~5.3 seconds of natural flutter
       })
     }
 
@@ -71,14 +71,14 @@ export default function ConfettiCannon({ triggerOnMount = true }) {
         color: colors[Math.floor(Math.random() * colors.length)],
         shape: shapes[Math.floor(Math.random() * shapes.length)],
         rotation: Math.random() * 360,
-        rotationSpeed: (Math.random() - 0.5) * 2.5,
+        rotationSpeed: (Math.random() - 0.5) * 4,
         wobble: Math.random() * 10,
-        wobbleSpeed: Math.random() * 0.06 + 0.02,
-        gravity: isMobile ? 0.035 : 0.045,
-        drag: isMobile ? 0.982 : 0.98,
+        wobbleSpeed: Math.random() * 0.09 + 0.04,
+        gravity: isMobile ? 0.11 : 0.13,
+        drag: isMobile ? 0.965 : 0.968,
         opacity: 1,
         life: 0,
-        maxLife: isMobile ? 560 : 520
+        maxLife: 320
       })
     }
 
@@ -87,20 +87,20 @@ export default function ConfettiCannon({ triggerOnMount = true }) {
       newParticles.push({
         x: Math.random() * width,
         y: -(Math.random() * 30 + 10),
-        vx: (Math.random() - 0.5) * 2.5,
-        vy: Math.random() * 1.2 + 0.5,
+        vx: (Math.random() - 0.5) * 3,
+        vy: Math.random() * 2 + 1,
         size: isMobile ? Math.random() * 6 + 4 : Math.random() * 8 + 5,
         color: colors[Math.floor(Math.random() * colors.length)],
         shape: shapes[Math.floor(Math.random() * shapes.length)],
         rotation: Math.random() * 360,
-        rotationSpeed: (Math.random() - 0.5) * 2,
+        rotationSpeed: (Math.random() - 0.5) * 3,
         wobble: Math.random() * 10,
-        wobbleSpeed: Math.random() * 0.05 + 0.02,
-        gravity: isMobile ? 0.03 : 0.04,
-        drag: 0.985,
+        wobbleSpeed: Math.random() * 0.08 + 0.04,
+        gravity: 0.10,
+        drag: 0.975,
         opacity: 1,
         life: 0,
-        maxLife: isMobile ? 560 : 520
+        maxLife: 320
       })
     }
 
@@ -137,7 +137,7 @@ export default function ConfettiCannon({ triggerOnMount = true }) {
 
       for (let p of particlesRef.current) {
         p.life++
-        p.x += p.vx + Math.sin(p.wobble) * 2.4
+        p.x += p.vx + Math.sin(p.wobble) * 2.2
         p.y += p.vy
         p.vy += p.gravity
         p.vx *= p.drag
@@ -145,9 +145,9 @@ export default function ConfettiCannon({ triggerOnMount = true }) {
         p.rotation += p.rotationSpeed
         p.wobble += p.wobbleSpeed
 
-        // Gentle fade out in last 140 frames (~2.3 seconds)
-        if (p.life > p.maxLife - 140) {
-          p.opacity = Math.max(0, (p.maxLife - p.life) / 140)
+        // Fade out in last 80 frames
+        if (p.life > p.maxLife - 80) {
+          p.opacity = Math.max(0, (p.maxLife - p.life) / 80)
         }
 
         if (p.opacity > 0 && p.y < canvas.height + 60 && p.x > -60 && p.x < canvas.width + 60) {
@@ -180,16 +180,16 @@ export default function ConfettiCannon({ triggerOnMount = true }) {
 
     animationFrameIdRef.current = requestAnimationFrame(animate)
 
-    // Guaranteed Auto-Blast on Mount (Wave 1 at 300ms, Wave 2 at 700ms)
+    // Guaranteed Auto-Blast on Mount (Wave 1 at 250ms, Wave 2 at 600ms)
     let timer1, timer2
     if (triggerOnMount) {
       timer1 = setTimeout(() => {
         addConfettiBurst()
-      }, 300)
+      }, 250)
 
       timer2 = setTimeout(() => {
         addConfettiBurst()
-      }, 700)
+      }, 600)
     }
 
     return () => {

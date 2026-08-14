@@ -258,3 +258,16 @@ export const timeCapsuleLetter = {
   author: '20-year-old Tama',
   message: 'Hey 21-year-old me! If you are reading this a year from now: I hope you haven\'t lost your curiosity. I hope you\'re still making cool things, laughing at simple jokes, and taking life one step at a time. Keep building, keep becoming.'
 }
+
+export const dumpPolaroids = [
+  { id: 'dump-1', image: '/assets/photos/birthday/dump-1.webp', title: 'pict.1.jpg', rotate: '-3deg', tapeColor: 'var(--accent-mint)', tapeAngle: '2deg', paperClip: true },
+  { id: 'dump-2', image: '/assets/photos/birthday/dump-2.webp', title: 'pict.2.jpg', rotate: '3.5deg', tapeColor: 'var(--accent-yellow)', tapeAngle: '-1deg' },
+  { id: 'dump-3', image: '/assets/photos/birthday/dump-3.webp', title: 'pict.3.jpg', rotate: '-2.5deg', tapeColor: 'var(--accent-lavender)', tapeAngle: '3deg', paperClip: true },
+  { id: 'dump-4', image: '/assets/photos/birthday/dump-4.webp', title: 'pict.4.jpg', rotate: '2.8deg', tapeColor: 'var(--accent-peach)', tapeAngle: '-2deg' },
+  { id: 'dump-5', image: '/assets/photos/birthday/dump-5.webp', title: 'pict.5.jpg', rotate: '-4deg', tapeColor: 'var(--accent-mint)', tapeAngle: '1deg' },
+  { id: 'dump-6', image: '/assets/photos/birthday/dump-6.webp', title: 'pict.6.jpg', rotate: '2.2deg', tapeColor: 'var(--accent-yellow)', tapeAngle: '-3deg', paperClip: true },
+  { id: 'dump-7', image: '/assets/photos/birthday/dump-7.webp', title: 'pict.7.jpg', rotate: '-1.8deg', tapeColor: 'var(--accent-lavender)', tapeAngle: '2deg' },
+  { id: 'dump-8', image: '/assets/photos/birthday/dump-8.webp', title: 'pict.8.jpg', rotate: '3.2deg', tapeColor: 'var(--accent-peach)', tapeAngle: '-1deg' },
+  { id: 'dump-9', image: '/assets/photos/birthday/dump-9.webp', title: 'pict.9.jpg', rotate: '-2.2deg', tapeColor: 'var(--accent-mint)', tapeAngle: '2deg', paperClip: true },
+  { id: 'dump-10', image: '/assets/photos/birthday/dump-10.webp', title: 'pict.10.jpg', rotate: '4deg', tapeColor: 'var(--accent-yellow)', tapeAngle: '-2deg' }
+]

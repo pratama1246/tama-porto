@@ -1,12 +1,11 @@
 // src/components/birthday/BirthdayPage.jsx
-// Full /20 route page view
+// Full /20 route page view with Scattered 3:2 Polaroid Dump & Road to 21
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import OpeningScreen from './OpeningScreen'
 import BirthdayTeaser from './BirthdayTeaser'
-import MomentsArchive from './MomentsArchive'
-import SystemSpecs from './SystemSpecs'
+import ScatteredGallery from './ScatteredGallery'
 import RoadTo21 from './RoadTo21'
 import ScrollVelocity from '../reactbits/ScrollVelocity'
 import { birthdayMeta } from '../../data/birthday'
@@ -45,13 +44,19 @@ export default function BirthdayPage({ onBackToPortfolio }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="space-y-12"
+            className="space-y-16"
           >
             <OpeningScreen onEnterArchive={() => {
-              const roadEl = document.getElementById('road-to-21')
-              if (roadEl) roadEl.scrollIntoView({ behavior: 'smooth' })
+              const el = document.getElementById('polaroid-dump')
+              if (el) el.scrollIntoView({ behavior: 'smooth' })
             }} />
 
+            {/* Scattered 3:2 Polaroid Photo Dump Gallery */}
+            <div id="polaroid-dump">
+              <ScatteredGallery />
+            </div>
+
+            {/* Road to 21 & Time Capsule */}
             <div id="road-to-21">
               <RoadTo21 />
             </div>
@@ -60,7 +65,7 @@ export default function BirthdayPage({ onBackToPortfolio }) {
       </main>
 
       {/* Footer Copyright - ScrollVelocity Marquee & Disclaimer matching main portfolio */}
-      <footer className="w-full select-none mt-12 overflow-hidden bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 pt-5 pb-4 md:pt-6 md:pb-5 flex flex-col gap-2 md:gap-3 items-center text-center">
+      <footer className="w-full select-none mt-16 overflow-hidden bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 pt-5 pb-4 md:pt-6 md:pb-5 flex flex-col gap-2 md:gap-3 items-center text-center">
         <ScrollVelocity
           texts={[
             `© ${new Date().getFullYear()} Pratama Putra Purwanto • Informatics Engineering • All rights reserved`

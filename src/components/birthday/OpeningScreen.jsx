@@ -21,33 +21,24 @@ export default function OpeningScreen({ onEnterArchive }) {
         animate={{ opacity: 1, y: 0 }}
         className="font-mono text-xs sm:text-sm font-semibold tracking-widest text-[var(--text-muted)] uppercase mb-3"
       >
-        YOU FOUND IT.
+        YOU FOUND IT • TAMA v{birthdayMeta.version}
       </motion.span>
 
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="font-display font-semibold text-4xl sm:text-6xl text-[var(--text-dark)] tracking-tight mb-2"
+        className="font-display font-bold text-3xl sm:text-5xl md:text-6xl text-[var(--text-dark)] tracking-tight max-w-3xl leading-[1.1] mb-6 uppercase"
       >
-        TAMA v{birthdayMeta.version}
+        LET&apos;S CELEBRATE AND SAY HAPPY BIRTHDAY TO TAMA! 🎉
       </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="font-mono text-sm text-[var(--text-muted)] mb-8"
-      >
-        RELEASE DATE: {birthdayMeta.releaseDate}
-      </motion.p>
-
-      {/* Honest Developer Note Card */}
+      {/* Quote Card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.3 }}
-        className="bg-white p-6 sm:p-8 rounded-sm border border-black/10 max-w-lg w-full text-center shadow-xs mb-8 rotate-[0.5deg] relative"
+        transition={{ delay: 0.2 }}
+        className="bg-white p-6 sm:p-8 rounded-sm border border-black/10 max-w-lg w-full text-center shadow-xs mb-4 rotate-[0.5deg] relative"
       >
         {/* Top Washi Tape */}
         <div
@@ -56,36 +47,14 @@ export default function OpeningScreen({ onEnterArchive }) {
         />
 
         <p
-          className="font-handwrite text-lg sm:text-xl text-[var(--text-dark)] leading-relaxed m-0 mb-4"
+          className="font-handwrite text-lg sm:text-xl text-[var(--text-dark)] leading-relaxed m-0"
           style={{ fontFamily: 'var(--font-handwrite)' }}
         >
           &ldquo;20 years of existing. <br />
           Still figuring things out, still becoming.&rdquo;
         </p>
-
-        <div className="pt-4 border-t border-dashed border-black/15 text-xs sm:text-sm font-body text-[var(--text-muted)] leading-relaxed">
-          <p className="m-0 text-[var(--text-dark)] font-medium">
-            💡 <span className="font-mono font-bold text-amber-700">DEV NOTE:</span>
-          </p>
-          <p className="mt-1 mb-0 italic">
-            &ldquo;Sebenernya rencananya mau bikin 20 foto momen lengkap... tapi gak sempet karena males & gak ada waktu. hehe ✌️&rdquo;
-          </p>
-          <p className="mt-3 mb-0 text-xs font-mono text-[var(--text-dark)] font-semibold bg-[var(--accent-peach)]/30 py-1.5 px-3 rounded-xs border border-black/5 inline-block">
-            Tapi makasih banyak udah nemuin & mampir ke halaman rahasia ini! 🎉
-          </p>
-        </div>
       </motion.div>
 
-      {/* CTA Button */}
-      <motion.button
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        onClick={onEnterArchive}
-        className="px-6 py-3 rounded-sm bg-[var(--text-dark)] text-white text-sm font-semibold font-body tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm active:scale-95 cursor-pointer"
-      >
-        [ VIEW ROAD TO 21 & TIME CAPSULE ]
-      </motion.button>
     </div>
   )
 }

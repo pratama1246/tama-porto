@@ -26,7 +26,7 @@ export default function BirthdayToast({ onClose, onNavigateToBirthday }) {
           [✕]
         </button>
 
-        <span className="font-mono text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-xs tracking-wider uppercase inline-block mb-3">
+        <span className="font-mono text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-xs tracking-wider uppercase inline-block mb-2">
           🎉 BIRTHDAY EASTER EGG UNLOCKED
         </span>
 
@@ -34,8 +34,14 @@ export default function BirthdayToast({ onClose, onNavigateToBirthday }) {
           TAMA v{birthdayMeta.version}
         </h3>
 
+        <div className="my-2 py-1 px-2 bg-[var(--accent-lavender)]/50 rounded-xs border border-black/5">
+          <span className="font-mono text-[10px] font-bold text-[var(--text-dark)] uppercase">
+            LET&apos;S CELEBRATE AND SAY HAPPY BIRTHDAY TO TAMA! 🎂
+          </span>
+        </div>
+
         <p
-          className="text-base text-[var(--text-dark)] my-3 leading-relaxed"
+          className="text-base text-[var(--text-dark)] my-2.5 leading-relaxed"
           style={{ fontFamily: 'var(--font-handwrite)' }}
         >
           &ldquo;okay fine... you found the secret personal layer.&rdquo;

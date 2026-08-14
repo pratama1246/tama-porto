@@ -1,5 +1,5 @@
 // src/components/birthday/OpeningScreen.jsx
-// Minimal opening screen for /20 route
+// Honest & funny self-aware opening screen for /20 route
 
 import { motion } from 'framer-motion'
 import { birthdayMeta } from '../../data/birthday'
@@ -42,18 +42,38 @@ export default function OpeningScreen({ onEnterArchive }) {
         RELEASE DATE: {birthdayMeta.releaseDate}
       </motion.p>
 
-      {/* Quote Block */}
+      {/* Honest Developer Note Card */}
       <motion.div
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3 }}
-        className="bg-white/80 backdrop-blur-xs p-6 rounded-sm border border-black/10 max-w-lg w-full text-center shadow-xs mb-8 rotate-[0.5deg]"
+        className="bg-white p-6 sm:p-8 rounded-sm border border-black/10 max-w-lg w-full text-center shadow-xs mb-8 rotate-[0.5deg] relative"
       >
-        <p className="font-handwrite text-lg sm:text-xl text-[var(--text-dark)] leading-relaxed m-0" style={{ fontFamily: 'var(--font-handwrite)' }}>
+        {/* Top Washi Tape */}
+        <div
+          className="absolute -top-3 left-1/2 -translate-x-1/2 h-4 w-20 bg-[var(--accent-yellow)] opacity-80 rounded-[1px] border border-black/5"
+          style={{ transform: 'rotate(-1deg)' }}
+        />
+
+        <p
+          className="font-handwrite text-lg sm:text-xl text-[var(--text-dark)] leading-relaxed m-0 mb-4"
+          style={{ fontFamily: 'var(--font-handwrite)' }}
+        >
           &ldquo;20 years of existing. <br />
-          Still figuring things out. <br />
-          Still becoming.&rdquo;
+          Still figuring things out, still becoming.&rdquo;
         </p>
+
+        <div className="pt-4 border-t border-dashed border-black/15 text-xs sm:text-sm font-body text-[var(--text-muted)] leading-relaxed">
+          <p className="m-0 text-[var(--text-dark)] font-medium">
+            💡 <span className="font-mono font-bold text-amber-700">DEV NOTE:</span>
+          </p>
+          <p className="mt-1 mb-0 italic">
+            &ldquo;Sebenernya rencananya mau bikin 20 foto momen lengkap... tapi gak sempet karena males & gak ada waktu. hehe ✌️&rdquo;
+          </p>
+          <p className="mt-3 mb-0 text-xs font-mono text-[var(--text-dark)] font-semibold bg-[var(--accent-peach)]/30 py-1.5 px-3 rounded-xs border border-black/5 inline-block">
+            Tapi makasih banyak udah nemuin & mampir ke halaman rahasia ini! 🎉
+          </p>
+        </div>
       </motion.div>
 
       {/* CTA Button */}
@@ -64,7 +84,7 @@ export default function OpeningScreen({ onEnterArchive }) {
         onClick={onEnterArchive}
         className="px-6 py-3 rounded-sm bg-[var(--text-dark)] text-white text-sm font-semibold font-body tracking-wider transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm active:scale-95 cursor-pointer"
       >
-        [ ENTER ARCHIVE ]
+        [ VIEW ROAD TO 21 & TIME CAPSULE ]
       </motion.button>
     </div>
   )

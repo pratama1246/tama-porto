@@ -5,6 +5,7 @@ export const birthdayMeta = {
   version: '20.0',
   releaseDate: '15 AUG 2026',
   targetIsoDate: '2026-08-15T00:00:00+07:00', // Target birthday timestamp (WIB / GMT+7)
+  devPreviewMode: false, // Live mode: countdown active until 15 Aug 00:00 WIB
   status: 'Stable-ish',
   mainQuest: 'Figure things out',
   sideQuest: 'Make cool web experiences & learn React',
@@ -25,7 +26,8 @@ export const moments20 = [
     category: 'coding',
     caption: 'somewhere along the way, HTML tag errors became my daily puzzle.',
     color: '#ffeaa7',
-    rotate: '-3deg'
+    rotate: '-3deg',
+    image: '/assets/photos/moment-01.jpg' // Place your photo at public/assets/photos/moment-01.jpg
   },
   {
     id: 2,
@@ -34,7 +36,8 @@ export const moments20 = [
     category: 'campus',
     caption: 'D3 Informatics Engineering journey. Late lectures, heavy laptops.',
     color: '#b8d8e8',
-    rotate: '2deg'
+    rotate: '2deg',
+    image: '/assets/photos/moment-02.jpg'
   },
   {
     id: 3,
@@ -43,7 +46,8 @@ export const moments20 = [
     category: 'random',
     caption: 'late nights, questionable decisions, and coffee level at 85%.',
     color: '#ffd4b8',
-    rotate: '-2deg'
+    rotate: '-2deg',
+    image: '/assets/photos/moment-03.jpg'
   },
   {
     id: 4,
@@ -52,7 +56,8 @@ export const moments20 = [
     category: 'design',
     caption: 'obsessing over 4px padding and finding the perfect pastel tone.',
     color: '#c8b8e8',
-    rotate: '4deg'
+    rotate: '4deg',
+    image: '/assets/photos/moment-04.jpg'
   },
   {
     id: 5,
@@ -61,7 +66,8 @@ export const moments20 = [
     category: 'coding',
     caption: 'when routes and controllers finally made sense in my head.',
     color: '#ffb3c6',
-    rotate: '-4deg'
+    rotate: '-4deg',
+    image: '/assets/photos/moment-05.jpg'
   },
   {
     id: 6,
@@ -70,7 +76,8 @@ export const moments20 = [
     category: 'travel',
     caption: 'taking a breather away from monitors and terminal windows.',
     color: '#b8e8d0',
-    rotate: '1deg'
+    rotate: '1deg',
+    image: '/assets/photos/moment-06.jpg'
   },
   {
     id: 7,
@@ -79,7 +86,8 @@ export const moments20 = [
     category: 'music',
     caption: 'lofi beats, synthwave, and 300 Spotify replays later.',
     color: '#ffeaa7',
-    rotate: '-2deg'
+    rotate: '-2deg',
+    image: '/assets/photos/moment-07.jpg'
   },
   {
     id: 8,
@@ -88,7 +96,8 @@ export const moments20 = [
     category: 'design',
     caption: 'falling in love with tactile paper textures, stickers, and retro scrapbooks.',
     color: '#ffd4b8',
-    rotate: '3deg'
+    rotate: '3deg',
+    image: '/assets/photos/moment-08.jpg'
   },
   {
     id: 9,
@@ -97,7 +106,8 @@ export const moments20 = [
     category: 'coding',
     caption: 'panic, stack overflow, git reset --hard, and learning the hard way.',
     color: '#b8d8e8',
-    rotate: '-1deg'
+    rotate: '-1deg',
+    image: '/assets/photos/moment-09.jpg'
   },
   {
     id: 10,
@@ -106,7 +116,8 @@ export const moments20 = [
     category: 'ordinary',
     caption: 'this version of me didn\'t know what was coming.',
     color: '#c8b8e8',
-    rotate: '2deg'
+    rotate: '2deg',
+    image: '/assets/photos/moment-10.jpg'
   },
   {
     id: 11,
@@ -115,7 +126,8 @@ export const moments20 = [
     category: 'campus',
     caption: 'crimping RJ45 cables and configuring VLANs in the lab.',
     color: '#b8e8d0',
-    rotate: '-3deg'
+    rotate: '-3deg',
+    image: '/assets/photos/moment-11.jpg'
   },
   {
     id: 12,
@@ -124,7 +136,8 @@ export const moments20 = [
     category: 'milestone',
     caption: 'seeing someone actually use an interface I built.',
     color: '#ffb3c6',
-    rotate: '1deg'
+    rotate: '1deg',
+    image: '/assets/photos/moment-12.jpg'
   },
   {
     id: 13,
@@ -133,7 +146,8 @@ export const moments20 = [
     category: 'friends',
     caption: 'surviving group assignments and laughing at broken builds.',
     color: '#ffeaa7',
-    rotate: '-2deg'
+    rotate: '-2deg',
+    image: '/assets/photos/moment-13.jpg'
   },
   {
     id: 14,
@@ -142,7 +156,8 @@ export const moments20 = [
     category: 'coding',
     caption: 'Ubuntu setup on Dell Latitude. Customizing terminal themes.',
     color: '#b8d8e8',
-    rotate: '3deg'
+    rotate: '3deg',
+    image: '/assets/photos/moment-14.jpg'
   },
   {
     id: 15,
@@ -151,7 +166,8 @@ export const moments20 = [
     category: 'coding',
     caption: 'props are just function parameters, state is just reactive memory.',
     color: '#ffd4b8',
-    rotate: '-4deg'
+    rotate: '-4deg',
+    image: '/assets/photos/moment-15.jpg'
   },
   {
     id: 16,
@@ -160,7 +176,8 @@ export const moments20 = [
     category: 'milestone',
     caption: 'crafting a personal digital polaroid studio from scratch.',
     color: '#c8b8e8',
-    rotate: '2deg'
+    rotate: '2deg',
+    image: '/assets/photos/moment-16.jpg'
   },
   {
     id: 17,
@@ -169,7 +186,8 @@ export const moments20 = [
     category: 'ordinary',
     caption: 'learning that consistency beats occasional bursts of inspiration.',
     color: '#b8e8d0',
-    rotate: '-1deg'
+    rotate: '-1deg',
+    image: '/assets/photos/moment-17.jpg'
   },
   {
     id: 18,
@@ -178,7 +196,8 @@ export const moments20 = [
     category: 'random',
     caption: '20 years of existing. Still figuring things out, step by step.',
     color: '#ffb3c6',
-    rotate: '4deg'
+    rotate: '4deg',
+    image: '/assets/photos/moment-18.jpg'
   },
   {
     id: 19,
@@ -187,7 +206,8 @@ export const moments20 = [
     category: 'milestone',
     caption: 'leaving teenage years behind, stepping into v20.0.',
     color: '#ffeaa7',
-    rotate: '-2deg'
+    rotate: '-2deg',
+    image: '/assets/photos/moment-19.jpg'
   },
   {
     id: 20,
@@ -196,7 +216,8 @@ export const moments20 = [
     category: 'milestone',
     caption: 'still here. still becoming. welcome to chapter 20.',
     color: '#b8d8e8',
-    rotate: '1deg'
+    rotate: '1deg',
+    image: '/assets/photos/moment-20.jpg'
   }
 ]
 

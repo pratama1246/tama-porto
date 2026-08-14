@@ -22,11 +22,11 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative bg-[var(--bg-secondary)] pt-12 pb-0 px-0 mt-6 md:pt-24 md:mt-12 w-full"
+      className="relative bg-(--bg-secondary) pt-12 pb-0 px-0 mt-6 md:pt-24 md:mt-12 w-full"
     >
       {/* Decorative Torn Paper Edge at the top, separate from content to keep spikes small and avoid clipping */}
       <div 
-        className="absolute -top-[35px] left-0 right-0 h-[36px] bg-[var(--bg-secondary)] torn-edge pointer-events-none" 
+        className="absolute -top-8.75 left-0 right-0 h-9 bg-(--bg-secondary) torn-edge pointer-events-none" 
         aria-hidden="true"
       />
       <div className="max-w-7xl mx-auto px-4 md:px-8 pb-16">
@@ -41,14 +41,14 @@ export default function Contact() {
           <div>
             <motion.div
               variants={fadeUp}
-              className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-yellow)] border border-black/5 rotate-[-1.5deg] mb-2"
+              className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-(--accent-yellow) border border-black/5 rotate-[-1.5deg] mb-2"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               Get In Touch
             </motion.div>
             <motion.h2
               variants={fadeUp}
-              className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-[var(--text-dark)] m-0"
+              className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-(--text-dark) m-0"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               Send a Postcard
@@ -58,17 +58,17 @@ export default function Contact() {
           {/* Invitation Letter */}
           <motion.div
             variants={fadeUp}
-            className="bg-[#fefcf7] p-6 pr-24 sm:pr-28 md:p-8 md:pr-32 rounded-sm shadow-sm border border-black/5 max-w-[600px] w-full text-left rotate-[0.5deg] relative overflow-visible"
+            className="bg-[#fefcf7] p-6 pr-24 sm:pr-28 md:p-8 md:pr-32 rounded-sm shadow-sm border border-black/5 max-w-150 w-full text-left rotate-[0.5deg] relative overflow-visible"
           >
             {/* Y2K Postage Stamp */}
-            <div className="absolute top-4 right-4 md:top-6 md:right-6 w-14 h-18 md:w-16 md:h-20 bg-[var(--accent-pink)] border-2 border-dashed border-[var(--text-dark)]/20 rounded-xs flex flex-col items-center justify-between p-1.5 rotate-[6deg] shadow-3xs select-none z-10">
-              <div className="text-[7px] font-semibold text-[var(--text-dark)]/60 tracking-wider">INDONESIA</div>
+            <div className="absolute top-4 right-4 md:top-6 md:right-6 w-14 h-18 md:w-16 md:h-20 bg-(--accent-pink) border-2 border-dashed border-(--text-dark)/20ded-xs flex flex-col items-center justify-between p-1.5 rotate-6 shadow-3xs select-none z-10">
+              <div className="text-[7px] font-semibold text-(--text-dark)/60 tracking-wider">INDONESIA</div>
               <div className="text-lg md:text-xl">☕</div>
-              <div className="text-[8px] font-mono font-semibold text-[var(--text-dark)]">2026</div>
+              <div className="text-[8px] font-mono font-semibold text-(--text-dark)">2026</div>
             </div>
 
             {/* Circular Postmark Cancellation Cap (Overlapping the stamp) */}
-            <div className="absolute -top-2 -right-4 md:-top-4 md:-right-6 w-24 h-24 md:w-28 md:h-28 border border-dashed border-red-600/35 rounded-full flex flex-col items-center justify-center rotate-[-12deg] pointer-events-none font-mono text-[7px] md:text-[8px] text-red-600/40 select-none z-20">
+            <div className="absolute -top-2 -right-4 md:-top-4 md:-right-6 w-24 h-24 md:w-28 md:h-28 border border-dashed border-red-600/35 rounded-full flex flex-col items-center justify-center -rotate-12ter-events-none font-mono text-[7px] md:text-[8px] text-red-600/40 select-none z-20">
               <span className="font-semibold tracking-widest">CILACAP</span>
               <span className="my-0.5 font-semibold">15 JUN 2026</span>
               <span className="font-semibold tracking-wide">POSTED</span>
@@ -80,7 +80,7 @@ export default function Contact() {
             </div>
 
             <p
-              className="text-base text-[var(--text-handwrite)] leading-relaxed m-0"
+              className="text-base text-(--text-handwrite) leading-relaxed m-0"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
               Hey there! Thanks for visiting my gallery. If you want to discuss a project, 
@@ -88,13 +88,13 @@ export default function Contact() {
               My inbox is always open!
             </p>
             <div
-              className="text-right mt-4 text-sm text-[var(--text-handwrite)]"
+              className="text-right mt-4 text-sm text-(--text-handwrite)"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
               — Tama
             </div>
             <div
-              className="mt-4 text-[13px] text-[var(--text-handwrite)]/90 border-t border-[var(--text-dark)]/5 pt-2"
+              className="mt-4 text-[13px] text-(--text-handwrite)/90 border-t border-(--text-dark)/5 pt-2"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
               P.S. Let's grab a cup of coffee if you are around Cilacap! ☕
@@ -104,7 +104,7 @@ export default function Contact() {
           {/* Clean Text-Only Social Links */}
           <motion.div
             variants={fadeUp}
-            className="flex flex-col w-full mt-4 border-t border-[var(--text-dark)]/15 text-left"
+            className="flex flex-col w-full mt-4 border-t border-(--text-dark)/15-left"
           >
             {/* Link 1: GitHub */}
             <motion.a
@@ -112,7 +112,7 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ x: 12 }}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-(--text-dark)/15 hover:border-(--text-dark)/35 text-(--text-dark) transition-all duration-200 no-underline"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">GITHUB</span>
@@ -123,7 +123,7 @@ export default function Contact() {
             <motion.a
               href="mailto:pratamaputra6854@gmail.com"
               whileHover={{ x: 12 }}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-(--text-dark)/15 hover:border-(--text-dark)/35 text-(--text-dark) transition-all duration-200 no-underline"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">OFFICIAL MAIL</span>
@@ -136,7 +136,7 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ x: 12 }}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-(--text-dark)/15 hover:border-(--text-dark)/35 text-(--text-dark) transition-all duration-200 no-underline"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">LINKEDIN</span>
@@ -149,7 +149,7 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ x: 12 }}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-(--text-dark)/15 hover:border-(--text-dark)/35 text-(--text-dark) transition-all duration-200 no-underline"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">INSTAGRAM</span>
@@ -162,7 +162,7 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ x: 12 }}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-[var(--text-dark)]/15 hover:border-[var(--text-dark)]/35 text-[var(--text-dark)] transition-all duration-200 no-underline"
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-(--text-dark)/15 hover:border-(--text-dark)/35 text-(--text-dark) transition-all duration-200 no-underline"
               style={{ fontFamily: 'var(--font-body)' }}
             >
               <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">PINTEREST</span>
@@ -178,7 +178,7 @@ export default function Contact() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="w-full select-none mt-12 overflow-hidden bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 pt-5 pb-4 md:pt-6 md:pb-5 flex flex-col gap-2 md:gap-3 items-center text-center"
+        className="w-full select-none mt-12 overflow-hidden bg-(--bg-primary)/50 border-t border-(--text-dark)/15 pt-5 pb-4 md:pt-6 md:pb-5 flex flex-col gap-2 md:gap-3 items-center text-center"
       >
         <ScrollVelocity
           texts={[
@@ -189,7 +189,7 @@ export default function Contact() {
           scrollerClassName="text-xl md:text-3xl font-display font-semibold uppercase tracking-wider text-[var(--text-dark)]/90 flex items-center w-full"
           className="px-8"
         />
-        <div className="text-[10px] md:text-xs opacity-75 font-mono font-semibold tracking-wider text-[var(--text-dark)] px-4 uppercase">
+        <div className="text-[10px] md:text-xs opacity-75 font-mono font-semibold tracking-wider text-(--text-dark) px-4 uppercase">
           Some assets and components may be subject to copyright • This website is a non-profit personal portfolio. If you own any featured asset and object to its use, please contact me for immediate removal.
         </div>
       </motion.div>

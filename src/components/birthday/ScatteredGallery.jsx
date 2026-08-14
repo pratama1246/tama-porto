@@ -1,12 +1,23 @@
 // src/components/birthday/ScatteredGallery.jsx
-// Big, Draggable Scattered Polaroid Photo Dump (3:2 Crop, pict.N.jpg captions)
+// Big Scattered Polaroid Photo Dump (3:2 Crop, pict.N.jpg captions, Draggable on desktop, touch-friendly scroll on mobile)
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { dumpPolaroids } from '../../data/birthday'
 
 export default function ScatteredGallery() {
   const [selectedPhoto, setSelectedPhoto] = useState(null)
+  const [isMobile, setIsMobile] = useState(() => 
+    typeof window !== 'undefined' && (window.innerWidth < 768 || ('ontouchstart' in window && window.innerWidth < 1024))
+  )
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || ('ontouchstart' in window && window.innerWidth < 1024))
+    }
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   return (
     <section className="w-full max-w-5xl mx-auto px-4 py-12 select-none relative">
@@ -18,7 +29,7 @@ export default function ScatteredGallery() {
           viewport={{ once: true }}
           className="inline-flex items-center gap-2 px-3 py-1.5 bg-[var(--accent-yellow)]/70 rounded-xs border border-black/10 text-xs font-mono font-bold uppercase tracking-wider mb-3 rotate-[-1deg] shadow-2xs"
         >
-          🖐️ INTERACTIVE: DRAG & SCATTER POLAROIDS AROUND!
+          {isMobile ? '🔍 TAP POLAROIDS TO VIEW FULL SIZE' : '🖐️ DRAG & SCATTER POLAROIDS AROUND!'}
         </motion.div>
 
         <motion.h2
@@ -31,36 +42,40 @@ export default function ScatteredGallery() {
         </motion.h2>
 
         <p className="text-sm sm:text-base font-body text-[var(--text-muted)] max-w-md mx-auto mt-2">
-          A curated collection of real snapshots at 20. Drag and scatter the polaroids around or click to view full size.
+          {isMobile 
+            ? 'A curated collection of real snapshots at 20. Tap any photo to expand.'
+            : 'A curated collection of real snapshots at 20. Drag and scatter the polaroids around or click to view full size.'}
         </p>
       </div>
 
-      {/* Big Draggable Scattered Polaroid Grid */}
+      {/* Big Scattered Polaroid Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 lg:gap-16 relative z-10 px-2 sm:px-4">
         {dumpPolaroids.map((photo, index) => (
           <motion.div
             key={photo.id}
-            drag
-            dragConstraints={{ left: -150, right: 150, top: -150, bottom: 150 }}
+            drag={!isMobile}
+            dragConstraints={isMobile ? undefined : { left: -150, right: 150, top: -150, bottom: 150 }}
             dragElastic={0.15}
-            whileDrag={{
+            whileDrag={!isMobile ? {
               scale: 1.07,
               zIndex: 70,
               cursor: 'grabbing',
               boxShadow: '0 30px 60px -12px rgba(0,0,0,0.3)',
               rotate: 0
-            }}
+            } : undefined}
             initial={{ opacity: 0, y: 30, rotate: parseFloat(photo.rotate) }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, delay: index * 0.08 }}
-            whileHover={{
+            whileHover={!isMobile ? {
               y: -10,
               scale: 1.03,
               zIndex: 35,
               transition: { duration: 0.2, ease: 'easeOut' }
-            }}
-            className="cursor-grab active:cursor-grabbing relative bg-white p-4 sm:p-5 pb-7 rounded-[2px] border border-black/10 shadow-[0_12px_28px_-6px_rgba(0,0,0,0.1),0_8px_12px_-6px_rgba(0,0,0,0.05)] transition-shadow duration-300 hover:shadow-[0_22px_40px_-10px_rgba(0,0,0,0.18)] flex flex-col"
+            } : undefined}
+            className={`relative bg-white p-4 sm:p-5 pb-7 rounded-[2px] border border-black/10 shadow-[0_12px_28px_-6px_rgba(0,0,0,0.1),0_8px_12px_-6px_rgba(0,0,0,0.05)] transition-shadow duration-300 hover:shadow-[0_22px_40px_-10px_rgba(0,0,0,0.18)] flex flex-col ${
+              isMobile ? 'cursor-pointer' : 'cursor-grab active:cursor-grabbing'
+            }`}
             style={{
               transform: `rotate(${photo.rotate})`,
               transformOrigin: 'center center'

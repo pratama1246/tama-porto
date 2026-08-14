@@ -54,7 +54,7 @@ export default function BirthdayTeaser({ onEnterArchive }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="font-display font-bold text-2xl sm:text-4xl md:text-5xl text-[var(--text-dark)] max-w-2xl mx-auto mb-3 tracking-tight uppercase leading-tight"
+        className="font-display font-extrabold sm:font-bold text-3xl sm:text-4xl md:text-5xl text-[var(--text-dark)] max-w-2xl mx-auto mb-3 tracking-tight uppercase leading-[1.08]"
       >
         LET&apos;S CELEBRATE AND SAY HAPPY BIRTHDAY TO TAMA! 🎉
       </motion.h2>

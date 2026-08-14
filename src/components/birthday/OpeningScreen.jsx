@@ -28,7 +28,7 @@ export default function OpeningScreen({ onEnterArchive }) {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="font-display font-bold text-3xl sm:text-5xl md:text-6xl text-[var(--text-dark)] tracking-tight max-w-3xl leading-[1.1] mb-6 uppercase"
+        className="font-display font-extrabold sm:font-bold text-[2.75rem] leading-[1.04] sm:text-5xl md:text-6xl text-[var(--text-dark)] tracking-tight max-w-3xl mb-6 uppercase"
       >
         LET&apos;S CELEBRATE AND SAY HAPPY BIRTHDAY TO TAMA! 🎉
       </motion.h1>

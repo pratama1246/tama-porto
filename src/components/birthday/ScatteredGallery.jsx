@@ -121,9 +121,6 @@ export default function ScatteredGallery() {
               <span className="font-mono text-sm sm:text-base font-bold text-[var(--text-dark)] tracking-wider">
                 {photo.title}
               </span>
-              <span className="font-mono text-[10px] sm:text-xs font-semibold text-[var(--text-muted)] bg-slate-100 px-2 py-0.5 rounded-xs">
-                3:2 • 1200x800
-              </span>
             </div>
           </motion.div>
         ))}
@@ -169,9 +166,6 @@ export default function ScatteredGallery() {
                 <h3 className="font-mono font-bold text-base sm:text-lg text-[var(--text-dark)]">
                   {selectedPhoto.title}
                 </h3>
-                <span className="font-mono text-xs text-[var(--text-muted)] bg-slate-100 px-2 py-0.5 rounded-xs">
-                  ORIGINAL BACKGROUND • 3:2 CROP
-                </span>
               </div>
             </motion.div>
           </motion.div>

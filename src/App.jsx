@@ -55,11 +55,11 @@ function App() {
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
 
-  // Auto Date Tweak: Check if today is 15 August 2026
+  // Auto Date Tweak: Keep birthday mode title active throughout August 2026
   useEffect(() => {
     const now = new Date()
-    const isBirthdayDay = now.getMonth() === 7 && now.getDate() === 15 && now.getFullYear() === 2026
-    if (isBirthdayDay) {
+    const isAugust2026 = now.getMonth() === 7 && now.getFullYear() === 2026
+    if (isAugust2026) {
       document.title = 'Tama — 20'
     }
   }, [])

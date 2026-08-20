@@ -95,7 +95,7 @@ export default function Projects({ onOpenDetail }) {
   // Auto-play state
   const isPausedRef = useRef(false)
   // Progress: 0 → 1 over AUTOPLAY_DELAY ms
-  const [progress, setProgress] = useState(0)
+  const [, setProgress] = useState(0)
   const progressRef = useRef(0)
   const progressRafRef = useRef(null)
   const startTimeRef = useRef(null)

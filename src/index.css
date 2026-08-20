@@ -5,9 +5,16 @@
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-handwrite: 'Architects Daughter', cursive;
 
+  --color-ink-black: #2d2d2d;
   --color-bg-primary: #fdf6e3;
   --color-bg-secondary: #f5e6c8;
   
+  --color-sticker-pink: #ffb3c6;
+  --color-mint: #b8e8d0;
+  --color-pale-yellow: #ffeaa7;
+  --color-soft-blue: #b8d8e8;
+  --color-lavender: #c8b8e8;
+
   --color-accent-pink: #ffb3c6;
   --color-accent-lavender: #c8b8e8;
   --color-accent-mint: #b8e8d0;
@@ -36,8 +43,15 @@
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-handwrite: 'Architects Daughter', cursive;
 
+  --ink-black: #2d2d2d;
   --bg-primary: #fdf6e3;
   --bg-secondary: #f5e6c8;
+
+  --sticker-pink: #ffb3c6;
+  --mint: #b8e8d0;
+  --pale-yellow: #ffeaa7;
+  --soft-blue: #b8d8e8;
+  --lavender: #c8b8e8;
 
   --accent-pink: #ffb3c6;
   --accent-lavender: #c8b8e8;
@@ -134,5 +148,12 @@ body {
 .protected-image {
   user-select: none;
   -webkit-user-drag: none;
+}
+
+/* Hide default OS cursor on desktop pointer devices so custom cursor is clean */
+@media (min-width: 1024px) and (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
 }
 

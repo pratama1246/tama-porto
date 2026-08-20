@@ -4,6 +4,7 @@ import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
 import BackgroundElements from './components/layout/BackgroundElements'
 import Loader from './components/layout/Loader'
+import CustomCursor from './components/layout/CustomCursor'
 import { projects } from './data/projects'
 import BirthdayToast from './components/birthday/BirthdayToast'
 
@@ -194,7 +195,10 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col justify-start relative w-full">
-      {/* Y2K OS Style Preloader */}
+      {/* Interactive Soft Neobrutal Custom Cursor (Desktop Only) */}
+      <CustomCursor />
+
+      {/* Studio Words Cycling Intro Overlay */}
       <AnimatePresence mode="wait">
         {isLoading && (
           <Loader onComplete={() => setIsLoading(false)} />

@@ -1,4 +1,5 @@
-/* eslint-disable react/no-unknown-property */
+/* eslint-disable no-unused-vars, react-hooks/immutability */
+import * as THREE from 'three';
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
 import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
@@ -6,8 +7,6 @@ import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphe
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
 import cardGLB from './card.glb';
-
-import * as THREE from 'three';
 
 extend({ MeshLineGeometry, MeshLineMaterial });
 
@@ -59,7 +58,7 @@ function createLanyardBandTexture() {
 }
 
 // Generate Full Custom Committee ID Card Texture (No React logo, 100% Kepanitiaan)
-function createCommitteeCardAtlas(frontImageElement, backImageElement) {
+function createCommitteeCardAtlas(frontImageElement, _backImageElement) {
   const W = 2048;
   const H = 2048;
   const canvas = document.createElement('canvas');

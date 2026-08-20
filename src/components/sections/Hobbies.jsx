@@ -28,7 +28,7 @@ export default function Hobbies() {
   return (
     <section 
       id="hobbies" 
-      className="py-10 px-4 md:py-24 md:px-8 max-w-6xl mx-auto relative overflow-hidden"
+      className="py-10 px-6 md:py-24 md:px-12 lg:px-20 max-w-[1600px] mx-auto w-full relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute right-[5%] top-[8%] w-16 h-16 bg-[var(--accent-lavender)] opacity-20 rounded-full blur-xl pointer-events-none" />
@@ -41,12 +41,10 @@ export default function Hobbies() {
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeUp}
       >
-        <h2 className="font-display text-2xl md:text-3.5xl text-[var(--text-dark)] rotate-[-1deg] inline-block relative">
+        <h2 className="font-display font-extrabold text-xl sm:text-2xl md:text-4xl text-ink-black bg-sticker-pink border-2 border-ink-black neo-shadow rotate-[-1deg] inline-block px-5 py-2 md:px-7 md:py-3 rounded-xl select-none">
           🎵 currently on repeat
-          {/* Accent line under heading */}
-          <span className="absolute -bottom-2 left-0 right-0 h-[3px] bg-[var(--accent-pink)] opacity-60 rounded-full rotate-[0.5deg]" />
         </h2>
-        <p className="font-handwrite text-md md:text-lg text-[var(--text-handwrite)] mt-4">
+        <p className="font-handwrite text-md md:text-lg text-text-handwrite mt-4 font-semibold">
           what i listen to when i'm coding
         </p>
       </motion.div>
@@ -61,7 +59,7 @@ export default function Hobbies() {
       >
         <button
           onClick={() => setShowMusic(!showMusic)}
-          className="px-6 py-2.5 bg-[var(--accent-pink)] border-2 border-[var(--text-dark)] rounded-sm font-display font-semibold text-sm md:text-base text-[var(--text-dark)] shadow-[3px_3px_0px_var(--text-dark)] hover:shadow-none hover:translate-x-[3px] hover:translate-y-[3px] transition-all cursor-pointer flex items-center gap-2 select-none"
+          className="px-6 py-3 bg-sticker-pink border-2 border-ink-black rounded-lg font-mono font-bold text-sm md:text-base text-ink-black neo-shadow neo-shadow-hover transition-all cursor-pointer flex items-center gap-2 select-none"
         >
           {showMusic ? "🙈 HIDE MY PLAYLIST" : "💿 SHOW MY PLAYLIST"}
         </button>
@@ -74,7 +72,7 @@ export default function Hobbies() {
           height: showMusic ? "auto" : 0, 
           opacity: showMusic ? 1 : 0 
         }}
-        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }} // smooth cubic easeOut
+        transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
         style={{ pointerEvents: showMusic ? 'auto' : 'none' }}
         className="overflow-hidden w-full"
       >
@@ -99,11 +97,11 @@ export default function Hobbies() {
               transition={{ type: 'tween', duration: 0.2, ease: 'easeOut' }}
             >
               {/* Washi Tape */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-6 bg-[var(--accent-pink)] opacity-85 -rotate-1 rounded-[2px] shadow-xs flex items-center justify-center text-[10px] font-handwrite text-[#4a3728] tracking-wider select-none z-10 pointer-events-none">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-6 bg-sticker-pink border border-ink-black/40 -rotate-1 rounded-xs neo-shadow-sm flex items-center justify-center text-[10px] font-mono font-bold text-ink-black tracking-wider select-none z-10 pointer-events-none">
                 🎵 NOW SPINNING
               </div>
 
-              <div className="bg-white p-3 pb-4 shadow-sm rounded-[6px] border border-[#e5dec9]">
+              <div className="bg-white p-3 pb-4 neo-shadow rounded-lg border-2 border-ink-black">
                 <a 
                   href={music.link} 
                   target="_blank" 
@@ -129,7 +127,7 @@ export default function Hobbies() {
               </div>
 
               {/* Tape decoration at bottom */}
-              <div className="absolute -bottom-2 -left-2 w-12 h-5 bg-[var(--accent-blue)] opacity-60 rotate-[-12deg] rounded-[1px] pointer-events-none" />
+              <div className="absolute -bottom-2 -left-2 w-12 h-5 bg-soft-blue border border-ink-black/40 rotate-[-12deg] rounded-xs pointer-events-none" />
             </motion.div>
           ))}
         </motion.div>

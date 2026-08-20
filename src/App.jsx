@@ -1,9 +1,11 @@
 import { useState, useEffect, lazy, Suspense } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from './components/layout/Navbar'
 import Hero from './components/sections/Hero'
 import BackgroundElements from './components/layout/BackgroundElements'
 import Loader from './components/layout/Loader'
+import CustomCursor from './components/layout/CustomCursor'
 import { projects } from './data/projects'
 import BirthdayToast from './components/birthday/BirthdayToast'
 
@@ -63,6 +65,35 @@ function App() {
       document.title = 'Tama — 20'
     }
   }, [])
+
+  // Global scroll lock while intro is playing - controlled at App level to avoid timing gaps
+  useEffect(() => {
+    if (!isLoading) return
+
+    const preventScroll = (e) => e.preventDefault()
+    const preventKeyScroll = (e) => {
+      if (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(e.key)) {
+        e.preventDefault()
+      }
+    }
+
+    document.documentElement.style.overflow = 'hidden'
+    document.body.style.overflow = 'hidden'
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+
+    window.addEventListener('wheel', preventScroll, { passive: false })
+    window.addEventListener('touchmove', preventScroll, { passive: false })
+    window.addEventListener('keydown', preventKeyScroll, { passive: false })
+
+    return () => {
+      document.documentElement.style.overflow = ''
+      document.body.style.overflow = ''
+      window.removeEventListener('wheel', preventScroll)
+      window.removeEventListener('touchmove', preventScroll)
+      window.removeEventListener('keydown', preventKeyScroll)
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    }
+  }, [isLoading])
 
   // Logo 5-click easter egg counter logic
   const [logoClicks, setLogoClicks] = useState([])
@@ -159,17 +190,19 @@ function App() {
       window.history.pushState({ projectId: id }, '', `/projects/${proj.slug}`)
     }
     setActiveProjectId(id)
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }
 
   const handleCloseDetail = () => {
     setActiveProjectId(null)
     window.history.pushState(null, '', '/')
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       window.scrollTo({
         top: savedScrollY,
         behavior: 'instant'
       })
-    }, 50)
+      ScrollTrigger.refresh()
+    })
   }
 
   const handleNavigateToBirthday = () => {
@@ -182,73 +215,79 @@ function App() {
   const handleBackToPortfolio = () => {
     setIsBirthdayRoute(false)
     window.history.pushState(null, '', '/')
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       window.scrollTo({
         top: savedScrollY,
         behavior: 'instant'
       })
-    }, 50)
+      ScrollTrigger.refresh()
+    })
   }
 
   const activeProject = projects.find(p => p.id === activeProjectId)
+  const isDetailView = Boolean(activeProject || isBirthdayRoute)
 
   return (
     <div className="min-h-screen flex flex-col justify-start relative w-full">
-      {/* Y2K OS Style Preloader */}
+      {/* Interactive Soft Neobrutal Custom Cursor (Desktop Only) */}
+      <CustomCursor />
+
+      {/* Studio Words Cycling Intro Overlay */}
       <AnimatePresence mode="wait">
         {isLoading && (
           <Loader onComplete={() => setIsLoading(false)} />
         )}
       </AnimatePresence>
 
-      {!isLoading && (
-        <>
-          {/* Easter Egg Popup Toast */}
-          <AnimatePresence>
-            {showBirthdayToast && (
-              <BirthdayToast
-                onClose={() => setShowBirthdayToast(false)}
-                onNavigateToBirthday={handleNavigateToBirthday}
-              />
-            )}
-          </AnimatePresence>
+      {/* Easter Egg Popup Toast */}
+      <AnimatePresence>
+        {showBirthdayToast && (
+          <BirthdayToast
+            onClose={() => setShowBirthdayToast(false)}
+            onNavigateToBirthday={handleNavigateToBirthday}
+          />
+        )}
+      </AnimatePresence>
 
-          {isBirthdayRoute ? (
-            <Suspense fallback={null}>
-              <BirthdayPage onBackToPortfolio={handleBackToPortfolio} />
-            </Suspense>
-          ) : activeProject ? (
-            <Suspense fallback={null}>
-              <ProjectDetail 
-                project={activeProject} 
-                onBack={handleCloseDetail} 
-              />
-            </Suspense>
-          ) : (
-            <>
-              {/* GSAP-Powered Mobile-Responsive Navbar */}
-              <Navbar onLogoClick={handleLogoClick} />
+      {/* Main Portfolio Layout - Kept in DOM, hidden when viewing detail page */}
+      <div className={`w-full flex-grow flex flex-col justify-start ${isDetailView ? 'hidden' : 'block'}`}>
+        {/* GSAP-Powered Mobile-Responsive Navbar */}
+        <Navbar onLogoClick={handleLogoClick} isLoading={isLoading} />
 
-              {/* Floating Background Stickers & Doodles */}
-              <BackgroundElements />
+        {/* Floating Background Stickers & Doodles */}
+        <BackgroundElements isLoading={isLoading} />
 
-              {/* Scrapbook Section Stack */}
-              <main className="flex-grow w-full relative z-10">
-                <Hero onOpenBirthday={handleNavigateToBirthday} />
-                <Suspense fallback={null}>
-                  <VisualReveal />
-                  <About />
-                  <Journey />
-                  <Projects onOpenDetail={handleOpenDetail} />
-                  <Skills />
-                  <Certifications />
-                  <Hobbies />
-                  <Contact />
-                </Suspense>
-              </main>
-            </>
-          )}
-        </>
+        {/* Scrapbook Section Stack */}
+        <main className="flex-grow w-full relative z-10">
+          <Hero onOpenBirthday={handleNavigateToBirthday} isLoading={isLoading} />
+          <Suspense fallback={null}>
+            <VisualReveal />
+            <About />
+            <Journey />
+            <Projects onOpenDetail={handleOpenDetail} />
+            <Skills />
+            <Certifications />
+            <Hobbies />
+            <Contact />
+          </Suspense>
+        </main>
+      </div>
+
+      {/* Project Detail Page View */}
+      {activeProject && (
+        <Suspense fallback={null}>
+          <ProjectDetail 
+            project={activeProject} 
+            onBack={handleCloseDetail} 
+          />
+        </Suspense>
+      )}
+
+      {/* Birthday Page View */}
+      {isBirthdayRoute && (
+        <Suspense fallback={null}>
+          <BirthdayPage onBackToPortfolio={handleBackToPortfolio} />
+        </Suspense>
       )}
     </div>
   )

@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion'
 import { birthdayMeta } from '../../data/birthday'
 
-export default function OpeningScreen({ onEnterArchive }) {
+export default function OpeningScreen() {
   return (
     <div className="w-full flex flex-col items-center justify-center min-h-[50vh] text-center px-4 py-12 relative select-none">
       {/* Tape Decoration */}

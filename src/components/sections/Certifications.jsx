@@ -155,7 +155,7 @@ function CertificateCard({ cert, isArchive = false }) {
   if (isArchive) {
     return (
       <div 
-        className={`relative flex flex-col justify-between min-h-[280px] w-full p-6 bg-white border border-black/10 rounded-sm shadow-xs hover:shadow-sm hover:-translate-y-1 transition-all duration-200 ${randomRotation}`}
+        className={`relative flex flex-col justify-between min-h-[280px] w-full p-6 bg-white border-2 border-ink-black rounded-lg neo-shadow hover:-translate-y-1 transition-all duration-200 ${randomRotation}`}
       >
         {renderCardContent()}
       </div>
@@ -164,7 +164,7 @@ function CertificateCard({ cert, isArchive = false }) {
 
   return (
     <ScrollStackItem 
-      itemClassName="flex flex-col justify-between min-h-[390px] md:min-h-[360px] w-full"
+      itemClassName="flex flex-col justify-between min-h-[390px] md:min-h-[360px] w-full border-2 border-ink-black neo-shadow rounded-lg"
     >
       {renderCardContent()}
     </ScrollStackItem>
@@ -182,22 +182,15 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="py-10 px-4 md:py-24 md:px-8 max-w-6xl mx-auto overflow-visible"
+      className="py-10 px-6 md:py-24 md:px-12 lg:px-20 max-w-[1600px] mx-auto w-full overflow-visible"
     >
       <div className="flex flex-col gap-10">
         {/* Section Header */}
         <div>
-          <div
-            className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-lavender)] border border-black/5 rotate-[1.5deg] mb-2"
-            style={{ fontFamily: 'var(--font-body)' }}
-          >
-            My Achievements
-          </div>
           <h2
-            className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-[var(--text-dark)] m-0"
-            style={{ fontFamily: 'var(--font-display)' }}
+            className="inline-block px-5 py-2 md:px-7 md:py-3 rounded-xl text-xl sm:text-2xl md:text-4xl font-display font-extrabold text-ink-black bg-lavender border-2 border-ink-black neo-shadow rotate-[1.5deg] tracking-tight m-0 select-none"
           >
-            The Certificate Board
+            Certifications
           </h2>
         </div>
 

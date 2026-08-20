@@ -94,7 +94,7 @@ export default function VisualReveal() {
   return (
     <div 
       ref={containerRef} 
-      className="relative h-[150vh] md:h-[200vh] w-full border-y border-black/5"
+      className="relative h-[150vh] md:h-[200vh] w-full border-y-2 border-ink-black border-dashed"
     >
       {/* Sticky Screen Viewport */}
       <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden px-6 md:px-12">
@@ -102,19 +102,12 @@ export default function VisualReveal() {
         {/* Animated Text Container (Header + Quote) */}
         <div 
           ref={textContainerRef}
-          className="relative z-10 max-w-4xl w-full text-center flex flex-col items-center gap-6"
+          className="relative z-10 max-w-6xl w-full text-center flex flex-col items-center gap-6"
         >
           {/* Header */}
           <div className="flex flex-col items-center justify-center">
-            <span 
-              className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-lavender)] border border-black/5 rotate-[1.5deg] mb-3"
-              style={{ fontFamily: 'var(--font-body)' }}
-            >
-              My Philosophy
-            </span>
             <h2 
-              className="font-display font-semibold text-3xl md:text-5xl text-[var(--text-dark)] m-0 tracking-tight"
-              style={{ fontFamily: 'var(--font-display)' }}
+              className="inline-block px-6 py-2.5 md:px-8 md:py-3.5 rounded-xl text-2xl sm:text-3xl md:text-5xl font-display font-extrabold text-ink-black bg-mint border-2 border-ink-black neo-shadow rotate-[-1deg] tracking-tight m-0 select-none"
             >
               Behind the Creative Flow
             </h2>
@@ -127,7 +120,7 @@ export default function VisualReveal() {
             baseRotation={2}
             blurStrength={10}
             containerClassName="mx-auto mt-2"
-            textClassName="text-center font-display font-semibold text-[var(--text-dark)] leading-[1.4] tracking-tight text-[1.4rem] sm:text-[1.8rem] md:text-[2.4rem]"
+            textClassName="text-center font-display font-bold text-ink-black leading-[1.4] tracking-tight text-[1.4rem] sm:text-[1.8rem] md:text-[2.3rem]"
           >
             "The things that inspire me most—stories that stay with us, music that sparks emotion, aesthetics that express personality, and technology that connects people—all share one thing in common: they leave a lasting impression. That's the kind of experience I hope to create in everything I build."
           </ScrollReveal>
@@ -148,10 +141,10 @@ export default function VisualReveal() {
         {/* Tiny instruction pill at the bottom */}
         <div 
           ref={pillRef}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[var(--bg-secondary)] px-4 py-1.5 rounded-full border border-black/10 shadow-xs z-30 pointer-events-none flex items-center gap-2 animate-bounce"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-pale-yellow px-4 py-1.5 rounded-full border-2 border-ink-black neo-shadow-sm z-30 pointer-events-none flex items-center gap-2 animate-bounce"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-pink)]"></span>
-          <span className="text-[10px] md:text-[11px] font-semibold text-[var(--text-dark)] uppercase tracking-wider">Keep scrolling to reveal</span>
+          <span className="w-2 h-2 rounded-full bg-sticker-pink border border-ink-black"></span>
+          <span className="text-[11px] font-mono font-bold text-ink-black uppercase tracking-wider">Keep scrolling to reveal</span>
         </div>
 
       </div>

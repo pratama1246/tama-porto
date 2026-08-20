@@ -94,8 +94,6 @@ export default function Projects({ onOpenDetail }) {
 
   // Auto-play state
   const isPausedRef = useRef(false)
-  // Progress: 0 → 1 over AUTOPLAY_DELAY ms
-  const [progress, setProgress] = useState(0)
   const progressRef = useRef(0)
   const progressRafRef = useRef(null)
   const startTimeRef = useRef(null)
@@ -148,7 +146,6 @@ export default function Projects({ onOpenDetail }) {
       const elapsed = now - startTimeRef.current
       const p = Math.min(elapsed / AUTOPLAY_DELAY, 1)
       progressRef.current = p
-      setProgress(p)
       
       if (p < 1) {
         progressRafRef.current = requestAnimationFrame(tick)
@@ -186,22 +183,13 @@ export default function Projects({ onOpenDetail }) {
         className="flex flex-col gap-6 md:gap-10 w-full"
       >
         {/* Section Header */}
-        <div className="max-w-7xl mx-auto w-full px-4 md:px-8">
-          <motion.div
-            variants={fadeUp}
-            className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-blue)] border border-black/5 rotate-[1deg] mb-2"
-            style={{ fontFamily: 'var(--font-body)' }}
+        <motion.div variants={fadeUp} className="max-w-[1600px] mx-auto w-full px-6 md:px-12 lg:px-20">
+          <h2
+            className="inline-block px-5 py-2 md:px-7 md:py-3 rounded-xl text-xl sm:text-2xl md:text-4xl font-display font-extrabold text-ink-black bg-soft-blue border-2 border-ink-black neo-shadow rotate-[-1.5deg] tracking-tight m-0 select-none"
           >
-            My Works Project
-          </motion.div>
-          <motion.h2
-            variants={fadeUp}
-            className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-[var(--text-dark)] m-0"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            The Project Blueprints
-          </motion.h2>
-        </div>
+            Featured Projects
+          </h2>
+        </motion.div>
 
         {/* Unified Board Container */}
         <div
@@ -214,9 +202,9 @@ export default function Projects({ onOpenDetail }) {
           }}
         >
           
-          {/* FIXED Washi Tapes on top and bottom corners (remain completely static as the page slides underneath them) */}
-          <div className="absolute top-[3%] left-[10%] w-24 h-5 bg-[var(--accent-blue)]/60 rotate-[-3deg] rounded-xs shadow-3xs z-25 pointer-events-none hidden md:block" />
-          <div className="absolute bottom-[3%] right-[10%] w-20 h-5 bg-[var(--accent-lavender)]/60 rotate-[4deg] rounded-xs shadow-3xs z-25 pointer-events-none hidden md:block" />
+          {/* FIXED Washi Tapes on top and bottom corners */}
+          <div className="absolute top-[3%] left-[10%] w-24 h-5 bg-soft-blue/70 border border-ink-black/40 rotate-[-3deg] rounded-xs shadow-xs z-25 pointer-events-none hidden md:block" />
+          <div className="absolute bottom-[3%] right-[10%] w-20 h-5 bg-lavender/70 border border-ink-black/40 rotate-[4deg] rounded-xs shadow-xs z-25 pointer-events-none hidden md:block" />
 
           {projects.map((project, idx) => {
             // Calculate relative distance with loop wrapping
@@ -241,8 +229,8 @@ export default function Projects({ onOpenDetail }) {
                 key={project.id}
                 style={{
                   backgroundImage: `
-                    linear-gradient(rgba(160, 160, 190, 0.05) 1.5px, transparent 1.5px),
-                    linear-gradient(90deg, rgba(160, 160, 190, 0.05) 1.5px, transparent 1.5px)
+                    linear-gradient(rgba(160, 160, 190, 0.08) 1.5px, transparent 1.5px),
+                    linear-gradient(90deg, rgba(160, 160, 190, 0.08) 1.5px, transparent 1.5px)
                   `,
                   backgroundSize: '20px 20px',
                 }}
@@ -278,7 +266,7 @@ export default function Projects({ onOpenDetail }) {
                   }, 4000)
                 }}
                 whileHover={!isActive ? { scale: 0.93, opacity: 0.55 } : undefined}
-                className={`absolute left-0 right-0 mx-auto w-[90%] md:w-[85%] lg:w-[80%] max-w-[1100px] bg-[#fefcf7] border border-black/10 shadow-md rounded-[6px] p-6 md:p-10 flex flex-col justify-between overflow-hidden touch-pan-y ${
+                className={`absolute left-0 right-0 mx-auto w-[90%] md:w-[85%] lg:w-[80%] max-w-[1100px] bg-white border-2 border-ink-black neo-shadow rounded-lg p-6 md:p-10 flex flex-col justify-between overflow-hidden touch-pan-y ${
                   isActive 
                     ? 'min-h-[540px] md:min-h-[480px] h-auto' 
                     : 'h-[280px] md:h-auto min-h-[280px] md:min-h-[480px] overflow-hidden cursor-pointer select-none'
@@ -294,18 +282,26 @@ export default function Projects({ onOpenDetail }) {
                   
                   {/* Left Column: Large Polaroid Photo Card */}
                   <div className="w-full md:w-[45%] flex items-center justify-center flex-shrink-0 relative">
-                    <div className="w-full max-w-[440px] p-4 pb-12 bg-white border border-black/10 shadow-sm rounded-xs rotate-[-2deg] relative hover:rotate-0 hover:scale-102 active:scale-98 transition-all">
+                    <div 
+                      data-cursor="view"
+                      className="w-full max-w-[440px] p-4 pb-12 bg-white border-2 border-ink-black neo-shadow rounded-lg rotate-[-2deg] relative hover:rotate-0 hover:scale-102 active:scale-98 transition-all cursor-pointer"
+                      onClick={(e) => {
+                        if (!isActive) return
+                        e.stopPropagation()
+                        onOpenDetail?.(project.id)
+                      }}
+                    >
                       
                       {/* Polaroid Image */}
-                      <div className={`relative aspect-video w-full overflow-hidden rounded-[2px] border border-black/5 select-none ${
-                        project.id === 7 ? 'bg-white' : 'bg-[var(--bg-secondary)]'
+                      <div className={`relative aspect-video w-full overflow-hidden rounded-md border-2 border-ink-black select-none ${
+                        project.id === 7 ? 'bg-white' : 'bg-[#f5e6c8]'
                       }`}>
                         <img
                           src={project.thumbnail}
                           alt={project.title}
                           draggable={false}
                           onContextMenu={(e) => e.preventDefault()}
-                          className={`protected-image w-full h-full grayscale-[15%] hover:grayscale-0 transition-all duration-300 pointer-events-none ${
+                          className={`protected-image w-full h-full grayscale-[10%] hover:grayscale-0 transition-all duration-300 pointer-events-none ${
                             project.id === 7 ? 'object-contain p-1' : 'object-cover'
                           }`}
                           loading="lazy"
@@ -313,23 +309,23 @@ export default function Projects({ onOpenDetail }) {
                       </div>
 
                       {/* Handwritten Label */}
-                      <div className="mt-4 text-center font-handwrite text-[1rem] text-[var(--text-handwrite)] select-none">
+                      <div className="mt-4 text-center font-handwrite text-[1rem] text-text-handwrite select-none font-semibold">
                         {project.title.toLowerCase().replace(/\s+/g, '_')}.png
                       </div>
 
                       {/* Washi Tape pinning the photo to the sheet */}
                       <div 
-                        className={`absolute -top-3.5 left-[calc(50%-45px)] w-[90px] h-[18px] ${cardWashiColor} rotate-[-1deg] rounded-[2px] z-10 shadow-3xs opacity-85 transition-colors duration-500`}
+                        className={`absolute -top-3.5 left-[calc(50%-45px)] w-[90px] h-[18px] ${cardWashiColor} border border-ink-black/40 rotate-[-1deg] rounded-[2px] z-10 shadow-xs opacity-85 transition-colors duration-500`}
                       />
 
                       {/* Corner sticker */}
-                      <div className="absolute -top-2.5 -right-2.5 w-8 h-8 bg-white rounded-full flex items-center justify-center text-base select-none shadow-xs rotate-[12deg] border border-black/5 z-20">
+                      <div className="absolute -top-2.5 -right-2.5 w-8 h-8 bg-pale-yellow rounded-full flex items-center justify-center text-base select-none neo-shadow-sm rotate-[12deg] border-2 border-ink-black z-20">
                         {cardSticker}
                       </div>
                     </div>
                   </div>
 
-                  {/* Right Column: Project Specifications (Bold minimalist style inspired by image.png) */}
+                  {/* Right Column: Project Specifications */}
                   <div className={`w-full md:w-[55%] flex-col justify-between self-stretch gap-6 ${
                     isActive ? 'flex' : 'hidden md:flex'
                   }`}>
@@ -338,38 +334,35 @@ export default function Projects({ onOpenDetail }) {
                         
                         {/* Status & Category/Subheader */}
                         <div className="flex items-center gap-2">
-                          <span className="inline-block px-2.5 py-0.5 rounded-sm text-[9px] font-semibold tracking-wider uppercase border border-black/10 bg-white text-[var(--text-dark)]">
+                          <span className="inline-block px-3 py-1 rounded-md text-[10px] font-mono font-bold tracking-wider uppercase border-2 border-ink-black bg-pale-yellow text-ink-black neo-shadow-sm">
                             {project.status}
                           </span>
                         </div>
 
-                        {/* Giant Bold Title (Uppercase & Heavy) */}
+                        {/* Giant Bold Title */}
                         <h3 
-                          className="font-display font-semibold text-2xl md:text-3xl lg:text-4xl text-[var(--text-dark)] uppercase leading-[1.1] tracking-tight m-0"
-                          style={{ fontFamily: 'var(--font-display)' }}
+                          className="font-display font-extrabold text-2xl md:text-3xl lg:text-4xl text-ink-black uppercase leading-[1.1] tracking-tight m-0"
                         >
                           {project.title}
                         </h3>
 
-                        {/* Tech Stack - Slashed Clean Text (LARAVEL / FIGMA / MYSQL) */}
+                        {/* Tech Stack - Space Mono Slashed Clean Text */}
                         <div 
-                          className="font-body text-[10px] md:text-xs font-semibold tracking-wider text-[var(--text-muted)] uppercase mt-0.5"
-                          style={{ fontFamily: 'var(--font-body)' }}
+                          className="font-mono text-[11px] md:text-xs font-bold tracking-wider text-text-muted uppercase mt-0.5"
                         >
                           {cardTechString}
                         </div>
 
                         {/* Description */}
                         <p 
-                          className="text-xs md:text-sm text-[var(--text-dark)]/85 leading-relaxed font-body mt-2 max-w-xl line-clamp-2 md:line-clamp-none"
-                          style={{ fontFamily: 'var(--font-body)' }}
+                          className="text-xs md:text-sm text-ink-black leading-relaxed font-body mt-2 max-w-xl line-clamp-2 md:line-clamp-none"
                         >
                           {project.desc}
                         </p>
                       </div>
 
-                      {/* Action Buttons (Clean Thin Outline Style) */}
-                      <div className="mt-4 pt-4 border-t border-black/5 flex flex-col gap-2 max-w-md">
+                      {/* Action Buttons */}
+                      <div className="mt-4 pt-4 border-t-2 border-ink-black/10 flex flex-col gap-2.5 max-w-md">
                         <button
                           onClick={(e) => {
                             if (!isActive) return
@@ -377,26 +370,26 @@ export default function Projects({ onOpenDetail }) {
                             onOpenDetail?.(project.id)
                           }}
                           disabled={!isActive}
-                          className="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-sm border border-[var(--text-dark)] text-[var(--text-dark)] text-xs font-semibold hover:bg-black/5 active:scale-[0.98] transition-all cursor-pointer min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg border-2 border-ink-black bg-soft-blue text-ink-black font-mono text-xs font-bold neo-shadow neo-shadow-hover transition-all cursor-pointer min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <ReadmeIcon className="shrink-0" />
-                          See Detail (README.md)
+                          <span>See Detail (README.md)</span>
                         </button>
                         
                         {(project.github || project.live) && (
-                          <div className="flex items-center gap-2 w-full">
+                          <div className="flex items-center gap-2.5 w-full">
                             {project.github && (
                               <a
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => { if (!isActive) e.preventDefault() }}
-                                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-sm border border-black/15 text-[var(--text-dark)]/80 text-xs font-semibold hover:border-[var(--text-dark)] hover:text-[var(--text-dark)] hover:bg-black/5 transition-all min-h-[44px] no-underline ${
+                                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg border-2 border-ink-black bg-white text-ink-black font-mono text-xs font-bold neo-shadow-sm hover:bg-pale-yellow transition-all min-h-[44px] no-underline ${
                                   isActive ? '' : 'pointer-events-none opacity-50'
                                 }`}
                               >
                                 <GitHubIcon className="shrink-0" />
-                                GitHub
+                                <span>GitHub</span>
                               </a>
                             )}
                             {project.live && (
@@ -405,12 +398,12 @@ export default function Projects({ onOpenDetail }) {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={(e) => { if (!isActive) e.preventDefault() }}
-                                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-sm border border-black/15 text-[var(--text-dark)]/80 text-xs font-semibold hover:border-[var(--text-dark)] hover:text-[var(--text-dark)] hover:bg-black/5 transition-all min-h-[44px] no-underline ${
+                                className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-lg border-2 border-ink-black bg-white text-ink-black font-mono text-xs font-bold neo-shadow-sm hover:bg-mint transition-all min-h-[44px] no-underline ${
                                   isActive ? '' : 'pointer-events-none opacity-50'
                                 }`}
                               >
                                 <ExternalIcon className="shrink-0" />
-                                Live Demo
+                                <span>Live Demo</span>
                               </a>
                             )}
                           </div>

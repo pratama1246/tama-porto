@@ -1,13 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Lexend', 'Space Grotesk', sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Hanken Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
   --font-handwrite: 'Architects Daughter', cursive;
 
-  --color-bg-primary: #fdf6e3;
-  --color-bg-secondary: #f5e6c8;
+  --color-ink-black: #1A1A1A;
+  --color-bg-primary: #fdf8f6;
+  --color-bg-secondary: #f7f3f0;
   
+  --color-sticker-pink: #FFD1DC;
+  --color-mint: #D0F0C0;
+  --color-pale-yellow: #FFF9C4;
+  --color-soft-blue: #B3E5FC;
+  --color-lavender: #E6E6FA;
+
   --color-accent-pink: #ffb3c6;
   --color-accent-lavender: #c8b8e8;
   --color-accent-mint: #b8e8d0;
@@ -15,9 +23,9 @@
   --color-accent-blue: #b8d8e8;
   --color-accent-peach: #ffd4b8;
 
-  --color-text-dark: #2d2d2d;
+  --color-text-dark: #1c1b1a;
   --color-text-handwrite: #4a3728;
-  --color-text-muted: #6e5d50;
+  --color-text-muted: #49473e;
 
   --color-glitch-pink: #ff6b9d;
   --color-glitch-blue: #6bcfff;
@@ -29,15 +37,24 @@
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
+  --radius-xl: 12px;
 }
 
 :root {
-  --font-display: 'Space Grotesk', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Lexend', 'Space Grotesk', sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Hanken Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
   --font-handwrite: 'Architects Daughter', cursive;
 
-  --bg-primary: #fdf6e3;
-  --bg-secondary: #f5e6c8;
+  --ink-black: #1A1A1A;
+  --bg-primary: #fdf8f6;
+  --bg-secondary: #f7f3f0;
+
+  --sticker-pink: #FFD1DC;
+  --mint: #D0F0C0;
+  --pale-yellow: #FFF9C4;
+  --soft-blue: #B3E5FC;
+  --lavender: #E6E6FA;
 
   --accent-pink: #ffb3c6;
   --accent-lavender: #c8b8e8;
@@ -46,20 +63,12 @@
   --accent-blue: #b8d8e8;
   --accent-peach: #ffd4b8;
 
-  --text-dark: #2d2d2d;
+  --text-dark: #1c1b1a;
   --text-handwrite: #4a3728;
-  --text-muted: #6e5d50;
+  --text-muted: #49473e;
 
   --glitch-pink: #ff6b9d;
   --glitch-blue: #6bcfff;
-
-  --shadow-xs: 1px 2px 4px rgba(0, 0, 0, 0.08);
-  --shadow-sm: 2px 3px 8px rgba(0, 0, 0, 0.10);
-  --shadow-md: 3px 5px 12px rgba(0, 0, 0, 0.12);
-
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
 }
 
 /* Base resets & layout */
@@ -135,4 +144,46 @@ body {
   user-select: none;
   -webkit-user-drag: none;
 }
+
+/* Soft Neobrutalism Shadows & Utilities */
+.neo-shadow {
+  box-shadow: 4px 4px 0px 0px #1A1A1A;
+}
+
+.neo-shadow-sm {
+  box-shadow: 2px 2px 0px 0px #1A1A1A;
+}
+
+.neo-shadow-lg {
+  box-shadow: 6px 6px 0px 0px #1A1A1A;
+}
+
+.neo-shadow-hover {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neo-shadow-hover:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #1A1A1A;
+}
+
+.neo-shadow-hover:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0px 0px #1A1A1A;
+}
+
+.bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(203, 198, 187, 0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(203, 198, 187, 0.35) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Hide default OS cursor on desktop pointer devices so custom cursor is clean */
+@media (min-width: 1024px) and (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
 

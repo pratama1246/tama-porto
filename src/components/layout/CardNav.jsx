@@ -6,7 +6,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { motion } from 'framer-motion';
-import GlassSurface from '../reactbits/GlassSurface';
 
 // Custom SVG arrow icon to replace react-icons/go
 function ArrowUpRight({ className, ...props }) {
@@ -37,7 +36,8 @@ const CardNav = ({
   className = '',
   ease = 'power3.out',
   menuColor = '#2d2d2d',
-  onLogoClick
+  onLogoClick,
+  isLoading = false
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -186,33 +186,14 @@ const CardNav = ({
   return (
     <motion.div
       initial={{ x: 100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
+      animate={!isLoading ? { x: 0, opacity: 1 } : { x: 100, opacity: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className={`card-nav-container fixed left-4 right-4 md:left-auto md:right-8 w-auto md:w-[90%] max-w-[720px] z-[99] top-[1em] md:top-[1.2em] ${className}`}
+      className={`card-nav-container fixed left-4 right-4 md:left-auto md:right-8 w-auto md:w-[90%] max-w-[760px] z-[99] top-[1em] md:top-[1.2em] ${className}`}
     >
       <nav
         ref={navRef}
-        className={`card-nav ${isExpanded ? 'open' : ''} block h-12 md:h-14 p-0 rounded-xl shadow-[var(--shadow-sm)] border border-text-dark/20 relative overflow-hidden`}
-        style={{ backgroundColor: 'transparent' }}
+        className={`card-nav ${isExpanded ? 'open' : ''} block h-12 md:h-14 p-0 rounded-xl neo-shadow border-2 border-ink-black relative overflow-hidden bg-white/90 backdrop-blur-md`}
       >
-        {/* GlassSurface as Background */}
-        <div className="absolute inset-0 w-full h-full -z-10 pointer-events-none">
-          <GlassSurface
-            width="100%"
-            height="100%"
-            borderRadius={12}
-            borderWidth={0.03}
-            brightness={85}
-            opacity={0.8}
-            blur={12}
-            backgroundOpacity={0.45}
-            saturation={1.6}
-            distortionScale={-80}
-            forceLight={true}
-            className="w-full h-full border-none shadow-none pointer-events-none"
-          />
-        </div>
-
         <div 
           className="card-nav-top absolute inset-x-0 top-0 h-12 md:h-14 flex items-center justify-between z-[2]"
           style={{ paddingLeft: '16px', paddingRight: '16px' }}
@@ -227,12 +208,12 @@ const CardNav = ({
             style={{ color: menuColor }}
           >
             <div
-              className={`hamburger-line w-[24px] h-[2px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
+              className={`hamburger-line w-[24px] h-[2px] bg-ink-black transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
                 isHamburgerOpen ? 'translate-y-[4px] rotate-45' : ''
               } group-hover:opacity-75`}
             />
             <div
-              className={`hamburger-line w-[24px] h-[2px] bg-current transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
+              className={`hamburger-line w-[24px] h-[2px] bg-ink-black transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
                 isHamburgerOpen ? '-translate-y-[4px] -rotate-45' : ''
               } group-hover:opacity-75`}
             />
@@ -251,14 +232,15 @@ const CardNav = ({
             ) : (
               <a
                 href="#hero"
-                className="logo font-semibold tracking-tight text-base select-none no-underline"
-                style={{ fontFamily: 'var(--font-display)', color: '#2d2d2d' }}
+                className="logo font-bold tracking-tight text-base select-none no-underline flex items-center gap-1.5"
+                style={{ fontFamily: 'var(--font-display)', color: '#1A1A1A' }}
                 onClick={(e) => {
                   if (onLogoClick) onLogoClick(e);
                   if (isExpanded) toggleMenu();
                 }}
               >
-                tama<span style={{ color: '#e29578' }}>.</span>gallery
+                <span className="w-2.5 h-2.5 rounded-full bg-mint border border-ink-black inline-block"></span>
+                tama<span className="text-[#ff6b9d]">.</span>gallery
               </a>
             )}
           </div>
@@ -267,72 +249,66 @@ const CardNav = ({
           <div className="hidden md:flex items-center gap-2 order-2 ml-auto">
             <a
               href="#hero"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
-                backgroundColor: '#b8d8e8', // --accent-blue
-                color: '#2d2d2d',
+                backgroundColor: 'var(--color-soft-blue, #B3E5FC)',
+                color: '#1A1A1A',
                 transform: 'rotate(-1.5deg)',
-                fontFamily: 'var(--font-body)'
               }}
             >
               Home
             </a>
             <a
               href="#about"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
-                backgroundColor: '#c8b8e8', // --accent-lavender
-                color: '#2d2d2d',
+                backgroundColor: 'var(--color-lavender, #E6E6FA)',
+                color: '#1A1A1A',
                 transform: 'rotate(1deg)',
-                fontFamily: 'var(--font-body)'
               }}
             >
               About
             </a>
             <a
               href="#projects"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
-                backgroundColor: '#ffb3c6', // --accent-pink
-                color: '#2d2d2d',
+                backgroundColor: 'var(--color-sticker-pink, #FFD1DC)',
+                color: '#1A1A1A',
                 transform: 'rotate(-1deg)',
-                fontFamily: 'var(--font-body)'
               }}
             >
               Projects
             </a>
             <a
               href="#skills"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
-                backgroundColor: '#b8e8d0', // --accent-mint
-                color: '#2d2d2d',
+                backgroundColor: 'var(--color-mint, #D0F0C0)',
+                color: '#1A1A1A',
                 transform: 'rotate(1.5deg)',
-                fontFamily: 'var(--font-body)'
               }}
             >
               Skills
             </a>
             <a
               href="#certifications"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
-                backgroundColor: '#ffeaa7', // --accent-yellow
-                color: '#2d2d2d',
+                backgroundColor: 'var(--color-pale-yellow, #FFF9C4)',
+                color: '#1A1A1A',
                 transform: 'rotate(-0.8deg)',
-                fontFamily: 'var(--font-body)'
               }}
             >
               Certifications
             </a>
             <a
               href="#contact"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-semibold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-black/5 hover:-translate-y-0.5 hover:scale-105 active:scale-95"
+              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
               style={{
-                backgroundColor: '#ffd4b8', // --accent-peach
-                color: '#2d2d2d',
+                backgroundColor: '#ffd4b8',
+                color: '#1A1A1A',
                 transform: 'rotate(-1deg)',
-                fontFamily: 'var(--font-body)'
               }}
             >
               Contact

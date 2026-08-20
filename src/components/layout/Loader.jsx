@@ -1,137 +1,96 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
-// Boot-up steps message log
-const BOOT_STEPS = [
-  "Initializing scrapbook engine...",
-  "Unboxing polaroid photo stack...",
-  "Sticking washi tape segments...",
-  "Injecting pastel aesthetic vibes...",
-  "Booting Tama's Gallery v2.0.26..."
+// Words combining Role & Pillars with comfortable timing & creamy scrapbook tones
+const INTRO_WORDS = [
+  { text: "DESIGNER", label: "01", bg: "bg-sticker-pink", textCol: "text-ink-black" },
+  { text: "DEVELOPER", label: "02", bg: "bg-soft-blue", textCol: "text-ink-black" },
+  { text: "STORIES", label: "03", bg: "bg-pale-yellow", textCol: "text-ink-black" },
+  { text: "MUSIC", label: "04", bg: "bg-mint", textCol: "text-ink-black" },
+  { text: "AESTHETICS", label: "05", bg: "bg-lavender", textCol: "text-ink-black" },
+  { text: "TECHNOLOGY", label: "06", bg: "bg-[#ffd4b8]", textCol: "text-ink-black" }
 ];
 
 export default function Loader({ onComplete }) {
-  const [progress, setProgress] = useState(0);
-  const stepSize = BOOT_STEPS.length ? 100 / BOOT_STEPS.length : 1;
-  const stepIndex = Math.min(
-    Math.floor(progress / stepSize),
-    BOOT_STEPS.length - 1
-  );
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // Increment progress simulating boot sequence
-    const progressInterval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 25); // ~2.5s total loading duration
-
-    return () => clearInterval(progressInterval);
-  }, []);
-
-  useEffect(() => {
-    if (progress === 100) {
-      // Small delay after reaching 100% before transition
-      const timeout = setTimeout(() => {
+    if (currentIndex < INTRO_WORDS.length - 1) {
+      const timer = setTimeout(() => {
+        setCurrentIndex((prev) => prev + 1);
+      }, 800); // Slower readable pace (~800ms per word)
+      return () => clearTimeout(timer);
+    } else {
+      // Pause on the final word before sweeping up
+      const finishTimer = setTimeout(() => {
         onComplete();
-      }, 600);
-      return () => clearTimeout(timeout);
+      }, 950);
+      return () => clearTimeout(finishTimer);
     }
-  }, [progress, onComplete]);
+  }, [currentIndex, onComplete]);
+
+  const currentItem = INTRO_WORDS[currentIndex];
 
   return (
     <motion.div
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-bg-primary overflow-hidden p-4"
-      initial={{ opacity: 1 }}
+      className="fixed inset-0 z-[9999] flex flex-col justify-between items-center bg-[#fdf8f6] text-ink-black overflow-hidden p-6 md:p-12 select-none border-b-2 border-ink-black touch-none overscroll-none"
+      initial={{ y: 0 }}
       exit={{ 
-        opacity: 0, 
-        y: -40,
-        transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } 
+        y: "-100%", 
+        transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
       }}
     >
-      {/* Retro desktop grid lines background */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(160,160,190,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(160,160,190,0.12)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+      {/* Creamy Grid Notebook Background */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(160, 160, 190, 0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(160, 160, 190, 0.25) 1px, transparent 1px)',
+          backgroundSize: '28px 28px'
+        }}
+      />
 
-      {/* Y2K Scrapbook Sticker Decorations around the window */}
-      <motion.div 
-        className="absolute top-10 left-10 text-3xl hidden md:block"
-        animate={{ rotate: [0, 10, -10, 0] }}
-        transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-      >
-        🌸
-      </motion.div>
-      <motion.div 
-        className="absolute bottom-10 right-10 text-3xl hidden md:block"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-      >
-        🌟
-      </motion.div>
-
-      {/* Retro OS Pop-up Dialog Window */}
-      <motion.div
-        className="w-full max-w-sm md:max-w-md bg-white border-2 border-text-dark rounded-sm shadow-[4px_4px_0px_#2d2d2d] flex flex-col z-10"
-        initial={{ scale: 0.9, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 200, damping: 15 }}
-      >
-        {/* Title bar */}
-        <div className="bg-accent-lavender border-b-2 border-text-dark px-3 py-1.5 flex items-center justify-between font-display font-medium text-text-dark text-sm md:text-base select-none">
-          <span>TAMA_BOOT_SYSTEM.EXE</span>
-          <div className="flex gap-1">
-            <button className="w-5 h-5 border border-text-dark bg-white rounded-sm text-xs font-semibold leading-none flex items-center justify-center hover:bg-accent-pink active:translate-y-0.5">
-              _
-            </button>
-            <button className="w-5 h-5 border border-text-dark bg-white rounded-sm text-xs font-semibold leading-none flex items-center justify-center hover:bg-accent-pink active:translate-y-0.5">
-              X
-            </button>
-          </div>
+      {/* Top Header Info Bar */}
+      <div className="w-full max-w-[1600px] flex items-center justify-between z-10">
+        <div className="flex items-center gap-3">
+          <span className="w-3 h-3 rounded-full bg-mint border-2 border-ink-black animate-pulse" />
+          <span className="font-mono text-xs md:text-sm font-bold tracking-widest text-ink-black uppercase">
+            STUDIO INTRO
+          </span>
         </div>
-
-        {/* Content body */}
-        <div className="p-4 md:p-6 flex flex-col gap-4">
-          {/* OS Icon & Status Message */}
-          <div className="flex items-center gap-3">
-            <span className="text-3xl select-none" role="img" aria-label="disk">💾</span>
-            <div className="flex-1">
-              <p className="font-display text-text-dark text-sm font-semibold">TAMA OS v2.0</p>
-              <p className="font-body text-text-muted text-xs">Booting up interactive portfolio...</p>
-            </div>
-            <span className="font-display text-text-dark text-sm font-semibold">{progress}%</span>
-          </div>
-
-          {/* Loading Progress Bar (Pixel block style) */}
-          <div className="w-full h-6 border-2 border-text-dark bg-bg-secondary p-0.5 rounded-sm overflow-hidden flex">
-            <motion.div 
-              className="bg-accent-pink h-full"
-              style={{ width: `${progress}%` }}
-              transition={{ ease: "easeOut" }}
-            />
-          </div>
-
-          {/* Desktop recommendation tip box */}
-          <div className="border border-dashed border-text-muted bg-[var(--accent-yellow)]/30 p-2.5 rounded-sm flex items-start select-none">
-            <p className="font-body text-[11px] leading-tight text-[var(--text-dark)]">
-              <span className="font-semibold text-[var(--text-dark)]">System Tip:</span> Better use desktop mode for the best interactive scrapbook experience!
-            </p>
-          </div>
-
-          {/* Console Log Message Area */}
-          <div className="bg-bg-primary border border-text-dark p-3 rounded-sm font-body text-xs text-text-dark min-h-[4.5rem] flex flex-col justify-center gap-1.5">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-mint animate-pulse" />
-              <span className="font-medium text-text-muted">SYSTEM STATUS:</span>
-            </div>
-            <p className="font-mono text-text-dark animate-fade-in">
-              {BOOT_STEPS[stepIndex]}
-            </p>
-          </div>
+        <div className="font-mono text-xs md:text-sm font-bold text-ink-black bg-white px-3.5 py-1.5 rounded-md border-2 border-ink-black neo-shadow-sm">
+          {currentItem.label} / 06
         </div>
-      </motion.div>
+      </div>
+
+      {/* Center Snappy Typography & Badge Cycling */}
+      <div className="relative z-10 flex flex-col items-center justify-center my-auto overflow-visible py-12 px-4">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentItem.text}
+            initial={{ y: 35, opacity: 0, scale: 0.95 }}
+            animate={{ y: 0, opacity: 1, scale: 1 }}
+            exit={{ y: -35, opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-4 overflow-visible"
+          >
+            {/* Main Word styled in soft neobrutal badge */}
+            <div 
+              className={`px-6 py-3 sm:px-9 sm:py-4.5 rounded-2xl border-2 border-ink-black neo-shadow rotate-[-1deg] ${currentItem.bg} select-none`}
+            >
+              <h1 className="font-display font-extrabold text-3xl sm:text-5xl md:text-7xl tracking-tight m-0 text-ink-black">
+                {currentItem.text}
+              </h1>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Bottom Footer Info */}
+      <div className="w-full max-w-[1600px] flex items-center justify-between text-text-muted font-mono text-[11px] md:text-xs z-10 border-t-2 border-ink-black/15 pt-4">
+        <span className="font-bold">© 2026 PRATAMA PUTRA</span>
+        <span className="hidden sm:inline-block tracking-wider font-semibold">PORTFOLIO INITIATION</span>
+        <span className="font-bold">CILACAP, ID</span>
+      </div>
     </motion.div>
   );
 }

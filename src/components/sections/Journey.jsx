@@ -47,7 +47,7 @@ export default function Journey() {
   return (
     <section
       id="journey"
-      className="py-10 px-4 md:py-24 md:px-8 max-w-5xl mx-auto overflow-visible relative"
+      className="py-10 px-6 md:py-24 md:px-12 lg:px-20 max-w-[1600px] mx-auto w-full overflow-visible relative"
     >
       <motion.div
         variants={staggerContainer}
@@ -57,28 +57,19 @@ export default function Journey() {
         className="flex flex-col gap-10"
       >
         {/* Section Header */}
-        <div>
-          <motion.div
-            variants={fadeUp}
-            className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-pink)] border border-black/5 rotate-[-1deg] mb-2"
-            style={{ fontFamily: 'var(--font-body)' }}
+        <motion.div variants={fadeUp}>
+          <h2
+            className="inline-block px-5 py-2 md:px-7 md:py-3 rounded-xl text-xl sm:text-2xl md:text-4xl font-display font-extrabold text-ink-black bg-lavender border-2 border-ink-black neo-shadow rotate-[1deg] tracking-tight m-0 select-none"
           >
-            My Background
-          </motion.div>
-          <motion.h2
-            variants={fadeUp}
-            className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-[var(--text-dark)] m-0"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            The Logbook Planner
-          </motion.h2>
-        </div>
+            My Journey
+          </h2>
+        </motion.div>
 
         {/* Interactive Ring Binder Layout */}
         <div className="flex flex-col md:flex-row items-stretch gap-0 relative pt-4">
           
           {/* Tabs Container - Mobile: Top row, Desktop: Vertical column on the right side */}
-          <div className="flex flex-row md:flex-col order-1 md:order-2 md:-translate-x-1.5 z-10 shrink-0 md:justify-center">
+          <div className="flex flex-row md:flex-col order-1 md:order-2 md:-translate-x-1.5 z-10 shrink-0 md:justify-center gap-1.5 mb-2 md:mb-0">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id
               return (
@@ -87,20 +78,15 @@ export default function Journey() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`
                     flex-1 md:flex-none py-3 px-4 md:py-4 md:px-5 
-                    text-xs font-semibold uppercase tracking-wider
-                    border border-black/10 transition-all duration-300 cursor-pointer
-                    min-h-[44px] flex items-center justify-center select-none
+                    text-xs font-mono font-bold uppercase tracking-wider
+                    border-2 border-ink-black transition-all duration-200 cursor-pointer
+                    min-h-[44px] flex items-center justify-center select-none rounded-md
                     ${tab.color} ${tab.text}
                     ${isActive 
-                      ? 'shadow-xs scale-100 z-10 font-semibold border-b-transparent md:border-b-black/10 md:border-l-transparent md:translate-x-1.5' 
-                      : 'opacity-70 scale-95 hover:opacity-90'
+                      ? 'neo-shadow scale-100 z-10 md:translate-x-2' 
+                      : 'opacity-70 scale-95 hover:opacity-100'
                     }
-                    rounded-t-sm md:rounded-t-none md:rounded-r-sm md:first:rounded-t-sm md:last:rounded-b-sm
                   `}
-                  style={{ 
-                    fontFamily: 'var(--font-body)',
-                    transform: isActive && window.innerWidth >= 768 ? 'translateX(6px)' : ''
-                  }}
                 >
                   {tab.label}
                 </button>
@@ -109,7 +95,7 @@ export default function Journey() {
           </div>
 
           {/* Notebook Lined Binder Sheet */}
-          <div className="flex-grow order-2 md:order-1 bg-[#fefcf7] border border-black/10 rounded-sm md:rounded-l-sm shadow-md relative min-h-[540px] md:min-h-[580px] flex flex-col overflow-visible">
+          <div className="flex-grow order-2 md:order-1 bg-white border-2 border-ink-black rounded-lg neo-shadow relative min-h-[540px] md:min-h-[580px] flex flex-col overflow-visible">
             
             {/* Metal Binder Rings Decorator (desktop only) */}
             <BinderRings />

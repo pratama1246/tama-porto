@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import ScrollVelocity from '../reactbits/ScrollVelocity'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -172,27 +171,49 @@ export default function Contact() {
         </motion.div>
       </div>
 
-      {/* Footer Copyright - Full Screen Width, Sticking to bottom */}
-      <motion.div
+      {/* Giant Stacked Typography Footer */}
+      <motion.footer
         variants={fadeUp}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="w-full select-none mt-12 overflow-hidden bg-(--bg-primary)/50 border-t border-(--text-dark)/15 pt-5 pb-4 md:pt-6 md:pb-5 flex flex-col gap-2 md:gap-3 items-center text-center"
+        className="w-full border-t-2 border-ink-black bg-[var(--bg-primary)] pt-10 sm:pt-14 pb-8 px-4 sm:px-8 md:px-16 lg:px-20 mt-16 sm:mt-24 flex justify-center select-none overflow-hidden"
       >
-        <ScrollVelocity
-          texts={[
-            `© ${new Date().getFullYear()} Pratama Putra Purwanto • Informatics Engineering • All rights reserved`
-          ]}
-          velocity={-35}
-          numCopies={8}
-          scrollerClassName="text-xl md:text-3xl font-display font-semibold uppercase tracking-wider text-[var(--text-dark)]/90 flex items-center w-full"
-          className="px-8"
-        />
-        <div className="text-[10px] md:text-xs opacity-75 font-mono font-semibold tracking-wider text-(--text-dark) px-4 uppercase">
-          Some assets and components may be subject to copyright • This website is a non-profit personal portfolio. If you own any featured asset and object to its use, please contact me for immediate removal.
+        <div className="max-w-[1600px] w-full flex flex-col justify-between">
+          {/* Top Info Bar */}
+          <div className="flex flex-row justify-between items-center gap-2 pb-5 sm:pb-8 border-b-2 border-ink-black/10 font-mono text-xs sm:text-sm font-bold text-ink-black uppercase">
+            <div className="flex items-center gap-2">
+              <span className="px-2.5 py-1 rounded-md bg-pale-yellow border-2 border-ink-black neo-shadow-sm text-xs sm:text-sm font-extrabold">
+                © 2026
+              </span>
+            </div>
+            <div className="flex items-center gap-1.5 sm:gap-3 text-text-muted text-[9.5px] xs:text-[11px] sm:text-xs">
+              <span>FRONTEND &amp; NETWORK</span>
+              <span>•</span>
+              <span>MYTAMAKIKII.WEB.ID</span>
+            </div>
+          </div>
+
+          {/* Massive Stacked Name with calibrated responsive clamping */}
+          <div className="py-6 sm:py-12 md:py-16 flex flex-col items-start leading-[0.85] tracking-tighter w-full">
+            <span className="font-display font-black text-[13.5vw] xs:text-[14.2vw] sm:text-[14.5vw] md:text-[14vw] lg:text-[13vw] 2xl:text-[12.5rem] text-ink-black uppercase hover:text-soft-blue transition-colors duration-300">
+              PRATAMA
+            </span>
+            <span className="font-display font-black text-[13.5vw] xs:text-[14.2vw] sm:text-[14.5vw] md:text-[14vw] lg:text-[13vw] 2xl:text-[12.5rem] text-ink-black uppercase hover:text-sticker-pink transition-colors duration-300">
+              PUTRA
+            </span>
+            <span className="font-display font-black text-[13.5vw] xs:text-[14.2vw] sm:text-[14.5vw] md:text-[14vw] lg:text-[13vw] 2xl:text-[12.5rem] text-ink-black uppercase hover:text-mint transition-colors duration-300">
+              PURWANTO
+            </span>
+          </div>
+
+          {/* Bottom Disclaimer */}
+          <div className="pt-6 border-t-2 border-ink-black/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-[10px] sm:text-xs font-mono text-text-muted">
+            <span>Some assets and components may be subject to copyright • Non-profit personal portfolio.</span>
+            <span className="shrink-0">Crafted in Cilacap, ID 🇮🇩</span>
+          </div>
         </div>
-      </motion.div>
+      </motion.footer>
     </section>
   )
 }

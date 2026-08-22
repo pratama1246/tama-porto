@@ -8,7 +8,6 @@ import BirthdayTeaser from './BirthdayTeaser'
 import ScatteredGallery from './ScatteredGallery'
 import RoadTo21 from './RoadTo21'
 import ConfettiCannon from './ConfettiCannon'
-import ScrollVelocity from '../reactbits/ScrollVelocity'
 import { birthdayMeta } from '../../data/birthday'
 
 export default function BirthdayPage({ onBackToPortfolio }) {
@@ -68,19 +67,13 @@ export default function BirthdayPage({ onBackToPortfolio }) {
         )}
       </main>
 
-      {/* Footer Copyright - ScrollVelocity Marquee & Disclaimer matching main portfolio */}
-      <footer className="w-full select-none mt-16 overflow-hidden bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 pt-5 pb-4 md:pt-6 md:pb-5 flex flex-col gap-2 md:gap-3 items-center text-center">
-        <ScrollVelocity
-          texts={[
-            `© ${new Date().getFullYear()} Pratama Putra Purwanto • Informatics Engineering • All rights reserved`
-          ]}
-          velocity={-35}
-          numCopies={8}
-          scrollerClassName="text-xl md:text-3xl font-display font-semibold uppercase tracking-wider text-[var(--text-dark)]/90 flex items-center w-full"
-          className="px-8"
-        />
-        <div className="text-[10px] md:text-xs opacity-75 font-mono font-semibold tracking-wider text-[var(--text-dark)] px-4 uppercase">
-          Some assets and components may be subject to copyright • This website is a non-profit personal portfolio. If you own any featured asset and object to its use, please contact me for immediate removal.
+      {/* Footer Copyright */}
+      <footer className="w-full select-none mt-16 bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 py-6 flex flex-col gap-2 items-center text-center px-4">
+        <div className="font-mono text-xs font-bold text-ink-black uppercase">
+          © {new Date().getFullYear()} Pratama Putra Purwanto • Informatics Engineering
+        </div>
+        <div className="text-[10px] md:text-xs opacity-75 font-mono tracking-wider text-[var(--text-dark)] uppercase">
+          Some assets and components may be subject to copyright • Non-profit personal portfolio.
         </div>
       </footer>
     </div>

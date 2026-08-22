@@ -1,6 +1,3 @@
-// src/components/birthday/BirthdayPage.jsx
-// Full /20 route page view with Confetti Cannon, Scattered 3:2 Polaroid Dump & Road to 21
-
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import OpeningScreen from './OpeningScreen'
@@ -8,7 +5,6 @@ import BirthdayTeaser from './BirthdayTeaser'
 import ScatteredGallery from './ScatteredGallery'
 import RoadTo21 from './RoadTo21'
 import ConfettiCannon from './ConfettiCannon'
-import ScrollVelocity from '../reactbits/ScrollVelocity'
 import { birthdayMeta } from '../../data/birthday'
 
 export default function BirthdayPage({ onBackToPortfolio }) {
@@ -68,19 +64,13 @@ export default function BirthdayPage({ onBackToPortfolio }) {
         )}
       </main>
 
-      {/* Footer Copyright - ScrollVelocity Marquee & Disclaimer matching main portfolio */}
-      <footer className="w-full select-none mt-16 overflow-hidden bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 pt-5 pb-4 md:pt-6 md:pb-5 flex flex-col gap-2 md:gap-3 items-center text-center">
-        <ScrollVelocity
-          texts={[
-            `© ${new Date().getFullYear()} Pratama Putra Purwanto • Informatics Engineering • All rights reserved`
-          ]}
-          velocity={-35}
-          numCopies={8}
-          scrollerClassName="text-xl md:text-3xl font-display font-semibold uppercase tracking-wider text-[var(--text-dark)]/90 flex items-center w-full"
-          className="px-8"
-        />
-        <div className="text-[10px] md:text-xs opacity-75 font-mono font-semibold tracking-wider text-[var(--text-dark)] px-4 uppercase">
-          Some assets and components may be subject to copyright • This website is a non-profit personal portfolio. If you own any featured asset and object to its use, please contact me for immediate removal.
+      {/* Footer Copyright */}
+      <footer className="w-full select-none mt-16 bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 pt-6 pb-6 px-4 flex flex-col gap-2 items-center text-center">
+        <div className="font-mono text-xs font-bold text-[var(--text-dark)] opacity-90 uppercase">
+          © 2026 Pratama Putra Purwanto • All rights reserved
+        </div>
+        <div className="text-[10px] opacity-75 font-mono text-[var(--text-dark)] px-4 uppercase">
+          Some assets and components may be subject to copyright • Non-profit personal portfolio.
         </div>
       </footer>
     </div>

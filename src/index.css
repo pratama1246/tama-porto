@@ -7,8 +7,8 @@
   --font-handwrite: 'Architects Daughter', cursive;
 
   --color-ink-black: #1A1A1A;
-  --color-bg-primary: #fdf8f6;
-  --color-bg-secondary: #f7f3f0;
+  --color-bg-primary: #fdf6e3;
+  --color-bg-secondary: #f5e6c8;
   
   --color-sticker-pink: #FFD1DC;
   --color-mint: #D0F0C0;
@@ -40,15 +40,11 @@
   --radius-xl: 12px;
 }
 
+/* Unprefixed aliases for SVG stickers & inline styles (var(--accent-pink) etc.) */
 :root {
-  --font-display: 'Lexend', 'Space Grotesk', sans-serif;
-  --font-body: 'Plus Jakarta Sans', 'Hanken Grotesk', sans-serif;
-  --font-mono: 'Space Mono', monospace;
-  --font-handwrite: 'Architects Daughter', cursive;
-
   --ink-black: #1A1A1A;
-  --bg-primary: #fdf8f6;
-  --bg-secondary: #f7f3f0;
+  --bg-primary: #fdf6e3;
+  --bg-secondary: #f5e6c8;
 
   --sticker-pink: #FFD1DC;
   --mint: #D0F0C0;
@@ -94,15 +90,12 @@ body {
   margin: 0;
   max-width: 100%;
   overflow-x: clip;
-}
-
-body {
-  background-color: var(--bg-primary);
+  background-color: var(--color-bg-primary);
   background-image:
     linear-gradient(rgba(160, 160, 190, 0.12) 1px, transparent 1px),
     linear-gradient(90deg, rgba(160, 160, 190, 0.12) 1px, transparent 1px);
   background-size: 24px 24px;
-  color: var(--text-dark);
+  color: var(--color-text-dark);
   font-family: var(--font-body);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -179,8 +172,8 @@ body {
   background-size: 32px 32px;
 }
 
-/* Hide default OS cursor on desktop pointer devices so custom cursor is clean */
-@media (min-width: 1024px) and (pointer: fine) {
+/* Hide default OS cursor ONLY on pure desktop pointer devices with hover support */
+@media (min-width: 1024px) and (pointer: fine) and (hover: hover) {
   *, *::before, *::after {
     cursor: none !important;
   }

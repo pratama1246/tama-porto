@@ -18,17 +18,17 @@ const staggerContainer = {
   }
 }
 
-// Metal Binder Rings for the Scrapbook Metaphor (desktop only)
+// Metal Binder Rings for the Scrapbook Metaphor (Fluid across all devices)
 function BinderRings() {
   const rings = [1, 2, 3, 4, 5]
   return (
-    <div className="absolute left-[-14px] top-1/2 -translate-y-1/2 flex flex-col gap-12 z-20 hidden md:flex pointer-events-none">
+    <div className="absolute -left-2 sm:-left-3.5 top-1/2 -translate-y-1/2 flex flex-col gap-8 sm:gap-12 z-20 pointer-events-none">
       {rings.map((r) => (
-        <div key={r} className="relative w-7 h-10 select-none">
+        <div key={r} className="relative w-5 h-7 sm:w-7 sm:h-10 select-none">
           {/* Metal Ring Curve */}
-          <div className="absolute inset-0 border-[3.5px] border-slate-300 rounded-full shadow-xs bg-gradient-to-r from-slate-200 via-slate-400 to-slate-200 opacity-90" />
+          <div className="absolute inset-0 border-[2.5px] sm:border-[3.5px] border-slate-300 rounded-full shadow-xs bg-gradient-to-r from-slate-200 via-slate-400 to-slate-200 opacity-90" />
           {/* Hole Background Overlay */}
-          <div className="absolute left-[2px] top-[14px] w-1.5 h-3 bg-black/25 rounded-full" />
+          <div className="absolute left-[1.5px] sm:left-[2px] top-[9px] sm:top-[14px] w-1 sm:w-1.5 h-2 sm:h-3 bg-black/25 rounded-full" />
         </div>
       ))}
     </div>
@@ -47,14 +47,14 @@ export default function Journey() {
   return (
     <section
       id="journey"
-      className="py-10 px-6 md:py-24 md:px-12 lg:px-20 max-w-[1600px] mx-auto w-full overflow-visible relative"
+      className="py-10 px-4 sm:px-6 md:py-24 md:px-12 lg:px-20 max-w-[1600px] mx-auto w-full overflow-visible relative"
     >
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
-        className="flex flex-col gap-10"
+        className="flex flex-col gap-6 sm:gap-10"
       >
         {/* Section Header */}
         <motion.div variants={fadeUp}>
@@ -66,10 +66,10 @@ export default function Journey() {
         </motion.div>
 
         {/* Interactive Ring Binder Layout */}
-        <div className="flex flex-col md:flex-row items-stretch gap-0 relative pt-4">
+        <div className="flex flex-col md:flex-row items-stretch gap-0 relative pt-2 sm:pt-4">
           
           {/* Tabs Container - Mobile: Top row, Desktop: Vertical column on the right side */}
-          <div className="flex flex-row md:flex-col order-1 md:order-2 md:-translate-x-1.5 z-10 shrink-0 md:justify-center gap-1.5 mb-2 md:mb-0">
+          <div className="flex flex-row md:flex-col order-1 md:order-2 md:-translate-x-1.5 z-10 shrink-0 md:justify-center gap-1 sm:gap-1.5 mb-2 md:mb-0">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.id
               return (
@@ -77,10 +77,10 @@ export default function Journey() {
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
                   className={`
-                    flex-1 md:flex-none py-3 px-4 md:py-4 md:px-5 
-                    text-xs font-mono font-bold uppercase tracking-wider
+                    flex-1 md:flex-none py-2.5 px-3 sm:py-3.5 sm:px-5 
+                    text-[11px] sm:text-xs font-mono font-bold uppercase tracking-wider
                     border-2 border-ink-black transition-all duration-200 cursor-pointer
-                    min-h-[44px] flex items-center justify-center select-none rounded-md
+                    min-h-[42px] flex items-center justify-center select-none rounded-md
                     ${tab.color} ${tab.text}
                     ${isActive 
                       ? 'neo-shadow scale-100 z-10 md:translate-x-2' 
@@ -95,17 +95,17 @@ export default function Journey() {
           </div>
 
           {/* Notebook Lined Binder Sheet */}
-          <div className="flex-grow order-2 md:order-1 bg-white border-2 border-ink-black rounded-lg neo-shadow relative min-h-[540px] md:min-h-[580px] flex flex-col overflow-visible">
+          <div className="flex-grow order-2 md:order-1 bg-white border-2 border-ink-black rounded-lg neo-shadow relative min-h-[500px] md:min-h-[580px] flex flex-col overflow-visible">
             
-            {/* Metal Binder Rings Decorator (desktop only) */}
+            {/* Metal Binder Rings Decorator */}
             <BinderRings />
 
             {/* Notebook Red Margin Line */}
-            <div className="absolute left-6 md:left-10 top-0 bottom-0 border-l border-red-200 pointer-events-none" aria-hidden="true" />
+            <div className="absolute left-5 sm:left-7 md:left-10 top-0 bottom-0 border-l border-red-200 pointer-events-none" aria-hidden="true" />
 
             {/* Content Container */}
             <div 
-              className="flex-grow p-6 pl-10 md:p-10 md:pl-16 relative z-10 flex flex-col justify-start"
+              className="flex-grow p-4 pl-8 sm:p-6 sm:pl-10 md:p-10 md:pl-16 relative z-10 flex flex-col justify-start"
               style={{
                 backgroundImage: 'linear-gradient(var(--bg-secondary) 1px, transparent 1px)',
                 backgroundSize: '100% 28px',

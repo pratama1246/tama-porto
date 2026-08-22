@@ -79,22 +79,22 @@ export default function Hero({ onOpenBirthday, isLoading = false }) {
   return (
     <section
       id="hero"
-      className="relative z-20 min-h-[90svh] flex items-center justify-center pt-28 pb-16 px-6 md:px-12 lg:px-20 max-w-[1600px] mx-auto w-full overflow-hidden lg:overflow-visible"
+      className="relative z-20 min-h-[90svh] flex items-center justify-center pt-28 pb-20 sm:pt-36 sm:pb-20 px-4 sm:px-8 md:px-12 lg:px-20 max-w-[1600px] mx-auto w-full overflow-hidden lg:overflow-visible"
     >
       <motion.div
         variants={staggerContainer}
         initial="hidden"
         animate={!isLoading ? "visible" : "hidden"}
-        className="w-full text-left relative z-10 flex flex-col gap-4 sm:gap-5"
+        className="w-full text-left relative z-10 flex flex-col gap-4 sm:gap-6"
       >
         {/* Top Header Area: Badges & Massive Display Name */}
         <div className="w-full flex flex-col items-start">
           
-          {/* Welcome Tag & Subtle Birthday Release Clue (Elevated with breathing room) */}
-          <div className="flex items-center gap-3 mb-3 sm:mb-4 flex-wrap">
+          {/* Welcome Tag & Subtle Birthday Release Clue */}
+          <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 flex-wrap">
             <motion.div
               variants={fadeUp}
-              className="px-3.5 py-1.5 rounded-md text-[12px] font-mono font-bold tracking-wider uppercase bg-lavender text-ink-black border-2 border-ink-black neo-shadow rotate-[-2deg] select-none"
+              className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-md text-[11px] sm:text-[12px] font-mono font-bold tracking-wider uppercase bg-lavender text-ink-black border-2 border-ink-black neo-shadow rotate-[-2deg] select-none"
             >
               Welcome to my studio
             </motion.div>
@@ -107,46 +107,46 @@ export default function Hero({ onOpenBirthday, isLoading = false }) {
               variants={fadeUp}
               whileHover={{ scale: 1.05, rotate: 2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-3 py-1 rounded-md text-[11px] font-mono font-bold uppercase tracking-wider bg-[#ffd4b8] text-ink-black border-2 border-ink-black neo-shadow-sm rotate-[2deg] select-none no-underline cursor-pointer"
+              className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-md text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider bg-[#ffd4b8] text-ink-black border-2 border-ink-black neo-shadow-sm rotate-[2deg] select-none no-underline cursor-pointer"
             >
               ⚡ v20.0 (15.08)
             </motion.button>
           </div>
 
-          {/* Massive Full-Width Display Name Header */}
+          {/* Display Name Header — Scaled precisely for 320px to 4K */}
           <motion.div variants={fadeUp} className="relative select-none w-full">
-            <h1 className="font-display font-extrabold text-[2.8rem] sm:text-[4.5rem] md:text-[5.8rem] lg:text-[7rem] xl:text-[8rem] leading-[0.94] tracking-tight text-ink-black m-0">
+            <h1 className="font-display font-extrabold text-[2.5rem] xs:text-[3rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[7rem] xl:text-[8.2rem] leading-[0.96] lg:leading-[0.92] tracking-tight text-ink-black m-0">
               Pratama Putra Purwanto
             </h1>
           </motion.div>
         </div>
 
         {/* Bottom Split: Bio & CTA on Left, Interactive Cards on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start w-full mt-2 sm:mt-3">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start w-full mt-2 sm:mt-6">
           
           {/* Left Column: Bio Teaser & CTA */}
           <div className="lg:col-span-7 flex flex-col items-start relative">
             
             {/* Subtitle / Bio Teaser with clean scrapbook highlights & underlines */}
             <motion.div variants={fadeUp} className="max-w-[650px] w-full">
-              <p className="text-lg md:text-xl text-text-muted leading-relaxed font-body m-0">
+              <p className="text-[0.95rem] sm:text-lg md:text-xl text-text-muted leading-[1.65] sm:leading-relaxed font-body m-0">
                 D3 Informatics Engineering student, Frontend Developer &amp; Network Administrator. Inspired by{' '}
-                <span className="font-bold text-ink-black border-b-2 border-sticker-pink">stories</span>,{' '}
-                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded bg-pale-yellow border border-ink-black/30">music</span>,{' '}
-                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded bg-lavender border border-ink-black/30">aesthetics</span>, and{' '}
-                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded bg-mint border border-ink-black/30">technology.</span>
+                <span className="font-bold text-ink-black border-b-2 border-sticker-pink whitespace-nowrap">stories</span>,{' '}
+                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded bg-pale-yellow border border-ink-black/30 whitespace-nowrap inline-block my-0.5">music</span>,{' '}
+                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded bg-lavender border border-ink-black/30 whitespace-nowrap inline-block my-0.5">aesthetics</span>, and{' '}
+                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded bg-mint border border-ink-black/30 whitespace-nowrap inline-block my-0.5">technology.</span>
               </p>
             </motion.div>
 
             {/* CTA Button and Arrow Doodle */}
             <motion.div
               variants={fadeUp}
-              className="mt-7 flex flex-col items-start gap-2 relative"
+              className="mt-6 sm:mt-8 flex flex-col items-start gap-2 relative"
             >
               <div className="relative">
                 <a
                   href="#about"
-                  className="px-6 py-3 rounded-lg border-2 border-ink-black bg-soft-blue text-ink-black font-mono text-sm font-bold neo-shadow neo-shadow-hover no-underline inline-flex items-center gap-2"
+                  className="px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg border-2 border-ink-black bg-soft-blue text-ink-black font-mono text-xs sm:text-sm font-bold neo-shadow neo-shadow-hover active:scale-95 transition-transform no-underline inline-flex items-center gap-2"
                 >
                   <span>Enter Gallery</span>
                   <span className="text-base">→</span>
@@ -181,100 +181,104 @@ export default function Hero({ onOpenBirthday, isLoading = false }) {
             </motion.div>
           </div>
 
-          {/* Right Column: Interactive Polaroid Stack (Elevated slightly) */}
-          <div className="lg:col-span-5 flex justify-center items-start relative min-h-[300px] sm:min-h-[380px] w-full select-none lg:-mt-6">
+          {/* Right Column: Tactile Studio Collage (Overlapping & Desktop-Draggable) */}
+          <div className="lg:col-span-5 flex justify-center items-start relative min-h-[290px] xs:min-h-[310px] sm:min-h-[340px] lg:min-h-[360px] w-full select-none mt-2 sm:mt-4 lg:-mt-14 xl:-mt-20">
           
-          {/* Card 1: Sticky Note (Mood/State) - Index 0 */}
-          <motion.div
-            ref={card1Ref}
-            drag={!isMobile}
-            dragMomentum={false}
-            onDragStart={() => bringCardToFront(0)}
-            onTapStart={() => bringCardToFront(0)}
-            style={{
-              zIndex: 10,
-            }}
-            variants={stickyNoteVariants}
-            whileHover={isMobile ? {} : { scale: 1.05, rotate: -2, transition: { duration: 0.15 } }}
-            whileDrag={{ scale: 1.03, zIndex: 100 }}
-            className={`absolute left-[5%] sm:left-[8%] top-[2%] bg-pale-yellow p-4 w-[180px] sm:w-[200px] aspect-square rounded-lg neo-shadow border-2 border-ink-black will-change-transform ${
-              isMobile ? 'cursor-default' : 'cursor-grab active:cursor-grabbing touch-none'
-            }`}
-          >
-            <h3 
-              className="text-[11px] font-mono font-bold text-text-handwrite tracking-wider uppercase border-b-2 border-ink-black/20 pb-1 mb-2.5"
-            >
-              ⚡ CURRENT STATE
-            </h3>
-            <ul
-              className="list-none p-0 m-0 flex flex-col gap-1.5 text-[0.9rem] text-text-handwrite leading-tight font-medium"
-              style={{ fontFamily: 'var(--font-handwrite)' }}
-            >
-              <li>🎧 Lofi beats playing</li>
-              <li>☕ Coffee level: 85%</li>
-              <li>📍 Cilacap, ID</li>
-              <li>🚀 Crafting in React</li>
-            </ul>
-          </motion.div>
- 
-          {/* Card 2: Mini Polaroid (Workspace / Tech Drawing) - Index 1 */}
-          <motion.div
-            ref={card2Ref}
-            drag={!isMobile}
-            dragMomentum={false}
-            onDragStart={() => bringCardToFront(1)}
-            onTapStart={() => bringCardToFront(1)}
-            style={{
-              zIndex: 20,
-            }}
-            variants={polaroidVariants}
-            whileHover={isMobile ? {} : { scale: 1.05, rotate: 3, transition: { duration: 0.15 } }}
-            whileDrag={{ scale: 1.03, zIndex: 100 }}
-            className={`absolute right-[5%] sm:right-[8%] -top-3 sm:-top-6 bg-white p-3 pb-6 w-[220px] sm:w-[245px] rounded-lg neo-shadow border-2 border-ink-black will-change-transform ${
-              isMobile ? 'cursor-default' : 'cursor-grab active:cursor-grabbing touch-none'
-            }`}
-          >
-            {/* Torn Washi Tape on top corner */}
-            <div
-              className="absolute -top-3.5 right-8 h-[18px] w-[64px] rounded-xs border border-ink-black/40 shadow-xs"
+            {/* Card 1: Sticky Note (Mood/State) - Index 0 */}
+            <motion.div
+              ref={card1Ref}
+              drag={!isMobile}
+              dragMomentum={false}
+              dragElastic={0}
+              onDragStart={() => bringCardToFront(0)}
+              onTapStart={() => bringCardToFront(0)}
               style={{
-                backgroundColor: 'var(--color-mint, #D0F0C0)',
-                clipPath: 'polygon(0% 10%, 4% 0%, 96% 5%, 100% 12%, 98% 88%, 94% 100%, 6% 95%, 0% 90%)',
-                mixBlendMode: 'multiply',
-                transform: 'rotate(-4deg)'
+                zIndex: 10,
+                touchAction: isMobile ? 'auto' : 'none'
               }}
-            />
- 
-            {/* Browser Drawing/Mockup */}
-            <div className="w-full aspect-square bg-white flex flex-col border-2 border-ink-black rounded-md p-1.5 overflow-hidden relative">
-              <div className="flex gap-1 border-b border-ink-black/20 pb-1 mb-1 select-none pointer-events-none">
-                <span className="w-2 h-2 rounded-full bg-red-400 border border-ink-black/40"></span>
-                <span className="w-2 h-2 rounded-full bg-yellow-400 border border-ink-black/40"></span>
-                <span className="w-2 h-2 rounded-full bg-green-400 border border-ink-black/40"></span>
-              </div>
-              <img
-                src="https://media.giphy.com/media/UWrvP9jVYegGdCXq6C/giphy.gif"
-                alt="Cute heart animation"
-                draggable={false}
-                onContextMenu={(e) => e.preventDefault()}
-                className="protected-image w-full flex-grow object-contain pointer-events-none select-none"
-              />
-            </div>
- 
-            <div
-              className="text-center mt-3 text-[0.85rem] font-medium text-text-handwrite"
-              style={{ fontFamily: 'var(--font-handwrite)' }}
+              variants={stickyNoteVariants}
+              whileHover={isMobile ? {} : { scale: 1.04, rotate: -2, transition: { duration: 0.15 } }}
+              whileDrag={{ scale: 1.05, zIndex: 100 }}
+              whileTap={{ scale: 0.98 }}
+              className={`absolute left-1 xs:left-3 sm:left-[6%] lg:left-[2%] top-0 sm:-top-2 lg:-top-6 bg-pale-yellow p-3.5 sm:p-4 w-[155px] xs:w-[170px] sm:w-[195px] lg:w-[210px] aspect-square rounded-lg neo-shadow border-2 border-ink-black will-change-transform ${
+                isMobile ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'
+              }`}
             >
-              🐢 juhoon (cortis).gif
-            </div>
-          </motion.div>
-
-
-
-        </div>
+              <h3 
+                className="text-[10px] sm:text-[11px] font-mono font-bold text-text-handwrite tracking-wider uppercase border-b-2 border-ink-black/20 pb-1 mb-2 sm:mb-2.5"
+              >
+                ⚡ CURRENT STATE
+              </h3>
+              <ul
+                className="list-none p-0 m-0 flex flex-col gap-1 sm:gap-1.5 text-[0.8rem] sm:text-[0.88rem] text-text-handwrite leading-tight font-medium"
+                style={{ fontFamily: 'var(--font-handwrite)' }}
+              >
+                <li>🎧 Lofi beats playing</li>
+                <li>☕ Coffee level: 85%</li>
+                <li>📍 Cilacap, ID</li>
+                <li>🚀 Crafting in React</li>
+              </ul>
+            </motion.div>
+   
+            {/* Card 2: Mini Polaroid (Workspace / Tech Drawing) - Index 1 */}
+            <motion.div
+              ref={card2Ref}
+              drag={!isMobile}
+              dragMomentum={false}
+              dragElastic={0}
+              onDragStart={() => bringCardToFront(1)}
+              onTapStart={() => bringCardToFront(1)}
+              style={{
+                zIndex: 20,
+                touchAction: isMobile ? 'auto' : 'none'
+              }}
+              variants={polaroidVariants}
+              whileHover={isMobile ? {} : { scale: 1.04, rotate: 3, transition: { duration: 0.15 } }}
+              whileDrag={{ scale: 1.05, zIndex: 100 }}
+              whileTap={{ scale: 0.98 }}
+              className={`absolute right-1 xs:right-3 sm:right-[6%] lg:right-[4%] top-14 xs:top-14 sm:top-4 lg:-top-16 bg-white p-2.5 pb-4 sm:p-3 sm:pb-6 w-[170px] xs:w-[190px] sm:w-[225px] lg:w-[245px] rounded-lg neo-shadow border-2 border-ink-black will-change-transform ${
+                isMobile ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'
+              }`}
+            >
+              {/* Torn Washi Tape on top corner */}
+              <div
+                className="absolute -top-3.5 right-5 sm:right-8 h-[16px] sm:h-[18px] w-[50px] sm:w-[64px] rounded-xs border border-ink-black/40 shadow-xs pointer-events-none"
+                style={{
+                  backgroundColor: 'var(--color-mint, #D0F0C0)',
+                  clipPath: 'polygon(0% 10%, 4% 0%, 96% 5%, 100% 12%, 98% 88%, 94% 100%, 6% 95%, 0% 90%)',
+                  mixBlendMode: 'multiply',
+                  transform: 'rotate(-4deg)'
+                }}
+              />
+   
+              {/* Browser Drawing/Mockup */}
+              <div className="w-full aspect-square bg-white flex flex-col border-2 border-ink-black rounded-md p-1 sm:p-1.5 overflow-hidden relative">
+                <div className="flex gap-1 border-b border-ink-black/20 pb-0.5 sm:pb-1 mb-1 select-none pointer-events-none">
+                  <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-red-400 border border-ink-black/40"></span>
+                  <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-yellow-400 border border-ink-black/40"></span>
+                  <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-green-400 border border-ink-black/40"></span>
+                </div>
+                <img
+                  src="https://media.giphy.com/media/UWrvP9jVYegGdCXq6C/giphy.gif"
+                  alt="Cute heart animation"
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="protected-image w-full flex-grow object-contain pointer-events-none select-none"
+                />
+              </div>
+   
+              <div
+                className="text-center mt-1.5 sm:mt-3 text-[0.78rem] sm:text-[0.85rem] font-medium text-text-handwrite"
+                style={{ fontFamily: 'var(--font-handwrite)' }}
+              >
+                🐢 juhoon (cortis).gif
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.div>
 
     </section>
   )
 }
+

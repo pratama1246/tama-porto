@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ScrollStack, { ScrollStackItem } from '../reactbits/ScrollStack'
 import { certifications } from '../../data/certifications'
 
@@ -119,7 +119,7 @@ function CertificateCard({ cert, isArchive = false }) {
       </div>
 
       {/* Card Footer (Verify Link and Stamp) */}
-      <div className={`mt-5 pt-3 border-t border-black/5 flex justify-between items-end relative min-h-[50px] ${
+      <div className={`mt-5 pt-3 border-t-2 border-ink-black/10 flex justify-between items-end relative min-h-[50px] ${
         isArchive ? 'z-10' : ''
       }`}>
         {cert.link ? (
@@ -127,19 +127,14 @@ function CertificateCard({ cert, isArchive = false }) {
             href={cert.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-0.5 text-[11px] font-semibold text-[var(--text-dark)] hover:underline no-underline"
-            style={{ fontFamily: 'var(--font-body)' }}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border-2 border-ink-black bg-mint text-ink-black font-mono text-[11px] font-bold neo-shadow-sm hover:brightness-95 active:scale-95 transition-all no-underline"
           >
-            Verify Credential 
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="inline ml-0.5">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-            </svg>
+            <span>Verify Credential</span>
+            <span className="text-[10px]">↗</span>
           </a>
         ) : (
           <span 
-            className="text-[10px] text-[var(--text-handwrite)]/60 font-medium select-none italic"
+            className="text-[10px] text-text-handwrite/70 font-semibold select-none italic bg-pale-yellow/60 px-2 py-0.5 rounded border border-black/10"
             style={{ fontFamily: 'var(--font-handwrite)' }}
           >
             * local_copy.png *
@@ -155,7 +150,7 @@ function CertificateCard({ cert, isArchive = false }) {
   if (isArchive) {
     return (
       <div 
-        className={`relative flex flex-col justify-between min-h-[280px] w-full p-6 bg-white border-2 border-ink-black rounded-lg neo-shadow hover:-translate-y-1 transition-all duration-200 ${randomRotation}`}
+        className={`relative flex flex-col justify-between min-h-[260px] w-full max-w-[340px] sm:max-w-[360px] p-4.5 sm:p-5 bg-white border-2 border-ink-black rounded-xl neo-shadow hover:-translate-y-1 transition-all duration-200 ${randomRotation}`}
       >
         {renderCardContent()}
       </div>
@@ -164,7 +159,7 @@ function CertificateCard({ cert, isArchive = false }) {
 
   return (
     <ScrollStackItem 
-      itemClassName="flex flex-col justify-between min-h-[390px] md:min-h-[360px] w-full border-2 border-ink-black neo-shadow rounded-lg"
+      itemClassName="flex flex-col justify-between min-h-[390px] md:min-h-[360px] w-full border-2 border-ink-black neo-shadow rounded-2xl"
     >
       {renderCardContent()}
     </ScrollStackItem>
@@ -173,6 +168,14 @@ function CertificateCard({ cert, isArchive = false }) {
 
 export default function Certifications() {
   const [showArchive, setShowArchive] = useState(false)
+
+  // Recalculate ScrollTrigger markers and layout cleanly after expand/collapse completes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 450)
+    return () => clearTimeout(timer)
+  }, [showArchive])
 
   // Active certifications shown in ScrollStack
   const coreCerts = certifications.filter(cert => !cert.archived)
@@ -212,41 +215,44 @@ export default function Certifications() {
         </ScrollStack>
 
         {/* Toggle Archive Button */}
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-8">
           <button
             onClick={() => setShowArchive(!showArchive)}
-            className="px-6 py-2.5 rounded-sm border border-[var(--text-dark)] bg-white text-xs font-semibold text-[var(--text-dark)] hover:bg-black/5 hover:-translate-y-0.5 active:scale-95 transition-all cursor-pointer shadow-3xs rotate-[-1deg] min-h-[44px]"
-            style={{ fontFamily: 'var(--font-body)' }}
+            className="group flex items-center gap-2.5 px-6 py-3 rounded-xl border-2 border-ink-black bg-pale-yellow text-ink-black font-mono text-xs sm:text-sm font-bold neo-shadow neo-shadow-hover transition-all cursor-pointer select-none"
           >
-            {showArchive ? 'Collapse Archive Certificates' : 'View Archive Certificates'}
+            <span>
+              {showArchive 
+                ? 'Collapse Archive Certificates ▴' 
+                : `View Archive Certificates (+${archiveCerts.length} more) ▾`}
+            </span>
           </button>
         </div>
 
-        {/* Collapsible Archive Grid */}
-        <AnimatePresence>
-          {showArchive && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="overflow-hidden"
-            >
-              <div className="border-t border-dashed border-[var(--text-muted)]/30 pt-10 mt-6">
-                <div className="text-center mb-8">
-                  <span className="font-handwrite text-sm text-[var(--text-handwrite)]/80 italic">
-                    * {archiveCerts.length} archived — general &amp; micro-skill achievements *
-                  </span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center items-start [&>*:last-child:nth-child(3n+1)]:md:col-start-2">
-                  {archiveCerts.map((cert) => (
-                    <CertificateCard key={cert.id} cert={cert} isArchive={true} />
-                  ))}
-                </div>
+        {/* Collapsible Archive Grid (Native Smooth CSS Grid Accordion - 0 Layout Stutter) */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateRows: showArchive ? '1fr' : '0fr',
+            transition: 'grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease',
+            opacity: showArchive ? 1 : 0
+          }}
+          className="w-full"
+        >
+          <div className="overflow-hidden min-h-0">
+            <div className="border-t border-dashed border-[var(--text-muted)]/30 pt-8 pb-6 px-2 sm:px-6 mt-6">
+              <div className="text-center mb-8">
+                <span className="font-handwrite text-sm text-[var(--text-handwrite)]/80 italic">
+                  * {archiveCerts.length} archived — general &amp; micro-skill achievements *
+                </span>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 justify-items-center items-start [&>*:last-child:nth-child(3n+1)]:lg:col-start-2">
+                {archiveCerts.map((cert) => (
+                  <CertificateCard key={cert.id} cert={cert} isArchive={true} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

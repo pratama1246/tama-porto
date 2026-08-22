@@ -39,28 +39,28 @@ export default function About() {
         </motion.div>
 
 
-        {/* Left Side: Polaroid Card (4 cols) */}
+        {/* Left Side: Polaroid Card (5 cols on desktop, centered overlapping on mobile) */}
         <motion.div
           variants={fadeUp}
-          className="md:col-span-5 flex justify-center relative py-6"
+          className="md:col-span-5 flex justify-center relative py-2 sm:py-6 -mb-4 md:mb-0 z-10"
         >
           {/* Polaroid Frame */}
           <div
-            className="relative bg-white p-3 pb-8 rounded-lg neo-shadow border-2 border-ink-black transition-all duration-300 hover:rotate-0 hover:scale-[1.02] max-w-[280px]"
+            className="relative bg-white p-3 pb-6 sm:pb-8 rounded-lg neo-shadow border-2 border-ink-black transition-all duration-300 hover:rotate-0 hover:scale-[1.02] w-[clamp(220px,65vw,280px)]"
             style={{
-              transform: 'rotate(-3deg)',
+              transform: 'rotate(-2.5deg)',
             }}
           >
             {/* CSS Paper Clip Decorator */}
             <div 
-              className="absolute -top-4 left-1/3 w-[12px] h-[36px] border-2 border-ink-black rounded-full z-20 bg-transparent rotate-[18deg]"
+              className="absolute -top-3.5 left-1/3 w-[12px] h-[34px] border-2 border-ink-black rounded-full z-20 bg-transparent rotate-[18deg] pointer-events-none"
               aria-hidden="true"
             >
-              <div className="absolute top-[4px] left-[1.5px] w-[6px] h-[22px] border-2 border-ink-black rounded-full bg-transparent" />
+              <div className="absolute top-[3px] left-[1.5px] w-[6px] h-[20px] border-2 border-ink-black rounded-full bg-transparent" />
             </div>
 
             {/* Polaroid Photo Image */}
-            <div className="w-[256px] h-[256px] bg-[#f5e6c8] overflow-hidden rounded-md border-2 border-ink-black">
+            <div className="w-full aspect-square bg-[#f5e6c8] overflow-hidden rounded-md border-2 border-ink-black">
               <img
                 src="/assets/photos/avatar.webp"
                 alt="Tama Purwanto"
@@ -73,7 +73,7 @@ export default function About() {
 
             {/* Handwritten Label */}
             <div
-              className="text-center mt-4 text-[0.9rem] font-medium text-text-handwrite select-none"
+              className="text-center mt-3 sm:mt-4 text-[0.85rem] sm:text-[0.9rem] font-medium text-text-handwrite select-none"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
               me_in_studio.jpg
@@ -82,7 +82,7 @@ export default function About() {
 
           {/* Washi Tape Strip at bottom left of polaroid */}
           <div
-            className="absolute -bottom-2 -left-2 w-[75px] h-[20px] bg-mint opacity-85 border border-ink-black/40 z-10 rotate-[-12deg] rounded-xs pointer-events-none"
+            className="absolute -bottom-1 -left-1 sm:-bottom-2 sm:-left-2 w-[65px] sm:w-[75px] h-[18px] sm:h-[20px] bg-mint opacity-85 border border-ink-black/40 z-10 rotate-[-12deg] rounded-xs pointer-events-none"
             style={{ mixBlendMode: 'multiply' }}
             aria-hidden="true"
           />

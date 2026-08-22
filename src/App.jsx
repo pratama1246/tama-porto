@@ -1,7 +1,8 @@
-import { useState, useEffect, lazy, Suspense } from 'react'
+import { useState, useEffect, useLayoutEffect, useRef, lazy, Suspense } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import Navbar from './components/layout/Navbar'
+import CardNav from './components/layout/CardNav'
+import { navItems } from './data/navigation'
 import Hero from './components/sections/Hero'
 import BackgroundElements from './components/layout/BackgroundElements'
 import Loader from './components/layout/Loader'
@@ -45,6 +46,34 @@ function App() {
   const [isBirthdayRoute, setIsBirthdayRoute] = useState(() => checkIsBirthdayPath())
   const [showBirthdayToast, setShowBirthdayToast] = useState(false)
   const [savedScrollY, setSavedScrollY] = useState(0)
+  const targetScrollSectionRef = useRef(null)
+
+  const activeProject = projects.find(p => p.id === activeProjectId)
+  const isDetailView = Boolean(activeProject || isBirthdayRoute)
+
+  // Synchronous pre-paint scroll positioning: Prevents any 1-frame Hero jitter on return from detail
+  useLayoutEffect(() => {
+    if (!isDetailView && targetScrollSectionRef.current) {
+      const sectionId = targetScrollSectionRef.current
+      targetScrollSectionRef.current = null
+
+      const targetEl = document.getElementById(sectionId)
+      if (targetEl) {
+        let top = 0
+        let el = targetEl
+        while (el) {
+          top += el.offsetTop
+          el = el.offsetParent
+        }
+        const navOffset = 24
+        window.scrollTo({
+          top: Math.max(0, top - navOffset),
+          behavior: 'instant'
+        })
+      }
+      ScrollTrigger.refresh()
+    }
+  }, [isDetailView])
 
   // Sync state when browser back/forward buttons are clicked
   useEffect(() => {
@@ -194,15 +223,9 @@ function App() {
   }
 
   const handleCloseDetail = () => {
+    targetScrollSectionRef.current = 'projects'
     setActiveProjectId(null)
-    window.history.pushState(null, '', '/')
-    requestAnimationFrame(() => {
-      window.scrollTo({
-        top: savedScrollY,
-        behavior: 'instant'
-      })
-      ScrollTrigger.refresh()
-    })
+    window.history.pushState(null, '', '/#projects')
   }
 
   const handleNavigateToBirthday = () => {
@@ -223,9 +246,6 @@ function App() {
       ScrollTrigger.refresh()
     })
   }
-
-  const activeProject = projects.find(p => p.id === activeProjectId)
-  const isDetailView = Boolean(activeProject || isBirthdayRoute)
 
   return (
     <div className="min-h-screen flex flex-col justify-start relative w-full">
@@ -252,7 +272,7 @@ function App() {
       {/* Main Portfolio Layout - Kept in DOM, hidden when viewing detail page */}
       <div className={`w-full flex-grow flex flex-col justify-start ${isDetailView ? 'hidden' : 'block'}`}>
         {/* GSAP-Powered Mobile-Responsive Navbar */}
-        <Navbar onLogoClick={handleLogoClick} isLoading={isLoading} />
+        <CardNav items={navItems} onLogoClick={handleLogoClick} isLoading={isLoading} />
 
         {/* Floating Background Stickers & Doodles */}
         <BackgroundElements isLoading={isLoading} />
@@ -279,6 +299,7 @@ function App() {
           <ProjectDetail 
             project={activeProject} 
             onBack={handleCloseDetail} 
+            isLoading={isLoading}
           />
         </Suspense>
       )}

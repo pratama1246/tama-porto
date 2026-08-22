@@ -29,16 +29,15 @@ function ArrowUpRight({ className, ...props }) {
   );
 }
 
-const CardNav = ({
-  logo,
-  logoAlt = 'Logo',
+export default function CardNav({
   items,
   className = '',
-  ease = 'power3.out',
-  menuColor = '#2d2d2d',
+  logo,
+  logoAlt = 'Logo',
   onLogoClick,
-  isLoading = false
-}) => {
+  isLoading = false,
+  ease = 'power3.out'
+}) {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const navRef = useRef(null);
@@ -184,141 +183,167 @@ const CardNav = ({
   };
 
   return (
-    <motion.div
-      initial={{ x: 100, opacity: 0 }}
-      animate={!isLoading ? { x: 0, opacity: 1 } : { x: 100, opacity: 0 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className={`card-nav-container fixed left-4 right-4 md:left-auto md:right-8 w-auto md:w-[90%] max-w-[760px] z-[99] top-[1em] md:top-[1.2em] ${className}`}
+    <motion.header
+      initial={{ y: -60, opacity: 0 }}
+      animate={!isLoading ? { y: 0, opacity: 1 } : { y: -60, opacity: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+      className={`card-nav-container fixed top-0 inset-x-0 w-full z-[99] ${className}`}
     >
       <nav
         ref={navRef}
-        className={`card-nav ${isExpanded ? 'open' : ''} block h-12 md:h-14 p-0 rounded-xl neo-shadow border-2 border-ink-black relative overflow-hidden bg-white/90 backdrop-blur-md`}
+        className={`card-nav ${isExpanded ? 'open' : ''} w-full block h-14 sm:h-16 p-0 border-b border-black/[0.08] bg-[#fdf6e3]/85 backdrop-blur-md relative overflow-hidden transition-all`}
       >
         <div 
-          className="card-nav-top absolute inset-x-0 top-0 h-12 md:h-14 flex items-center justify-between z-[2]"
-          style={{ paddingLeft: '16px', paddingRight: '16px' }}
+          className="card-nav-top w-full max-w-[1600px] mx-auto h-14 sm:h-16 flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-16"
         >
-          {/* Hamburger Menu Icon (Mobile Only) */}
-          <div
-            className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} group h-full min-w-[44px] min-h-[44px] p-2 md:hidden flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2`}
-            onClick={toggleMenu}
-            role="button"
-            aria-label={isExpanded ? 'Close menu' : 'Open menu'}
-            tabIndex={0}
-            style={{ color: menuColor }}
-          >
-            <div
-              className={`hamburger-line w-[24px] h-[2px] bg-ink-black transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
-                isHamburgerOpen ? 'translate-y-[4px] rotate-45' : ''
-              } group-hover:opacity-75`}
-            />
-            <div
-              className={`hamburger-line w-[24px] h-[2px] bg-ink-black transition-[transform,opacity,margin] duration-300 ease-linear [transform-origin:50%_50%] ${
-                isHamburgerOpen ? '-translate-y-[4px] -rotate-45' : ''
-              } group-hover:opacity-75`}
-            />
-          </div>
-
-          {/* Logo Container */}
-          <div className="logo-container flex items-center order-1">
+          {/* Mobile: Logo on Left */}
+          <div className="logo-container flex md:hidden items-center order-1">
             {logo ? (
               <img
                 src={logo}
                 alt={logoAlt}
                 draggable={false}
                 onContextMenu={(e) => e.preventDefault()}
-                className="protected-image logo h-[28px]"
+                className="protected-image logo h-[30px]"
               />
             ) : (
               <a
+                id="nav-brand-mobile"
                 href="#hero"
-                className="logo font-bold tracking-tight text-base select-none no-underline flex items-center gap-1.5"
-                style={{ fontFamily: 'var(--font-display)', color: '#1A1A1A' }}
+                className="logo font-semibold tracking-tight text-base select-none no-underline flex items-center gap-2 text-ink-black cursor-pointer group"
+                style={{ fontFamily: 'var(--font-display)' }}
                 onClick={(e) => {
                   if (onLogoClick) onLogoClick(e);
                   if (isExpanded) toggleMenu();
                 }}
               >
-                <span className="w-2.5 h-2.5 rounded-full bg-mint border border-ink-black inline-block"></span>
-                tama<span className="text-[#ff6b9d]">.</span>gallery
+                <div className="w-7 h-7 shrink-0 group-hover:scale-105 transition-transform">
+                  <img
+                    src="/favicon.svg"
+                    alt="Tama Polaroid Logo"
+                    className="w-full h-full object-contain select-none pointer-events-none"
+                    draggable={false}
+                  />
+                </div>
+                <span className="font-bold">tama<span className="text-[#ff6b9d]">.</span>gallery</span>
               </a>
             )}
           </div>
 
-          {/* Desktop Links (Hidden on Mobile, Styled as cute index tabs/tapes) */}
-          <div className="hidden md:flex items-center gap-2 order-2 ml-auto">
+          {/* Mobile: Menu Toggle Button on Right */}
+          <button
+            type="button"
+            onClick={toggleMenu}
+            aria-label={isExpanded ? 'Close menu' : 'Open menu'}
+            className="md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-black/[0.04] hover:bg-black/[0.08] border border-black/10 rounded-md active:scale-95 transition-all text-ink-black font-mono font-semibold text-[11px] uppercase tracking-wider cursor-pointer order-2 select-none"
+          >
+            {isHamburgerOpen ? (
+              <>
+                <span className="text-[12px] leading-none">✕</span>
+                <span className="leading-none">CLOSE</span>
+              </>
+            ) : (
+              <>
+                <div className="flex flex-col gap-[3px] w-3.5 items-start justify-center">
+                  <span className="w-3.5 h-[1.5px] bg-ink-black rounded-full block" />
+                  <span className="w-2.5 h-[1.5px] bg-ink-black rounded-full block" />
+                  <span className="w-3.5 h-[1.5px] bg-ink-black rounded-full block" />
+                </div>
+                <span className="leading-none">MENU</span>
+              </>
+            )}
+          </button>
+
+          {/* Desktop Left Wing: Nav Links */}
+          <div className="hidden md:flex items-center justify-start gap-1.5 lg:gap-2.5 flex-1">
             <a
               href="#hero"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
-              style={{
-                backgroundColor: 'var(--color-soft-blue, #B3E5FC)',
-                color: '#1A1A1A',
-                transform: 'rotate(-1.5deg)',
-              }}
+              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
             >
               Home
             </a>
             <a
               href="#about"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
-              style={{
-                backgroundColor: 'var(--color-lavender, #E6E6FA)',
-                color: '#1A1A1A',
-                transform: 'rotate(1deg)',
-              }}
+              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
             >
               About
             </a>
             <a
+              href="#journey"
+              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
+            >
+              Journey
+            </a>
+          </div>
+
+          {/* Desktop Centerpiece: Centered Brand Logo */}
+          <div className="hidden md:flex items-center justify-center shrink-0 px-4">
+            {logo ? (
+              <img
+                src={logo}
+                alt={logoAlt}
+                draggable={false}
+                onContextMenu={(e) => e.preventDefault()}
+                className="protected-image logo h-[30px]"
+              />
+            ) : (
+              <a
+                id="nav-brand-desktop"
+                href="#hero"
+                className="logo font-semibold tracking-tight text-base sm:text-lg select-none no-underline flex items-center gap-2.5 text-ink-black cursor-pointer group"
+                style={{ fontFamily: 'var(--font-display)' }}
+                onClick={(e) => {
+                  if (onLogoClick) onLogoClick(e);
+                  if (isExpanded) toggleMenu();
+                }}
+              >
+                {/* Polaroid Favicon Icon */}
+                <div className="w-7 h-7 sm:w-7.5 sm:h-7.5 shrink-0 group-hover:scale-110 transition-transform">
+                  <img
+                    src="/favicon.svg"
+                    alt="Tama Polaroid Logo"
+                    className="w-full h-full object-contain select-none pointer-events-none"
+                    draggable={false}
+                  />
+                </div>
+                <span className="font-bold tracking-tight">tama<span className="text-[#ff6b9d]">.</span>gallery</span>
+              </a>
+            )}
+          </div>
+
+          {/* Desktop Right Wing: Nav Links & CTA */}
+          <div className="hidden md:flex items-center justify-end gap-1.5 lg:gap-2.5 flex-1">
+            <a
               href="#projects"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
-              style={{
-                backgroundColor: 'var(--color-sticker-pink, #FFD1DC)',
-                color: '#1A1A1A',
-                transform: 'rotate(-1deg)',
-              }}
+              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
             >
               Projects
             </a>
             <a
               href="#skills"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
-              style={{
-                backgroundColor: 'var(--color-mint, #D0F0C0)',
-                color: '#1A1A1A',
-                transform: 'rotate(1.5deg)',
-              }}
+              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
             >
               Skills
             </a>
             <a
               href="#certifications"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
-              style={{
-                backgroundColor: 'var(--color-pale-yellow, #FFF9C4)',
-                color: '#1A1A1A',
-                transform: 'rotate(-0.8deg)',
-              }}
+              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
             >
-              Certifications
+              Certs
             </a>
             <a
               href="#contact"
-              className="px-2.5 py-1 rounded-sm text-[11px] font-mono font-bold uppercase tracking-wider transition-all duration-200 select-none no-underline border border-ink-black neo-shadow-sm hover:-translate-y-0.5 hover:scale-105 active:scale-95"
-              style={{
-                backgroundColor: '#ffd4b8',
-                color: '#1A1A1A',
-                transform: 'rotate(-1deg)',
-              }}
+              className="ml-2 px-3.5 py-1.5 rounded-md bg-ink-black text-white hover:bg-neutral-800 font-mono text-xs font-semibold uppercase tracking-wider transition-colors no-underline inline-flex items-center gap-1.5"
             >
-              Contact
+              <span>Contact</span>
+              <span className="text-xs">→</span>
             </a>
           </div>
         </div>
 
         {/* Expanded Content Grid (Mobile Drawer only) */}
         <div
-          className={`card-nav-content absolute left-0 right-0 top-[48px] bottom-0 p-4 flex flex-col items-stretch gap-4 justify-start z-[1] ${
+          className={`card-nav-content absolute left-0 right-0 top-[56px] bottom-0 p-4 flex flex-col items-stretch gap-3 justify-start z-[1] max-w-lg mx-auto ${
             isExpanded ? 'visible pointer-events-auto' : 'invisible pointer-events-none'
           } md:hidden`}
           aria-hidden={!isExpanded}
@@ -326,27 +351,27 @@ const CardNav = ({
           {(items || []).slice(0, 3).map((item, idx) => (
             <div
               key={`${item.label}-${idx}`}
-              className="nav-card select-none relative flex flex-col gap-4 rounded-[calc(0.75rem-0.2rem)] border border-black/5 min-w-0 flex-[1_1_auto] h-auto min-h-[120px]"
+              className="nav-card select-none relative flex flex-col gap-3 rounded-xl border border-black/10 min-w-0 flex-[1_1_auto] h-auto min-h-[110px] shadow-xs"
               ref={setCardRef(idx)}
               style={{ 
                 backgroundColor: item.bgColor, 
                 color: item.textColor,
-                padding: '20px'
+                padding: '16px'
               }}
             >
               <div 
-                className="nav-card-label font-semibold tracking-tight text-[18px]"
+                className="nav-card-label font-semibold tracking-tight text-[16px]"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 {item.label}
               </div>
-              <div className="nav-card-links mt-1 flex flex-col gap-2.5">
+              <div className="nav-card-links mt-0.5 flex flex-col gap-2">
                 {item.links?.map((lnk, i) => {
                   const isExternal = lnk.href?.startsWith('http');
                   return (
                     <a
                       key={`${lnk.label}-${i}`}
-                      className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[14px] font-medium"
+                      className="nav-card-link inline-flex items-center gap-1.5 no-underline cursor-pointer transition-opacity duration-200 hover:opacity-75 text-[13px] font-medium"
                       style={{ fontFamily: 'var(--font-body)', color: 'inherit' }}
                       href={lnk.href}
                       aria-label={lnk.ariaLabel}
@@ -359,7 +384,7 @@ const CardNav = ({
                         }
                       }}
                     >
-                      <ArrowUpRight className="nav-card-link-icon shrink-0 w-3.5 h-3.5 opacity-80" />
+                      <ArrowUpRight className="nav-card-link-icon shrink-0 w-3.5 h-3.5 opacity-70" />
                       {lnk.label}
                     </a>
                   );
@@ -369,8 +394,6 @@ const CardNav = ({
           ))}
         </div>
       </nav>
-    </motion.div>
+    </motion.header>
   );
-};
-
-export default CardNav;
+}

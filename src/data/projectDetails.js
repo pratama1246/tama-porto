@@ -194,7 +194,7 @@ export const projectDetails = {
       steps: [
         { cmd: "composer install", desc: "Install dependencies via Composer" },
         { cmd: "cp env .env", desc: "Duplicate configuration environment file" },
-        { cmd: "Configure Env Configs", desc: "Adjust app.baseURL, JWT_SECRET_KEY, and SMTP email parameters in .env" },
+        { cmd: "nano .env", desc: "Adjust app.baseURL, JWT_SECRET_KEY, and SMTP email parameters in .env" },
         { cmd: "php spark migrate", desc: "Create database schema using CodeIgniter migrations" },
         { cmd: "php spark db:seed --all", desc: "Seed database with PaymentMethodSeeder, EventSeeder, AdminUserSeeder, and FakeUserSeeder" },
         { cmd: "php spark serve", desc: "Launch development server at http://localhost:8080" }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useLayoutEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { projectDetails } from '../../data/projectDetails'
 
@@ -66,8 +66,27 @@ function ExternalIcon({ className }) {
 export default function ProjectDetail({ project, onBack, isLoading = false }) {
   const [copiedIdx, setCopiedIdx] = useState(null)
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
+  // Ensure case study detail page always boots synchronously at the very top (0, 0)
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+    const scrollToTop = () => {
+      window.scrollTo(0, 0)
+      if (document.body) document.body.scrollTop = 0
+      if (document.documentElement) document.documentElement.scrollTop = 0
+    }
+    scrollToTop()
+    const t1 = setTimeout(scrollToTop, 0)
+    const t2 = setTimeout(scrollToTop, 50)
+    const t3 = setTimeout(scrollToTop, 150)
+    const raf = requestAnimationFrame(scrollToTop)
+    return () => {
+      clearTimeout(t1)
+      clearTimeout(t2)
+      clearTimeout(t3)
+      cancelAnimationFrame(raf)
+    }
   }, [project?.id])
 
   const detail = useMemo(() => projectDetails[project?.id] || {}, [project?.id])
@@ -153,12 +172,9 @@ export default function ProjectDetail({ project, onBack, isLoading = false }) {
         backgroundSize: '24px 24px'
       }}
     >
-      {/* Sticky Top Header Navigation Bar */}
-      <motion.header 
-        initial={{ y: -40, opacity: 0 }}
-        animate={!isLoading ? { y: 0, opacity: 1 } : { y: -40, opacity: 0 }}
-        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className="sticky top-0 z-40 bg-[#fdf6e3]/90 backdrop-blur-md border-b border-black/10 px-4 sm:px-8 py-3 flex items-center justify-between shadow-xs gap-4"
+      {/* Fixed Top Header Navigation Bar — Viewport-Locked to eliminate all scroll jitter */}
+      <header 
+        className="fixed top-0 left-0 right-0 z-50 bg-[#fdf6e3]/95 backdrop-blur-md border-b border-black/10 px-4 sm:px-8 py-3 flex items-center justify-between shadow-xs gap-4"
       >
         {/* Brand & Breadcrumb */}
         <div className="flex items-center gap-2.5 sm:gap-3 overflow-hidden text-ellipsis whitespace-nowrap">
@@ -196,14 +212,14 @@ export default function ProjectDetail({ project, onBack, isLoading = false }) {
           <span className="hidden sm:inline">Back to Gallery</span>
           <span className="sm:hidden">Back</span>
         </button>
-      </motion.header>
+      </header>
 
-      {/* Main Content Article with Staggered Children */}
+      {/* Main Content Article with Staggered Children & Offset for Fixed Header */}
       <motion.main
         variants={containerVariants}
         initial="hidden"
         animate={!isLoading ? "visible" : "hidden"}
-        className="max-w-[1360px] w-full mx-auto px-2.5 xs:px-4 sm:px-8 flex flex-col gap-6 sm:gap-14 pt-4 sm:pt-10"
+        className="max-w-[1360px] w-full mx-auto px-2.5 xs:px-4 sm:px-8 flex flex-col gap-6 sm:gap-14 pt-20 sm:pt-24 md:pt-28"
       >
         {/* 1. TOP HERO SHOWCASE (Mockup Split + Bento Specs) */}
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 items-center justify-between w-full">
@@ -542,37 +558,51 @@ export default function ProjectDetail({ project, onBack, isLoading = false }) {
 
               <div className="bg-[#fefcf7] border border-black/15 sm:border-2 sm:border-ink-black rounded-lg sm:rounded-xl p-3.5 sm:p-6 shadow-none sm:shadow-xs flex flex-col gap-3 sm:gap-4">
                 <div className="flex flex-col gap-3 sm:gap-4 font-mono text-sm">
-                  {detail.setup.steps.map((step, idx) => (
-                    <div key={idx} className="flex flex-col gap-1.5 sm:gap-2 border-b border-black/10 pb-3 sm:pb-4 last:border-0 last:pb-0">
-                      <div className="flex items-center justify-between gap-2 sm:gap-4">
-                        <span className="font-body text-[11px] sm:text-xs text-text-dark font-bold uppercase truncate">
-                          Step {idx + 1}: {step.desc}
-                        </span>
-                        <button
-                          onClick={() => handleCopy(step.cmd, idx)}
-                          className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-black/20 bg-white text-[9px] sm:text-[10px] font-mono font-bold hover:bg-pale-yellow active:scale-95 transition-all cursor-pointer select-none shrink-0"
-                        >
-                          {copiedIdx === idx ? 'Copied ✓' : 'Copy'}
-                        </button>
+                  {detail.setup.steps.map((step, idx) => {
+                    const isCliCommand = (cmd) => {
+                      if (!cmd) return false
+                      const trimmed = cmd.trim()
+                      const cliPrefixes = ['git', 'cd', 'composer', 'php', 'npm', 'flutter', 'cp', 'mv', 'rm', 'mkdir', 'code', 'nano', 'open', 'python', 'gcc', 'g++', 'dotnet', 'docker', 'valet', 'ls', 'mysql']
+                      const firstWord = trimmed.split(/\s+/)[0].toLowerCase()
+                      return cliPrefixes.includes(firstWord) || trimmed.startsWith('$') || trimmed.includes('&&') || trimmed.includes('||')
+                    }
+                    const isCommand = isCliCommand(step.cmd)
+
+                    return (
+                      <div key={idx} className="flex flex-col gap-1.5 sm:gap-2 border-b border-black/10 pb-3 sm:pb-4 last:border-0 last:pb-0">
+                        <div className="flex items-center justify-between gap-2 sm:gap-4">
+                          <span className="font-body text-[11px] sm:text-xs text-text-dark font-bold uppercase truncate">
+                            Step {idx + 1}: {step.desc}
+                          </span>
+                          {isCommand && (
+                            <button
+                              onClick={() => handleCopy(step.cmd, idx)}
+                              className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-black/20 bg-white text-[9px] sm:text-[10px] font-mono font-bold hover:bg-pale-yellow active:scale-95 transition-all cursor-pointer select-none shrink-0"
+                            >
+                              {copiedIdx === idx ? 'Copied ✓' : 'Copy'}
+                            </button>
+                          )}
+                        </div>
+                        {isCommand ? (
+                          <div className="bg-black/[0.04] border border-black/15 rounded-md sm:rounded-lg p-2.5 sm:p-3 font-mono text-[11px] sm:text-sm text-ink-black select-all overflow-x-auto whitespace-nowrap">
+                            $ {step.cmd}
+                          </div>
+                        ) : (
+                          <div className="bg-pale-yellow/60 border border-black/15 rounded-md sm:rounded-lg p-2.5 sm:p-3 font-mono text-[11px] sm:text-xs text-ink-black flex items-center gap-2 select-text">
+                            <span className="shrink-0">📌</span>
+                            <span>{step.cmd}</span>
+                          </div>
+                        )}
                       </div>
-                      <div className="bg-black/[0.04] border border-black/15 rounded-md sm:rounded-lg p-2.5 sm:p-3 font-mono text-[11px] sm:text-sm text-ink-black select-all overflow-x-auto whitespace-nowrap">
-                        $ {step.cmd}
-                      </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
               </div>
             </section>
           )}
 
           {/* Bottom Action Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pt-4 sm:pt-6 border-t border-ink-black/15 sm:border-t-2 sm:border-ink-black/10">
-            <button
-              onClick={onBack}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-soft-blue border-2 border-ink-black text-xs sm:text-sm font-mono font-bold text-ink-black neo-shadow hover:neo-shadow-hover active:scale-95 transition-all cursor-pointer"
-            >
-              <span>← Back to Gallery</span>
-            </button>
+          <div className="flex items-center justify-end gap-3 pt-4 sm:pt-6 border-t border-ink-black/15 sm:border-t-2 sm:border-ink-black/10">
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white border-2 border-ink-black text-xs sm:text-sm font-mono font-bold text-ink-black neo-shadow hover:bg-pale-yellow active:scale-95 transition-all cursor-pointer"

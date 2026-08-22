@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Words combining Role & Pillars with comfortable timing & creamy scrapbook tones
 const INTRO_WORDS = [
-  { text: "DESIGNER", label: "01", bg: "bg-sticker-pink" },
-  { text: "DEVELOPER", label: "02", bg: "bg-soft-blue" },
-  { text: "STORIES", label: "03", bg: "bg-pale-yellow" },
-  { text: "AESTHETICS", label: "04", bg: "bg-lavender" },
-  { text: "TECHNOLOGY", label: "05", bg: "bg-mint" }
+  { text: "UI / UX", label: "01", bg: "bg-sticker-pink" },
+  { text: "FRONTEND", label: "02", bg: "bg-soft-blue" },
+  { text: "BACKEND", label: "03", bg: "bg-pale-yellow" },
+  { text: "NETWORK", label: "04", bg: "bg-lavender" },
+  { text: "ENGINEERING", label: "05", bg: "bg-mint" }
 ];
 
 export default function Loader({ onComplete }) {

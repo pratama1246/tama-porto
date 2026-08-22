@@ -127,14 +127,21 @@ export default function Hero({ onOpenBirthday, isLoading = false }) {
           {/* Left Column: Bio Teaser & CTA */}
           <div className="lg:col-span-7 flex flex-col items-start relative">
             
-            {/* Subtitle / Bio Teaser with clean scrapbook highlights & underlines */}
-            <motion.div variants={fadeUp} className="max-w-[650px] w-full">
-              <p className="text-[0.95rem] sm:text-lg md:text-xl text-text-muted leading-[1.65] sm:leading-relaxed font-body m-0">
-                D3 Informatics Engineering student, Frontend Developer &amp; Network Administrator. Inspired by{' '}
-                <span className="font-bold text-ink-black border-b-2 border-sticker-pink whitespace-nowrap">stories</span>,{' '}
-                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded bg-pale-yellow border border-ink-black/30 whitespace-nowrap inline-block my-0.5">music</span>,{' '}
-                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded bg-lavender border border-ink-black/30 whitespace-nowrap inline-block my-0.5">aesthetics</span>, and{' '}
-                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded bg-mint border border-ink-black/30 whitespace-nowrap inline-block my-0.5">technology.</span>
+            {/* Subtitle / Bio Teaser with uniform line-height & clean highlights */}
+            <motion.div variants={fadeUp} className="max-w-[680px] w-full">
+              <p className="text-[0.95rem] sm:text-lg md:text-xl text-text-muted leading-[1.5] sm:leading-[1.55] font-body m-0">
+                <span className="font-bold text-ink-black">Frontend Developer</span> with a solid foundation in{' '}
+                <span className="font-bold text-ink-black underline decoration-sticker-pink decoration-[2.5px] underline-offset-4">
+                  Network &amp; Backend Engineering
+                </span>
+                . Bridging pixel-perfect UI design with reliable system fundamentals to craft{' '}
+                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded-sm bg-pale-yellow border border-ink-black/30 box-decoration-clone inline">
+                  expressive
+                </span>{' '}
+                web experiences that truly feel{' '}
+                <span className="font-bold text-ink-black px-1.5 py-0.5 rounded-sm bg-mint border border-ink-black/30 box-decoration-clone inline">
+                  alive.
+                </span>
               </p>
             </motion.div>
 
@@ -214,9 +221,10 @@ export default function Hero({ onOpenBirthday, isLoading = false }) {
                 style={{ fontFamily: 'var(--font-handwrite)' }}
               >
                 <li>🎧 Lofi beats playing</li>
-                <li>☕ Coffee level: 85%</li>
+                <li>☕ Coffee level: 90%</li>
                 <li>📍 Cilacap, ID</li>
-                <li>🚀 Crafting in React</li>
+                <li>🚀 Crafting in React + GSAP</li>
+                <li>🌐 Analyzing packet flows</li>
               </ul>
             </motion.div>
    

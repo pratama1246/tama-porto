@@ -160,7 +160,7 @@ export default function BackgroundElements() {
 
       {/* SVG 3: Yellow Smiley */}
       <DraggableSticker
-        className="top-[2450px] left-[2%] sm:left-[3%] block"
+        className="top-[2450px] left-[3%] hidden md:block"
         rotate={12}
         hoverRotate={18}
         delay={0.55}
@@ -170,7 +170,7 @@ export default function BackgroundElements() {
 
       {/* PNG 3: MikroTik */}
       <DraggableSticker
-        className="top-[2680px] right-[1%] sm:right-[4%] w-[65px] xs:w-[80px] sm:w-[105px] lg:w-[130px] block"
+        className="top-[2680px] right-[4%] w-[105px] lg:w-[130px] hidden md:block"
         rotate={6}
         hoverRotate={-3}
         delay={0.5}
@@ -180,7 +180,7 @@ export default function BackgroundElements() {
 
       {/* PNG 4: Pixel Cursor */}
       <DraggableSticker
-        className="top-[2950px] left-[2%] sm:left-[5%] w-[40px] xs:w-[48px] sm:w-[58px] lg:w-[70px] block z-30"
+        className="top-[2950px] left-[5%] w-[58px] lg:w-[70px] hidden md:block z-30"
         rotate={-15}
         hoverRotate={5}
         delay={0.55}
@@ -190,7 +190,7 @@ export default function BackgroundElements() {
 
       {/* SVG 4: Lavender Sparkle Star */}
       <DraggableSticker
-        className="top-[3300px] left-[2%] sm:left-[3%] block"
+        className="top-[3300px] left-[3%] hidden md:block"
         rotate={-15}
         hoverRotate={0}
         delay={0.6}
@@ -242,7 +242,7 @@ export default function BackgroundElements() {
 
       {/* SVG 7: Blue Butterfly */}
       <DraggableSticker
-        className="top-[1950px] left-[2%] sm:left-[4%] block"
+        className="top-[1950px] left-[4%] hidden md:block"
         rotate={-10}
         hoverRotate={-16}
         delay={0.75}
@@ -254,7 +254,7 @@ export default function BackgroundElements() {
       {/* ─── PROJECTS SECTION ─── */}
       {/* PNG 7: Earphone */}
       <DraggableSticker
-        className="top-[2300px] left-[1%] sm:left-[3%] w-[60px] xs:w-[75px] sm:w-[95px] lg:w-[120px] block"
+        className="top-[2300px] left-[3%] w-[95px] lg:w-[120px] hidden md:block"
         rotate={-10}
         hoverRotate={-2}
         delay={0.7}
@@ -264,7 +264,7 @@ export default function BackgroundElements() {
 
       {/* SVG 8: Lavender Flower */}
       <DraggableSticker
-        className="top-[2550px] right-[2%] sm:right-[3%] block"
+        className="top-[2550px] right-[3%] hidden md:block"
         rotate={8}
         hoverRotate={15}
         delay={0.8}
@@ -274,7 +274,7 @@ export default function BackgroundElements() {
 
       {/* SVG 9: Mint Sparkle Star */}
       <DraggableSticker
-        className="top-[2850px] left-[4%] sm:left-[6%] block"
+        className="top-[2850px] left-[6%] hidden md:block"
         rotate={0}
         hoverRotate={15}
         delay={0.85}
@@ -286,7 +286,7 @@ export default function BackgroundElements() {
       {/* ─── SKILLS SECTION ─── */}
       {/* SVG 10: Yellow Sparkle Star */}
       <DraggableSticker
-        className="top-[3150px] right-[3%] sm:right-[5%] block"
+        className="top-[3150px] right-[5%] hidden md:block"
         rotate={0}
         hoverRotate={15}
         delay={0.8}
@@ -296,7 +296,7 @@ export default function BackgroundElements() {
 
       {/* PNG 4: Pixel Cursor */}
       <DraggableSticker
-        className="top-[3350px] left-[2%] sm:left-[4%] w-[40px] xs:w-[48px] sm:w-[58px] lg:w-[70px] block z-30"
+        className="top-[3350px] left-[4%] w-[58px] lg:w-[70px] hidden md:block z-30"
         rotate={-15}
         hoverRotate={5}
         delay={0.55}
@@ -308,7 +308,7 @@ export default function BackgroundElements() {
       {/* ─── CERTIFICATIONS SECTION ─── */}
       {/* PNG 3: MikroTik Router Sticker */}
       <DraggableSticker
-        className="top-[3650px] right-[1%] sm:right-[3%] w-[65px] xs:w-[80px] sm:w-[105px] lg:w-[130px] block"
+        className="top-[3650px] right-[3%] w-[105px] lg:w-[130px] hidden md:block"
         rotate={8}
         hoverRotate={-3}
         delay={0.7}
@@ -318,7 +318,7 @@ export default function BackgroundElements() {
 
       {/* SVG 11: Lavender Smiley */}
       <DraggableSticker
-        className="top-[3820px] left-[1%] sm:left-[3%] block"
+        className="top-[3820px] left-[3%] hidden md:block"
         rotate={15}
         hoverRotate={22}
         delay={0.75}
@@ -328,7 +328,7 @@ export default function BackgroundElements() {
 
       {/* PNG 6: Pixel Folder */}
       <DraggableSticker
-        className="top-[4050px] left-[1%] sm:left-[3%] w-[55px] xs:w-[70px] sm:w-[90px] lg:w-[110px] block"
+        className="top-[4050px] left-[3%] w-[90px] lg:w-[110px] hidden md:block"
         rotate={-6}
         hoverRotate={5}
         delay={0.8}
@@ -338,7 +338,7 @@ export default function BackgroundElements() {
 
       {/* SVG 12: Peach Sparkle Star */}
       <DraggableSticker
-        className="top-[4180px] right-[2%] sm:right-[4%] block"
+        className="top-[4180px] right-[4%] hidden md:block"
         rotate={-10}
         hoverRotate={10}
         delay={0.85}
@@ -348,7 +348,7 @@ export default function BackgroundElements() {
 
       {/* PNG 8: CD Sticker */}
       <DraggableSticker
-        className="top-[4380px] right-[1%] sm:right-[3%] w-[65px] xs:w-[80px] sm:w-[105px] lg:w-[130px] block"
+        className="top-[4380px] right-[3%] w-[105px] lg:w-[130px] hidden md:block"
         rotate={8}
         hoverRotate={-12}
         delay={0.85}
@@ -358,7 +358,7 @@ export default function BackgroundElements() {
 
       {/* SVG 4: Mint Sparkle Star */}
       <DraggableSticker
-        className="top-[4480px] left-[2%] sm:left-[4%] block"
+        className="top-[4480px] left-[4%] hidden md:block"
         rotate={15}
         hoverRotate={25}
         delay={0.9}
@@ -370,7 +370,7 @@ export default function BackgroundElements() {
       {/* ─── HOBBIES SECTION ─── */}
       {/* SVG 13: Mint Flower */}
       <DraggableSticker
-        className="top-[4500px] left-[2%] sm:left-[4%] block"
+        className="top-[4500px] left-[4%] hidden md:block"
         rotate={8}
         hoverRotate={15}
         delay={0.85}
@@ -380,7 +380,7 @@ export default function BackgroundElements() {
 
       {/* PNG 9: Cassette Tape */}
       <DraggableSticker
-        className="top-[4800px] left-[1%] sm:left-[3%] w-[75px] xs:w-[90px] sm:w-[115px] lg:w-[145px] block"
+        className="top-[4800px] left-[3%] w-[115px] lg:w-[145px] hidden md:block"
         rotate={-12}
         hoverRotate={-2}
         delay={0.8}
@@ -390,7 +390,7 @@ export default function BackgroundElements() {
 
       {/* SVG 14: Yellow Heart */}
       <DraggableSticker
-        className="top-[4980px] left-[6%] sm:left-[10%] block"
+        className="top-[4980px] left-[10%] hidden md:block"
         rotate={10}
         hoverRotate={-10}
         delay={0.9}
@@ -400,7 +400,7 @@ export default function BackgroundElements() {
 
       {/* PNG 10: Bowie Card */}
       <DraggableSticker
-        className="top-[5150px] right-[2%] sm:right-[4%] w-[65px] xs:w-[80px] sm:w-[100px] lg:w-[125px] block"
+        className="top-[5150px] right-[4%] w-[100px] lg:w-[125px] hidden md:block"
         rotate={14}
         hoverRotate={4}
         delay={0.85}
@@ -410,7 +410,7 @@ export default function BackgroundElements() {
 
       {/* SVG 15: Pink Butterfly */}
       <DraggableSticker
-        className="top-[5350px] right-[5%] sm:right-[9%] block"
+        className="top-[5350px] right-[9%] hidden md:block"
         rotate={-12}
         hoverRotate={-18}
         delay={0.95}
@@ -422,7 +422,7 @@ export default function BackgroundElements() {
       {/* ─── CONTACT SECTION ─── */}
       {/* SVG 16: Lavender Sparkle Star */}
       <DraggableSticker
-        className="top-[5750px] left-[3%] sm:left-[5%] block"
+        className="top-[5750px] left-[5%] hidden md:block"
         rotate={15}
         hoverRotate={25}
         delay={0.9}
@@ -432,7 +432,7 @@ export default function BackgroundElements() {
 
       {/* PNG 11: Retro Phone */}
       <DraggableSticker
-        className="top-[5920px] right-[1%] sm:right-[3%] w-[55px] xs:w-[70px] sm:w-[90px] lg:w-[110px] block"
+        className="top-[5920px] right-[3%] w-[90px] lg:w-[110px] hidden md:block"
         rotate={8}
         hoverRotate={18}
         delay={0.9}
@@ -442,7 +442,7 @@ export default function BackgroundElements() {
 
       {/* SVG 17: Peach Smiley */}
       <DraggableSticker
-        className="top-[6000px] left-[2%] sm:left-[4%] block"
+        className="top-[6000px] left-[4%] hidden md:block"
         rotate={-15}
         hoverRotate={0}
         delay={0.95}

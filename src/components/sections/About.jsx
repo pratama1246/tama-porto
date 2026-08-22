@@ -107,22 +107,27 @@ export default function About() {
 
             <div className="pl-6 md:pl-10">
               <h3
-                className="font-display font-bold text-xl text-ink-black mb-4"
+                className="font-display font-bold text-xl sm:text-2xl text-ink-black mb-4"
               >
-                Hi, I'm Tama!
+                Hi, I'm Tama! 👋
               </h3>
               <p
                 className="text-sm md:text-[0.95rem] text-ink-black leading-relaxed font-body"
                 style={{ lineHeight: '28px' }}
               >
-                I am currently pursuing my D3 Informatics Engineering degree at <strong>Politeknik Negeri Cilacap</strong>. 
-                With a passion for UI/UX design and frontend development, I love bridging the gap between design systems in Figma and functional, responsive code.
+                I am an Informatics Engineering student at <strong>Politeknik Negeri Cilacap</strong>, driven by a deep curiosity for how visual aesthetics and system logic connect. My journey started with crafting clean interfaces in Figma and developing backend systems in Laravel, which quickly sparked my obsession with building dynamic, tactile web experiences.
               </p>
               <p
                 className="text-sm md:text-[0.95rem] text-ink-black leading-relaxed mt-4 font-body"
                 style={{ lineHeight: '28px' }}
               >
-                Currently, I am expanding my skills in React, component-based architectures, and modern styling tools like Tailwind CSS. Backed by a foundation in computer networking and IT systems, I strive to build digital products that balance aesthetics, usability, and technical reliability.
+                What shapes my development approach is a dual mindset: I don't just see a website as static markup, but as an interactive canvas governed by render performance, component states, and network efficiency. Having a solid grounding in computer networking allows me to look past the browser window—understanding how data packets travel, how servers respond, and how to keep applications fast and reliable from end to end.
+              </p>
+              <p
+                className="text-sm md:text-[0.95rem] text-ink-black leading-relaxed mt-4 font-body"
+                style={{ lineHeight: '28px' }}
+              >
+                Currently, I am expanding my craft in modern React ecosystems, GSAP scroll-driven animations, and scalable design systems. I thrive on translating creative concepts into pixel-perfect, accessible code that leaves a lasting impression on anyone who interacts with it.
               </p>
             </div>
           </div>
@@ -145,11 +150,11 @@ export default function About() {
                 className="list-none p-0 m-0 flex flex-col gap-1.5 text-[0.85rem] font-medium text-text-handwrite"
                 style={{ fontFamily: 'var(--font-handwrite)' }}
               >
-                <li>📌 D3 Informatics @ PNC</li>
-                <li>🎨 Figma & UI Enthusiast</li>
-                <li>🛠️ PHP & Laravel Basics</li>
-                <li>🌐 Networking foundations</li>
-                <li>🚀 Learning React & GSAP</li>
+                <li>📌 D3 Informatics Engineering</li>
+                <li>🎨 UI/UX &amp; Figma-to-Code</li>
+                <li>⚡ Modern React &amp; Tailwind CSS</li>
+                <li>🌐 Network &amp; Routing Protocols</li>
+                <li>🛠️ Laravel &amp; Relational DBs</li>
               </ul>
             </motion.div>
           </div>

@@ -51,9 +51,14 @@ function App() {
   const activeProject = projects.find(p => p.id === activeProjectId)
   const isDetailView = Boolean(activeProject || isBirthdayRoute)
 
-  // Synchronous pre-paint scroll positioning: Prevents any 1-frame Hero jitter on return from detail
+  // Synchronous pre-paint scroll positioning: Resets to (0, 0) on detail entry, restores to #projects on detail exit
   useLayoutEffect(() => {
-    if (!isDetailView && targetScrollSectionRef.current) {
+    if (isDetailView) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+      return
+    }
+
+    if (targetScrollSectionRef.current) {
       const sectionId = targetScrollSectionRef.current
       targetScrollSectionRef.current = null
 
@@ -73,7 +78,14 @@ function App() {
       }
       ScrollTrigger.refresh()
     }
-  }, [isDetailView])
+  }, [isDetailView, activeProjectId])
+
+  // Disable browser automatic scroll restoration so history.pushState never overrides custom scroll positioning
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+  }, [])
 
   // Sync state when browser back/forward buttons are clicked
   useEffect(() => {
@@ -214,12 +226,22 @@ function App() {
 
   const handleOpenDetail = (id) => {
     setSavedScrollY(window.scrollY)
+    if (typeof document !== 'undefined' && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur()
+    }
     const proj = projects.find(p => p.id === id)
     if (proj) {
       window.history.pushState({ projectId: id }, '', `/projects/${proj.slug}`)
     }
     setActiveProjectId(id)
-    window.scrollTo({ top: 0, behavior: 'instant' })
+    const resetScroll = () => {
+      window.scrollTo(0, 0)
+      if (document.body) document.body.scrollTop = 0
+      if (document.documentElement) document.documentElement.scrollTop = 0
+    }
+    resetScroll()
+    setTimeout(resetScroll, 0)
+    setTimeout(resetScroll, 60)
   }
 
   const handleCloseDetail = () => {

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <!-- Background Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#e8dcbe" stroke-width="1.5"/>
+    </pattern>
+    <!-- Neo Shadow Filter -->
+    <filter id="neo-shadow" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="12" dy="12" stdDeviation="0" flood-color="#1a1a1a"/>
+    </filter>
+    <filter id="neo-shadow-sm" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="6" dy="6" stdDeviation="0" flood-color="#1a1a1a"/>
+    </filter>
+  </defs>
+
+  <!-- Base Yellow-Cream Background -->
+  <rect width="1200" height="630" fill="#faeed1"/>
+  <!-- Subtle Grid Overlay -->
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Decorative Pastel Ambient Blobs -->
+  <circle cx="150" cy="120" r="180" fill="#e8dff5" opacity="0.4"/>
+  <circle cx="1050" cy="500" r="220" fill="#ffd1dc" opacity="0.4"/>
+  <circle cx="1100" cy="100" r="160" fill="#d1f2e8" opacity="0.4"/>
+
+  <!-- Main Center Studio Card with Neobrutal Shadow -->
+  <g filter="url(#neo-shadow)">
+    <rect x="100" y="75" width="1000" height="480" rx="24" fill="#ffffff" stroke="#1a1a1a" stroke-width="5"/>
+  </g>
+
+  <!-- Top Center Washi Tape -->
+  <g transform="translate(475, 55) rotate(-1)">
+    <rect width="250" height="42" rx="4" fill="#ffd1dc" stroke="#1a1a1a" stroke-width="3" filter="url(#neo-shadow-sm)"/>
+    <text x="125" y="27" font-family="'Courier New', Courier, monospace, sans-serif" font-size="16" font-weight="900" fill="#1a1a1a" text-anchor="middle" letter-spacing="2">✨ TAMA'S GALLERY</text>
+  </g>
+
+  <!-- Left Side: Large Polaroid Graphic Icon -->
+  <g transform="translate(180, 160) rotate(-3)">
+    <!-- Polaroid Shadow & Frame -->
+    <rect x="0" y="0" width="240" height="280" rx="16" fill="#ffffff" stroke="#1a1a1a" stroke-width="4" filter="url(#neo-shadow-sm)"/>
+    <!-- Yellow Photo Inner Screen -->
+    <rect x="20" y="20" width="200" height="180" rx="8" fill="#ffeaa7" stroke="#1a1a1a" stroke-width="3.5"/>
+    
+    <!-- Cute Smiley Face Inside Polaroid -->
+    <circle cx="90" cy="95" r="12" fill="#1a1a1a"/>
+    <circle cx="150" cy="95" r="12" fill="#1a1a1a"/>
+    <!-- Blush cheeks -->
+    <circle cx="70" cy="115" r="8" fill="#ffb3c6" opacity="0.8"/>
+    <circle cx="170" cy="115" r="8" fill="#ffb3c6" opacity="0.8"/>
+    <!-- Smile Arc -->
+    <path d="M 85 125 Q 120 155 155 125" fill="none" stroke="#1a1a1a" stroke-width="5" stroke-linecap="round"/>
+    
+    <!-- Polaroid Bottom Caption -->
+    <text x="120" y="245" font-family="'Courier New', Courier, monospace, sans-serif" font-size="16" font-weight="bold" fill="#1a1a1a" text-anchor="middle" letter-spacing="1">tama.gallery // v20</text>
+    
+    <!-- Small Pink Washi Tape on Polaroid Corner -->
+    <rect x="140" y="-10" width="80" height="24" rx="2" fill="#d1f2e8" stroke="#1a1a1a" stroke-width="2.5" transform="rotate(18, 180, 2)"/>
+  </g>
+
+  <!-- Right Side: Clean Typography & Role Badges -->
+  <g transform="translate(480, 160)">
+    <!-- Status Badge -->
+    <g filter="url(#neo-shadow-sm)">
+      <rect x="0" y="0" width="210" height="34" rx="8" fill="#d1f2e8" stroke="#1a1a1a" stroke-width="3"/>
+      <text x="105" y="22" font-family="'Courier New', Courier, monospace, sans-serif" font-size="13" font-weight="900" fill="#1a1a1a" text-anchor="middle" letter-spacing="1.5">● AVAILABLE FOR WORK</text>
+    </g>
+
+    <!-- Full Name -->
+    <text x="0" y="90" font-family="'Trebuchet MS', 'Arial Black', sans-serif" font-size="44" font-weight="900" fill="#1a1a1a" letter-spacing="-1">PRATAMA PUTRA</text>
+    <text x="0" y="145" font-family="'Trebuchet MS', 'Arial Black', sans-serif" font-size="44" font-weight="900" fill="#1a1a1a" letter-spacing="-1">PURWANTO</text>
+
+    <!-- Subtitle / Pillars Pill Stack -->
+    <g transform="translate(0, 180)">
+      <rect x="0" y="0" width="460" height="42" rx="10" fill="#faeed1" stroke="#1a1a1a" stroke-width="3" filter="url(#neo-shadow-sm)"/>
+      <text x="230" y="27" font-family="'Courier New', Courier, monospace, sans-serif" font-size="16" font-weight="bold" fill="#1a1a1a" text-anchor="middle" letter-spacing="1">FRONTEND &amp; NETWORK ENGINEERING</text>
+    </g>
+
+    <!-- Domain Pill -->
+    <g transform="translate(0, 240)">
+      <rect x="0" y="0" width="280" height="38" rx="8" fill="#1a1a1a"/>
+      <text x="140" y="25" font-family="'Courier New', Courier, monospace, sans-serif" font-size="15" font-weight="bold" fill="#faeed1" text-anchor="middle" letter-spacing="1">🌐 mytamakikii.web.id</text>
+    </g>
+  </g>
+
+  <!-- Decorative Sparkle Stars -->
+  <!-- Top Right Sparkle -->
+  <g transform="translate(1000, 130) rotate(15)">
+    <path d="M 0 -24 Q 0 0 -24 0 Q 0 0 0 24 Q 0 0 24 0 Q 0 0 0 -24 Z" fill="#ffd1dc" stroke="#1a1a1a" stroke-width="3"/>
+  </g>
+  <!-- Bottom Left Sparkle -->
+  <g transform="translate(130, 480) rotate(-20)">
+    <path d="M 0 -18 Q 0 0 -18 0 Q 0 0 0 18 Q 0 0 18 0 Q 0 0 0 -18 Z" fill="#ffeaa7" stroke="#1a1a1a" stroke-width="3"/>
+  </g>
+  <!-- Bottom Right Sparkle -->
+  <g transform="translate(980, 470) rotate(10)">
+    <path d="M 0 -20 Q 0 0 -20 0 Q 0 0 0 20 Q 0 0 20 0 Q 0 0 0 -20 Z" fill="#d1f2e8" stroke="#1a1a1a" stroke-width="3"/>
+  </g>
+</svg>

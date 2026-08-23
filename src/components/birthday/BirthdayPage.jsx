@@ -6,7 +6,7 @@ import ScatteredGallery from './ScatteredGallery'
 import SystemSpecs from './SystemSpecs'
 import RoadTo21 from './RoadTo21'
 import ConfettiCannon from './ConfettiCannon'
-import { birthdayMeta } from '../../data/birthday'
+import { birthdayMeta, isBirthdayExpired } from '../../data/birthday'
 
 // Decorative Sticker Helpers
 function SparkleStar({ className, color = 'var(--accent-pink)', size = 36 }) {
@@ -52,6 +52,7 @@ function FlowerSticker({ className, color = 'var(--accent-lavender)', size = 44 
 export default function BirthdayPage({ onBackToPortfolio, isLoading = false }) {
   // Check if target birthday date has arrived or if devPreviewMode is enabled for editing
   const isTargetDateReached = birthdayMeta.devPreviewMode || (new Date().getTime() >= new Date(birthdayMeta.targetIsoDate).getTime())
+  const isExpired = isBirthdayExpired()
 
   // State to control archive view
   const [showFullArchive, setShowFullArchive] = useState(isTargetDateReached)
@@ -63,8 +64,8 @@ export default function BirthdayPage({ onBackToPortfolio, isLoading = false }) {
       transition={{ duration: 0.5, ease: 'easeOut' }}
       className="min-h-screen bg-[var(--bg-primary)] text-ink-black flex flex-col justify-start relative w-full pb-0 overflow-x-hidden"
     >
-      {/* Confetti Explosion upon opening /20 ONLY after intro is done */}
-      {!isLoading && <ConfettiCannon triggerOnMount={true} />}
+      {/* Confetti Explosion upon opening /20 ONLY after intro is done and not expired */}
+      {!isLoading && !isExpired && <ConfettiCannon triggerOnMount={true} />}
 
       {/* Background Ambient Glows & Floating Scrapbook Stickers */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -102,7 +103,44 @@ export default function BirthdayPage({ onBackToPortfolio, isLoading = false }) {
 
       {/* Main Content */}
       <main className="flex-grow w-full z-10 space-y-16 sm:space-y-24 relative">
-        {!showFullArchive && !isTargetDateReached ? (
+        {isExpired ? (
+          /* Sealed State when accessed after August 2026 */
+          <div className="max-w-2xl mx-auto px-4 py-16 text-center select-none">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              className="bg-white p-8 sm:p-12 rounded-2xl border-2 border-ink-black neo-shadow relative"
+            >
+              {/* Wax Seal */}
+              <div className="mx-auto w-16 h-16 rounded-full bg-[#852c2c] text-amber-100 flex items-center justify-center shadow-lg border-2 border-amber-300/40 mb-5 rotate-[-4deg] neo-shadow-sm">
+                <span className="font-mono font-bold text-xs tracking-tight">🔒 SEALED</span>
+              </div>
+
+              <span className="font-mono text-xs font-bold text-ink-black/70 tracking-widest uppercase bg-pale-yellow px-3 py-1 rounded border border-ink-black/30 neo-shadow-sm -rotate-1 inline-block mb-3">
+                EVENT CONCLUDED // SEPTEMBER 2026
+              </span>
+
+              <h2 className="font-display font-extrabold text-2xl sm:text-4xl text-ink-black uppercase tracking-tight mb-3">
+                CHAPTER 20 HAS CONCLUDED
+              </h2>
+
+              <p 
+                className="text-base sm:text-lg text-text-handwrite leading-relaxed max-w-md mx-auto mb-8 font-semibold"
+                style={{ fontFamily: 'var(--font-handwrite)' }}
+              >
+                The 20th birthday live celebration and digital dump has officially concluded. All memories have been vaulted. See you on the next milestone release! 🚀✨
+              </p>
+
+              <button
+                onClick={onBackToPortfolio}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border-2 border-ink-black bg-mint text-sm font-bold font-mono text-ink-black neo-shadow neo-shadow-hover transition-all active:scale-95 cursor-pointer"
+              >
+                <span>←</span>
+                <span>RETURN TO MAIN STUDIO</span>
+              </button>
+            </motion.div>
+          </div>
+        ) : !showFullArchive && !isTargetDateReached ? (
           <BirthdayTeaser onEnterArchive={() => setShowFullArchive(true)} />
         ) : (
           <motion.div

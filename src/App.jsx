@@ -9,6 +9,7 @@ import Loader from './components/layout/Loader'
 import CustomCursor from './components/layout/CustomCursor'
 import { projects } from './data/projects'
 import BirthdayToast from './components/birthday/BirthdayToast'
+import { isBirthdaySeason } from './data/birthday'
 
 const VisualReveal = lazy(() => import('./components/sections/VisualReveal'))
 const About = lazy(() => import('./components/sections/About'))
@@ -136,9 +137,11 @@ function App() {
     }
   }, [isLoading])
 
-  // Logo 5-click easter egg counter logic
+  // Logo 5-click easter egg counter logic (Active exclusively during August birthday season)
   const [logoClicks, setLogoClicks] = useState([])
   const handleLogoClick = () => {
+    if (!isBirthdaySeason()) return
+
     const now = Date.now()
     const recentClicks = [...logoClicks, now].filter(t => now - t <= 3000)
     setLogoClicks(recentClicks)
@@ -149,8 +152,10 @@ function App() {
     }
   }
 
-  // Keyboard Easter Egg sequence listener (Press '2' then '0')
+  // Keyboard Easter Egg sequence listener (Press '2' then '0' - Active in August)
   useEffect(() => {
+    if (!isBirthdaySeason()) return
+
     let lastKey = ''
     let keyTimeout = null
 

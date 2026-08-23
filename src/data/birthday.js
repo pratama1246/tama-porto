@@ -5,7 +5,8 @@ export const birthdayMeta = {
   version: '20.0',
   releaseDate: '15 AUG 2026',
   targetIsoDate: '2026-08-15T00:00:00+07:00', // Target birthday timestamp (WIB / GMT+7)
-  devPreviewMode: false, // Live mode: countdown active until 15 Aug 00:00 WIB
+  expiryIsoDate: '2026-09-01T00:00:00+07:00', // Auto-shutdown timestamp (1 September 2026 00:00 WIB)
+  devPreviewMode: false, // Set true for editing/previewing anytime
   status: 'Stable-ish',
   mainQuest: 'Figure things out',
   sideQuest: 'Make cool web experiences & learn React',
@@ -16,6 +17,17 @@ export const birthdayMeta = {
   ],
   currentlyLearning: 'React (Vite), JSX, Advanced Tailwind & Python',
   nextUpdate: '21.0'
+}
+
+export const isBirthdayExpired = () => {
+  if (birthdayMeta.devPreviewMode) return false
+  return new Date().getTime() >= new Date(birthdayMeta.expiryIsoDate).getTime()
+}
+
+export const isBirthdaySeason = () => {
+  if (birthdayMeta.devPreviewMode) return true
+  const now = new Date().getTime()
+  return now < new Date(birthdayMeta.expiryIsoDate).getTime()
 }
 
 export const moments20 = [

@@ -1,4 +1,19 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+
+// Hook to detect touch/mobile devices to prevent dragging from intercepting scroll
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const check = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+  return isMobile
+}
 
 // Y2K 4-Pointed Sparkle Star Component
 function SparkleStar({ className, color = 'var(--accent-pink)', size = 40 }) {
@@ -75,24 +90,34 @@ function ButterflySticker({ className, color = 'var(--accent-blue)', size = 48 }
   )
 }
 
-// Fixed Decorative Sticker Container (Purely decorative, 0 pointer/touch interception)
+// Desktop-Draggable Sticker Container (Draggable on desktop, pointer-events-none on mobile)
 function DraggableSticker({
   className,
   rotate = 0,
+  hoverRotate = 0,
   delay = 0,
   children
 }) {
+  const isMobile = useIsMobile()
+
   return (
     <motion.div
+      drag={!isMobile}
+      dragMomentum={false}
+      dragElastic={0.15}
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
+      whileHover={isMobile ? {} : { scale: 1.08, rotate: hoverRotate || rotate, transition: { duration: 0.15 } }}
+      whileDrag={{ scale: 1.15, zIndex: 100 }}
       transition={{
         type: 'spring',
         stiffness: 90,
         damping: 14,
         delay
       }}
-      className={`absolute pointer-events-none select-none z-20 ${className}`}
+      className={`absolute select-none z-20 will-change-transform ${
+        isMobile ? 'pointer-events-none' : 'pointer-events-auto cursor-grab active:cursor-grabbing'
+      } ${className}`}
     >
       <div
         style={{ transform: `rotate(${rotate}deg)`, transformOrigin: 'center center' }}

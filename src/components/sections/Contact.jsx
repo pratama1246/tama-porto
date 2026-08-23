@@ -167,13 +167,13 @@ export default function Contact() {
       >
         <div className="max-w-[1600px] w-full flex flex-col justify-between">
           {/* Top Info Bar */}
-          <div className="flex flex-row justify-between items-center gap-2 pb-5 sm:pb-8 border-b-2 border-ink-black/10 font-mono text-xs sm:text-sm font-bold text-ink-black uppercase">
-            <div className="flex items-center gap-2">
-              <span className="px-2.5 py-1 rounded-md bg-pale-yellow border-2 border-ink-black neo-shadow-sm text-xs sm:text-sm font-extrabold">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-5 sm:pb-8 border-b-2 border-ink-black/10 font-mono text-xs sm:text-sm font-bold text-ink-black uppercase">
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="px-2.5 py-1 rounded-md bg-pale-yellow border-2 border-ink-black neo-shadow-sm text-xs sm:text-sm font-extrabold whitespace-nowrap">
                 © 2026
               </span>
             </div>
-            <div className="flex items-center gap-1.5 sm:gap-3 text-text-muted text-[9.5px] xs:text-[11px] sm:text-xs">
+            <div className="flex items-center gap-1.5 sm:gap-2 text-text-muted text-[11px] sm:text-xs whitespace-nowrap">
               <span>FRONTEND &amp; NETWORK</span>
               <span>•</span>
               <span>MYTAMAKIKII.WEB.ID</span>

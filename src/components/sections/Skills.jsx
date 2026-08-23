@@ -60,6 +60,7 @@ const localLogos = {
   "Node.js": "/assets/tech-stack/Node.js.png",
   "Dart": "/assets/tech-stack/Dart.png",
   "Flutter": "/assets/tech-stack/Flutter.png",
+  "Linux": "/assets/tech-stack/Linux.svg",
   "Ubuntu": "/assets/tech-stack/Ubuntu.png",
   "MikroTik": "/assets/tech-stack/MikroTik.png",
   "Cisco": "/assets/tech-stack/Cisco.png",
@@ -89,8 +90,8 @@ const localLogos = {
 }
 
 export default function Skills() {
-  // All categories are collapsed by default
-  const [activeId, setActiveId] = useState(null)
+  // First category (Frontend & UI Craftsmanship) open by default
+  const [activeId, setActiveId] = useState(1)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -105,7 +106,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-16 px-4 md:py-24 md:px-8 max-w-6xl mx-auto"
+      className="py-16 px-6 md:py-24 md:px-12 lg:px-20 max-w-[1600px] mx-auto w-full"
     >
       <motion.div
         variants={staggerContainer}
@@ -115,28 +116,19 @@ export default function Skills() {
         className="flex flex-col gap-10"
       >
         {/* Section Header */}
-        <div>
-          <motion.div
-            variants={fadeUp}
-            className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-mint)] border border-black/5 rotate-[-1deg] mb-2 select-none"
-            style={{ fontFamily: 'var(--font-body)' }}
+        <motion.div variants={fadeUp}>
+          <h2
+            className="inline-block px-5 py-2 md:px-7 md:py-3 rounded-xl text-xl sm:text-2xl md:text-4xl font-display font-extrabold text-ink-black bg-mint border-2 border-ink-black neo-shadow rotate-[1deg] tracking-tight m-0 select-none"
           >
-            My Toolbox
-          </motion.div>
-          <motion.h2
-            variants={fadeUp}
-            className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-[var(--text-dark)] m-0 select-none"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            Skills Explorer
-          </motion.h2>
-          <p className="text-xs md:text-sm text-[var(--text-muted)] mt-1 select-none">
+            Skills & Toolbox
+          </h2>
+          <p className="text-xs md:text-sm font-mono font-medium text-text-muted mt-3 select-none">
             {isMobile 
               ? "Tap folders below to expand or collapse each technical category directory."
               : "Hover over folders below to expand each technical category directory."
             }
           </p>
-        </div>
+        </motion.div>
 
         {/* Collapsible Categories Accordion Stack */}
         <div 
@@ -153,81 +145,81 @@ export default function Skills() {
                 key={cat.id}
                 variants={fadeUp}
                 onMouseEnter={isMobile ? undefined : () => setActiveId(cat.id)}
-                className="bg-[#fefcf7] rounded-md border border-black/5 shadow-xs overflow-hidden"
+                className="bg-white rounded-lg border-2 border-ink-black neo-shadow overflow-hidden"
               >
-                {/* Accordion Header (Hover on desktop / click to toggle on both) */}
+                {/* Accordion Header */}
                 <div
-                  className="px-5 py-3.5 bg-zinc-50 border-b border-black/5 flex justify-between items-center select-none transition-colors cursor-pointer hover:bg-zinc-100/80"
+                  className="px-5 py-4 bg-[#fdf5e6] border-b-2 border-ink-black flex justify-between items-center select-none transition-colors cursor-pointer hover:bg-pale-yellow/60"
                   onClick={() => {
                     setActiveId(prevId => prevId === cat.id ? null : cat.id)
                   }}
                 >
                   <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-4 flex-1 min-w-0 mr-4">
                     <span 
-                      className="text-base md:text-2xl font-semibold text-neutral-800 uppercase tracking-widest font-mono flex items-center gap-2.5 shrink-0"
+                      className="text-base md:text-xl font-bold text-ink-black uppercase tracking-wider font-mono flex items-center gap-2.5 shrink-0"
                     >
                       <span className="text-xl md:text-2xl leading-none">{isOpen ? "📂" : "📁"}</span>
                       <span>{cat.title}</span>
                     </span>
                     {cat.description && (
-                      <span className="text-[10px] md:text-sm text-neutral-400 font-mono md:border-l md:border-neutral-300 md:pl-4 truncate ml-8 md:ml-0">
+                      <span className="text-[11px] md:text-sm text-text-muted font-mono md:border-l-2 md:border-ink-black/20 md:pl-4 truncate ml-8 md:ml-0">
                         {cat.description}
                       </span>
                     )}
                   </div>
                   
-                  {/* Windows 98 Tree View Expand Indicator [+] or [-] */}
-                  <div className="w-6 h-6 md:w-8 md:h-8 bg-white border border-neutral-400 flex items-center justify-center rounded-[1px] shadow-xs font-mono text-[11px] md:text-lg font-semibold text-neutral-700">
+                  {/* Expand Indicator [+] or [-] */}
+                  <div className="w-7 h-7 md:w-8 md:h-8 bg-white border-2 border-ink-black flex items-center justify-center rounded-md neo-shadow-sm font-mono text-sm md:text-base font-bold text-ink-black">
                     {isOpen ? "-" : "+"}
                   </div>
                 </div>
 
-                {/* Collapsible Content Wrapper (Framer Motion height transition) */}
+                {/* Collapsible Content Wrapper */}
                 <motion.div
                   initial={false}
                   animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden"
+                  className="overflow-hidden bg-[#faf8f5]"
                 >
-                  <div className="p-6 border-t border-black/[0.02]">
+                  <div className="p-6 border-t border-ink-black/10">
                     {/* Skills Folder Grid */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 justify-items-center">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-6 justify-items-center">
                       {cat.skills.map((skill) => {
                         const localLogo = localLogos[skill]
                         return (
                           <motion.div
                             key={skill}
-                            whileHover={{ scale: 1.05 }}
+                            whileHover={{ scale: 1.05, y: -2 }}
                             className="w-24 flex flex-col items-center gap-2 cursor-pointer group text-center select-none"
                           >
                             {/* Icon container */}
-                            <div className="relative transform transition-transform group-hover:scale-105 flex items-center justify-center w-14 h-14">
+                            <div className="relative flex items-center justify-center w-14 h-14 bg-white border-2 border-ink-black neo-shadow-sm rounded-lg p-2 group-hover:bg-pale-yellow transition-colors">
                               {localLogo ? (
-                                <div className="relative w-11 h-11 flex items-center justify-center">
+                                <div className="relative w-10 h-10 flex items-center justify-center">
                                   <img
                                     src={localLogo}
                                     alt={`${skill} logo`}
                                     draggable={false}
                                     onContextMenu={(e) => e.preventDefault()}
-                                    className="protected-image w-11 h-11 object-contain"
+                                    className="protected-image w-8 h-8 object-contain"
                                   />
-                                  {/* Classic Windows 98 Shortcut Arrow overlay */}
-                                  <div className="absolute -bottom-1 -left-1 w-3.5 h-3.5 bg-white border border-neutral-400 flex items-center justify-center rounded-[1px] shadow-xs select-none pointer-events-none">
-                                    <span className="text-[8px] text-blue-800 leading-none font-semibold">↗</span>
+                                  {/* Shortcut Arrow */}
+                                  <div className="absolute -bottom-1 -left-1 w-3 h-3 bg-white border border-ink-black flex items-center justify-center rounded-[1px] select-none pointer-events-none">
+                                    <span className="text-[7px] text-ink-black font-bold">↗</span>
                                   </div>
                                 </div>
                               ) : (
                                 <>
-                                  <FolderIcon colorClass={folderColor} className="w-14 h-14 drop-shadow-xs" />
-                                  <span className="absolute -bottom-0.5 -right-1 bg-zinc-800 text-[7px] text-[#00ffcc] font-mono px-1 rounded-xs border border-zinc-700 font-semibold select-none uppercase">
+                                  <FolderIcon colorClass={folderColor} className="w-10 h-10 drop-shadow-xs" />
+                                  <span className="absolute -bottom-1 -right-1 bg-ink-black text-[7px] text-mint font-mono px-1 rounded-xs border border-ink-black font-bold select-none uppercase">
                                     {ext}
                                   </span>
                                 </>
                               )}
                             </div>
                             
-                            {/* File Label (Classic Windows 98 highlight style on hover) */}
-                            <span className="text-[11px] font-mono text-neutral-800 px-1 py-0.5 leading-tight rounded-xs group-hover:bg-[#000080] group-hover:text-white select-none transition-colors break-words max-w-[88px]">
+                            {/* File Label */}
+                            <span className="text-[11px] font-mono font-bold text-ink-black px-1.5 py-0.5 leading-tight rounded-xs group-hover:bg-ink-black group-hover:text-white select-none transition-colors break-words max-w-[90px]">
                               {skill}
                             </span>
                           </motion.div>

@@ -3,49 +3,73 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 // Words combining Role & Pillars with comfortable timing & creamy scrapbook tones
 const INTRO_WORDS = [
-  { text: "DESIGNER", label: "01", bg: "bg-accent-pink", textCol: "text-ink-black" },
-  { text: "DEVELOPER", label: "02", bg: "bg-accent-blue", textCol: "text-ink-black" },
-  { text: "STORIES", label: "03", bg: "bg-accent-yellow", textCol: "text-ink-black" },
-  { text: "MUSIC", label: "04", bg: "bg-accent-mint", textCol: "text-ink-black" },
-  { text: "AESTHETICS", label: "05", bg: "bg-accent-lavender", textCol: "text-ink-black" },
-  { text: "TECHNOLOGY", label: "06", bg: "bg-accent-peach", textCol: "text-ink-black" }
+  { text: "UI / UX", label: "01", bg: "bg-sticker-pink" },
+  { text: "FRONTEND", label: "02", bg: "bg-soft-blue" },
+  { text: "BACKEND", label: "03", bg: "bg-pale-yellow" },
+  { text: "NETWORK", label: "04", bg: "bg-lavender" },
+  { text: "ENGINEERING", label: "05", bg: "bg-mint" }
 ];
 
 export default function Loader({ onComplete }) {
+  // 'words' | 'logo' | 'flying-up'
+  const [phase, setPhase] = useState('words');
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // 1. Cycle through words (comfortable, readable ~680ms)
   useEffect(() => {
+    if (phase !== 'words') return;
+
     if (currentIndex < INTRO_WORDS.length - 1) {
       const timer = setTimeout(() => {
         setCurrentIndex((prev) => prev + 1);
-      }, 800); // Slower readable pace (~800ms per word)
+      }, 680);
       return () => clearTimeout(timer);
     } else {
-      // Pause on the final word before sweeping up
+      // Pause on final word before revealing center brand logo
       const finishTimer = setTimeout(() => {
-        onComplete();
-      }, 950);
+        setPhase('logo');
+      }, 700);
       return () => clearTimeout(finishTimer);
     }
-  }, [currentIndex, onComplete]);
+  }, [currentIndex, phase]);
+
+  // 2. Hold logo in center for ~950ms, then shoot only the logo up to hide
+  useEffect(() => {
+    if (phase !== 'logo') return;
+
+    const logoTimer = setTimeout(() => {
+      setPhase('flying-up');
+    }, 950); // Display logo proud in center for ~950ms
+
+    return () => clearTimeout(logoTimer);
+  }, [phase]);
+
+  // 3. When logo finishes flying up, call onComplete
+  useEffect(() => {
+    if (phase !== 'flying-up') return;
+
+    const completeTimer = setTimeout(() => {
+      onComplete();
+    }, 700);
+
+    return () => clearTimeout(completeTimer);
+  }, [phase, onComplete]);
 
   const currentItem = INTRO_WORDS[currentIndex];
 
   return (
     <motion.div
       className="fixed inset-0 z-[9999] flex flex-col justify-between items-center bg-[#fdf6e3] text-ink-black overflow-hidden p-6 md:p-12 select-none border-b-2 border-ink-black touch-none overscroll-none"
-      initial={{ y: 0 }}
-      exit={{ 
-        y: "-100%", 
-        transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
-      }}
+      initial={{ opacity: 1 }}
+      animate={{ opacity: phase === 'flying-up' ? 0 : 1 }}
+      transition={{ duration: 0.7, ease: 'easeInOut' }}
     >
-      {/* Creamy Grid Notebook Background */}
+      {/* Creamy Grid Notebook Background matching exact website theme */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-40"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: 'linear-gradient(rgba(160, 160, 190, 0.25) 1px, transparent 1px), linear-gradient(90deg, rgba(160, 160, 190, 0.25) 1px, transparent 1px)',
-          backgroundSize: '28px 28px'
+          backgroundImage: 'linear-gradient(rgba(160, 160, 190, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(160, 160, 190, 0.12) 1px, transparent 1px)',
+          backgroundSize: '24px 24px'
         }}
       />
 
@@ -58,31 +82,62 @@ export default function Loader({ onComplete }) {
           </span>
         </div>
         <div className="font-mono text-xs md:text-sm font-bold text-ink-black bg-white px-3.5 py-1.5 rounded-md border-2 border-ink-black neo-shadow-sm">
-          {currentItem.label} / 06
+          {phase === 'words' ? `${currentItem.label} / 05` : '05 / 05'}
         </div>
       </div>
 
-      {/* Center Snappy Typography & Badge Cycling */}
+      {/* Center Stage: Words or Brand Logo */}
       <div className="relative z-10 flex flex-col items-center justify-center my-auto overflow-visible py-12 px-4">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentItem.text}
-            initial={{ y: 35, opacity: 0, scale: 0.95 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
-            exit={{ y: -35, opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-4 overflow-visible"
-          >
-            {/* Main Word styled in soft neobrutal badge */}
-            <div 
-              className={`px-6 py-3 sm:px-9 sm:py-4.5 rounded-2xl border-2 border-ink-black neo-shadow rotate-[-1deg] ${currentItem.bg} select-none`}
+        {phase === 'words' ? (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentItem.text}
+              initial={{ y: 35, opacity: 0, scale: 0.95 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -35, opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-4 overflow-visible"
             >
-              <h1 className="font-display font-extrabold text-3xl sm:text-5xl md:text-7xl tracking-tight m-0 text-ink-black">
-                {currentItem.text}
-              </h1>
+              {/* Main Word styled in soft neobrutal badge */}
+              <div 
+                className={`px-6 py-3 sm:px-9 sm:py-4.5 rounded-2xl border-2 border-ink-black neo-shadow rotate-[-1deg] ${currentItem.bg} select-none`}
+              >
+                <h1 className="font-display font-extrabold text-3xl sm:text-5xl md:text-7xl tracking-tight m-0 text-ink-black">
+                  {currentItem.text}
+                </h1>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        ) : (
+          /* Climax Phase: Logo appears in center, then only the logo flies UP off-screen to hide */
+          <motion.div
+            initial={{ scale: 0.85, opacity: 0, y: 25 }}
+            animate={
+              phase === 'flying-up'
+                ? { y: -window.innerHeight * 0.85, opacity: 0, scale: 0.6 }
+                : { y: 0, opacity: 1, scale: 1 }
+            }
+            transition={{
+              duration: phase === 'flying-up' ? 0.72 : 0.45,
+              ease: phase === 'flying-up' ? [0.76, 0, 0.24, 1] : [0.16, 1, 0.3, 1]
+            }}
+            className="flex items-center gap-3 sm:gap-4 select-none cursor-default"
+          >
+            <div className="w-11 h-11 sm:w-14 sm:h-14 shrink-0">
+              <img
+                src="/favicon.svg"
+                alt="Tama Polaroid Logo"
+                className="w-full h-full object-contain select-none pointer-events-none"
+                draggable={false}
+              />
             </div>
+            <span 
+              className="font-display font-bold text-3xl sm:text-5xl md:text-6xl text-ink-black tracking-tight leading-none"
+            >
+              tama<span className="text-[#ff6b9d]">.</span>gallery
+            </span>
           </motion.div>
-        </AnimatePresence>
+        )}
       </div>
 
       {/* Bottom Footer Info */}

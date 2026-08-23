@@ -20,7 +20,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-10 px-4 md:py-24 md:px-8 max-w-7xl mx-auto"
+      className="py-10 px-6 md:py-24 md:px-12 lg:px-20 max-w-[1600px] mx-auto w-full"
     >
       <motion.div
         variants={staggerContainer}
@@ -30,47 +30,37 @@ export default function About() {
         className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
       >
         {/* Section Title - Span full width on mobile, top on desktop */}
-        <div className="md:col-span-12 mb-4">
-          <motion.div
-            variants={fadeUp}
-            className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-pink)] border border-black/5 rotate-[-1deg] mb-2"
-            style={{ fontFamily: 'var(--font-body)' }}
+        <motion.div variants={fadeUp} className="md:col-span-12 mb-4">
+          <h2
+            className="inline-block px-5 py-2 md:px-7 md:py-3 rounded-xl text-xl sm:text-2xl md:text-4xl font-display font-extrabold text-ink-black bg-sticker-pink border-2 border-ink-black neo-shadow rotate-[-1deg] tracking-tight m-0 select-none"
           >
-            My Profile
-          </motion.div>
-          <motion.h2
-            variants={fadeUp}
-            className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-[var(--text-dark)] m-0"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            Inside the Pinboard
-          </motion.h2>
-        </div>
+            About Me
+          </h2>
+        </motion.div>
 
 
-        {/* Left Side: Polaroid Card (4 cols) */}
+        {/* Left Side: Polaroid Card (5 cols on desktop, centered overlapping on mobile) */}
         <motion.div
           variants={fadeUp}
-          className="md:col-span-5 flex justify-center relative py-6"
+          className="md:col-span-5 flex justify-center relative py-2 sm:py-6 -mb-4 md:mb-0 z-10"
         >
           {/* Polaroid Frame */}
           <div
-            className="relative bg-white p-3 pb-8 rounded-sm shadow-sm transition-transform duration-300 hover:scale-[1.02] hover:-translate-y-1 hover:shadow-md max-w-[280px]"
+            className="relative bg-white p-3 pb-6 sm:pb-8 rounded-lg neo-shadow border-2 border-ink-black transition-all duration-300 hover:rotate-0 hover:scale-[1.02] w-[clamp(220px,65vw,280px)]"
             style={{
-              transform: 'rotate(-3deg)',
-              border: '1px solid rgba(0,0,0,0.06)'
+              transform: 'rotate(-2.5deg)',
             }}
           >
             {/* CSS Paper Clip Decorator */}
             <div 
-              className="absolute -top-4 left-1/3 w-[12px] h-[36px] border-2 border-[var(--text-muted)] rounded-full z-20 bg-transparent rotate-[18deg]"
+              className="absolute -top-3.5 left-1/3 w-[12px] h-[34px] border-2 border-ink-black rounded-full z-20 bg-transparent rotate-[18deg] pointer-events-none"
               aria-hidden="true"
             >
-              <div className="absolute top-[4px] left-[1.5px] w-[6px] h-[22px] border-2 border-[var(--text-muted)] rounded-full bg-transparent" />
+              <div className="absolute top-[3px] left-[1.5px] w-[6px] h-[20px] border-2 border-ink-black rounded-full bg-transparent" />
             </div>
 
             {/* Polaroid Photo Image */}
-            <div className="w-[256px] h-[256px] bg-[#f5e6c8] overflow-hidden rounded-[2px] border border-black/5">
+            <div className="w-full aspect-square bg-[#f5e6c8] overflow-hidden rounded-md border-2 border-ink-black">
               <img
                 src="/assets/photos/avatar.webp"
                 alt="Tama Purwanto"
@@ -83,7 +73,7 @@ export default function About() {
 
             {/* Handwritten Label */}
             <div
-              className="text-center mt-4 text-[0.85rem] text-[var(--text-handwrite)] select-none"
+              className="text-center mt-3 sm:mt-4 text-[0.85rem] sm:text-[0.9rem] font-medium text-text-handwrite select-none"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
               me_in_studio.jpg
@@ -92,7 +82,7 @@ export default function About() {
 
           {/* Washi Tape Strip at bottom left of polaroid */}
           <div
-            className="absolute -bottom-2 -left-2 w-[75px] h-[18px] bg-[var(--accent-mint)] opacity-80 border border-black/5 z-10 rotate-[-12deg] rounded-sm pointer-events-none"
+            className="absolute -bottom-1 -left-1 sm:-bottom-2 sm:-left-2 w-[65px] sm:w-[75px] h-[18px] sm:h-[20px] bg-mint opacity-85 border border-ink-black/40 z-10 rotate-[-12deg] rounded-xs pointer-events-none"
             style={{ mixBlendMode: 'multiply' }}
             aria-hidden="true"
           />
@@ -105,7 +95,7 @@ export default function About() {
         >
           {/* Notebook Paper Sheet Container */}
           <div
-            className="bg-[#fefcf7] p-6 md:p-8 rounded-sm shadow-sm border border-black/5 relative overflow-hidden rotate-[1deg]"
+            className="bg-white p-6 md:p-8 rounded-lg neo-shadow border-2 border-ink-black relative overflow-hidden rotate-[1deg]"
             style={{
               backgroundImage: 'linear-gradient(var(--bg-secondary) 1px, transparent 1px)',
               backgroundSize: '100% 28px',
@@ -113,27 +103,31 @@ export default function About() {
             }}
           >
             {/* Notebook Margin Line */}
-            <div className="absolute top-0 bottom-0 left-8 md:left-12 border-l border-red-200" aria-hidden="true" />
+            <div className="absolute top-0 bottom-0 left-8 md:left-12 border-l border-red-300" aria-hidden="true" />
 
             <div className="pl-6 md:pl-10">
               <h3
-                className="font-display font-medium text-lg text-[var(--text-dark)] mb-4"
-                style={{ fontFamily: 'var(--font-display)', lineHeight: '1.2' }}
+                className="font-display font-bold text-xl sm:text-2xl text-ink-black mb-4"
               >
-                Hi, I'm Tama!
+                Hi, I'm Tama! 👋
               </h3>
               <p
-                className="text-sm md:text-[0.95rem] text-[var(--text-dark)] leading-relaxed"
-                style={{ fontFamily: 'var(--font-body)', lineHeight: '28px' }}
+                className="text-sm md:text-[0.95rem] text-ink-black leading-relaxed font-body"
+                style={{ lineHeight: '28px' }}
               >
-                I am currently pursuing my D3 Informatics Engineering degree at <strong>Politeknik Negeri Cilacap</strong>. 
-                With a passion for UI/UX design and frontend development, I love bridging the gap between design systems in Figma and functional, responsive code.
+                I am an Informatics Engineering student at <strong>Politeknik Negeri Cilacap</strong>, driven by a deep curiosity for how visual aesthetics and system logic connect. My journey started with crafting clean interfaces in Figma and developing backend systems in Laravel, which quickly sparked my obsession with building dynamic, tactile web experiences.
               </p>
               <p
-                className="text-sm md:text-[0.95rem] text-[var(--text-dark)] leading-relaxed mt-4"
-                style={{ fontFamily: 'var(--font-body)', lineHeight: '28px' }}
+                className="text-sm md:text-[0.95rem] text-ink-black leading-relaxed mt-4 font-body"
+                style={{ lineHeight: '28px' }}
               >
-                Currently, I am expanding my skills in React, component-based architectures, and modern styling tools like Tailwind CSS. Backed by a foundation in computer networking and IT systems, I strive to build digital products that balance aesthetics, usability, and technical reliability.
+                What shapes my development approach is a dual mindset: I don't just see a website as static markup, but as an interactive canvas governed by render performance, component states, and network efficiency. Having a solid grounding in computer networking allows me to look past the browser window—understanding how data packets travel, how servers respond, and how to keep applications fast and reliable from end to end.
+              </p>
+              <p
+                className="text-sm md:text-[0.95rem] text-ink-black leading-relaxed mt-4 font-body"
+                style={{ lineHeight: '28px' }}
+              >
+                Currently, I am expanding my craft in modern React ecosystems, GSAP scroll-driven animations, and scalable design systems. I thrive on translating creative concepts into pixel-perfect, accessible code that leaves a lasting impression on anyone who interacts with it.
               </p>
             </div>
           </div>
@@ -141,28 +135,26 @@ export default function About() {
           {/* Sticky Note Row */}
           <div className="flex justify-end md:justify-start pl-0 md:pl-8 mt-2">
             <motion.div
-              whileHover={{ scale: 1.05, rotate: '5deg' }}
-              className="bg-[var(--accent-yellow)] p-4 rounded-sm shadow-xs max-w-[220px]"
+              whileHover={{ scale: 1.05, rotate: '3deg' }}
+              className="bg-pale-yellow p-5 rounded-lg neo-shadow border-2 border-ink-black max-w-[260px]"
               style={{
                 transform: 'rotate(2deg)',
-                border: '1px solid rgba(0,0,0,0.04)'
               }}
             >
               <h4 
-                className="text-[0.85rem] font-semibold text-[var(--text-handwrite)] border-b border-[var(--text-handwrite)]/10 pb-1 mb-2 tracking-wide uppercase"
-                style={{ fontFamily: 'var(--font-body)' }}
+                className="text-[0.8rem] font-mono font-bold text-text-handwrite border-b-2 border-ink-black/20 pb-1 mb-2.5 tracking-wide uppercase"
               >
                 QUICK STATS:
               </h4>
               <ul
-                className="list-none p-0 m-0 flex flex-col gap-1.5 text-[0.85rem] text-[var(--text-handwrite)]"
+                className="list-none p-0 m-0 flex flex-col gap-1.5 text-[0.85rem] font-medium text-text-handwrite"
                 style={{ fontFamily: 'var(--font-handwrite)' }}
               >
-                <li>📌 D3 Informatics @ PNC</li>
-                <li>🎨 Figma & UI Enthusiast</li>
-                <li>🛠️ PHP & Laravel Basics</li>
-                <li>🌐 Networking foundations</li>
-                <li>🚀 Learning React & GSAP</li>
+                <li>📌 D3 Informatics Engineering</li>
+                <li>🎨 UI/UX &amp; Figma-to-Code</li>
+                <li>⚡ Modern React &amp; Tailwind CSS</li>
+                <li>🌐 Network &amp; Routing Protocols</li>
+                <li>🛠️ Laravel &amp; Relational DBs</li>
               </ul>
             </motion.div>
           </div>

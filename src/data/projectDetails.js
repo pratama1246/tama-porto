@@ -81,6 +81,8 @@ export const projectDetails = {
     },
     setup: {
       steps: [
+        { cmd: "git clone https://github.com/pratama1246/PickupOrder-App.git", desc: "Clone repository to your local workstation" },
+        { cmd: "cd PickupOrder-App", desc: "Navigate into the project root directory" },
         { cmd: "composer install", desc: "Install backend PHP dependencies via Composer" },
         { cmd: "cp .env.example .env && php artisan key:generate", desc: "Create environment file and generate secure encryption key" },
         { cmd: "php artisan migrate --seed", desc: "Create MySQL schema, run migrations, and seed demo accounts" },
@@ -111,23 +113,23 @@ export const projectDetails = {
     ]
   },
   2: {
-    tagline: "CodeIgniter 4 powered event ticketing platform with secure user booking and JWT RESTful APIs.",
-    overview: "Ticketly is a robust and modern event ticketing platform powered by CodeIgniter 4 (PHP 8.1+). It provides a comprehensive solution for managing events, selling tickets, and processing bookings. The system features a web-based user portal, an administrative dashboard, and a custom JWT-protected RESTful API for mobile Flutter client integrations.",
+    tagline: "CodeIgniter 4 powered concert & festival ticketing platform with multi-step checkout and JWT RESTful API.",
+    overview: "Ticketly is an event ticketing web platform built with CodeIgniter 4 (PHP 8.1+) and MySQL. Developed as a collaborative project, it provides an end-to-end ticketing solution featuring a public event catalog for concerts and festivals, a multi-step checkout workflow, an administrative management board for event/ticket CRUD and sales monitoring, and a JWT-protected RESTful API serving the Flutter mobile client with interactive Scalar/OpenAPI documentation.",
     disclaimer: "All event logos, promoter names, and concert posters featured in this project belong to their respective copyright owners. They are used purely for educational and academic demonstration purposes to simulate a realistic ticketing catalog.",
-    problem: "Event registration and booking processes on campus are often disorganized, leading to issues with quota management, manual ticketing, and slow attendance checks.",
-    solution: "A centralized web application utilizing CodeIgniter 4 MVC architecture to automate ticket bookings, manage ticket quotas in real-time, provide an administrative control board, and expose JWT RESTful API endpoints for mobile companion apps.",
+    problem: "Event registration and ticket sales on campus or local gigs are often fragmented, leading to quota mismatches, manual verification bottlenecks, and lack of mobile integration.",
+    solution: "A CodeIgniter 4 MVC web application providing structured event & ticket management, a multi-step checkout pipeline, and a RESTful API backend protected by custom JWT filters to power companion mobile clients.",
     keyFeatures: [
-      "Custom authentication for user & admin (Web Shield & custom JWT token for Mobile API)",
-      "Interactive event catalog showcasing upcoming concert listings and descriptions",
-      "Ticket booking system with dynamic category pricing and real-time quota validation",
-      "Comprehensive Admin Dashboard monitoring transactions, sales statistics, and seat quotas",
-      "Scalar-powered interactive REST API documentation (public/openapi.json)",
-      "Forgot password flows with email verification codes (OTP via SMTP)"
+      "Multi-step checkout workflow (Personal Info → Payment Method → Order Review → Payment Confirmation)",
+      "CodeIgniter Shield session auth for web & custom JWT token filter for mobile REST API",
+      "Admin Panel with sales metrics, event management (CRUD), and ticket quota controls",
+      "Ticket tier management with duplicate tier functionality for quick setup",
+      "Order transaction history and automated PDF invoice generation",
+      "Scalar-powered interactive OpenAPI documentation (/api/docs)"
     ],
     techStack: [
       { category: "Backend Core", list: ["PHP 8.1+", "CodeIgniter 4", "MySQL"] },
-      { category: "Security & Auth", list: ["CodeIgniter Shield (Web)", "firebase/php-jwt (Mobile API)", "OTP via SMTP"] },
-      { category: "Libraries & Frontend", list: ["Tailwind CSS v3", "Flowbite UI", "Dompdf (PDF Generator)", "Simple Qrcode (QR Generator)"] }
+      { category: "Security & Auth", list: ["CodeIgniter Shield (Web)", "Custom JWT Filter (Mobile API)", "SMTP Email Verification"] },
+      { category: "UI & Libraries", list: ["Tailwind CSS", "Flowbite UI", "Dompdf (PDF Invoices)", "Scalar (API Docs)"] }
     ],
     roles: [
       {
@@ -135,10 +137,10 @@ export const projectDetails = {
         color: "var(--accent-pink)",
         icon: "👩‍💻",
         features: [
-          "Browse and search available concert and show events",
-          "Purchase tickets with custom seat/category quantity selections",
-          "Track personal order history details and transaction status",
-          "Manage personal profile details and edit accounts"
+          "Browse concerts, festivals, and featured event catalogs",
+          "Multi-step ticket checkout with seat and quantity selection",
+          "View transaction history and download PDF ticket invoices",
+          "Manage account profile and password reset via email OTP"
         ]
       },
       {
@@ -146,10 +148,10 @@ export const projectDetails = {
         color: "var(--accent-mint)",
         icon: "🛠️",
         features: [
-          "Monitor ticket sales statistics, transaction logs, and capacity thresholds",
-          "Manage events database (CRUD operations: create, edit, delete events)",
-          "Configure ticket tiers, prices, and event quotas in real-time",
-          "Audit incoming ticket transaction entries"
+          "Dashboard overview with transaction metrics and sales statistics",
+          "Full Event management (CRUD operations: create, edit, update, delete)",
+          "Ticket tier configuration (pricing, quotas, and tier duplication)",
+          "Order status management and PDF invoice downloads"
         ]
       },
       {
@@ -157,46 +159,49 @@ export const projectDetails = {
         color: "var(--accent-blue)",
         icon: "📱",
         features: [
-          "User registration, JWT login, OTP requests, and password resets",
-          "Retrieve banner landing events and featured listings",
-          "Real-time mobile shopping cart calculation endpoint",
-          "Start checkout, upload payment proof/confirm, and cancel bookings via API"
+          "User authentication endpoints (Login, Register, OTP verification, Reset Password)",
+          "Public event catalog & featured banner endpoints",
+          "Cart subtotal calculation with fee breakdowns",
+          "Protected endpoints (JWT) for user profile, orders list, and checkout flow"
         ]
       }
     ],
     database: {
-      description: "Relational MySQL schema structured with clean relational integrity, performance indexes, and database foreign key cascades.",
+      description: "Relational MySQL schema structured with clean relational integrity, foreign key constraints, and indexing for event catalogs and booking transactions.",
       tables: [
-        { name: "users", fields: ["id", "username", "email", "password", "role", "created_at", "updated_at"] },
-        { name: "events", fields: ["id", "title", "description", "date", "time", "venue", "ticket_price", "ticket_quota", "image", "created_at"] },
-        { name: "ticket_types", fields: ["id", "event_id", "name", "price", "quota", "created_at"] },
+        { name: "events", fields: ["id", "title", "description", "category", "date", "time", "venue", "image", "created_at"] },
+        { name: "tickets", fields: ["id", "event_id", "name", "price", "quota", "created_at"] },
         { name: "seats", fields: ["id", "event_id", "seat_number", "status"] },
-        { name: "orders", fields: ["id", "user_id", "event_id", "quantity", "total_price", "booking_status", "created_at"] },
-        { name: "order_items", fields: ["id", "order_id", "ticket_type_id", "quantity", "price_at_purchase"] },
-        { name: "payment_methods", fields: ["id", "name", "code", "is_active"] }
+        { name: "orders", fields: ["id", "user_id", "order_code", "total_price", "payment_status", "created_at"] },
+        { name: "order_items", fields: ["id", "order_id", "ticket_id", "seat_id", "quantity", "price"] },
+        { name: "payment_methods", fields: ["id", "name", "code", "is_active"] },
+        { name: "password_resets", fields: ["id", "email", "token", "created_at"] },
+        { name: "users", fields: ["id", "username", "email", "password", "role", "created_at"] }
       ],
       specialFeatures: [
-        "Real-time ticket type quota subtractions on order creation.",
-        "Custom database tracking for seat maps per event venue.",
-        "Relational CASCADE rules on event catalog edits."
+        "Real-time ticket quota subtractions upon order creation.",
+        "Seat mapping support per event venue.",
+        "Scalar-based OpenAPI contract generation directly from endpoints."
       ]
     },
     payments: {
-      provider: "JWT Rest Checkout & Web Gateway Payments",
+      provider: "Direct Bank Transfer & Proof Upload Verification",
       endpoints: [
-        { method: "POST", path: "/api/checkout/calculate", desc: "Calculates cart subtotals, admin fees, and totals in real-time." },
-        { method: "POST", path: "/api/checkout/start", desc: "Locks seat quotas and starts a pending transaction." },
-        { method: "POST", path: "/api/checkout/confirm", desc: "Confirm booking and upload proof of payment file." },
-        { method: "GET", path: "/api/docs", desc: "Scalar interactive endpoint to view and test Swagger/OpenAPI specifications." }
+        { method: "POST", path: "/api/checkout/calculate", desc: "Calculates cart subtotals, admin fees, and grand total." },
+        { method: "POST", path: "/api/checkout/start", desc: "Locks ticket quota and initializes a pending order." },
+        { method: "POST", path: "/api/checkout/confirm", desc: "Confirms order and submits proof of payment." },
+        { method: "GET", path: "/api/docs", desc: "Interactive Scalar OpenAPI specification documentation." }
       ]
     },
     setup: {
       steps: [
-        { cmd: "composer install", desc: "Install dependencies via Composer" },
+        { cmd: "git clone https://github.com/pratama1246/Ticketly-Project.git", desc: "Clone the CodeIgniter 4 repository" },
+        { cmd: "cd Ticketly-Project", desc: "Navigate into the project directory" },
+        { cmd: "composer install", desc: "Install backend PHP dependencies via Composer" },
         { cmd: "cp env .env", desc: "Duplicate configuration environment file" },
-        { cmd: "Configure Env Configs", desc: "Adjust app.baseURL, JWT_SECRET_KEY, and SMTP email parameters in .env" },
-        { cmd: "php spark migrate", desc: "Create database schema using CodeIgniter migrations" },
-        { cmd: "php spark db:seed --all", desc: "Seed database with PaymentMethodSeeder, EventSeeder, AdminUserSeeder, and FakeUserSeeder" },
+        { cmd: "nano .env", desc: "Set app.baseURL, JWT_SECRET_KEY, and database credentials in .env" },
+        { cmd: "php spark migrate", desc: "Run database migrations to generate tables" },
+        { cmd: "php spark db:seed --all", desc: "Seed database with default payment methods, events, and testing accounts" },
         { cmd: "php spark serve", desc: "Launch development server at http://localhost:8080" }
       ],
       envVars: [
@@ -214,22 +219,22 @@ export const projectDetails = {
     screenshots: []
   },
   3: {
-    tagline: "Desktop employee payroll and webcam QR attendance system with robust OOP architecture.",
-    overview: "Sistem Informasi Penggajian Karyawan (Employee Payroll Information System) is a desktop application based on Windows Forms (C# .NET Framework 4.8) designed to manage employee profiles, track daily attendance, configure custom salary components, calculate monthly payroll automatically, and print/view salary slips. Built as a practical assignment for the Object-Oriented Programming (OOP) Lab Course at Politeknik Negeri Cilacap, the application features database auto-initialization and seeding, dynamic salary configs, and a dedicated Kiosk Mode for contactless check-in/out via QR Code scanner using a live webcam feed.",
-    problem: "Manual monthly salary calculations (allowances, deductions, and grace-period late penalties based on raw logs) trigger math discrepancies and delays, while standard biometric attendance hardware is expensive to implement.",
-    solution: "A desktop C# WinForms application integrated with MySQL that automatically seeds its database on launch, computes dynamic salaries, and utilizes a standard computer webcam to scan employee QR badge cards for automated kiosk attendance tracking.",
+    tagline: "Desktop employee payroll & contactless webcam QR attendance system with OOP hierarchy in C# WinForms.",
+    overview: "Sistem Informasi Penggajian Karyawan is a Windows Forms desktop application built in C# (.NET Framework 4.8) and MySQL. Developed as a practical project for the Object-Oriented Programming (OOP) Lab course at Politeknik Negeri Cilacap by a 4-person student team, it features a self-healing auto-seeder, inheritance-based employee modeling (Permanent, Contract, Daily), dynamic salary allowance/deduction rules, and a dedicated Kiosk Mode for webcam-based QR badge check-ins.",
+    problem: "Manual monthly salary calculations and paper-based attendance tracking cause calculation errors, late attendance disputes, and delays in issuing employee pay slips.",
+    solution: "A desktop C# WinForms solution utilizing ADO.NET and MySQL that automatically initializes its schema on launch, executes OOP-based salary calculations, and uses a standard computer webcam to scan employee QR badges in real-time.",
     keyFeatures: [
-      "Secure role-based dashboards (Admin, HRD, Employee, and Kiosk Mode)",
-      "Automated database schema creation & self-healing data seeder on startup",
-      "Dynamic salary components configuration (allowances & deductions by nominal or %)",
-      "Live webcam QR code scanner for contactless self-attendance checking (kiosk)",
-      "Automatic monthly salary calculation & GDI+ dynamic slip rendering and printing",
-      "Secure cryptography service for user passwords and login sessions"
+      "OOP Architecture: BaseKaryawan abstract model with concrete Permanent, Contract, and Daily employee subclasses",
+      "Contactless Kiosk Mode: Real-time webcam QR attendance scanning using AForge.Video & ZXing.Net",
+      "Automated DatabaseSeeder: Self-healing schema generation and sample data seeding on startup",
+      "Dynamic Salary Engine: Configurable allowances and deductions with automated monthly payroll processing",
+      "Dynamic Slip Printing: In-app salary slip generation and viewing for employees",
+      "Role-Based Security: Dedicated views for Admin, HRD, Kiosk, and Employee with encrypted credentials"
     ],
     techStack: [
       { category: "Application Layer", list: ["C#", ".NET Framework 4.8", "Windows Forms (WinForms)"] },
-      { category: "Data Layer", list: ["MySQL Server", "ADO.NET Provider (MySql.Data v9.7.0)", "Database Auto-Seeder"] },
-      { category: "Third-Party Libraries", list: ["AForge.Video (Webcam API)", "ZXing.Net (QR Code)", "BouncyCastle (Cryptography)"] }
+      { category: "Data Layer", list: ["MySQL Server", "ADO.NET Provider (MySql.Data)", "Auto-Seeder (DatabaseSeeder.cs)"] },
+      { category: "Third-Party Libraries", list: ["AForge.Video & DirectShow (Webcam Capture)", "ZXing.Net (QR Decoding)", "BouncyCastle (Cryptography)"] }
     ],
     roles: [
       {
@@ -237,9 +242,9 @@ export const projectDetails = {
         color: "var(--accent-lavender)",
         icon: "⚙️",
         features: [
-          "User Management: CRUD operations for login accounts",
-          "Employee Management: CRUD operations for employee records (Permanent, Contract, Daily)",
-          "QR Identity Cards: Automatically generate and download badges as PNG"
+          "Employee master data management (Permanent, Contract, Daily)",
+          "User credentials and role administration",
+          "Generate and download employee QR identity badges"
         ]
       },
       {
@@ -247,19 +252,9 @@ export const projectDetails = {
         color: "var(--accent-peach)",
         icon: "👔",
         features: [
-          "Configure salary components dynamically (allowances and deductions)",
-          "Configure shifts, normal hours, and late tolerance grace periods",
-          "Process monthly payroll calculations and review recaps/reports"
-        ]
-      },
-      {
-        roleName: "Employee (Karyawan)",
-        color: "var(--accent-blue)",
-        icon: "👤",
-        features: [
-          "Personal dashboard showing real-time stats and active payroll status",
-          "View individual daily attendance history logs",
-          "Print/export monthly salary slips rendered dynamically using GDI+"
+          "Salary components editor (dynamic allowances and deductions)",
+          "Shift schedule, working hours, and grace-period late penalty configs",
+          "Monthly payroll calculation trigger and attendance recap reports"
         ]
       },
       {
@@ -267,29 +262,45 @@ export const projectDetails = {
         color: "var(--accent-pink)",
         icon: "🖥️",
         features: [
-          "Contactless check-in/out self-attendance clocking console",
-          "Live webcam stream capturing using AForge.Video library",
-          "Instantly decode employee QR identity cards using ZXing.Net"
+          "Dedicated full-screen webcam check-in console",
+          "Live video feed decoding of employee QR badges",
+          "Secure credential-protected dialog to exit kiosk mode"
+        ]
+      },
+      {
+        roleName: "Employee (Karyawan)",
+        color: "var(--accent-blue)",
+        icon: "👤",
+        features: [
+          "Personal dashboard showing attendance records and payroll status",
+          "View individual daily check-in/out attendance logs",
+          "View and export dynamic monthly salary slips"
         ]
       }
     ],
     database: {
       description: "Normalized MySQL schema containing tables for employee master profiles (base class with concrete models), attendance logs, login accounts, and salary components.",
       tables: [
-        { name: "Karyawan", fields: ["kode_karyawan", "nama", "jabatan", "gaji_pokok", "jenis_karyawan"] },
+        { name: "Karyawan", fields: ["kode_karyawan", "nama", "jabatan", "gaji_pokok", "jenis_karyawan", "qr_code"] },
         { name: "DataAbsensi", fields: ["id_absensi", "kode_karyawan", "tanggal", "status", "jam_masuk", "jam_keluar"] },
         { name: "KomponenGaji", fields: ["id_komponen", "nama_komponen", "jenis", "nilai", "tipe_nilai"] },
-        { name: "Gaji", fields: ["id_gaji", "kode_karyawan", "bulan_tahun", "gaji_pokok", "total_tunjangan", "total_potongan", "gaji_bersih"] }
+        { name: "Gaji", fields: ["id_gaji", "kode_karyawan", "bulan_tahun", "gaji_pokok", "total_tunjangan", "total_potongan", "gaji_bersih"] },
+        { name: "User", fields: ["id_user", "username", "password", "role"] }
       ],
-      specialFeatures: ["Self-healing auto-seeder on startup", "Inheritance-based employee OOP hierarchy", "Dynamic custom salary components binding"]
+      specialFeatures: [
+        "Self-healing DatabaseSeeder runs on FormSplash initialization.",
+        "Polymorphic salary calculations via Service Layer (Gaji_serv.cs).",
+        "Webcam capture pipeline with thread-safe UI updates in WinForms."
+      ]
     },
     payments: null,
     setup: {
       steps: [
-        { cmd: "Clone Repository", desc: "Clone files: git clone https://github.com/pratama1246/SistemPenggajianKaryawan.git" },
-        { cmd: "Create Database", desc: "Open MySQL and execute: CREATE DATABASE penggajian;" },
-        { cmd: "Configure Connection", desc: "Adjust credentials in Koneksi.cs if different from default root / empty password" },
-        { cmd: "Compile & Run", desc: "Open in Visual Studio 2022 and compile (F5). Seeder creates tables and sample data automatically" }
+        { cmd: "git clone https://github.com/pratama1246/SistemPenggajianKaryawan.git", desc: "Clone the C# desktop repository" },
+        { cmd: "cd SistemPenggajianKaryawan", desc: "Navigate into the project root directory" },
+        { cmd: "mysql -u root -p -e 'CREATE DATABASE penggajian;'", desc: "Create MySQL database 'penggajian'" },
+        { cmd: "nano Koneksi.cs", desc: "Configure database connection parameters if different from root / empty password" },
+        { cmd: "Compile & Run (F5)", desc: "Open SistemPenggajianKaryawan.csproj in Visual Studio 2022 and press F5. DatabaseSeeder auto-creates tables and sample data" }
       ],
       envVars: [
         { name: "Database Name", val: "penggajian" },
@@ -440,59 +451,50 @@ export const projectDetails = {
     screenshots: []
   },
   7: {
-    tagline: "Stateless cross-platform mobile client for ticket booking built with Flutter & JWT REST APIs.",
-    overview: "Ticketly Mobile is a cross-platform mobile application built using Flutter (Dart) that serves as the client interface for the Ticketly event ticketing system. It connects to the CodeIgniter 4 Backend RESTful API to deliver a seamless event discovery and ticket purchasing experience on mobile devices, supporting JWT-based stateless authentication, real-time shopping cart validation, and payment proof uploading.",
+    tagline: "Cross-platform Flutter mobile client for Ticketly event discovery & digital QR tickets.",
+    overview: "Ticketly Mobile is a cross-platform mobile application built with Flutter and Dart, serving as the client companion application for the Ticketly CodeIgniter 4 backend. It provides concert and festival attendees with an intuitive mobile experience to browse featured event banners, select ticket tiers, complete checkout bookings, store digital tickets with scannable QR codes, and manage user profile accounts.",
     disclaimer: "All event logos, promoter names, and concert posters featured in this project belong to their respective copyright owners. They are used purely for educational and academic demonstration purposes to simulate a realistic ticketing catalog.",
-    problem: "Booking event tickets on campus usually requires using web-based portals that are not mobile-responsive or optimized for on-the-go checks and scanning.",
-    solution: "A native-performing Flutter app that integrates with the backend API, utilizing local caching for sessions, interactive seat category quotas, and dynamically rendered e-tickets with barcode/QR verification.",
+    problem: "Checking event ticket details, entering venue gates, and viewing purchase history on mobile browsers can be cumbersome without a dedicated, responsive mobile interface.",
+    solution: "A Flutter mobile client communicating with the CodeIgniter 4 REST API, featuring JWT authentication, persistent token caching via SharedPreferences, and in-app digital ticket cards with QR codes.",
     keyFeatures: [
-      "JWT-Based Stateless Auth & Session caching via shared_preferences",
-      "Dynamic Home Banner & Event categories discovery flow",
-      "Real-time ticket category quota checking & cart checkout calculations",
-      "Camera/Gallery payment proof uploading for vendor manual validation",
-      "E-Ticket dashboard showing active barcodes/QRs for check-in",
-      "Pull-to-refresh mechanism to reload concert poster updates dynamically"
+      "Onboarding & Authentication: Login, Register, Forgot Password with email OTP verification, and Password Reset",
+      "Event Discovery: Featured event banners, upcoming concerts, and interactive event detail screens",
+      "Ticket Tier Selection: Real-time ticket pricing, quotas, and seat category selection",
+      "Digital Ticket Wallet: In-app ticket detail view with scannable QR codes for event check-in",
+      "JWT Token Storage: Persistent session authentication via SharedPreferences",
+      "Custom Theming: Clean UI styled with Google Fonts (Poppins) and reusable widget components"
     ],
     techStack: [
-      { category: "Mobile Framework", list: ["Flutter SDK v3.11+", "Dart 3.x"] },
-      { category: "State & Storage", list: ["shared_preferences (Local Cache)", "HTTP Client (REST API)", "Flutter SVG"] },
-      { category: "Typography & Theme", list: ["Poppins Font (Google Fonts)", "Figma UI/UX Prototypes"] }
+      { category: "Mobile Framework", list: ["Flutter SDK", "Dart"] },
+      { category: "Networking & Auth", list: ["HTTP (REST API Client)", "JWT Bearer Token Storage", "shared_preferences"] },
+      { category: "UI & Typography", list: ["Google Fonts (Poppins)", "Flutter SVG", "Custom Theme Widgets"] }
     ],
     roles: [
       {
-        roleName: "Mobile App User",
+        roleName: "Mobile Customer / Attendee",
         color: "var(--accent-pink)",
         icon: "📱",
         features: [
-          "Stateless registration, login, OTP recovery, and profiles",
-          "Browse events, filter by categories, and view seat capacities",
-          "Reserve ticket tiers and upload camera checkout payment proofs",
-          "Display e-tickets with barcode/QR check-in stamps"
-        ]
-      },
-      {
-        roleName: "API Integration Gateway",
-        color: "var(--accent-mint)",
-        icon: "🌐",
-        features: [
-          "Exposes routes to Android emulator loopback (10.0.2.2:8080)",
-          "Exposes iOS/Web local network interfaces (localhost:8080)",
-          "JWT authorization header security verification"
+          "Register and log in with JWT authentication",
+          "Browse featured concert banners and event details",
+          "Select ticket tiers and initiate checkout bookings",
+          "View active digital tickets with QR codes and booking history",
+          "Manage personal profile information and password recovery"
         ]
       }
     ],
     database: {
-      description: "Local device persistent storage utilizing key-value structures to maintain user sessions and offline state indicators.",
+      description: "Local device persistent storage utilizing key-value structures (SharedPreferences) to maintain JWT tokens and user session cache.",
       tables: [
-        { name: "shared_preferences", fields: ["jwt_token", "user_profile_cache", "is_first_open_state"] }
+        { name: "shared_preferences", fields: ["jwt_token", "user_data_cache", "is_first_open"] }
       ],
       specialFeatures: [
-        "Stateless token caching to avoid repeated credential inputs.",
-        "Automatic connection host resolver based on device platform."
+        "Persistent JWT bearer token storage for seamless auto-login.",
+        "Adaptive base URL resolver for emulator and physical device testing."
       ]
     },
     payments: {
-      provider: "JWT API Checkout Flow",
+      provider: "JWT REST API Checkout Flow",
       endpoints: [
         { method: "POST", path: "/api/auth/login", desc: "Exchanges user credentials for a secure JWT Bearer authorization token." },
         { method: "POST", path: "/api/checkout/start", desc: "Locks ticket seat quotas and registers order state on the backend." },
@@ -502,11 +504,11 @@ export const projectDetails = {
     },
     setup: {
       steps: [
-        { cmd: "flutter devices", desc: "Ensure your Android Emulator or iOS Simulator is active and connected" },
-        { cmd: "git clone https://github.com/pratama1246/ticketly.git", desc: "Clone the Flutter repository into your workspace" },
-        { cmd: "flutter pub get", desc: "Fetch and download all required packages in pubspec.yaml" },
-        { cmd: "Configure API URL", desc: "Double check lib/constants/api_constants.dart points to backend (10.0.2.2:8080 or localhost:8080)" },
-        { cmd: "flutter run", desc: "Launch the compiler and deploy the app to your active device/emulator" }
+        { cmd: "git clone https://github.com/pratama1246/ticketly.git", desc: "Clone the Flutter mobile repository" },
+        { cmd: "cd ticketly", desc: "Navigate into the project directory" },
+        { cmd: "flutter pub get", desc: "Download all Flutter dependencies listed in pubspec.yaml" },
+        { cmd: "nano lib/constants/api_constants.dart", desc: "Set backend API URL (10.0.2.2:8080 for Android Emulator or localhost:8080 for Web/iOS)" },
+        { cmd: "flutter run", desc: "Build and launch the app on connected emulator or device" }
       ],
       envVars: [
         { name: "baseUrl (Android Emulator)", val: "http://10.0.2.2:8080" },
@@ -568,9 +570,9 @@ export const projectDetails = {
     setup: {
       steps: [
         { cmd: "git clone https://github.com/pratama1246/Payroll-System-PHP-Native-Alpro-Kelompok3.git", desc: "Clone the ALPRO project files to your local workstation" },
-        { cmd: "Check PHP version", desc: "Ensure you have PHP 8.0 or higher installed by running: php -v" },
-        { cmd: "php -S localhost:8000", desc: "Start the PHP built-in web server in the project root directory" },
-        { cmd: "Open Browser", desc: "Visit http://localhost:8000 in your browser and log in with default credentials" }
+        { cmd: "cd Payroll-System-PHP-Native-Alpro-Kelompok3", desc: "Navigate into the project root directory" },
+        { cmd: "php -v", desc: "Ensure you have PHP 8.0 or higher installed" },
+        { cmd: "php -S localhost:8000", desc: "Start the PHP built-in web server in the project root directory" }
       ],
       envVars: [
         { name: "Server URL", val: "http://localhost:8000" },
@@ -630,9 +632,10 @@ export const projectDetails = {
     setup: {
       steps: [
         { cmd: "git clone https://github.com/pratama1246/JWD_project.git", desc: "Clone the JWD project repository to your workspace" },
+        { cmd: "cd JWD_project", desc: "Navigate into the project directory" },
         { cmd: "composer install", desc: "Download project dependencies (Respect/Validation) using Composer" },
-        { cmd: "Import Database Schema", desc: "Create a MySQL database named 'beasiswa' and import db_beasiswa.sql" },
-        { cmd: "Configure Database Connection", desc: "Edit conn.php to adjust host, user, password, and database details" },
+        { cmd: "mysql -u root -p -e 'CREATE DATABASE beasiswa;' && mysql -u root -p beasiswa < db_beasiswa.sql", desc: "Create MySQL database 'beasiswa' and import db_beasiswa.sql schema" },
+        { cmd: "nano conn.php", desc: "Edit conn.php to adjust host, user, password, and database details" },
         { cmd: "php -S localhost:8080", desc: "Launch local PHP web server and open http://localhost:8080 in browser" }
       ],
       envVars: [

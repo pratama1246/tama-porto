@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 
 export default function CustomCursor() {
   const [cursorType, setCursorType] = useState('default') // 'default' | 'link' | 'drag' | 'view'
   const [isClicking, setIsClicking] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
+  const lastTouchTimeRef = useRef(0)
 
   // Raw mouse coordinates
   const mouseX = useMotionValue(-100)
@@ -16,20 +17,47 @@ export default function CustomCursor() {
   const ringY = useSpring(mouseY, springConfig)
 
   useEffect(() => {
-    // Only enable on desktop pointer devices
-    const isTouch = window.matchMedia('(pointer: coarse)').matches
-    if (isTouch) return
+    // Only enable on screens wider than mobile devices
+    if (window.innerWidth < 768) return
 
-    const handleMouseMove = (e) => {
-      mouseX.set(e.clientX)
-      mouseY.set(e.clientY)
-      if (!isVisible) setIsVisible(true)
+    const handleTouchStart = () => {
+      lastTouchTimeRef.current = Date.now()
+      setIsVisible(false)
     }
 
-    const handleMouseDown = () => setIsClicking(true)
-    const handleMouseUp = () => setIsClicking(false)
+    const handlePointerMove = (e) => {
+      // Ignore any touch/pen input or synthesized mouse events from taps
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        setIsVisible(false)
+        return
+      }
+      if (Date.now() - lastTouchTimeRef.current < 800) {
+        return
+      }
+
+      mouseX.set(e.clientX)
+      mouseY.set(e.clientY)
+      setIsVisible(true)
+    }
+
+    const handlePointerDown = (e) => {
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') {
+        lastTouchTimeRef.current = Date.now()
+        setIsVisible(false)
+        return
+      }
+      setIsClicking(true)
+    }
+
+    const handlePointerUp = (e) => {
+      if (e.pointerType === 'touch' || e.pointerType === 'pen') return
+      setIsClicking(false)
+    }
 
     const handleMouseOver = (e) => {
+      // Do not process hover states if recent touch occurred
+      if (Date.now() - lastTouchTimeRef.current < 800) return
+
       const target = e.target
 
       // Check for draggable cards
@@ -54,24 +82,31 @@ export default function CustomCursor() {
     }
 
     const handleMouseLeave = () => setIsVisible(false)
-    const handleMouseEnter = () => setIsVisible(true)
+    const handleMouseEnter = (e) => {
+      if (e.pointerType === 'touch' || Date.now() - lastTouchTimeRef.current < 800) return
+      setIsVisible(true)
+    }
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    window.addEventListener('mousedown', handleMouseDown)
-    window.addEventListener('mouseup', handleMouseUp)
+    window.addEventListener('touchstart', handleTouchStart, { passive: true })
+    window.addEventListener('touchend', handleTouchStart, { passive: true })
+    window.addEventListener('pointermove', handlePointerMove, { passive: true })
+    window.addEventListener('pointerdown', handlePointerDown)
+    window.addEventListener('pointerup', handlePointerUp)
     window.addEventListener('mouseover', handleMouseOver)
     document.body.addEventListener('mouseleave', handleMouseLeave)
     document.body.addEventListener('mouseenter', handleMouseEnter)
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mousedown', handleMouseDown)
-      window.removeEventListener('mouseup', handleMouseUp)
+      window.removeEventListener('touchstart', handleTouchStart)
+      window.removeEventListener('touchend', handleTouchStart)
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerdown', handlePointerDown)
+      window.removeEventListener('pointerup', handlePointerUp)
       window.removeEventListener('mouseover', handleMouseOver)
       document.body.removeEventListener('mouseleave', handleMouseLeave)
       document.body.removeEventListener('mouseenter', handleMouseEnter)
     }
-  }, [mouseX, mouseY, isVisible])
+  }, [mouseX, mouseY])
 
   if (!isVisible) return null
 

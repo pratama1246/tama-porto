@@ -1,44 +1,44 @@
 export const skillCategories = [
   {
     id: 1,
-    title: "Frontend Core",
+    title: "Frontend & UI Craftsmanship",
     color: "var(--accent-pink)",
-    description: "Creating responsive, interactive web interfaces",
-    skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Next.js", "Vite.js", "Alpine.js", "Tailwind CSS", "Framer Motion"]
+    description: "Crafting pixel-perfect, interactive user interfaces with smooth animations",
+    skills: ["React", "Vite.js", "Tailwind CSS", "Framer Motion", "Alpine.js", "JavaScript", "HTML5", "CSS3"]
   },
   {
     id: 2,
-    title: "Backend Services",
+    title: "Backend & Database Systems",
     color: "var(--accent-lavender)",
-    description: "Server administration, database design, & APIs",
-    skills: ["PHP", "Laravel", "CodeIgniter", "Node.js", "MySQL"]
+    description: "Building MVC architectures, relational databases, & RESTful web services",
+    skills: ["PHP", "Laravel", "CodeIgniter", "MySQL", "Node.js"]
   },
   {
     id: 3,
-    title: "Mobile Development",
-    color: "var(--accent-yellow)",
-    description: "Cross-platform mobile apps using Dart & Flutter",
-    skills: ["Dart", "Flutter"]
+    title: "Network Infrastructure & OS",
+    color: "var(--accent-blue)",
+    description: "RouterOS configuration, VLAN segmentation, packet flows, & server OS",
+    skills: ["MikroTik", "Cisco", "Linux", "Windows"]
   },
   {
     id: 4,
-    title: "Networking & OS",
-    color: "var(--accent-blue)",
-    description: "Routing, firewall configuration, & systems",
-    skills: ["MikroTik", "Cisco", "Windows", "Ubuntu"]
+    title: "Mobile Development",
+    color: "var(--accent-yellow)",
+    description: "Cross-platform mobile applications & REST API integrations",
+    skills: ["Dart", "Flutter"]
   },
   {
     id: 5,
-    title: "Workspace & Tools",
+    title: "Workspace & Developer Tools",
     color: "var(--accent-peach)",
-    description: "Prototyping, version control, API testing, & dev utilities",
-    skills: ["Figma", "Canva", "VS Code", "Git", "GitHub", "Notion", "Postman", "ngrok"]
+    description: "Design prototyping, version control, API testing, & dev environment",
+    skills: ["Figma", "Git", "GitHub", "VS Code", "Postman", "Canva", "Notion", "ngrok"]
   },
   {
     id: 6,
-    title: "AI Stack",
+    title: "AI-Assisted Workflow",
     color: "var(--accent-mint)",
-    description: "Prompt engineering, LLMs, & daily assistants",
+    description: "Accelerating pair-programming, architecture planning, & daily automation",
     skills: ["Claude", "Gemini", "ChatGPT"]
   }
 ]

@@ -28,7 +28,7 @@ export default function Contact() {
         className="absolute -top-8.75 left-0 right-0 h-9 bg-(--bg-secondary) torn-edge pointer-events-none" 
         aria-hidden="true"
       />
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pb-16">
+      <div className="max-w-[1600px] mx-auto w-full px-6 md:px-12 lg:px-20 pb-16">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -37,49 +37,40 @@ export default function Contact() {
           className="flex flex-col items-center text-center gap-10"
         >
           {/* Section Header */}
-          <div>
-            <motion.div
-              variants={fadeUp}
-              className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-(--accent-yellow) border border-black/5 rotate-[-1.5deg] mb-2"
-              style={{ fontFamily: 'var(--font-body)' }}
+          <motion.div variants={fadeUp}>
+            <h2
+              className="inline-block px-5 py-2 md:px-7 md:py-3 rounded-xl text-xl sm:text-2xl md:text-4xl font-display font-extrabold text-ink-black bg-pale-yellow border-2 border-ink-black neo-shadow rotate-[-1.5deg] tracking-tight m-0 select-none"
             >
               Get In Touch
-            </motion.div>
-            <motion.h2
-              variants={fadeUp}
-              className="font-display font-semibold text-[1.5rem] md:text-[2rem] tracking-tight text-(--text-dark) m-0"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              Send a Postcard
-            </motion.h2>
-          </div>
+            </h2>
+          </motion.div>
 
           {/* Invitation Letter */}
           <motion.div
             variants={fadeUp}
-            className="bg-[#fefcf7] p-6 pr-24 sm:pr-28 md:p-8 md:pr-32 rounded-sm shadow-sm border border-black/5 max-w-150 w-full text-left rotate-[0.5deg] relative overflow-visible"
+            className="bg-[#fefcf7] p-6 pr-24 sm:pr-28 md:p-8 md:pr-32 rounded-lg border-2 border-ink-black neo-shadow max-w-150 w-full text-left rotate-[0.5deg] relative overflow-visible"
           >
-            {/* Y2K Postage Stamp */}
-            <div className="absolute top-4 right-4 md:top-6 md:right-6 w-14 h-18 md:w-16 md:h-20 bg-(--accent-pink) border-2 border-dashed border-(--text-dark)/20ded-xs flex flex-col items-center justify-between p-1.5 rotate-6 shadow-3xs select-none z-10">
-              <div className="text-[7px] font-semibold text-(--text-dark)/60 tracking-wider">INDONESIA</div>
+            {/* Postage Stamp */}
+            <div className="absolute top-4 right-4 md:top-6 md:right-6 w-14 h-18 md:w-16 md:h-20 bg-sticker-pink border-2 border-ink-black rounded-md flex flex-col items-center justify-between p-1.5 rotate-6 neo-shadow-sm select-none z-10">
+              <div className="text-[7px] font-mono font-bold text-ink-black tracking-wider">INDONESIA</div>
               <div className="text-lg md:text-xl">☕</div>
-              <div className="text-[8px] font-mono font-semibold text-(--text-dark)">2026</div>
+              <div className="text-[8px] font-mono font-bold text-ink-black">2026</div>
             </div>
 
-            {/* Circular Postmark Cancellation Cap (Overlapping the stamp) */}
-            <div className="absolute -top-2 -right-4 md:-top-4 md:-right-6 w-24 h-24 md:w-28 md:h-28 border border-dashed border-red-600/35 rounded-full flex flex-col items-center justify-center -rotate-12ter-events-none font-mono text-[7px] md:text-[8px] text-red-600/40 select-none z-20">
-              <span className="font-semibold tracking-widest">CILACAP</span>
-              <span className="my-0.5 font-semibold">15 JUN 2026</span>
-              <span className="font-semibold tracking-wide">POSTED</span>
+            {/* Circular Postmark Cancellation Cap */}
+            <div className="absolute -top-2 -right-4 md:-top-4 md:-right-6 w-24 h-24 md:w-28 md:h-28 border border-dashed border-red-600/40 rounded-full flex flex-col items-center justify-center -rotate-12 pointer-events-none font-mono text-[7px] md:text-[8px] text-red-600/50 select-none z-20">
+              <span className="font-bold tracking-widest">CILACAP</span>
+              <span className="my-0.5 font-bold">15 JUN 2026</span>
+              <span className="font-bold tracking-wide">POSTED</span>
               
               {/* Wavy lines spanning across */}
-              <svg className="absolute -left-12 top-6 w-20 h-12 text-red-600/30" viewBox="0 0 100 50">
+              <svg className="absolute -left-12 top-6 w-20 h-12 text-red-600/35" viewBox="0 0 100 50">
                 <path d="M0,10 Q25,0 50,10 T100,10 M0,25 Q25,15 50,25 T100,25 M0,40 Q25,30 50,40 T100,40" fill="none" stroke="currentColor" strokeWidth="1.2" />
               </svg>
             </div>
 
             <p
-              className="text-base text-(--text-handwrite) leading-relaxed m-0"
+              className="text-base text-text-handwrite leading-relaxed m-0 font-medium"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
               Hey there! Thanks for visiting my gallery. If you want to discuss a project, 
@@ -87,13 +78,13 @@ export default function Contact() {
               My inbox is always open!
             </p>
             <div
-              className="text-right mt-4 text-sm text-(--text-handwrite)"
+              className="text-right mt-4 text-sm font-semibold text-text-handwrite"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
               — Tama
             </div>
             <div
-              className="mt-4 text-[13px] text-(--text-handwrite)/90 border-t border-(--text-dark)/5 pt-2"
+              className="mt-4 text-[13px] text-text-handwrite border-t border-ink-black/10 pt-2 font-medium"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
               P.S. Let's grab a cup of coffee if you are around Cilacap! ☕
@@ -103,69 +94,64 @@ export default function Contact() {
           {/* Clean Text-Only Social Links */}
           <motion.div
             variants={fadeUp}
-            className="flex flex-col w-full mt-4 border-t border-(--text-dark)/15-left"
+            className="flex flex-col w-full mt-4 border-t-2 border-ink-black text-left"
           >
             {/* Link 1: GitHub */}
             <motion.a
               href="https://github.com/pratama1246"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ x: 12 }}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-(--text-dark)/15 hover:border-(--text-dark)/35 text-(--text-dark) transition-all duration-200 no-underline"
-              style={{ fontFamily: 'var(--font-body)' }}
+              whileHover={{ x: 10 }}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b-2 border-ink-black hover:bg-pale-yellow/40 px-2 text-ink-black transition-colors duration-200 no-underline"
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">GITHUB</span>
-              <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">@PRATAMA1246</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-mono font-extrabold tracking-wider">GITHUB</span>
+              <span className="font-mono font-bold text-xs sm:text-sm md:text-base mt-1 sm:mt-0 opacity-80">@PRATAMA1246 ↗</span>
             </motion.a>
 
             {/* Link 2: Email */}
             <motion.a
               href="mailto:pratamaputra6854@gmail.com"
-              whileHover={{ x: 12 }}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-(--text-dark)/15 hover:border-(--text-dark)/35 text-(--text-dark) transition-all duration-200 no-underline"
-              style={{ fontFamily: 'var(--font-body)' }}
+              whileHover={{ x: 10 }}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b-2 border-ink-black hover:bg-mint/40 px-2 text-ink-black transition-colors duration-200 no-underline"
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">OFFICIAL MAIL</span>
-              <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">PRATAMAPUTRA6854@GMAIL.COM</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-mono font-extrabold tracking-wider">OFFICIAL MAIL</span>
+              <span className="font-mono font-bold text-xs sm:text-sm md:text-base mt-1 sm:mt-0 opacity-80">PRATAMAPUTRA6854@GMAIL.COM ↗</span>
             </motion.a>
 
-            {/* Link 4: LinkedIn */}
+            {/* Link 3: LinkedIn */}
             <motion.a
               href="https://www.linkedin.com/in/perfectpratama/"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ x: 12 }}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-(--text-dark)/15 hover:border-(--text-dark)/35 text-(--text-dark) transition-all duration-200 no-underline"
-              style={{ fontFamily: 'var(--font-body)' }}
+              whileHover={{ x: 10 }}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b-2 border-ink-black hover:bg-soft-blue/40 px-2 text-ink-black transition-colors duration-200 no-underline"
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">LINKEDIN</span>
-              <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">PERFECTPRATAMA</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-mono font-extrabold tracking-wider">LINKEDIN</span>
+              <span className="font-mono font-bold text-xs sm:text-sm md:text-base mt-1 sm:mt-0 opacity-80">PERFECTPRATAMA ↗</span>
             </motion.a>
 
-            {/* Link 5: Instagram */}
+            {/* Link 4: Instagram */}
             <motion.a
               href="https://instagram.com/perfectamafine"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ x: 12 }}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-(--text-dark)/15 hover:border-(--text-dark)/35 text-(--text-dark) transition-all duration-200 no-underline"
-              style={{ fontFamily: 'var(--font-body)' }}
+              whileHover={{ x: 10 }}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b-2 border-ink-black hover:bg-sticker-pink/40 px-2 text-ink-black transition-colors duration-200 no-underline"
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">INSTAGRAM</span>
-              <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">@PERFECTAMAFINE</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-mono font-extrabold tracking-wider">INSTAGRAM</span>
+              <span className="font-mono font-bold text-xs sm:text-sm md:text-base mt-1 sm:mt-0 opacity-80">@PERFECTAMAFINE ↗</span>
             </motion.a>
 
-            {/* Link 6: Pinterest */}
+            {/* Link 5: Pinterest */}
             <motion.a
               href="https://id.pinterest.com/ppraaatammma___/"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ x: 12 }}
-              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b border-(--text-dark)/15 hover:border-(--text-dark)/35 text-(--text-dark) transition-all duration-200 no-underline"
-              style={{ fontFamily: 'var(--font-body)' }}
+              whileHover={{ x: 10 }}
+              className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b-2 border-ink-black hover:bg-lavender/40 px-2 text-ink-black transition-colors duration-200 no-underline"
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wider">PINTEREST</span>
-              <span className="font-medium opacity-80 text-xs sm:text-sm md:text-lg mt-1 sm:mt-0">@PPRAAATAMMMA___</span>
+              <span className="text-lg sm:text-xl md:text-2xl font-mono font-extrabold tracking-wider">PINTEREST</span>
+              <span className="font-mono font-bold text-xs sm:text-sm md:text-base mt-1 sm:mt-0 opacity-80">@PPRAAATAMMMA___ ↗</span>
             </motion.a>
           </motion.div>
         </motion.div>

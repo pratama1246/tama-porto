@@ -1,62 +1,96 @@
+export const featuredPlaylists = [
+  {
+    id: "kr-mood",
+    tapeLabel: "⭐ Tama's Mix",
+    tabTitle: "kr_-mood",
+    title: "kr_-mood",
+    tag: "Personal Playlist",
+    description: "",
+    curator: "dorothea.boy (Tama)",
+    themeBg: "bg-[#183a5e]",
+    accentGlow: "bg-[#60a5fa]/20",
+    spotifyUrl: "https://open.spotify.com/playlist/1VuQCxnLeyMtiB50WQTAjv",
+    embedUrl: "https://open.spotify.com/embed/playlist/1VuQCxnLeyMtiB50WQTAjv?utm_source=generator&theme=0"
+  },
+  {
+    id: "kpop-galau",
+    tapeLabel: "📼 Mixtape #1",
+    tabTitle: "kpop galau brutal",
+    title: "kpop galau brutal ajg",
+    tag: "Public Playlist",
+    description: "lagu korea bikin banjir kek abis cere 7 kali...",
+    curator: "Nadya",
+    themeBg: "bg-[#4a2e2b]",
+    accentGlow: "bg-[#ff6b9d]/20",
+    spotifyUrl: "https://open.spotify.com/playlist/7oNyFuXroVyHghAOZQw94n",
+    embedUrl: "https://open.spotify.com/embed/playlist/7oNyFuXroVyHghAOZQw94n?utm_source=generator&theme=0"
+  },
+  {
+    id: "k-indie",
+    tapeLabel: "🌿 Mixtape #2",
+    tabTitle: "k-indie vibes",
+    title: "a boy w/ k-indie playlist",
+    tag: "Public Playlist",
+    description: "calm korean indie & acoustic melodies for deep focus coding sessions...",
+    curator: "Iannnn",
+    themeBg: "bg-[#273c24]",
+    accentGlow: "bg-[#34d399]/20",
+    spotifyUrl: "https://open.spotify.com/playlist/52MEloWXUdPpk2v620x09b",
+    embedUrl: "https://open.spotify.com/embed/playlist/52MEloWXUdPpk2v620x09b?utm_source=generator&theme=0"
+  }
+];
+
+export const featuredPlaylist = featuredPlaylists[0];
+
 export const musicList = [
   {
     id: 1,
-    title: "you seem pretty sad for a girl so in love",
-    artist: "Olivia Rodrigo",
-    link: "https://open.spotify.com/album/3WZZF72ihlKPZBS4zSsNHl",
-    coverImage: "/assets/music/olivia-rodrigo.webp",
-    rotation: "-1.5deg",
-    description: "Album ketiga dari Olivia Rodrigo! Liriknya yang jujur/confessional, dipadu dengan nuansa pop rock dan indie, seru banget buat nemenin ngoding malam-malam.",
-    noteAuthor: "Tama"
-  },
-  {
-    id: 2,
     title: "greengreen - ep",
     artist: "CORTIS",
     link: "https://open.spotify.com/album/2zEdi42kfgLEySoikGJMFT",
     coverImage: "/assets/music/greengreen-cortis.webp",
-    rotation: "2deg",
-    description: "EP 'GREENGREEN' dari CORTIS yang baru rilis. Dengan 6 track berdurasi ~16 menit, ketukannya yang fresh dan melodinya sangat seru didengar pas lagi produktif.",
+    rotation: "-1.5deg",
+    description: "EP 'GREENGREEN' dari CORTIS. 6 track fresh yang sangat seru dan bikin fokus pas lagi nugas dan ngoding.",
     noteAuthor: "Tama"
   },
   {
-    id: 3,
-    title: "lemonade - the 2nd album",
-    artist: "aespa",
-    link: "https://open.spotify.com/album/2233LC6uuoi67lGcO2OaBm",
-    coverImage: "/assets/music/lemonade-aespa.webp",
-    rotation: "-1.8deg",
-    description: "Album studio kedua dari aespa! Diisi track energik seperti 'Lemonade' yang bersemangat, asyik banget buat ngebangkitin mood ngantuk pas lagi nugas.",
-    noteAuthor: "Tama"
-  },
-  {
-    id: 4,
-    title: "shot callers - ep",
-    artist: "LNGSHOT",
-    link: "https://open.spotify.com/album/6M05ADW4mz2x07jIpIzCXR",
-    coverImage: "/assets/music/shot-callers-lngshot.webp",
-    rotation: "2.2deg",
-    description: "EP 'SHOT CALLERS' dari LNGSHOT. Berisi 5 track hip-hop/trap energik berdurasi ~15 menit, beat-beatnya super asyik untuk memicu adrenalin pas coding.",
-    noteAuthor: "Tama"
-  },
-  {
-    id: 5,
-    title: "color outside the lines - ep",
-    artist: "CORTIS",
-    link: "https://open.spotify.com/album/2yMfaynthtWVAkJ5A3Kwrf",
-    coverImage: "/assets/music/color-outside-the-lines-cortis.webp",
-    rotation: "-2deg",
-    description: "Debut EP 'Color Outside the Lines' dari CORTIS! Dengan lagu utama 'What You Want', lagu-lagu hip-hop pop di album ini punya ketukan asyik yang membangkitkan fokus pas nugas.",
-    noteAuthor: "Tama"
-  },
-  {
-    id: 6,
+    id: 2,
     title: "odyssey - the 1st album",
     artist: "RIIZE",
     link: "https://open.spotify.com/album/07cUjKdLcgmnABNKKb4rGQ",
     coverImage: "/assets/music/odyssey-riize.webp",
     rotation: "1.5deg",
-    description: "Album studio pertama dari RIIZE! Penuh dengan track pop-dance yang fresh, booster terbaik buat menjaga alur fokus dan produktivitas pas lagi coding.",
+    description: "Album studio perdana RIIZE! Penuh dengan track pop-dance berenergi yang jadi booster produktivitas.",
+    noteAuthor: "Tama"
+  },
+  {
+    id: 3,
+    title: "shot callers - ep",
+    artist: "LNGSHOT",
+    link: "https://open.spotify.com/album/6M05ADW4mz2x07jIpIzCXR",
+    coverImage: "/assets/music/shot-callers-lngshot.webp",
+    rotation: "1.2deg",
+    description: "EP 'SHOT CALLERS' dari LNGSHOT. 5 track hip-hop/trap energik yang memicu adrenalin pas coding.",
+    noteAuthor: "Tama"
+  },
+  {
+    id: 4,
+    title: "lemonade - the 2nd album",
+    artist: "aespa",
+    link: "https://open.spotify.com/album/2233LC6uuoi67lGcO2OaBm",
+    coverImage: "/assets/music/lemonade-aespa.webp",
+    rotation: "-2deg",
+    description: "Album studio kedua dari aespa! Beat dinamisnya ampuh banget buat usir ngantuk pas lagi coding.",
+    noteAuthor: "Tama"
+  },
+  {
+    id: 5,
+    title: "you seem pretty sad for a girl so in love",
+    artist: "Olivia Rodrigo",
+    link: "https://open.spotify.com/album/3WZZF72ihlKPZBS4zSsNHl",
+    coverImage: "/assets/music/olivia-rodrigo.webp",
+    rotation: "2deg",
+    description: "Lirik jujur dipadu dengan nuansa pop rock indie, pas buat nemenin sesi ngoding malam-malam.",
     noteAuthor: "Tama"
   }
 ];
@@ -72,11 +106,11 @@ export const hobbiesList = [
   },
   {
     id: 2,
-    title: "Brewing Coffee",
-    label: "☕ Espresso Craft",
-    desc: "Rutinitas pagi hari sebelum buka VS Code. Menyeduh kopi sendiri itu semacam terapi fokus.",
+    title: "Iced Chocolate Fuel",
+    label: "🍫 Sweet Energy",
+    desc: "Secangkir coklat dingin andalan buat nemenin sesi coding dan eksplorasi UI.",
     rotation: "2deg",
-    image: "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=400&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?q=80&w=400&auto=format&fit=crop"
   },
   {
     id: 3,

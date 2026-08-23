@@ -24,14 +24,14 @@ export default function VisualReveal() {
     const imgAnim = gsap.fromTo(
       img,
       { 
-        y: '20vh',
+        y: '22vh',
         rotate: -6,
         scale: 0.95
       },
       {
         y: '0vh',
         rotate: -2,
-        scale: 1.05,
+        scale: 1.08,
         ease: 'power1.out',
         scrollTrigger: {
           trigger: container,
@@ -43,14 +43,14 @@ export default function VisualReveal() {
     );
 
     // 2. Text Container Animation:
-    // Starts lower down and scrolls up past the center of the viewport.
+    // Starts higher up and scrolls smoothly up past the top of the viewport.
     const textAnim = gsap.fromTo(
       textContainer,
       {
-        y: '30vh',
+        y: '18vh',
       },
       {
-        y: '-30vh',
+        y: '-38vh',
         ease: 'none',
         scrollTrigger: {
           trigger: container,
@@ -94,27 +94,20 @@ export default function VisualReveal() {
   return (
     <div 
       ref={containerRef} 
-      className="relative h-[150vh] md:h-[200vh] w-full border-y border-black/5"
+      className="relative h-[160vh] md:h-[200vh] w-full"
     >
       {/* Sticky Screen Viewport */}
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden px-6 md:px-12">
+      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 sm:px-8 md:px-12">
 
-        {/* Animated Text Container (Header + Quote) */}
+        {/* Animated Text Container (Header + Quote) - Higher z-index so text is always 100% visible */}
         <div 
           ref={textContainerRef}
-          className="relative z-10 max-w-4xl w-full text-center flex flex-col items-center gap-6"
+          className="relative z-30 max-w-5xl w-full text-center flex flex-col items-center gap-3 sm:gap-6 pt-2 sm:pt-0"
         >
           {/* Header */}
           <div className="flex flex-col items-center justify-center">
-            <span 
-              className="inline-block px-3 py-1 rounded-sm text-[12px] font-semibold uppercase tracking-wider bg-[var(--accent-lavender)] border border-black/5 rotate-[1.5deg] mb-3"
-              style={{ fontFamily: 'var(--font-body)' }}
-            >
-              My Philosophy
-            </span>
             <h2 
-              className="font-display font-semibold text-3xl md:text-5xl text-[var(--text-dark)] m-0 tracking-tight"
-              style={{ fontFamily: 'var(--font-display)' }}
+              className="inline-block px-4 py-2 sm:px-6 sm:py-2.5 md:px-8 md:py-3.5 rounded-xl text-lg xs:text-xl sm:text-3xl md:text-5xl font-display font-extrabold text-ink-black bg-mint border-2 border-ink-black neo-shadow rotate-[-1deg] tracking-tight m-0 select-none"
             >
               Behind the Creative Flow
             </h2>
@@ -126,32 +119,32 @@ export default function VisualReveal() {
             baseOpacity={0.05}
             baseRotation={2}
             blurStrength={10}
-            containerClassName="mx-auto mt-2"
-            textClassName="text-center font-display font-semibold text-[var(--text-dark)] leading-[1.4] tracking-tight text-[1.4rem] sm:text-[1.8rem] md:text-[2.4rem]"
+            containerClassName="mx-auto mt-1 sm:mt-2 px-1 sm:px-2 max-w-4xl"
+            textClassName="text-center font-display font-bold text-ink-black leading-[1.38] sm:leading-[1.4] tracking-tight text-[1.05rem] xs:text-[1.18rem] sm:text-[1.6rem] md:text-[2.2rem]"
           >
             "The things that inspire me most—stories that stay with us, music that sparks emotion, aesthetics that express personality, and technology that connects people—all share one thing in common: they leave a lasting impression. That's the kind of experience I hope to create in everything I build."
           </ScrollReveal>
         </div>
 
-        {/* The sticker photo at the bottom of the viewport */}
-        <div className="absolute bottom-[-20px] md:bottom-[-40px] left-1/2 -translate-x-1/2 pointer-events-none z-20 flex justify-center origin-bottom max-h-[50vh]">
+        {/* The sticker photo at the bottom of the viewport - Large, prominent, and cinematic */}
+        <div className="absolute bottom-[-10px] sm:bottom-[-20px] md:bottom-[-40px] left-1/2 -translate-x-1/2 pointer-events-none z-10 flex justify-center origin-bottom max-h-[48vh] sm:max-h-[50vh]">
           <img
             ref={imageRef}
             src="/assets/stickers/profile-sticker.webp"
             alt="Tama Sticker"
             draggable={false}
             onContextMenu={(e) => e.preventDefault()}
-            className="protected-image w-[380px] max-w-[90vw] sm:w-[480px] md:w-[660px] max-h-[50vh] h-auto object-contain sticker-effect origin-bottom"
+            className="protected-image w-[350px] max-w-[92vw] sm:w-[500px] md:w-[660px] max-h-[48vh] sm:max-h-[50vh] h-auto object-contain sticker-effect origin-bottom"
           />
         </div>
 
         {/* Tiny instruction pill at the bottom */}
         <div 
           ref={pillRef}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-[var(--bg-secondary)] px-4 py-1.5 rounded-full border border-black/10 shadow-xs z-30 pointer-events-none flex items-center gap-2 animate-bounce"
+          className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 bg-pale-yellow px-3.5 py-1.5 rounded-full border-2 border-ink-black neo-shadow-sm z-30 pointer-events-none flex items-center gap-2 animate-bounce"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent-pink)]"></span>
-          <span className="text-[10px] md:text-[11px] font-semibold text-[var(--text-dark)] uppercase tracking-wider">Keep scrolling to reveal</span>
+          <span className="w-2 h-2 rounded-full bg-sticker-pink border border-ink-black"></span>
+          <span className="text-[10px] sm:text-[11px] font-mono font-bold text-ink-black uppercase tracking-wider">Keep scrolling to reveal</span>
         </div>
 
       </div>

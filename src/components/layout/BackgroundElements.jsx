@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 // Y2K 4-Pointed Sparkle Star Component
@@ -76,418 +75,380 @@ function ButterflySticker({ className, color = 'var(--accent-blue)', size = 48 }
   )
 }
 
-// Wrapper to apply protection to all background sticker images
-function StickerImage({ src, alt, className }) {
+// Fixed Decorative Sticker Container (Purely decorative, 0 pointer/touch interception)
+function DraggableSticker({
+  className,
+  rotate = 0,
+  delay = 0,
+  children
+}) {
   return (
-    <img
-      src={src}
-      alt={alt}
-      draggable={false}
-      onContextMenu={(e) => e.preventDefault()}
-      className={`protected-image ${className}`}
-    />
+    <motion.div
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{
+        type: 'spring',
+        stiffness: 90,
+        damping: 14,
+        delay
+      }}
+      className={`absolute pointer-events-none select-none z-20 ${className}`}
+    >
+      <div
+        style={{ transform: `rotate(${rotate}deg)`, transformOrigin: 'center center' }}
+      >
+        {children}
+      </div>
+    </motion.div>
   )
 }
 
 export default function BackgroundElements() {
-  const [isDesktop, setIsDesktop] = useState(() => 
-    typeof window !== 'undefined' ? window.matchMedia('(min-width: 1024px)').matches : false
-  )
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 1024px)')
-    const handler = (e) => setIsDesktop(e.matches)
-    mediaQuery.addEventListener('change', handler)
-    return () => mediaQuery.removeEventListener('change', handler)
-  }, [])
-
-  if (!isDesktop) return null
-
-  const springTransition = (delay = 0) => ({
-    type: 'spring',
-    stiffness: 80,
-    damping: 14,
-    mass: 1,
-    delay
-  })
-
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden z-20 w-full select-none hidden lg:block" aria-hidden="true">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden z-20 w-full select-none" aria-hidden="true">
       
-      {/* ─── HERO SECTION ─── */}
-      {/* PNG 1: Y2K Element 1 */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={springTransition(0.4)}
-        className="absolute top-[140px] left-[3%] w-[85px] sm:w-[110px] rotate-[-8deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.12, rotate: '-12deg' }}
+      {/* ─── VISUAL REVEAL & PHILOSOPHY SECTION ─── */}
+      {/* PNG 1: Y2K Element 1 (Desktop only) */}
+      <DraggableSticker
+        className="top-[1220px] left-[3%] w-[90px] lg:w-[110px] hidden md:block"
+        rotate={-8}
+        hoverRotate={-12}
+        delay={0.4}
       >
-        <StickerImage src="/assets/stickers/1.png" alt="Y2K Element 1" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/1.png" alt="Y2K Element 1" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
-      {/* SVG 1: Pink Heart */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: -200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.45)}
-        className="absolute top-[180px] left-[12%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.15, rotate: '-10deg' }}
+      {/* SVG 1: Pink Sparkle Star (Edge Peeking Micro-Sticker) */}
+      <DraggableSticker
+        className="top-[1260px] right-[2%] sm:right-[4%] block"
+        rotate={-8}
+        hoverRotate={-12}
+        delay={0.45}
       >
-        <HeartSticker color="var(--accent-pink)" size={42} className="sticker-effect rotate-[-8deg]" />
-      </motion.div>
+        <SparkleStar color="var(--accent-pink)" size={26} className="sticker-effect sm:w-[40px] sm:h-[40px]" />
+      </DraggableSticker>
 
-      {/* PNG 2: Vinyl */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={springTransition(0.45)}
-        className="absolute top-[200px] right-[3%] w-[100px] sm:w-[125px] rotate-[12deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.1, rotate: '25deg' }}
+      {/* SVG 2: Pink Heart (Edge Peeking Micro-Sticker) */}
+      <DraggableSticker
+        className="top-[1660px] left-[1.5%] sm:left-[3%] block"
+        rotate={10}
+        hoverRotate={20}
+        delay={0.45}
       >
-        <StickerImage src="/assets/stickers/vinly.png" alt="Vinyl Record Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <HeartSticker color="var(--accent-pink)" size={26} className="sticker-effect sm:w-[38px] sm:h-[38px]" />
+      </DraggableSticker>
 
-      {/* SVG 2: Pink Sparkle Star */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, y: -200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.5)}
-        className="absolute top-[260px] right-[12%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.15 }}
+      {/* PNG 2: Vinyl (Desktop only) */}
+      <DraggableSticker
+        className="top-[1650px] left-[3%] w-[100px] lg:w-[125px] hidden md:block"
+        rotate={12}
+        hoverRotate={25}
+        delay={0.45}
       >
-        <SparkleStar color="var(--accent-pink)" size={42} className="sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/vinly.png" alt="Vinyl Record Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
+
+      {/* SVG 3: Lavender Sparkle Star (Edge Peeking Micro-Sticker) */}
+      <DraggableSticker
+        className="top-[1820px] right-[2%] sm:right-[5%] block"
+        rotate={0}
+        hoverRotate={15}
+        delay={0.5}
+      >
+        <SparkleStar color="var(--accent-lavender)" size={24} className="sticker-effect sm:w-[36px] sm:h-[36px]" />
+      </DraggableSticker>
 
       {/* SVG 3: Yellow Smiley */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: 200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.55)}
-        className="absolute top-[480px] left-[4%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.1, rotate: '15deg' }}
+      <DraggableSticker
+        className="top-[2450px] left-[3%] hidden md:block"
+        rotate={12}
+        hoverRotate={18}
+        delay={0.55}
       >
-        <SmileySticker color="var(--accent-yellow)" size={46} className="sticker-effect rotate-[12deg]" />
-      </motion.div>
+        <SmileySticker color="var(--accent-yellow)" size={36} className="sticker-effect" />
+      </DraggableSticker>
 
       {/* PNG 3: MikroTik */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: 100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.5)}
-        className="absolute top-[580px] left-[12%] w-[100px] sm:w-[130px] rotate-[6deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.12, rotate: '-3deg' }}
+      <DraggableSticker
+        className="top-[2680px] right-[4%] w-[105px] lg:w-[130px] hidden md:block"
+        rotate={6}
+        hoverRotate={-3}
+        delay={0.5}
       >
-        <StickerImage src="/assets/stickers/mikrotik.png" alt="MikroTik Router Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/mikrotik.png" alt="MikroTik Router Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
       {/* PNG 4: Pixel Cursor */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, y: 150, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.55)}
-        className="absolute top-[680px] right-[14%] w-[55px] sm:w-[70px] rotate-[-15deg] z-30 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.15, rotate: '5deg' }}
+      <DraggableSticker
+        className="top-[2950px] left-[5%] w-[58px] lg:w-[70px] hidden md:block z-30"
+        rotate={-15}
+        hoverRotate={5}
+        delay={0.55}
       >
-        <StickerImage src="/assets/stickers/cursor.png" alt="Pixel Cursor Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/cursor.png" alt="Pixel Cursor Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 4: Lavender Sparkle Star */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, y: 200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.6)}
-        className="absolute top-[750px] right-[3%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.15 }}
+      <DraggableSticker
+        className="top-[3300px] left-[3%] hidden md:block"
+        rotate={-15}
+        hoverRotate={0}
+        delay={0.6}
       >
-        <SparkleStar color="var(--accent-lavender)" size={35} className="sticker-effect rotate-[-15deg]" />
-      </motion.div>
+        <SparkleStar color="var(--accent-lavender)" size={28} className="sticker-effect" />
+      </DraggableSticker>
 
 
       {/* ─── ABOUT SECTION ─── */}
       {/* PNG 5: Y2K Element 2 */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={springTransition(0.6)}
-        className="absolute top-[1100px] right-[3%] w-[90px] sm:w-[115px] rotate-[10deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.12, rotate: '18deg' }}
+      <DraggableSticker
+        className="top-[1100px] right-[3%] w-[95px] lg:w-[115px] hidden md:block"
+        rotate={10}
+        hoverRotate={18}
+        delay={0.6}
       >
-        <StickerImage src="/assets/stickers/2.png" alt="Y2K Element 2" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/2.png" alt="Y2K Element 2" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 5: Peach Sparkle Star */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, y: -100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.65)}
-        className="absolute top-[1180px] right-[12%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.15 }}
+      <DraggableSticker
+        className="top-[1180px] right-[12%] hidden md:block"
+        rotate={10}
+        hoverRotate={20}
+        delay={0.65}
       >
-        <SparkleStar color="var(--accent-peach)" size={38} className="sticker-effect rotate-[10deg]" />
-      </motion.div>
+        <SparkleStar color="var(--accent-peach)" size={38} className="sticker-effect" />
+      </DraggableSticker>
 
       {/* PNG 6: Pixel Folder */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={springTransition(0.65)}
-        className="absolute top-[1450px] left-[3%] w-[85px] sm:w-[110px] rotate-[-5deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.1, rotate: '5deg' }}
+      <DraggableSticker
+        className="top-[1450px] left-[3%] w-[90px] lg:w-[110px] hidden md:block"
+        rotate={-5}
+        hoverRotate={5}
+        delay={0.65}
       >
-        <StickerImage src="/assets/stickers/folder.png" alt="Pixel Folder Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/folder.png" alt="Pixel Folder Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 6: Mint Sparkle Star */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: 100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.7)}
-        className="absolute top-[1550px] left-[12%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.15 }}
+      <DraggableSticker
+        className="top-[1550px] left-[12%] hidden md:block"
+        rotate={15}
+        hoverRotate={25}
+        delay={0.7}
       >
-        <SparkleStar color="var(--accent-mint)" size={35} className="sticker-effect rotate-[15deg]" />
-      </motion.div>
+        <SparkleStar color="var(--accent-mint)" size={35} className="sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 7: Blue Butterfly */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: 150, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.75)}
-        className="absolute top-[1950px] left-[4%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
-        whileHover={{ scale: 1.15, rotate: '-8deg' }}
+      <DraggableSticker
+        className="top-[1950px] left-[4%] hidden md:block"
+        rotate={-10}
+        hoverRotate={-16}
+        delay={0.75}
       >
-        <ButterflySticker color="var(--accent-blue)" size={48} className="sticker-effect rotate-[-10deg]" />
-      </motion.div>
+        <ButterflySticker color="var(--accent-blue)" size={36} className="sticker-effect" />
+      </DraggableSticker>
 
 
       {/* ─── PROJECTS SECTION ─── */}
       {/* PNG 7: Earphone */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={springTransition(0.7)}
-        className="absolute top-[2300px] left-[3%] w-[95px] sm:w-[120px] rotate-[-10deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.12, rotate: '-2deg' }}
+      <DraggableSticker
+        className="top-[2300px] left-[3%] w-[95px] lg:w-[120px] hidden md:block"
+        rotate={-10}
+        hoverRotate={-2}
+        delay={0.7}
       >
-        <StickerImage src="/assets/stickers/earphone.png" alt="Earphone Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/earphone.png" alt="Earphone Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 8: Lavender Flower */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, y: 100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.8)}
-        className="absolute top-[2550px] right-[3%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
-        whileHover={{ scale: 1.08, rotate: '12deg' }}
+      <DraggableSticker
+        className="top-[2550px] right-[3%] hidden md:block"
+        rotate={8}
+        hoverRotate={15}
+        delay={0.8}
       >
-        <FlowerSticker color="var(--accent-lavender)" size={55} className="sticker-effect rotate-[8deg]" />
-      </motion.div>
+        <FlowerSticker color="var(--accent-lavender)" size={42} className="sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 9: Mint Sparkle Star */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: -100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.85)}
-        className="absolute top-[2850px] left-[6%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.15 }}
+      <DraggableSticker
+        className="top-[2850px] left-[6%] hidden md:block"
+        rotate={0}
+        hoverRotate={15}
+        delay={0.85}
       >
-        <SparkleStar color="var(--accent-mint)" size={35} className="sticker-effect" />
-      </motion.div>
+        <SparkleStar color="var(--accent-mint)" size={28} className="sticker-effect" />
+      </DraggableSticker>
 
 
-      {/* ─── SKILLS & CERTIFICATIONS ─── */}
+      {/* ─── SKILLS SECTION ─── */}
       {/* SVG 10: Yellow Sparkle Star */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, y: -100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.8)}
-        className="absolute top-[3150px] right-[5%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.15 }}
+      <DraggableSticker
+        className="top-[3150px] right-[5%] hidden md:block"
+        rotate={0}
+        hoverRotate={15}
+        delay={0.8}
       >
-        <SparkleStar color="var(--accent-yellow)" size={38} className="sticker-effect" />
-      </motion.div>
+        <SparkleStar color="var(--accent-yellow)" size={30} className="sticker-effect" />
+      </DraggableSticker>
 
-      {/* PNG 8: CD Sticker */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={springTransition(0.75)}
-        className="absolute top-[3450px] right-[3%] w-[100px] sm:w-[130px] rotate-[8deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.15, rotate: '-12deg' }}
+      {/* PNG 4: Pixel Cursor */}
+      <DraggableSticker
+        className="top-[3350px] left-[4%] w-[58px] lg:w-[70px] hidden md:block z-30"
+        rotate={-15}
+        hoverRotate={5}
+        delay={0.55}
       >
-        <StickerImage src="/assets/stickers/cd.png" alt="Compact Disc Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/cursor.png" alt="Pixel Cursor Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
+
+
+      {/* ─── CERTIFICATIONS SECTION ─── */}
+      {/* PNG 3: MikroTik Router Sticker */}
+      <DraggableSticker
+        className="top-[3650px] right-[3%] w-[105px] lg:w-[130px] hidden md:block"
+        rotate={8}
+        hoverRotate={-3}
+        delay={0.7}
+      >
+        <img src="/assets/stickers/mikrotik.png" alt="MikroTik Router Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 11: Lavender Smiley */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: 100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.85)}
-        className="absolute top-[3750px] left-[3%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
-        whileHover={{ scale: 1.1, rotate: '15deg' }}
+      <DraggableSticker
+        className="top-[3820px] left-[3%] hidden md:block"
+        rotate={15}
+        hoverRotate={22}
+        delay={0.75}
       >
-        <SmileySticker color="var(--accent-lavender)" size={46} className="sticker-effect rotate-[15deg]" />
-      </motion.div>
+        <SmileySticker color="var(--accent-lavender)" size={36} className="sticker-effect" />
+      </DraggableSticker>
+
+      {/* PNG 6: Pixel Folder */}
+      <DraggableSticker
+        className="top-[4050px] left-[3%] w-[90px] lg:w-[110px] hidden md:block"
+        rotate={-6}
+        hoverRotate={5}
+        delay={0.8}
+      >
+        <img src="/assets/stickers/folder.png" alt="Pixel Folder Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 12: Peach Sparkle Star */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, y: -100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.9)}
-        className="absolute top-[4150px] right-[4%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.15 }}
+      <DraggableSticker
+        className="top-[4180px] right-[4%] hidden md:block"
+        rotate={-10}
+        hoverRotate={10}
+        delay={0.85}
       >
-        <SparkleStar color="var(--accent-peach)" size={35} className="sticker-effect rotate-[-10deg]" />
-      </motion.div>
+        <SparkleStar color="var(--accent-peach)" size={30} className="sticker-effect" />
+      </DraggableSticker>
+
+      {/* PNG 8: CD Sticker */}
+      <DraggableSticker
+        className="top-[4380px] right-[3%] w-[105px] lg:w-[130px] hidden md:block"
+        rotate={8}
+        hoverRotate={-12}
+        delay={0.85}
+      >
+        <img src="/assets/stickers/cd.png" alt="Compact Disc Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
+
+      {/* SVG 4: Mint Sparkle Star */}
+      <DraggableSticker
+        className="top-[4480px] left-[4%] hidden md:block"
+        rotate={15}
+        hoverRotate={25}
+        delay={0.9}
+      >
+        <SparkleStar color="var(--accent-mint)" size={28} className="sticker-effect" />
+      </DraggableSticker>
 
 
       {/* ─── HOBBIES SECTION ─── */}
       {/* SVG 13: Mint Flower */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: 100, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.85)}
-        className="absolute top-[4500px] left-[4%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
-        whileHover={{ scale: 1.08, rotate: '12deg' }}
+      <DraggableSticker
+        className="top-[4500px] left-[4%] hidden md:block"
+        rotate={8}
+        hoverRotate={15}
+        delay={0.85}
       >
-        <FlowerSticker color="var(--accent-mint)" size={50} className="sticker-effect rotate-[8deg]" />
-      </motion.div>
+        <FlowerSticker color="var(--accent-mint)" size={40} className="sticker-effect" />
+      </DraggableSticker>
 
       {/* PNG 9: Cassette Tape */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={springTransition(0.8)}
-        className="absolute top-[4800px] left-[3%] w-[120px] sm:w-[145px] rotate-[-12deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.1, rotate: '-2deg' }}
+      <DraggableSticker
+        className="top-[4800px] left-[3%] w-[115px] lg:w-[145px] hidden md:block"
+        rotate={-12}
+        hoverRotate={-2}
+        delay={0.8}
       >
-        <StickerImage src="/assets/stickers/Cassette_tape.png" alt="Cassette Tape Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/Cassette_tape.png" alt="Cassette Tape Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 14: Yellow Heart */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: -200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.9)}
-        className="absolute top-[4980px] left-[10%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.15, rotate: '-10deg' }}
+      <DraggableSticker
+        className="top-[4980px] left-[10%] hidden md:block"
+        rotate={10}
+        hoverRotate={-10}
+        delay={0.9}
       >
-        <HeartSticker color="var(--accent-yellow)" size={40} className="sticker-effect rotate-[10deg]" />
-      </motion.div>
+        <HeartSticker color="var(--accent-yellow)" size={32} className="sticker-effect" />
+      </DraggableSticker>
 
       {/* PNG 10: Bowie Card */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={springTransition(0.85)}
-        className="absolute top-[5150px] right-[4%] w-[100px] sm:w-[125px] rotate-[14deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.12, rotate: '4deg' }}
+      <DraggableSticker
+        className="top-[5150px] right-[4%] w-[100px] lg:w-[125px] hidden md:block"
+        rotate={14}
+        hoverRotate={4}
+        delay={0.85}
       >
-        <StickerImage src="/assets/stickers/bowie.png" alt="Bowie Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/bowie.png" alt="Bowie Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 15: Pink Butterfly */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, y: 200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.95)}
-        className="absolute top-[5350px] right-[9%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
-        whileHover={{ scale: 1.15, rotate: '-8deg' }}
+      <DraggableSticker
+        className="top-[5350px] right-[9%] hidden md:block"
+        rotate={-12}
+        hoverRotate={-18}
+        delay={0.95}
       >
-        <ButterflySticker color="var(--accent-pink)" size={45} className="sticker-effect rotate-[-12deg]" />
-      </motion.div>
+        <ButterflySticker color="var(--accent-pink)" size={36} className="sticker-effect" />
+      </DraggableSticker>
 
 
       {/* ─── CONTACT SECTION ─── */}
       {/* SVG 16: Lavender Sparkle Star */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: 200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.9)}
-        className="absolute top-[5750px] left-[5%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden lg:block"
-        whileHover={{ scale: 1.15 }}
+      <DraggableSticker
+        className="top-[5750px] left-[5%] hidden md:block"
+        rotate={15}
+        hoverRotate={25}
+        delay={0.9}
       >
-        <SparkleStar color="var(--accent-lavender)" size={38} className="sticker-effect rotate-[15deg]" />
-      </motion.div>
+        <SparkleStar color="var(--accent-lavender)" size={30} className="sticker-effect" />
+      </DraggableSticker>
 
       {/* PNG 11: Retro Phone */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: 200, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={springTransition(0.9)}
-        className="absolute top-[5920px] right-[3%] w-[85px] sm:w-[110px] rotate-[8deg] z-20 pointer-events-auto cursor-grab active:cursor-grabbing hidden xl:block"
-        whileHover={{ scale: 1.15, rotate: '18deg' }}
+      <DraggableSticker
+        className="top-[5920px] right-[3%] w-[90px] lg:w-[110px] hidden md:block"
+        rotate={8}
+        hoverRotate={18}
+        delay={0.9}
       >
-        <StickerImage src="/assets/stickers/phone.png" alt="Retro Telephone Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
-      </motion.div>
+        <img src="/assets/stickers/phone.png" alt="Retro Telephone Sticker" className="w-full h-auto select-none pointer-events-none sticker-effect" />
+      </DraggableSticker>
 
       {/* SVG 17: Peach Smiley */}
-      <motion.div
-        drag
-        dragMomentum={false}
-        initial={{ x: -200, y: 200, opacity: 0 }}
-        animate={{ x: 0, y: 0, opacity: 1 }}
-        transition={springTransition(0.95)}
-        className="absolute top-[6000px] left-[4%] pointer-events-auto cursor-grab active:cursor-grabbing z-20 hidden xl:block"
-        whileHover={{ scale: 1.1, rotate: '15deg' }}
+      <DraggableSticker
+        className="top-[6000px] left-[4%] hidden md:block"
+        rotate={-15}
+        hoverRotate={0}
+        delay={0.95}
       >
-        <SmileySticker color="var(--accent-peach)" size={46} className="sticker-effect rotate-[-15deg]" />
-      </motion.div>
+        <SmileySticker color="var(--accent-peach)" size={36} className="sticker-effect" />
+      </DraggableSticker>
 
     </div>
   )

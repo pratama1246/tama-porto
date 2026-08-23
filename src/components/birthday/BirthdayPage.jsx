@@ -1,6 +1,3 @@
-// src/components/birthday/BirthdayPage.jsx
-// Full /20 route page view with Confetti Cannon, Scattered 3:2 Polaroid Dump & Road to 21
-
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import OpeningScreen from './OpeningScreen'
@@ -68,11 +65,11 @@ export default function BirthdayPage({ onBackToPortfolio }) {
       </main>
 
       {/* Footer Copyright */}
-      <footer className="w-full select-none mt-16 bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 py-6 flex flex-col gap-2 items-center text-center px-4">
-        <div className="font-mono text-xs font-bold text-ink-black uppercase">
-          © {new Date().getFullYear()} Pratama Putra Purwanto • Informatics Engineering
+      <footer className="w-full select-none mt-16 bg-[var(--bg-primary)]/50 border-t border-[var(--text-dark)]/15 pt-6 pb-6 px-4 flex flex-col gap-2 items-center text-center">
+        <div className="font-mono text-xs font-bold text-[var(--text-dark)] opacity-90 uppercase">
+          © 2026 Pratama Putra Purwanto • All rights reserved
         </div>
-        <div className="text-[10px] md:text-xs opacity-75 font-mono tracking-wider text-[var(--text-dark)] uppercase">
+        <div className="text-[10px] opacity-75 font-mono text-[var(--text-dark)] px-4 uppercase">
           Some assets and components may be subject to copyright • Non-profit personal portfolio.
         </div>
       </footer>

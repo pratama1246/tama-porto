@@ -103,15 +103,11 @@ const ScrollReveal = ({
       );
     }
 
-
-
     return () => {
       animRotation.scrollTrigger?.kill();
       animRotation.kill();
-      
       animOpacity.scrollTrigger?.kill();
       animOpacity.kill();
-      
       if (animBlur) {
         animBlur.scrollTrigger?.kill();
         animBlur.kill();

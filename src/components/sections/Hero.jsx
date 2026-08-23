@@ -220,10 +220,10 @@ export default function Hero({ onOpenBirthday, isLoading = false }) {
                 className="list-none p-0 m-0 flex flex-col gap-1 sm:gap-1.5 text-[0.8rem] sm:text-[0.88rem] text-text-handwrite leading-tight font-medium"
                 style={{ fontFamily: 'var(--font-handwrite)' }}
               >
-                <li>🎧 Lofi beats playing</li>
-                <li>☕ Coffee level: 90%</li>
+                <li>🎧 Spotify on repeat</li>
+                <li>🍫 Iced Chocolate: 100%</li>
                 <li>📍 Cilacap, ID</li>
-                <li>🚀 Crafting in React + GSAP</li>
+                <li>💻 Building interactive UI</li>
                 <li>🌐 Analyzing packet flows</li>
               </ul>
             </motion.div>

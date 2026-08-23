@@ -60,6 +60,7 @@ const localLogos = {
   "Node.js": "/assets/tech-stack/Node.js.png",
   "Dart": "/assets/tech-stack/Dart.png",
   "Flutter": "/assets/tech-stack/Flutter.png",
+  "Linux": "/assets/tech-stack/Linux.svg",
   "Ubuntu": "/assets/tech-stack/Ubuntu.png",
   "MikroTik": "/assets/tech-stack/MikroTik.png",
   "Cisco": "/assets/tech-stack/Cisco.png",
@@ -89,8 +90,8 @@ const localLogos = {
 }
 
 export default function Skills() {
-  // All categories are collapsed by default
-  const [activeId, setActiveId] = useState(null)
+  // First category (Frontend & UI Craftsmanship) open by default
+  const [activeId, setActiveId] = useState(1)
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {

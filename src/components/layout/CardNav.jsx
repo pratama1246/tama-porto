@@ -65,7 +65,7 @@ export default function CardNav({
         // Trigger reflow to read correct scrollHeight
         contentEl.offsetHeight;
 
-        const topBar = 48; // height of mobile top bar (h-12 = 48px)
+        const topBar = 56; // height of mobile top bar (h-14 = 56px)
         const padding = 16;
         const contentHeight = contentEl.scrollHeight;
 
@@ -91,7 +91,7 @@ export default function CardNav({
       return null;
     }
 
-    gsap.set(navEl, { height: 48, overflow: 'hidden' });
+    gsap.set(navEl, { height: 56, overflow: 'hidden' });
     gsap.set(cardsRef.current, { y: 50, opacity: 0 });
 
     const tl = gsap.timeline({ paused: true });
@@ -230,47 +230,47 @@ export default function CardNav({
             )}
           </div>
 
-          {/* Mobile: Menu Toggle Button on Right */}
+          {/* Mobile: Cool Neobrutal Menu Toggle Button on Right */}
           <button
             type="button"
             onClick={toggleMenu}
             aria-label={isExpanded ? 'Close menu' : 'Open menu'}
-            className="md:hidden flex items-center gap-1.5 px-3 py-1.5 bg-black/[0.04] hover:bg-black/[0.08] border border-black/10 rounded-md active:scale-95 transition-all text-ink-black font-mono font-semibold text-[11px] uppercase tracking-wider cursor-pointer order-2 select-none"
+            className="md:hidden flex items-center gap-2 px-3 py-1.5 bg-pale-yellow hover:bg-[#ffe58f] border-2 border-ink-black rounded-lg active:scale-95 transition-all text-ink-black font-mono font-bold text-xs uppercase tracking-wider cursor-pointer order-2 select-none shadow-[1.5px_1.5px_0px_#2d2d2d]"
           >
             {isHamburgerOpen ? (
               <>
-                <span className="text-[12px] leading-none">✕</span>
+                <span className="text-xs font-bold leading-none">✕</span>
                 <span className="leading-none">CLOSE</span>
               </>
             ) : (
               <>
                 <div className="flex flex-col gap-[3px] w-3.5 items-start justify-center">
-                  <span className="w-3.5 h-[1.5px] bg-ink-black rounded-full block" />
-                  <span className="w-2.5 h-[1.5px] bg-ink-black rounded-full block" />
-                  <span className="w-3.5 h-[1.5px] bg-ink-black rounded-full block" />
+                  <span className="w-3.5 h-[2px] bg-ink-black rounded-full block" />
+                  <span className="w-2.5 h-[2px] bg-ink-black rounded-full block" />
+                  <span className="w-3.5 h-[2px] bg-ink-black rounded-full block" />
                 </div>
                 <span className="leading-none">MENU</span>
               </>
             )}
           </button>
 
-          {/* Desktop Left Wing: Nav Links */}
-          <div className="hidden md:flex items-center justify-start gap-1.5 lg:gap-2.5 flex-1">
+          {/* Desktop Left Wing: Pastel Scrapbook Pita Nav Links */}
+          <div className="hidden md:flex items-center justify-start gap-1.5 lg:gap-2.5 flex-1 select-none">
             <a
               href="#hero"
-              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
+              className="px-2.5 py-1 rounded-md bg-lavender text-ink-black border border-ink-black/40 rotate-[-1deg] font-mono text-[10px] lg:text-[11px] font-bold uppercase tracking-wider neo-shadow-sm hover:rotate-0 hover:scale-105 transition-transform no-underline"
             >
               Home
             </a>
             <a
               href="#about"
-              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
+              className="px-2.5 py-1 rounded-md bg-[#ffd4b8] text-ink-black border border-ink-black/40 rotate-[1.5deg] font-mono text-[10px] lg:text-[11px] font-bold uppercase tracking-wider neo-shadow-sm hover:rotate-0 hover:scale-105 transition-transform no-underline"
             >
               About
             </a>
             <a
               href="#journey"
-              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
+              className="px-2.5 py-1 rounded-md bg-pale-yellow text-ink-black border border-ink-black/40 rotate-[-1.5deg] font-mono text-[10px] lg:text-[11px] font-bold uppercase tracking-wider neo-shadow-sm hover:rotate-0 hover:scale-105 transition-transform no-underline"
             >
               Journey
             </a>
@@ -311,29 +311,29 @@ export default function CardNav({
             )}
           </div>
 
-          {/* Desktop Right Wing: Nav Links & CTA */}
-          <div className="hidden md:flex items-center justify-end gap-1.5 lg:gap-2.5 flex-1">
+          {/* Desktop Right Wing: Pastel Scrapbook Pita Nav Links & CTA */}
+          <div className="hidden md:flex items-center justify-end gap-1.5 lg:gap-2.5 flex-1 select-none">
             <a
               href="#projects"
-              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
+              className="px-2.5 py-1 rounded-md bg-mint text-ink-black border border-ink-black/40 rotate-[1deg] font-mono text-[10px] lg:text-[11px] font-bold uppercase tracking-wider neo-shadow-sm hover:rotate-0 hover:scale-105 transition-transform no-underline"
             >
               Projects
             </a>
             <a
               href="#skills"
-              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
+              className="px-2.5 py-1 rounded-md bg-sticker-pink text-ink-black border border-ink-black/40 rotate-[-1deg] font-mono text-[10px] lg:text-[11px] font-bold uppercase tracking-wider neo-shadow-sm hover:rotate-0 hover:scale-105 transition-transform no-underline"
             >
               Skills
             </a>
             <a
               href="#certifications"
-              className="px-3 py-1.5 rounded-md text-xs font-mono font-semibold uppercase tracking-wider text-text-dark/75 hover:text-ink-black hover:bg-black/[0.04] transition-colors no-underline"
+              className="px-2.5 py-1 rounded-md bg-[#b3e5fc] text-ink-black border border-ink-black/40 rotate-[1.5deg] font-mono text-[10px] lg:text-[11px] font-bold uppercase tracking-wider neo-shadow-sm hover:rotate-0 hover:scale-105 transition-transform no-underline"
             >
               Certs
             </a>
             <a
               href="#contact"
-              className="ml-2 px-3.5 py-1.5 rounded-md bg-ink-black text-white hover:bg-neutral-800 font-mono text-xs font-semibold uppercase tracking-wider transition-colors no-underline inline-flex items-center gap-1.5"
+              className="ml-2 px-3.5 py-1 rounded-md bg-ink-black text-white hover:bg-neutral-800 border-2 border-ink-black font-mono text-[10px] lg:text-[11px] font-extrabold uppercase tracking-wider neo-shadow hover:scale-105 transition-all no-underline inline-flex items-center gap-1.5"
             >
               <span>Contact</span>
               <span className="text-xs">→</span>

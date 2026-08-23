@@ -3,30 +3,15 @@ import { motion } from 'framer-motion'
 
 export default function NotFound({ onGoHome }) {
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-ink-black flex flex-col justify-between relative w-full px-4 py-8 overflow-hidden select-none">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-ink-black flex items-center justify-center relative w-full px-4 py-8 overflow-hidden select-none">
       {/* Background Ambient Glows */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute top-[20%] left-[10%] w-72 h-72 bg-[var(--accent-pink)] opacity-25 rounded-full blur-3xl" />
         <div className="absolute bottom-[20%] right-[10%] w-80 h-80 bg-[var(--accent-yellow)] opacity-25 rounded-full blur-3xl" />
       </div>
 
-      {/* Top Simple Header */}
-      <header className="w-full max-w-5xl mx-auto flex items-center justify-between z-10">
-        <button
-          onClick={onGoHome}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border-2 border-ink-black bg-white text-xs sm:text-sm font-bold font-mono text-ink-black neo-shadow neo-shadow-hover transition-all active:scale-95 cursor-pointer"
-        >
-          <span>←</span>
-          <span>BACK TO MAIN STUDIO</span>
-        </button>
-
-        <span className="font-mono text-xs font-bold bg-pale-yellow text-ink-black px-3 py-1.5 rounded-lg border-2 border-ink-black neo-shadow-sm rotate-1">
-          ⚠️ 404 // NOT FOUND
-        </span>
-      </header>
-
-      {/* Main 404 Scrapbook Card */}
-      <main className="flex-grow flex items-center justify-center my-12 z-10">
+      {/* Main Centered 404 Scrapbook Card */}
+      <main className="w-full flex items-center justify-center z-10">
         <motion.div
           initial={{ opacity: 0, scale: 0.92, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -74,11 +59,6 @@ export default function NotFound({ onGoHome }) {
           </button>
         </motion.div>
       </main>
-
-      {/* Footer copyright */}
-      <footer className="w-full text-center text-xs font-mono text-text-muted z-10">
-        © 2026 Pratama Putra Purwanto • mytamakikii.web.id
-      </footer>
     </div>
   )
 }

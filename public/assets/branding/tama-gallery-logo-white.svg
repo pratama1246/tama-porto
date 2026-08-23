@@ -16,7 +16,7 @@
     <path d="M 39 51 Q 50 62 61 51" fill="none" stroke="#1a1a1a" stroke-width="4.5" stroke-linecap="round" />
   </g>
 
-  <!-- Right Side: Logo Text "tama.gallery" in White for Dark Backgrounds -->
+  <!-- Right Side: Logo Text "tama.gallery" in White -->
   <text x="120" y="74" font-family="'Lexend', 'Space Grotesk', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" letter-spacing="-1.5">
     <tspan fill="#ffffff">tama</tspan><tspan fill="#ff6b9d">.</tspan><tspan fill="#ffffff">gallery</tspan>
   </text>

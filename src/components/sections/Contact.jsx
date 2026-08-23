@@ -101,6 +101,7 @@ export default function Contact() {
               href="https://github.com/pratama1246"
               target="_blank"
               rel="noopener noreferrer"
+              whileHover={{ x: 12, transition: { duration: 0.18, ease: 'easeOut' } }}
               className="group flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b-2 border-ink-black hover:bg-pale-yellow px-3 sm:px-4 text-ink-black transition-colors duration-200 no-underline"
             >
               <div className="flex items-center gap-2.5 sm:gap-3">
@@ -111,13 +112,14 @@ export default function Contact() {
               </div>
               <span className="font-mono font-bold text-xs sm:text-sm md:text-base mt-2 sm:mt-0 opacity-85 group-hover:opacity-100 flex items-center gap-1.5">
                 <span>@PRATAMA1246</span>
-                <span className="inline-block transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                <span className="inline-block transform group-hover:translate-x-1.5 group-hover:-translate-y-1 transition-transform">↗</span>
               </span>
             </motion.a>
 
             {/* Link 2: Email */}
             <motion.a
               href="mailto:pratamaputra6854@gmail.com"
+              whileHover={{ x: 12, transition: { duration: 0.18, ease: 'easeOut' } }}
               className="group flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b-2 border-ink-black hover:bg-mint px-3 sm:px-4 text-ink-black transition-colors duration-200 no-underline"
             >
               <div className="flex items-center gap-2.5 sm:gap-3">
@@ -128,7 +130,7 @@ export default function Contact() {
               </div>
               <span className="font-mono font-bold text-xs sm:text-sm md:text-base mt-2 sm:mt-0 opacity-85 group-hover:opacity-100 flex items-center gap-1.5">
                 <span>PRATAMAPUTRA6854@GMAIL.COM</span>
-                <span className="inline-block transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                <span className="inline-block transform group-hover:translate-x-1.5 group-hover:-translate-y-1 transition-transform">↗</span>
               </span>
             </motion.a>
 
@@ -137,6 +139,7 @@ export default function Contact() {
               href="https://www.linkedin.com/in/perfectpratama/"
               target="_blank"
               rel="noopener noreferrer"
+              whileHover={{ x: 12, transition: { duration: 0.18, ease: 'easeOut' } }}
               className="group flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b-2 border-ink-black hover:bg-soft-blue px-3 sm:px-4 text-ink-black transition-colors duration-200 no-underline"
             >
               <div className="flex items-center gap-2.5 sm:gap-3">
@@ -147,7 +150,7 @@ export default function Contact() {
               </div>
               <span className="font-mono font-bold text-xs sm:text-sm md:text-base mt-2 sm:mt-0 opacity-85 group-hover:opacity-100 flex items-center gap-1.5">
                 <span>PERFECTPRATAMA</span>
-                <span className="inline-block transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                <span className="inline-block transform group-hover:translate-x-1.5 group-hover:-translate-y-1 transition-transform">↗</span>
               </span>
             </motion.a>
 
@@ -156,6 +159,7 @@ export default function Contact() {
               href="https://instagram.com/perfectamafine"
               target="_blank"
               rel="noopener noreferrer"
+              whileHover={{ x: 12, transition: { duration: 0.18, ease: 'easeOut' } }}
               className="group flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b-2 border-ink-black hover:bg-sticker-pink px-3 sm:px-4 text-ink-black transition-colors duration-200 no-underline"
             >
               <div className="flex items-center gap-2.5 sm:gap-3">
@@ -166,7 +170,7 @@ export default function Contact() {
               </div>
               <span className="font-mono font-bold text-xs sm:text-sm md:text-base mt-2 sm:mt-0 opacity-85 group-hover:opacity-100 flex items-center gap-1.5">
                 <span>@PERFECTAMAFINE</span>
-                <span className="inline-block transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                <span className="inline-block transform group-hover:translate-x-1.5 group-hover:-translate-y-1 transition-transform">↗</span>
               </span>
             </motion.a>
 
@@ -175,6 +179,7 @@ export default function Contact() {
               href="https://id.pinterest.com/ppraaatammma___/"
               target="_blank"
               rel="noopener noreferrer"
+              whileHover={{ x: 12, transition: { duration: 0.18, ease: 'easeOut' } }}
               className="group flex flex-col sm:flex-row sm:justify-between sm:items-center w-full py-4 md:py-6 border-b-2 border-ink-black hover:bg-lavender px-3 sm:px-4 text-ink-black transition-colors duration-200 no-underline"
             >
               <div className="flex items-center gap-2.5 sm:gap-3">
@@ -185,7 +190,7 @@ export default function Contact() {
               </div>
               <span className="font-mono font-bold text-xs sm:text-sm md:text-base mt-2 sm:mt-0 opacity-85 group-hover:opacity-100 flex items-center gap-1.5">
                 <span>@PPRAAATAMMMA___</span>
-                <span className="inline-block transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span>
+                <span className="inline-block transform group-hover:translate-x-1.5 group-hover:-translate-y-1 transition-transform">↗</span>
               </span>
             </motion.a>
           </motion.div>

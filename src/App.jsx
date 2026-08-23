@@ -21,6 +21,7 @@ const Hobbies = lazy(() => import('./components/sections/Hobbies'))
 const Contact = lazy(() => import('./components/sections/Contact'))
 const ProjectDetail = lazy(() => import('./components/sections/ProjectDetail'))
 const BirthdayPage = lazy(() => import('./components/birthday/BirthdayPage'))
+const NotFound = lazy(() => import('./components/layout/NotFound'))
 
 // Helper to get active project ID from pathname (e.g. /projects/ticketly)
 function getProjectIdFromPath() {
@@ -41,16 +42,31 @@ function checkIsBirthdayPath() {
   return window.location.pathname === '/20'
 }
 
+// Helper to check if current pathname is an invalid route (404)
+function checkIsNotFoundPath() {
+  if (typeof window === 'undefined') return false
+  const path = window.location.pathname
+  if (path === '/' || path === '') return false
+  if (path === '/20') return false
+  const match = path.match(/^\/projects\/([a-zA-Z0-9_-]+)/)
+  if (match) {
+    const slugOrId = match[1]
+    return !projects.some(p => p.slug === slugOrId || String(p.id) === slugOrId)
+  }
+  return true
+}
+
 function App() {
   const [isLoading, setIsLoading] = useState(true)
   const [activeProjectId, setActiveProjectId] = useState(() => getProjectIdFromPath())
   const [isBirthdayRoute, setIsBirthdayRoute] = useState(() => checkIsBirthdayPath())
+  const [isNotFoundRoute, setIsNotFoundRoute] = useState(() => checkIsNotFoundPath())
   const [showBirthdayToast, setShowBirthdayToast] = useState(false)
   const [savedScrollY, setSavedScrollY] = useState(0)
   const targetScrollSectionRef = useRef(null)
 
   const activeProject = projects.find(p => p.id === activeProjectId)
-  const isDetailView = Boolean(activeProject || isBirthdayRoute)
+  const isDetailView = Boolean(activeProject || isBirthdayRoute || isNotFoundRoute)
 
   // Synchronous pre-paint scroll positioning: Resets to (0, 0) on detail entry, restores to #projects on detail exit
   useLayoutEffect(() => {
@@ -94,6 +110,7 @@ function App() {
       const idFromPath = getProjectIdFromPath()
       setActiveProjectId(idFromPath)
       setIsBirthdayRoute(checkIsBirthdayPath())
+      setIsNotFoundRoute(checkIsNotFoundPath())
     }
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
@@ -264,6 +281,8 @@ function App() {
 
   const handleBackToPortfolio = () => {
     setIsBirthdayRoute(false)
+    setIsNotFoundRoute(false)
+    setActiveProjectId(null)
     window.history.pushState(null, '', '/')
     requestAnimationFrame(() => {
       window.scrollTo({
@@ -296,7 +315,7 @@ function App() {
         )}
       </AnimatePresence>
 
-      {/* Main Portfolio Layout - Kept in DOM, hidden when viewing detail page */}
+      {/* Main Portfolio Layout - Kept in DOM, hidden when viewing detail/birthday/404 page */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={!isLoading ? { opacity: 1 } : { opacity: 0 }}
@@ -340,6 +359,13 @@ function App() {
       {isBirthdayRoute && (
         <Suspense fallback={null}>
           <BirthdayPage onBackToPortfolio={handleBackToPortfolio} isLoading={isLoading} />
+        </Suspense>
+      )}
+
+      {/* 404 Not Found Page View */}
+      {isNotFoundRoute && (
+        <Suspense fallback={null}>
+          <NotFound onGoHome={handleBackToPortfolio} />
         </Suspense>
       )}
     </div>

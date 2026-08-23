@@ -142,7 +142,7 @@ export default function Loader({ onComplete }) {
 
       {/* Bottom Footer Info */}
       <div className="w-full max-w-[1600px] flex items-center justify-between text-text-muted font-mono text-[11px] md:text-xs z-10 border-t-2 border-ink-black/15 pt-4">
-        <span className="font-bold">© 2026 PRATAMA PUTRA</span>
+        <span className="font-bold">© {new Date().getFullYear()} PRATAMA PUTRA</span>
         <span className="hidden sm:inline-block tracking-wider font-semibold">PORTFOLIO INITIATION</span>
         <span className="font-bold">CILACAP, ID</span>
       </div>

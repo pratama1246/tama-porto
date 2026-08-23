@@ -621,7 +621,7 @@ export default function ProjectDetail({ project, onBack, isLoading = false }) {
           <div className="flex flex-row justify-between items-center gap-2 pb-5 sm:pb-8 border-b-2 border-ink-black/10 font-mono text-xs sm:text-sm font-bold text-ink-black uppercase">
             <div className="flex items-center gap-2">
               <span className="px-2.5 py-1 rounded-md bg-pale-yellow border-2 border-ink-black neo-shadow-sm text-xs sm:text-sm font-extrabold">
-                © 2026
+                © {new Date().getFullYear()}
               </span>
             </div>
             <div className="flex items-center gap-1.5 sm:gap-3 text-text-muted text-[9.5px] xs:text-[11px] sm:text-xs">

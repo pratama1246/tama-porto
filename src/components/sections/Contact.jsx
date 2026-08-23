@@ -210,7 +210,7 @@ export default function Contact() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-5 sm:pb-8 border-b-2 border-ink-black/10 font-mono text-xs sm:text-sm font-bold text-ink-black uppercase">
             <div className="flex items-center gap-2 shrink-0">
               <span className="px-2.5 py-1 rounded-md bg-pale-yellow border-2 border-ink-black neo-shadow-sm text-xs sm:text-sm font-extrabold whitespace-nowrap">
-                © 2026
+                © {new Date().getFullYear()}
               </span>
             </div>
             <div className="flex items-center gap-1.5 sm:gap-2 text-text-muted text-[11px] sm:text-xs whitespace-nowrap">

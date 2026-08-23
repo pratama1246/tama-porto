@@ -182,7 +182,7 @@ export default function BirthdayPage({ onBackToPortfolio, isLoading = false }) {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-5 sm:pb-8 border-b-2 border-ink-black/10 font-mono text-xs sm:text-sm font-bold text-ink-black uppercase">
             <div className="flex items-center gap-2 shrink-0">
               <span className="px-2.5 py-1 rounded-md bg-pale-yellow border-2 border-ink-black neo-shadow-sm text-xs sm:text-sm font-extrabold whitespace-nowrap">
-                © 2026
+                © {new Date().getFullYear()}
               </span>
               <span className="px-2.5 py-1 rounded-md bg-sticker-pink border-2 border-ink-black neo-shadow-sm text-xs font-bold whitespace-nowrap">
                 🎂 CHAPTER 20

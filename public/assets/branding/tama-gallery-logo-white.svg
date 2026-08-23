@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" width="100%" height="100%">
+  <!-- Left Side: Polaroid Icon -->
+  <g transform="translate(10, 10)">
+    <!-- Top washi tape (pastel pink) -->
+    <g transform="rotate(-4, 50, 15)">
+      <rect x="32" y="6" width="36" height="15" rx="3" fill="#ffb3c6" stroke="#1a1a1a" stroke-width="4" stroke-linejoin="round" />
+    </g>
+    <!-- Polaroid white frame with solid white background -->
+    <rect x="14" y="14" width="72" height="76" rx="10" fill="#ffffff" stroke="#1a1a1a" stroke-width="6" stroke-linejoin="round" />
+    <!-- Inner photo area (pastel yellow) -->
+    <rect x="22" y="22" width="56" height="46" rx="6" fill="#ffeaa7" stroke="#1a1a1a" stroke-width="5" stroke-linejoin="round" />
+    <!-- Cute smiley eyes -->
+    <circle cx="39" cy="41" r="4.5" fill="#1a1a1a" />
+    <circle cx="61" cy="41" r="4.5" fill="#1a1a1a" />
+    <!-- Cute smile arc -->
+    <path d="M 39 51 Q 50 62 61 51" fill="none" stroke="#1a1a1a" stroke-width="4.5" stroke-linecap="round" />
+  </g>
+
+  <!-- Right Side: Logo Text "tama.gallery" in White for Dark Backgrounds -->
+  <text x="120" y="74" font-family="'Lexend', 'Space Grotesk', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-size="52" font-weight="800" letter-spacing="-1.5">
+    <tspan fill="#ffffff">tama</tspan><tspan fill="#ff6b9d">.</tspan><tspan fill="#ffffff">gallery</tspan>
+  </text>
+</svg>

@@ -49,7 +49,7 @@ export default function ScatteredGallery() {
       </div>
 
       {/* Big Scattered Polaroid Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 lg:gap-16 relative z-10 px-2 sm:px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 lg:gap-16 relative z-10 px-2 sm:px-4 max-w-5xl mx-auto">
         {dumpPolaroids.map((photo, index) => (
           <motion.div
             key={photo.id}
@@ -60,7 +60,7 @@ export default function ScatteredGallery() {
               scale: 1.07,
               zIndex: 70,
               cursor: 'grabbing',
-              boxShadow: '0 30px 60px -12px rgba(0,0,0,0.3)',
+              boxShadow: '8px 12px 0px rgba(26,26,26,0.9)',
               rotate: 0
             } : undefined}
             initial={{ opacity: 0, y: 30, rotate: parseFloat(photo.rotate) }}
@@ -73,7 +73,7 @@ export default function ScatteredGallery() {
               zIndex: 35,
               transition: { duration: 0.2, ease: 'easeOut' }
             } : undefined}
-            className={`relative bg-white p-4 sm:p-5 pb-7 rounded-[2px] border border-black/10 shadow-[0_12px_28px_-6px_rgba(0,0,0,0.1),0_8px_12px_-6px_rgba(0,0,0,0.05)] transition-shadow duration-300 hover:shadow-[0_22px_40px_-10px_rgba(0,0,0,0.18)] flex flex-col ${
+            className={`relative bg-white p-4 sm:p-5 pb-6 rounded-xl border-2 border-ink-black neo-shadow transition-shadow duration-300 flex flex-col ${
               isMobile ? 'cursor-pointer' : 'cursor-grab active:cursor-grabbing'
             }`}
             style={{
@@ -83,23 +83,25 @@ export default function ScatteredGallery() {
           >
             {/* Washi Tape Accent */}
             <div
-              className="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-6 opacity-90 rounded-[1px] border border-black/5 z-20 pointer-events-none"
+              className="absolute -top-3.5 left-1/2 -translate-x-1/2 w-28 h-6 rounded-xs border border-ink-black/40 z-20 pointer-events-none neo-shadow-sm flex items-center justify-center text-[10px] font-mono font-bold text-ink-black tracking-widest uppercase"
               style={{
                 backgroundColor: photo.tapeColor,
                 transform: `translateX(-50%) rotate(${photo.tapeAngle})`,
                 clipPath: 'polygon(0% 15%, 5% 0%, 95% 8%, 100% 20%, 97% 85%, 92% 100%, 8% 92%, 0% 80%)'
               }}
-            />
+            >
+              MEMORIES
+            </div>
 
             {/* Paper Clip Decoration */}
             {photo.paperClip && (
-              <div className="absolute -top-3 right-6 w-4 h-10 border-2 border-slate-700/60 rounded-full z-20 pointer-events-none rotate-[12deg]" />
+              <div className="absolute -top-3 right-6 w-4 h-10 border-2 border-slate-700/80 rounded-full z-20 pointer-events-none rotate-[12deg]" />
             )}
 
             {/* 3:2 Photo Container (Large) */}
             <div
               onClick={() => setSelectedPhoto(photo)}
-              className="w-full aspect-[3/2] bg-slate-100 overflow-hidden rounded-[1px] border border-black/5 relative mb-4 cursor-pointer group"
+              className="w-full aspect-[3/2] bg-[#f5e6c8] overflow-hidden rounded-md border-2 border-ink-black relative mb-3 cursor-pointer group"
             >
               <img
                 src={photo.image}
@@ -109,8 +111,8 @@ export default function ScatteredGallery() {
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               {/* Overlay vignette */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-200 flex items-center justify-center">
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 font-mono text-xs font-bold text-white bg-black/60 px-3 py-1 rounded-sm backdrop-blur-xs">
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 flex items-center justify-center">
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 font-mono text-xs font-bold text-ink-black bg-pale-yellow border-2 border-ink-black neo-shadow-sm px-3 py-1.5 rounded-md">
                   🔍 CLICK TO EXPAND
                 </span>
               </div>
@@ -118,8 +120,14 @@ export default function ScatteredGallery() {
 
             {/* Clean Caption: pict.N.jpg */}
             <div className="flex items-center justify-between pt-1 px-1">
-              <span className="font-mono text-sm sm:text-base font-bold text-[var(--text-dark)] tracking-wider">
-                {photo.title}
+              <span className="font-mono text-sm sm:text-base font-bold text-ink-black tracking-wider">
+                📁 {photo.title}
+              </span>
+              <span 
+                className="text-xs text-text-handwrite font-semibold"
+                style={{ fontFamily: 'var(--font-handwrite)' }}
+              >
+                chapter.20
               </span>
             </div>
           </motion.div>
@@ -141,18 +149,19 @@ export default function ScatteredGallery() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               onClick={e => e.stopPropagation()}
-              className="bg-white p-4 sm:p-6 pb-6 rounded-sm max-w-3xl w-full border border-black/20 shadow-2xl relative cursor-default"
+              className="bg-white p-4 sm:p-6 pb-6 rounded-2xl max-w-3xl w-full border-2 border-ink-black neo-shadow relative cursor-default"
             >
               {/* Close button */}
               <button
                 onClick={() => setSelectedPhoto(null)}
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 flex items-center justify-center font-bold text-sm cursor-pointer z-20"
+                className="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-sticker-pink hover:bg-[#ffb6cb] text-ink-black border-2 border-ink-black flex items-center justify-center font-bold text-sm cursor-pointer z-20 neo-shadow-sm active:scale-95 transition-all"
+                title="Close"
               >
                 ✕
               </button>
 
               {/* 3:2 High Res Photo */}
-              <div className="w-full aspect-[3/2] bg-slate-100 overflow-hidden rounded-[1px] border border-black/10 mb-3">
+              <div className="w-full aspect-[3/2] bg-[#f5e6c8] overflow-hidden rounded-lg border-2 border-ink-black mb-4">
                 <img
                   src={selectedPhoto.image}
                   alt={selectedPhoto.title}
@@ -163,9 +172,15 @@ export default function ScatteredGallery() {
 
               {/* Filename Header */}
               <div className="flex items-center justify-between px-1">
-                <h3 className="font-mono font-bold text-base sm:text-lg text-[var(--text-dark)]">
-                  {selectedPhoto.title}
+                <h3 className="font-mono font-bold text-base sm:text-lg text-ink-black">
+                  📁 {selectedPhoto.title}
                 </h3>
+                <span 
+                  className="text-sm text-text-handwrite font-semibold"
+                  style={{ fontFamily: 'var(--font-handwrite)' }}
+                >
+                  ✨ snapshot archive • 20th year
+                </span>
               </div>
             </motion.div>
           </motion.div>

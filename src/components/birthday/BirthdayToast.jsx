@@ -48,7 +48,7 @@ export default function BirthdayToast({ onClose, onNavigateToBirthday }) {
         </p>
 
         <p className="text-xs text-[var(--text-muted)] font-body mb-6">
-          A personal digital archive & software release milestone for 15 August 2026.
+          A personal digital archive & software release milestone for Chapter 20.
         </p>
 
         <div className="flex flex-col gap-2">

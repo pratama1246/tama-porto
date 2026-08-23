@@ -1,5 +1,5 @@
 import { useState, useEffect, useLayoutEffect, useRef, lazy, Suspense } from 'react'
-import { AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import CardNav from './components/layout/CardNav'
 import { navItems } from './data/navigation'
@@ -292,7 +292,12 @@ function App() {
       </AnimatePresence>
 
       {/* Main Portfolio Layout - Kept in DOM, hidden when viewing detail page */}
-      <div className={`w-full flex-grow flex flex-col justify-start ${isDetailView ? 'hidden' : 'block'}`}>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={!isLoading ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className={`w-full flex-grow flex flex-col justify-start ${isDetailView ? 'hidden' : 'block'}`}
+      >
         {/* GSAP-Powered Mobile-Responsive Navbar */}
         <CardNav items={navItems} onLogoClick={handleLogoClick} isLoading={isLoading} />
 
@@ -313,7 +318,7 @@ function App() {
             <Contact />
           </Suspense>
         </main>
-      </div>
+      </motion.div>
 
       {/* Project Detail Page View */}
       {activeProject && (
@@ -329,7 +334,7 @@ function App() {
       {/* Birthday Page View */}
       {isBirthdayRoute && (
         <Suspense fallback={null}>
-          <BirthdayPage onBackToPortfolio={handleBackToPortfolio} />
+          <BirthdayPage onBackToPortfolio={handleBackToPortfolio} isLoading={isLoading} />
         </Suspense>
       )}
     </div>

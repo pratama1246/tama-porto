@@ -41,10 +41,10 @@ export const moments20 = [
   },
   {
     id: 3,
-    title: 'Late Night Coffee & Syntax',
+    title: 'Late Night Chocolate & Syntax',
     date: '2024',
     category: 'random',
-    caption: 'late nights, questionable decisions, and coffee level at 85%.',
+    caption: 'late nights, questionable decisions, and iced chocolate at 100%.',
     color: '#ffd4b8',
     rotate: '-2deg',
     image: '/assets/photos/moment-03.jpg'
@@ -84,7 +84,7 @@ export const moments20 = [
     title: 'Coding Playlist on Repeat',
     date: '2025',
     category: 'music',
-    caption: 'lofi beats, synthwave, and 300 Spotify replays later.',
+    caption: 'k-indie & k-pop galau on Spotify, and 300 replays later.',
     color: '#ffeaa7',
     rotate: '-2deg',
     image: '/assets/photos/moment-07.jpg'

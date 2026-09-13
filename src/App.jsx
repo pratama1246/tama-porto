@@ -15,6 +15,7 @@ const VisualReveal = lazy(() => import('./components/sections/VisualReveal'))
 const About = lazy(() => import('./components/sections/About'))
 const Journey = lazy(() => import('./components/sections/Journey'))
 const Projects = lazy(() => import('./components/sections/Projects'))
+const FieldDocumentation = lazy(() => import('./components/sections/FieldDocumentation'))
 const Skills = lazy(() => import('./components/sections/Skills'))
 const Certifications = lazy(() => import('./components/sections/Certifications'))
 const Hobbies = lazy(() => import('./components/sections/Hobbies'))
@@ -336,6 +337,7 @@ function App() {
             <About />
             <Journey />
             <Projects onOpenDetail={handleOpenDetail} />
+            <FieldDocumentation />
             <Skills />
             <Certifications />
             <Hobbies />

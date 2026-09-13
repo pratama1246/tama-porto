@@ -105,7 +105,7 @@ export default function Journey() {
 
             {/* Content Container */}
             <div 
-              className="flex-grow p-4 pl-8 sm:p-6 sm:pl-10 md:p-10 md:pl-16 relative z-10 flex flex-col justify-start"
+              className="flex-grow p-4 pl-8 pb-12 sm:p-6 sm:pl-10 sm:pb-10 md:p-10 md:pl-16 relative z-10 flex flex-col justify-start"
               style={{
                 backgroundImage: 'linear-gradient(var(--bg-secondary) 1px, transparent 1px)',
                 backgroundSize: '100% 28px',

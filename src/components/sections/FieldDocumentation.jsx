@@ -86,7 +86,7 @@ export default function FieldDocumentation() {
               `,
               backgroundSize: '20px 20px',
             }}
-            className="w-full bg-white border-2 border-ink-black neo-shadow rounded-2xl p-5 sm:p-8 md:p-12 relative overflow-hidden"
+            className="w-full bg-white border-2 border-ink-black neo-shadow rounded-2xl p-5 pt-14 sm:p-8 md:p-12 relative overflow-hidden"
           >
             {/* Top Right: Pelindo Official Logo (subtle, clean) */}
             <div className="absolute top-4 right-4 sm:top-6 sm:right-7 z-10 flex items-center">
@@ -98,7 +98,7 @@ export default function FieldDocumentation() {
               />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center pt-2 sm:pt-0">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
               
               {/* Left Column: Embed Container clipped exactly at video bottom (no comments/likes) */}
               <div className="lg:col-span-5 w-full flex justify-center items-center">

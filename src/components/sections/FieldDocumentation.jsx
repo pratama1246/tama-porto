@@ -88,14 +88,17 @@ export default function FieldDocumentation() {
             }}
             className="w-full bg-white border-2 border-ink-black neo-shadow rounded-2xl p-5 sm:p-8 md:p-12 relative overflow-hidden"
           >
-            {/* Top Washi Tape Accent */}
-            <div 
-              className="absolute -top-2 right-8 sm:right-16 w-24 sm:w-28 h-6 bg-[var(--accent-pink)]/80 border border-ink-black/30 rotate-[2deg] rounded-xs pointer-events-none z-10"
-              style={{ mixBlendMode: 'multiply' }}
-              aria-hidden="true"
-            />
+            {/* Top Right: Pelindo Official Logo (subtle, clean) */}
+            <div className="absolute top-4 right-4 sm:top-6 sm:right-7 z-10 flex items-center">
+              <img
+                src="/assets/pelindo-logo.svg"
+                alt="Pelindo Official Logo"
+                className="h-4.5 sm:h-5.5 md:h-6 w-auto object-contain select-none opacity-90"
+                draggable={false}
+              />
+            </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center pt-2 sm:pt-0">
               
               {/* Left Column: Embed Container clipped exactly at video bottom (no comments/likes) */}
               <div className="lg:col-span-5 w-full flex justify-center items-center">
@@ -123,9 +126,12 @@ export default function FieldDocumentation() {
                   </span>
                 </div>
 
-                {/* Subtitle / Project Heading */}
+                {/* Subtitle / Project Heading with Date */}
                 <h3 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-ink-black tracking-tight leading-snug">
-                  Port Operational Activity — Tanjung Intan
+                  Port Operational Activity — Tanjung Intan{' '}
+                  <span className="inline-block text-base sm:text-lg md:text-xl font-mono font-normal text-text-muted">
+                    (8 September 2026)
+                  </span>
                 </h3>
 
                 {/* Description */}
@@ -134,7 +140,7 @@ export default function FieldDocumentation() {
                 </p>
 
                 {/* Highlights Specs */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                   <div className="bg-[#fdf6e3] border border-ink-black/20 rounded-xl p-3">
                     <span className="text-xs font-mono text-text-muted block">ROLE</span>
                     <span className="text-sm font-semibold text-ink-black font-body">On-Camera Presenter</span>
@@ -142,10 +148,6 @@ export default function FieldDocumentation() {
                   <div className="bg-[#fdf6e3] border border-ink-black/20 rounded-xl p-3">
                     <span className="text-xs font-mono text-text-muted block">LOCATION</span>
                     <span className="text-sm font-semibold text-ink-black font-body">Tanjung Intan, Cilacap</span>
-                  </div>
-                  <div className="bg-[#fdf6e3] border border-ink-black/20 rounded-xl p-3">
-                    <span className="text-xs font-mono text-text-muted block">PLATFORM</span>
-                    <span className="text-sm font-semibold text-ink-black font-body">Instagram Official</span>
                   </div>
                 </div>
 

@@ -84,7 +84,7 @@ export default function Contact() {
               — Tama
             </div>
             <div
-              className="mt-4 text-[13px] text-text-handwrite border-t border-ink-black/10 pt-2.5 font-semibold text-amber-950 flex items-center gap-1.5"
+              className="mt-4 text-[13px] text-text-handwrite border-t border-ink-black/10 pt-2.5 font-semibold flex items-center gap-1.5"
               style={{ fontFamily: 'var(--font-handwrite)' }}
             >
               <span>P.S. Let's grab an iced chocolate or matcha if you are around Cilacap! 🍫✨</span>
@@ -203,7 +203,7 @@ export default function Contact() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="w-full border-t-2 border-ink-black bg-[var(--bg-primary)] pt-10 sm:pt-14 pb-8 px-4 sm:px-8 md:px-16 lg:px-20 mt-16 sm:mt-24 flex justify-center select-none overflow-hidden"
+        className="w-full border-t-2 border-ink-black bg-(--bg-primary) pt-10 sm:pt-14 pb-8 px-4 sm:px-8 md:px-16 lg:px-20 mt-16 sm:mt-24 flex justify-center select-none overflow-hidden"
       >
         <div className="max-w-[1600px] w-full flex flex-col justify-between">
           {/* Top Info Bar */}

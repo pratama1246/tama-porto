@@ -10,6 +10,7 @@ import CustomCursor from './components/layout/CustomCursor'
 import { projects } from './data/projects'
 import BirthdayToast from './components/birthday/BirthdayToast'
 import { isBirthdaySeason } from './data/birthday'
+import HazeOverlay from './components/layout/HazeOverlay'
 
 const VisualReveal = lazy(() => import('./components/sections/VisualReveal'))
 const About = lazy(() => import('./components/sections/About'))
@@ -328,6 +329,9 @@ function App() {
 
         {/* Floating Background Stickers & Doodles */}
         <BackgroundElements isLoading={isLoading} />
+
+        {/* Atmospheric Smog & Subtle Protest Layer */}
+        <HazeOverlay isLoading={isLoading} />
 
         {/* Scrapbook Section Stack */}
         <main className="flex-grow w-full relative z-10">

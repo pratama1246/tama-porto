@@ -1,9 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { hazeConfig } from '../../../data/haze'
 
 export default function HazeBadge({ isActive, onToggle }) {
   const [isMinimized, setIsMinimized] = useState(false)
+  const [noteIndex, setNoteIndex] = useState(0)
+
+  // Rotasi otomatis setiap 2 menit sekali
+  useEffect(() => {
+    if (!isActive || isMinimized) return
+    const timer = setInterval(() => {
+      setNoteIndex((prev) => (prev + 1) % hazeConfig.notes.length)
+    }, hazeConfig.rotationIntervalMs)
+    return () => clearInterval(timer)
+  }, [isActive, isMinimized])
+
+  const handleNextNote = () => {
+    setNoteIndex((prev) => (prev + 1) % hazeConfig.notes.length)
+  }
 
   return (
     <div className="fixed top-14 sm:top-16 left-4 md:left-1/2 md:-translate-x-1/2 z-[80] select-none pointer-events-auto">
@@ -15,7 +29,7 @@ export default function HazeBadge({ isActive, onToggle }) {
             animate={{ opacity: 1, y: 0, rotate: -1 }}
             exit={{ opacity: 0, y: -8, scale: 0.95 }}
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-            className="relative bg-[#fbf5e6] text-stone-800 border-2 border-stone-800 p-3 sm:p-3.5 rounded-sm shadow-[3px_4px_0px_#1c1b1a] w-[260px] sm:w-[295px]"
+            className="relative bg-[#fbf5e6] text-stone-800 border-2 border-stone-800 p-3 sm:p-3.5 rounded-sm shadow-[3px_4px_0px_#1c1b1a] w-[270px] sm:w-[305px] box-border"
           >
             {/* Top Washi Tape Pinned to Navbar Edge */}
             <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-4 bg-amber-200/90 border-t border-b border-amber-300/80 rotate-1 shadow-xs" />
@@ -31,10 +45,25 @@ export default function HazeBadge({ isActive, onToggle }) {
               </span>
             </div>
 
-            {/* Handwritten Note in English */}
-            <p className="font-handwrite text-sm sm:text-base text-amber-950/90 leading-snug mb-3">
-              "{hazeConfig.handwrittenNote}"
-            </p>
+            {/* Locked-Height Note Container (mencegah card melebar/goyang saat ganti kata) */}
+            <div
+              onClick={handleNextNote}
+              className="min-h-[44px] sm:min-h-[48px] flex items-center mb-2.5 cursor-pointer"
+              title="Click to see next note"
+            >
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={noteIndex}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  className="font-handwrite text-sm sm:text-base text-amber-950/90 leading-snug w-full select-none"
+                >
+                  "{hazeConfig.notes[noteIndex]}"
+                </motion.p>
+              </AnimatePresence>
+            </div>
 
             {/* Action Buttons: Clear Haze & Minimize */}
             <div className="flex items-center gap-2 pt-0.5">

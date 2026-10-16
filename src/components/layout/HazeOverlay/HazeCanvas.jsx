@@ -14,41 +14,41 @@ export default function HazeCanvas({ isActive }) {
     let w = (canvas.width = window.innerWidth)
     let h = (canvas.height = window.innerHeight)
 
-    // 1. Pre-render sprite gumpalan kabut putih-keabuan agar kontras jelas di atas background kuning
+    // 1. Pre-render sprite gumpalan kabut tebal putih-keabuan (high density)
     const puff = document.createElement('canvas')
-    const pSize = 300
+    const pSize = 340
     puff.width = puff.height = pSize
     const pctx = puff.getContext('2d')
     const grad = pctx.createRadialGradient(pSize / 2, pSize / 2, 0, pSize / 2, pSize / 2, pSize / 2)
-    grad.addColorStop(0, 'rgba(255, 255, 255, 0.85)')
-    grad.addColorStop(0.35, 'rgba(245, 242, 235, 0.55)')
-    grad.addColorStop(0.7, 'rgba(215, 210, 200, 0.22)')
-    grad.addColorStop(1, 'rgba(200, 195, 185, 0)')
+    grad.addColorStop(0, 'rgba(255, 255, 255, 0.95)')
+    grad.addColorStop(0.3, 'rgba(248, 245, 238, 0.78)')
+    grad.addColorStop(0.65, 'rgba(230, 225, 215, 0.45)')
+    grad.addColorStop(1, 'rgba(205, 200, 190, 0)')
     pctx.fillStyle = grad
     pctx.fillRect(0, 0, pSize, pSize)
 
-    // 2. Inisialisasi gumpalan awan kabut tebal
+    // 2. Inisialisasi gumpalan awan kabut tebal & lebar
     const isMobile = window.innerWidth < 768
     const count = isMobile ? hazeConfig.particleCountMobile : hazeConfig.particleCountDesktop
     const clouds = Array.from({ length: count }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      size: (isMobile ? 260 : 420) + Math.random() * 260,
-      vx: 0.25 + Math.random() * 0.35,
+      size: (isMobile ? 320 : 500) + Math.random() * 320,
+      vx: 0.2 + Math.random() * 0.35,
       vy: (Math.random() - 0.5) * 0.15,
-      alpha: 0.35 + Math.random() * 0.35, // Opacity nyata agar kabut terlihat mengapung
+      alpha: 0.45 + Math.random() * 0.4, // Opacity tebal nyata (hingga 85%)
       wobble: Math.random() * Math.PI * 2,
     }))
 
-    // 3. Serpihan abu gambut halus (karakteristik khas karhutla)
-    const ashCount = isMobile ? 12 : 24
+    // 3. Serpihan abu gambut halus yang lebih banyak
+    const ashCount = isMobile ? 20 : 40
     const ashFlakes = Array.from({ length: ashCount }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      size: 1.8 + Math.random() * 2.2,
+      size: 1.8 + Math.random() * 2.6,
       vx: 0.3 + Math.random() * 0.4,
-      vy: 0.6 + Math.random() * 0.7, // Melayang turun perlahan terbawa angin
-      alpha: 0.5 + Math.random() * 0.4,
+      vy: 0.6 + Math.random() * 0.7,
+      alpha: 0.55 + Math.random() * 0.4,
       wobble: Math.random() * Math.PI * 2,
     }))
 
@@ -69,6 +69,10 @@ export default function HazeCanvas({ isActive }) {
     // 4. Animation render loop (Clear murni tanpa bikin layar gelap/kusam)
     const render = () => {
       ctx.clearRect(0, 0, w, h)
+
+      // Lapisan selimut kabut putih transparan tipis (memberi efek depth atmosfer berkabut)
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)'
+      ctx.fillRect(0, 0, w, h)
 
       // Gambar gumpalan kabut putih
       clouds.forEach((c) => {

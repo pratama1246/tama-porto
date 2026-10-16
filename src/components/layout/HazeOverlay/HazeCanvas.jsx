@@ -16,7 +16,7 @@ export default function HazeCanvas({ isActive }) {
 
     // 1. Pre-render sprite gumpalan kabut tebal putih-keabuan (high density)
     const puff = document.createElement('canvas')
-    const pSize = 340
+    const pSize = 360
     puff.width = puff.height = pSize
     const pctx = puff.getContext('2d')
     const grad = pctx.createRadialGradient(pSize / 2, pSize / 2, 0, pSize / 2, pSize / 2, pSize / 2)
@@ -27,21 +27,30 @@ export default function HazeCanvas({ isActive }) {
     pctx.fillStyle = grad
     pctx.fillRect(0, 0, pSize, pSize)
 
-    // 2. Inisialisasi gumpalan awan kabut tebal & lebar
+    // 2. Kerapatan dinamis: otomatis menyesuaikan resolusi monitor besar (1080p, 2K, Ultrawide)
     const isMobile = window.innerWidth < 768
-    const count = isMobile ? hazeConfig.particleCountMobile : hazeConfig.particleCountDesktop
-    const clouds = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      size: (isMobile ? 320 : 500) + Math.random() * 320,
-      vx: 0.2 + Math.random() * 0.35,
-      vy: (Math.random() - 0.5) * 0.15,
-      alpha: 0.45 + Math.random() * 0.4, // Opacity tebal nyata (hingga 85%)
-      wobble: Math.random() * Math.PI * 2,
-    }))
+    const areaRatio = Math.max(0.7, (w * h) / (1920 * 1080))
+    const count = isMobile
+      ? hazeConfig.particleCountMobile
+      : Math.round(hazeConfig.particleCountDesktop * Math.max(1, areaRatio * 1.3))
 
-    // 3. Serpihan abu gambut halus yang lebih banyak
-    const ashCount = isMobile ? 20 : 40
+    // Ukuran awan melebar proporsional dengan lebar layar agar saling bertumpuk mulus
+    const baseCloudSize = isMobile ? 320 : Math.max(550, Math.min(950, w * 0.38))
+    const clouds = Array.from({ length: count }, () => {
+      const size = baseCloudSize + Math.random() * (isMobile ? 240 : 360)
+      return {
+        x: -size / 2 + Math.random() * (w + size),
+        y: -size / 2 + Math.random() * (h + size),
+        size,
+        vx: 0.18 + Math.random() * 0.32,
+        vy: (Math.random() - 0.5) * 0.15,
+        alpha: 0.42 + Math.random() * 0.42,
+        wobble: Math.random() * Math.PI * 2,
+      }
+    })
+
+    // 3. Serpihan abu gambut dinamis mengikuti luas viewport
+    const ashCount = isMobile ? 20 : Math.round(40 * Math.max(1, areaRatio))
     const ashFlakes = Array.from({ length: ashCount }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
@@ -66,11 +75,11 @@ export default function HazeCanvas({ isActive }) {
     }
     window.addEventListener('resize', onResize)
 
-    // 4. Animation render loop (Clear murni tanpa bikin layar gelap/kusam)
+    // 4. Animation render loop
     const render = () => {
       ctx.clearRect(0, 0, w, h)
 
-      // Lapisan selimut kabut putih transparan tipis (memberi efek depth atmosfer berkabut)
+      // Lapisan selimut kabut putih transparan tipis
       ctx.fillStyle = 'rgba(255, 255, 255, 0.08)'
       ctx.fillRect(0, 0, w, h)
 
@@ -84,16 +93,16 @@ export default function HazeCanvas({ isActive }) {
         const dx = c.x - mouse.x
         const dy = c.y - mouse.y
         const dist = Math.hypot(dx, dy)
-        if (dist < 200 && dist > 0) {
-          const force = (1 - dist / 200) * 2.5
+        if (dist < 220 && dist > 0) {
+          const force = (1 - dist / 220) * 2.6
           c.x += (dx / dist) * force
           c.y += (dy / dist) * force
         }
 
         // Looping layar saat kabut keluar batas
-        if (c.x - c.size / 2 > w) c.x = -c.size / 2
-        if (c.y - c.size / 2 > h) c.y = -c.size / 2
-        if (c.y + c.size / 2 < 0) c.y = h + c.size / 2
+        if (c.x - c.size / 2 > w + 60) c.x = -c.size / 2 - 40
+        if (c.y - c.size / 2 > h + 60) c.y = -c.size / 2 - 40
+        if (c.y + c.size / 2 < -60) c.y = h + c.size / 2 + 40
 
         ctx.globalAlpha = c.alpha
         ctx.drawImage(puff, c.x - c.size / 2, c.y - c.size / 2, c.size, c.size)

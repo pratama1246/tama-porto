@@ -14,28 +14,41 @@ export default function HazeCanvas({ isActive }) {
     let w = (canvas.width = window.innerWidth)
     let h = (canvas.height = window.innerHeight)
 
-    // Pre-render soft puff sprite on offscreen canvas for 60fps performance
+    // 1. Pre-render sprite gumpalan kabut putih-keabuan agar kontras jelas di atas background kuning
     const puff = document.createElement('canvas')
-    const pSize = 180
+    const pSize = 300
     puff.width = puff.height = pSize
     const pctx = puff.getContext('2d')
     const grad = pctx.createRadialGradient(pSize / 2, pSize / 2, 0, pSize / 2, pSize / 2, pSize / 2)
-    grad.addColorStop(0, 'rgba(180, 125, 60, 0.35)')
-    grad.addColorStop(0.5, 'rgba(140, 95, 50, 0.15)')
-    grad.addColorStop(1, 'rgba(40, 30, 25, 0)')
+    grad.addColorStop(0, 'rgba(255, 255, 255, 0.85)')
+    grad.addColorStop(0.35, 'rgba(245, 242, 235, 0.55)')
+    grad.addColorStop(0.7, 'rgba(215, 210, 200, 0.22)')
+    grad.addColorStop(1, 'rgba(200, 195, 185, 0)')
     pctx.fillStyle = grad
     pctx.fillRect(0, 0, pSize, pSize)
 
-    // Init smoke particles
+    // 2. Inisialisasi gumpalan awan kabut tebal
     const isMobile = window.innerWidth < 768
     const count = isMobile ? hazeConfig.particleCountMobile : hazeConfig.particleCountDesktop
-    const particles = Array.from({ length: count }, () => ({
+    const clouds = Array.from({ length: count }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      size: (isMobile ? 180 : 320) + Math.random() * 180,
-      vx: 0.15 + Math.random() * 0.3,
-      vy: (Math.random() - 0.5) * 0.1,
-      alpha: 0.12 + Math.random() * 0.18,
+      size: (isMobile ? 260 : 420) + Math.random() * 260,
+      vx: 0.25 + Math.random() * 0.35,
+      vy: (Math.random() - 0.5) * 0.15,
+      alpha: 0.35 + Math.random() * 0.35, // Opacity nyata agar kabut terlihat mengapung
+      wobble: Math.random() * Math.PI * 2,
+    }))
+
+    // 3. Serpihan abu gambut halus (karakteristik khas karhutla)
+    const ashCount = isMobile ? 12 : 24
+    const ashFlakes = Array.from({ length: ashCount }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      size: 1.8 + Math.random() * 2.2,
+      vx: 0.3 + Math.random() * 0.4,
+      vy: 0.6 + Math.random() * 0.7, // Melayang turun perlahan terbawa angin
+      alpha: 0.5 + Math.random() * 0.4,
       wobble: Math.random() * Math.PI * 2,
     }))
 
@@ -53,36 +66,49 @@ export default function HazeCanvas({ isActive }) {
     }
     window.addEventListener('resize', onResize)
 
-    // Main animation loop
+    // 4. Animation render loop (Clear murni tanpa bikin layar gelap/kusam)
     const render = () => {
       ctx.clearRect(0, 0, w, h)
 
-      // Ambient warm hazy tint
-      ctx.fillStyle = 'rgba(160, 105, 50, 0.045)'
-      ctx.fillRect(0, 0, w, h)
+      // Gambar gumpalan kabut putih
+      clouds.forEach((c) => {
+        c.wobble += 0.006
+        c.x += c.vx + Math.sin(c.wobble) * 0.25
+        c.y += c.vy + Math.cos(c.wobble) * 0.2
 
-      particles.forEach((p) => {
-        p.wobble += 0.008
-        p.x += p.vx + Math.sin(p.wobble) * 0.2
-        p.y += p.vy + Math.cos(p.wobble) * 0.2
-
-        // Soft cursor wind deflection
-        const dx = p.x - mouse.x
-        const dy = p.y - mouse.y
+        // Kursor menepis/menyibak gumpalan kabut
+        const dx = c.x - mouse.x
+        const dy = c.y - mouse.y
         const dist = Math.hypot(dx, dy)
-        if (dist < 180 && dist > 0) {
-          const force = (1 - dist / 180) * 1.8
-          p.x += (dx / dist) * force
-          p.y += (dy / dist) * force
+        if (dist < 200 && dist > 0) {
+          const force = (1 - dist / 200) * 2.5
+          c.x += (dx / dist) * force
+          c.y += (dy / dist) * force
         }
 
-        // Loop boundaries smoothly
-        if (p.x - p.size > w) p.x = -p.size
-        if (p.y - p.size > h) p.y = -p.size
-        if (p.y + p.size < 0) p.y = h + p.size
+        // Looping layar saat kabut keluar batas
+        if (c.x - c.size / 2 > w) c.x = -c.size / 2
+        if (c.y - c.size / 2 > h) c.y = -c.size / 2
+        if (c.y + c.size / 2 < 0) c.y = h + c.size / 2
 
-        ctx.globalAlpha = p.alpha
-        ctx.drawImage(puff, p.x - p.size / 2, p.y - p.size / 2, p.size, p.size)
+        ctx.globalAlpha = c.alpha
+        ctx.drawImage(puff, c.x - c.size / 2, c.y - c.size / 2, c.size, c.size)
+      })
+
+      // Gambar serpihan abu gambut melayang
+      ashFlakes.forEach((a) => {
+        a.wobble += 0.02
+        a.x += a.vx + Math.sin(a.wobble) * 0.4
+        a.y += a.vy
+
+        if (a.x > w) a.x = 0
+        if (a.y > h) a.y = 0
+
+        ctx.globalAlpha = a.alpha
+        ctx.fillStyle = '#3a322c'
+        ctx.beginPath()
+        ctx.arc(a.x, a.y, a.size, 0, Math.PI * 2)
+        ctx.fill()
       })
 
       ctx.globalAlpha = 1
@@ -104,7 +130,7 @@ export default function HazeCanvas({ isActive }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: isActive ? 1 : 0 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 1.2, ease: 'easeInOut' }}
+      transition={{ duration: 0.8, ease: 'easeOut' }}
       className="fixed inset-0 pointer-events-none z-30 overflow-hidden"
     >
       <canvas ref={canvasRef} className="w-full h-full block" />

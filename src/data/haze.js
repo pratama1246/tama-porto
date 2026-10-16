@@ -4,6 +4,6 @@ export const hazeConfig = {
   statusAir: 'TIDAK SEHAT',
   handwrittenNote: 'langitnya kuning lagi...',
   storageKey: 'tama_haze_preference',
-  particleCountDesktop: 24,
-  particleCountMobile: 12,
+  particleCountDesktop: 28,
+  particleCountMobile: 14,
 }
